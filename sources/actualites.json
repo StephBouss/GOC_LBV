@@ -1,0 +1,283 @@
+{
+  "_lisezmoi": [
+    "Articles du site : préfiguration des articles WordPress (type « post »).",
+    "Un article = titre, slug (adresse), catégorie (une seule, principale), date de publication, extrait, image à la une, galerie facultative, contenu (paragraphes).",
+    "L'accueil affiche automatiquement les 3 plus récents, la page Actualités les 20 plus récents (filtre par catégorie), chaque article a sa page actualite-<slug>.html.",
+    "« archive » : article composé à partir de la frise historique du site de référence, à valider, compléter ou supprimer.",
+    "Régénération : node scripts/assembler-pages.js (ou automatiquement avec --surveiller)."
+  ],
+  "categories": [
+    {
+      "slug": "acquisition",
+      "nom": "Acquisition"
+    },
+    {
+      "slug": "partenariat",
+      "nom": "Partenariat"
+    },
+    {
+      "slug": "sites-operations",
+      "nom": "Sites et opérations"
+    },
+    {
+      "slug": "filiales",
+      "nom": "Filiales"
+    },
+    {
+      "slug": "nomination",
+      "nom": "Nomination"
+    },
+    {
+      "slug": "transformation",
+      "nom": "Transformation"
+    }
+  ],
+  "articles": [
+    {
+      "slug": "nomination-dg-gaboil",
+      "titre": "GAB’OIL : Éric Alain Sounda prend les rênes de la filiale de distribution de la SNHG",
+      "categorie": "nomination",
+      "etiquetteOrigine": "Nomination",
+      "date": "2026-05-22",
+      "extrait": "Monsieur Éric Alain Sounda a été nommé Directeur Général de Gab’Oil.",
+      "image": {
+        "src": "img/actu-nomination-gaboil",
+        "largeur": 1076,
+        "hauteur": 580
+      },
+      "galerie": [
+        {
+          "src": "img/actu-nomination-gaboil-2",
+          "largeur": 1057,
+          "hauteur": 1428,
+          "alt": "Éric Alain Sounda, Directeur Général de Gab'Oil"
+        }
+      ],
+      "contenu": [
+        "À l'issue du Conseil des ministres du 22 mai 2026, présidé par le Chef de l'État, le Général de Brigade <strong>BRICE CLOTAIRE OLIGUI NGUEMA</strong>, Monsieur <strong>ÉRIC ALAIN SOUNDA</strong> a été nommé Directeur Général de <strong>GAB’OIL</strong>, filiale de distribution et de commercialisation de la <strong>SOCIÉTÉ NATIONALE DES HYDROCARBURES DU GABON</strong> (<strong>SNHG</strong>). Il succède à Madame <strong>RENÉE PATRICIA KU-KUMBE IVUGU</strong>, qui dirigeait l'entreprise depuis seize mois.",
+        "Cette nomination s'inscrit dans un contexte marqué par la volonté des plus hautes autorités de stabiliser la gouvernance de cette filiale stratégique, qui a connu plusieurs changements de direction ces dernières années. Gab’Oil doit également faire face à des défis financiers et structurels majeurs, notamment l'assainissement de ses comptes et le règlement de dettes croisées importantes envers d'autres acteurs étatiques comme la <strong>Société Gabonaise de Raffinage</strong> (<strong>SOGARA</strong>) et la <strong>Société d'Énergie et d'Eau du Gabon</strong> (<strong>SEEG</strong>).",
+        "Connaisseur chevronné de la maison, <strong>ÉRIC ALAIN SOUNDA</strong> y a exercé d'importantes responsabilités, ayant occupé par le passé les fonctions de Directeur Commercial avant d'officier en tant que Chef de Service Commercial. Cette connaissance fine du terrain, de la logistique de distribution et de la relation client sera indispensable pour relever les défis de rentabilité et d'efficacité de l'entreprise.",
+        "Parmi les priorités fixées au nouveau Directeur Général figurent la rationalisation des coûts de fonctionnement, la restructuration interne des équipes, le renforcement de la transparence de gestion et la modernisation du réseau national de stations-service. Ce dernier, qui compte actuellement 12 stations actives sur le territoire, constitue le fer de lance de la politique de souveraineté énergétique et de régulation des prix voulue par le <strong>GROUPE SNHG</strong>.",
+        "La Direction Générale de la <strong>SNHG</strong> adresse ses vives félicitations à Monsieur <strong>ÉRIC ALAIN SOUNDA</strong> et lui assure son plein soutien dans la mise en œuvre de sa feuille de route pour le redressement et la croissance durable de <strong>GAB’OIL</strong>."
+      ]
+    },
+    {
+      "slug": "deploiement-gaboil",
+      "titre": "Déploiement de Gab'Oil : un réseau au service des citoyens",
+      "categorie": "filiales",
+      "etiquetteOrigine": "Distribution",
+      "date": "2025-12-01",
+      "extrait": "La marque nationale continue d’étendre son empreinte au plus près des populations.",
+      "image": {
+        "src": "img/actu-gaboil-reseau",
+        "largeur": 1536,
+        "hauteur": 858
+      },
+      "contenu": [
+        "En décembre 2025, Gab’Oil, filiale stratégique de la SNHG, confirme son rôle d’acteur essentiel de la sécurité énergétique nationale en poursuivant une modernisation ambitieuse de son réseau.",
+        "L’année 2025 aura été marquée par l’ouverture de nouvelles stations modernes, par la rénovation des infrastructures existantes, et par l’amélioration du service aux usagers.",
+        "Au-delà de la distribution, chaque station Gab’Oil porte une mission : rendre l’énergie accessible partout, y compris dans les zones reculées."
+      ]
+    },
+    {
+      "slug": "modernisation-outils",
+      "titre": "Modernisation des outils de gestion et transformation interne",
+      "categorie": "transformation",
+      "etiquetteOrigine": "Digitalisation",
+      "date": "2025-11-01",
+      "extrait": "Vaste programme de modernisation interne visant à renforcer la performance globale.",
+      "image": {
+        "src": "img/actu-modernisation",
+        "largeur": 1536,
+        "hauteur": 1152
+      },
+      "contenu": [
+        "La SNHG a engagé un vaste programme de modernisation interne visant à renforcer sa performance globale. Cette transformation repose d’abord sur la digitalisation des processus, permettant d’automatiser de nombreuses tâches, de réduire les délais opérationnels et d’améliorer la fiabilité des données.",
+        "L’entreprise optimise également ses flux de données techniques, un enjeu central pour disposer d’informations en temps réel sur les opérations pétrolières et gazières.",
+        "Cette transformation interne ne peut toutefois réussir sans une montée en compétence des équipes. La SNHG déploie ainsi des programmes de formation continue."
+      ]
+    },
+    {
+      "slug": "pizolub-renaissance",
+      "titre": "Pizolub : Renaissance industrielle et valorisation locale",
+      "categorie": "filiales",
+      "etiquetteOrigine": "Industrie",
+      "date": "2025-08-01",
+      "extrait": "Pizolub confirme son retour parmi les acteurs industriels stratégiques du pays.",
+      "image": {
+        "src": "img/actu-pizolub",
+        "largeur": 758,
+        "hauteur": 380
+      },
+      "contenu": [
+        "Basée à Port-Gentil, Pizolub confirme en 2025 son retour parmi les acteurs industriels stratégiques du pays, sous une dynamique de modernisation impulsée par la SNHG.",
+        "Après plusieurs années de ralentissement, Pizolub remet à niveau ses lignes de production, désormais conformes aux standards internationaux.",
+        "Cette revitalisation s’inscrit dans la stratégie de la SNHG visant à réduire la dépendance aux importations, stimuler les filières locales et renforcer le tissu industriel gabonais."
+      ]
+    },
+    {
+      "slug": "tullow-oil-gop",
+      "titre": "Tullow Oil Gabon devient Gabon Oil Participations",
+      "categorie": "acquisition",
+      "etiquetteOrigine": "Modernisation",
+      "date": "2025-02-01",
+      "extrait": "Une stratégie nationale de consolidation et de modernisation du portefeuille pétrolier.",
+      "image": {
+        "src": "img/actu-gop",
+        "largeur": 1536,
+        "hauteur": 858
+      },
+      "contenu": [
+        "Les discussions entourant les participations de Tullow Oil Gabon, désormais intégrées sous l’appellation Gabon Oil Participations (GOP), s’inscrivent dans une stratégie nationale clairement affirmée de consolidation et de modernisation du portefeuille pétrolier.",
+        "Cette intégration progressive permet également d’optimiser le portefeuille national, en harmonisant la gestion des actifs sous un pilotage stratégique unique.",
+        "Enfin, cette opération contribue directement au renforcement de la résilience énergétique du Gabon à long terme."
+      ]
+    },
+    {
+      "slug": "smp-maintenance",
+      "titre": "SMP : Sécuriser la maintenance et l'expertise technique",
+      "categorie": "acquisition",
+      "etiquetteOrigine": "Maintenance",
+      "date": "2025-01-01",
+      "extrait": "La SNHG pose les fondations d'une filiale 100% gabonaise dédiée aux services techniques pétroliers.",
+      "image": {
+        "src": "img/actu-smp",
+        "largeur": 1536,
+        "hauteur": 1016
+      },
+      "contenu": [
+        "La reprise de la Société de Maintenance Pétrolière (SMP) constitue un levier essentiel dans la stratégie de renforcement industriel de la SNHG. En intégrant cette entité au sein de son périmètre, la SNHG pose les fondations d’une filiale 100 % gabonaise, entièrement dédiée aux services techniques pétroliers.",
+        "Cette évolution marque un tournant majeur pour la souveraineté opérationnelle du pays. Grâce à la SMP, la SNHG est en mesure de consolider des compétences locales de pointe.",
+        "En internalisant ces expertises, la SNHG améliore la maîtrise des coûts, renforce la qualité des interventions et garantit une meilleure réactivité sur les sites de production."
+      ]
+    },
+    {
+      "slug": "assala-energy",
+      "titre": "Assala Energy : une étape déterminante",
+      "categorie": "acquisition",
+      "etiquetteOrigine": "Stratégie",
+      "date": "2024-06-01",
+      "extrait": "Le rachat des actifs d'Assala Energy vise à renforcer la souveraineté énergétique et repositionner l'État.",
+      "image": {
+        "src": "img/actu-assala",
+        "largeur": 1414,
+        "hauteur": 788,
+        "position": "center top"
+      },
+      "contenu": [
+        "Les discussions qui ont permis l’acquisition des actifs d’Assala Energy constituent l’un des chantiers les plus structurants pour l’avenir énergétique du Gabon. Finalisé en juin 2024, ce rachat par l’État gabonais – via la SNHG/Gabon Oil Company (GOC) – s’inscrivait dans une stratégie claire : nationaliser davantage l’amont pétrolier, renforcer la souveraineté énergétique et repositionner l’État au centre de la gouvernance des ressources. Toutefois, l’intégration de ce deuxième producteur national s’est révélée complexe et s’accompagne d’une actualité contrastée, oscillant entre progrès opérationnels et défis techniques majeurs.",
+        "D’un côté, la production d’Assala a connu un redressement notable. En décembre 2025, une augmentation de 26,6 % a porté la production à 57 000 barils/jour, résultat direct des investissements réalisés sur le champ mature de Rabi, l’un des piliers historiques de l’industrie gabonaise. Cette performance démontre la capacité de l’État et de la SNHG à relancer des actifs matures, à optimiser les opérations existantes et à consolider la valeur issue des ressources nationales.",
+        "Mais en parallèle, la filiale fait face à des déconvenues importantes dans le domaine de l’exploration. Début 2025, trois puits (Rabunga-A, Rossignol-A, Totou-NE) se sont révélés secs, et un autre a été abandonné. Ces échecs, fréquents dans l’industrie mais stratégiquement sensibles pour un pays en relance pétrolière, ont affecté la capacité d’Assala à compenser le déclin naturel des champs matures. Ils soulèvent aussi des interrogations sur la stratégie d’exploration, la qualité du portefeuille géologique, et surtout sur la transparence de la gestion, les chiffres ayant été publiés tardivement, alimentant des inquiétudes parmi les partenaires et observateurs du secteur.",
+        "Dans un contexte où le Gabon cherche à stabiliser son industrie pétrolière pour financer la diversification économique, Assala occupe une place centrale. L’entreprise doit désormais démontrer qu’elle peut non seulement maintenir la performance de ses actifs matures, mais aussi réussir ses projets d’exploration. La SNHG, de son côté, devra traduire cette acquisition en moteur réel de croissance, d’innovation et de souveraineté énergétique."
+      ]
+    },
+    {
+      "slug": "dinonga-irondu",
+      "categorie": "sites-operations",
+      "date": "2024-03-02",
+      "titre": "La SNHG devient opérateur des permis Dinonga et Irondu",
+      "extrait": "Une nouvelle étape dans la consolidation d'un savoir-faire local.",
+      "image": {
+        "src": "img/frise/2024-dinonga-irondu.svg",
+        "largeur": 320,
+        "hauteur": 200
+      },
+      "contenu": [
+        "La SNHG devient opérateur des permis Dinonga et Irondu, élargissant sa capacité d'action et franchissant une nouvelle étape dans la consolidation d'un savoir-faire local."
+      ],
+      "archive": true
+    },
+    {
+      "slug": "retrocession-addax",
+      "titre": "Rétrocession des actifs d’Addax Petroleum : un tournant historique",
+      "categorie": "acquisition",
+      "etiquetteOrigine": "Consolidation",
+      "date": "2024-03-01",
+      "extrait": "Un tournant historique pour la reconquête de la souveraineté énergétique gabonaise.",
+      "image": {
+        "src": "img/actu-addax",
+        "largeur": 1536,
+        "hauteur": 858
+      },
+      "galerie": [
+        {
+          "src": "img/actu-addax-2",
+          "largeur": 1536,
+          "hauteur": 858,
+          "alt": "Installations pétrolières reprises par la SNHG"
+        }
+      ],
+      "contenu": [
+        "La reprise par la Société Nationale des Hydrocarbures du Gabon (SNHG), en mars 2024, des champs d'OBANGUE et de TSIENGUI, précédemment exploités par Addax Petroleum, marque une étape décisive dans la reconquête par l'État de sa souveraineté énergétique.",
+        "Fruit d'une étroite collaboration entre l'État gabonais et la SNHG, cette reprise d'actifs permet avant tout de consolider la capacité de pilotage opérationnel.",
+        "Elle permet également de sécuriser pleinement la part de production revenant à la Nation, un enjeu central dans un contexte où la transparence et la bonne gouvernance des ressources sont devenues des impératifs stratégiques.",
+        "Enfin, cette opération représente une opportunité majeure de transfert de compétences au profit des cadres et techniciens gabonais."
+      ]
+    },
+    {
+      "slug": "dussafu-ezanga",
+      "categorie": "acquisition",
+      "date": "2019-06-01",
+      "titre": "Montée en puissance : participations dans les CEPP Dussafu et Ezanga",
+      "extrait": "La SNHG détient progressivement plus d'actifs stratégiques.",
+      "image": {
+        "src": "img/frise/2019-montee-en-puissance.svg",
+        "largeur": 320,
+        "hauteur": 200
+      },
+      "contenu": [
+        "La société acquiert des participations dans les CEPP Dussafu (BW Energy) et Ezanga (Maurel &amp; Prom Gabon). La SNHG détient progressivement plus d'actifs stratégiques."
+      ],
+      "archive": true
+    },
+    {
+      "slug": "perenco-participations-etat",
+      "categorie": "partenariat",
+      "date": "2018-12-01",
+      "titre": "Partenariat stratégique avec Perenco pour les 32 participations de l'État",
+      "extrait": "L'État retrouve une lecture consolidée et un pilotage renforcé de son portefeuille d'actifs.",
+      "image": {
+        "src": "img/frise/2018-participations-etat.svg",
+        "largeur": 320,
+        "hauteur": 200
+      },
+      "contenu": [
+        "La SNHG conclut un partenariat stratégique pour la gestion des 32 participations de l'État dans les actifs pétroliers détenus par Perenco Oil &amp; Gas Gabon (POGG).",
+        "Un tournant majeur : l'État retrouve une lecture consolidée et un pilotage renforcé de son portefeuille d'actifs."
+      ],
+      "archive": true
+    },
+    {
+      "slug": "cepp-mboga-ii",
+      "categorie": "sites-operations",
+      "date": "2016-09-01",
+      "titre": "Expansion sur le CEPP Mboga II",
+      "extrait": "La SNHG prend en charge l'exploitation du CEPP Mboga II et confirme son ancrage d'opérateur technique.",
+      "image": {
+        "src": "img/frise/2016-cepp-mboga.svg",
+        "largeur": 320,
+        "hauteur": 200
+      },
+      "contenu": [
+        "La société renforce ses activités en prenant en charge l'exploitation du CEPP Mboga II, confirmant son ancrage comme opérateur technique d'envergure."
+      ],
+      "archive": true
+    },
+    {
+      "slug": "joint-venture-bourbon",
+      "categorie": "partenariat",
+      "date": "2014-10-01",
+      "titre": "Première joint-venture avec Bourbon Gabon",
+      "extrait": "Une étape clef pour intégrer des expertises nouvelles et renforcer la capacité nationale en exploitation.",
+      "image": {
+        "src": "img/frise/2014-joint-venture.svg",
+        "largeur": 320,
+        "hauteur": 200
+      },
+      "contenu": [
+        "La SNHG établit une joint-venture avec Bourbon Gabon, étape clef pour intégrer des expertises nouvelles et renforcer la capacité nationale en exploitation."
+      ],
+      "archive": true
+    }
+  ]
+}

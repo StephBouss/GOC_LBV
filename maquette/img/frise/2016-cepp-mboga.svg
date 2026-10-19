@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+<title>Expansion sur le CEPP Mboga II : nouveau bloc sur la carte des permis</title>
+<rect width="320" height="200" fill="#F6F6F7"/>
+<path d="M0 0 H74 C58 40 82 74 60 112 C44 140 58 172 48 200 H0Z" fill="#E6EFF9"/>
+<g fill="#FFFFFF" stroke="#C9CACD" stroke-width="1.5" stroke-linejoin="round">
+  <polygon points="96,26 170,20 176,82 102,88"/><polygon points="170,20 248,26 246,84 176,82"/><polygon points="248,26 304,36 300,88 246,84"/>
+  <polygon points="102,88 176,82 180,148 94,154"/><polygon points="246,84 300,88 304,150 254,148"/>
+  <polygon points="94,154 180,148 178,196 88,198"/><polygon points="180,148 254,148 258,196 178,196"/><polygon points="254,148 304,150 306,196 258,196"/>
+</g>
+<polygon points="168,74 256,76 266,158 170,158" fill="none" stroke="#ED1C24" stroke-width="1.5" stroke-dasharray="5 4" opacity=".7"/>
+<polygon points="176,82 246,84 254,148 180,148" fill="#ED1C24"/>
+<text x="214" y="112" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF" font-family="Archivo, 'Segoe UI', Roboto, Arial, sans-serif">MBOGA II</text>
+<text x="214" y="128" text-anchor="middle" font-size="9" font-weight="600" letter-spacing="1" fill="#FFFFFF" font-family="Archivo, 'Segoe UI', Roboto, Arial, sans-serif">CEPP</text>
+<g stroke="#ED1C24" stroke-width="2.2" stroke-linecap="round" fill="none">
+  <path d="M262 70 L276 58 M276 58 H268 M276 58 V66"/><path d="M272 164 L284 176 M284 176 H276 M284 176 V168"/><path d="M162 164 L150 176 M150 176 H158 M150 176 V168"/>
+</g>
+</svg>

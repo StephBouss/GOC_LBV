@@ -1,0 +1,172 @@
+<!-- {
+  "titre": "Contactez-nous · SNHG – Gabon Oil Company",
+  "description": "Coordonnées du siège de la SNHG – Gabon Oil Company à Libreville, horaires, formulaire de contact et candidature spontanée.",
+  "onglet": "information",
+  "precharger": { "src": "img/contact-hero.jpg", "srcset": "img/contact-hero-768.jpg 768w, img/contact-hero.jpg 1536w" },
+  "css": ["css/pages.css"]
+} -->
+
+  <!-- Navigation de la rubrique -->
+  <nav class="sous-nav" aria-label="Contact">
+    <ul>
+      <li><a href="#siege">Siège social</a></li>
+      <li><a href="#coordonnees" aria-current="location">Coordonnées</a></li>
+      <li><a href="#formulaire">Formulaire</a></li>
+      <li><a href="#candidature" data-ouvre-candidature>Carrières</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════ 1 · Ouverture ═══════════ -->
+  <section class="page-hero" aria-labelledby="page-titre">
+    <img class="page-hero-image" src="img/contact-hero.jpg" srcset="img/contact-hero-768.jpg 768w, img/contact-hero.jpg 1536w" sizes="100vw" alt="" width="1536" height="1024" fetchpriority="high">
+    <div class="voile" aria-hidden="true"></div>
+    <div class="conteneur page-hero-contenu">
+      <div class="page-hero-bloc">
+        <p class="sur-titre clair">Contact</p>
+        <h1 class="page-hero-titre" id="page-titre">Contactez-nous</h1>
+        <p class="page-hero-chapo">Nous sommes à votre écoute.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 2 · Coordonnées et formulaire ═══════════ -->
+  <section class="section" id="coordonnees" aria-labelledby="coordonnees-titre">
+    <div class="conteneur contact">
+      <div data-apparition>
+        <p class="sur-titre">Contact</p>
+        <h2 class="titre-section marge-40" id="coordonnees-titre">Nos coordonnées</h2>
+
+        <div class="siege" id="siege">
+          <svg class="icone" aria-hidden="true"><use href="#i-lieu"/></svg>
+          <div>
+            <h3>Siège social – Libreville</h3>
+            <address>
+              <p>1586 avenue Paul Moukambi, BP 635 Libreville</p>
+              <p>Gabon</p>
+            </address>
+          </div>
+        </div>
+
+        <div class="joindre">
+          <div>
+            <p class="etiquette"><svg class="icone" aria-hidden="true"><use href="#i-tel"/></svg>Téléphone</p>
+            <a class="joindre-valeur" href="tel:+24111484100">+241 11 48 41 00</a>
+          </div>
+          <div>
+            <p class="etiquette"><svg class="icone" aria-hidden="true"><use href="#i-mail"/></svg>Email</p>
+            <a class="joindre-valeur" href="mailto:contact@gabonoil.com">contact@gabonoil.com</a>
+          </div>
+        </div>
+
+        <div class="horaires">
+          <p class="etiquette"><svg class="icone" aria-hidden="true"><use href="#i-horloge"/></svg>Horaires</p>
+          <p>Lundi - Vendredi : 8h00 - 17h00</p>
+          <p>Samedi - Dimanche : fermé</p>
+        </div>
+      </div>
+
+      <div class="formulaire" id="formulaire" data-apparition>
+        <h3 id="formulaire-titre">Envoyez-nous un message</h3>
+        <form class="champs" action="#" method="post" aria-labelledby="formulaire-titre" data-demo>
+          <div class="champ">
+            <label for="contact-nom">Nom complet</label>
+            <input id="contact-nom" name="nom" type="text" autocomplete="name" placeholder="Votre nom" required>
+          </div>
+          <div class="champ">
+            <label for="contact-email">Adresse e-mail</label>
+            <input id="contact-email" name="email" type="email" autocomplete="email" placeholder="vous@exemple.com" required>
+          </div>
+          <div class="champ">
+            <label for="contact-sujet">Sujet</label>
+            <input id="contact-sujet" name="sujet" type="text" placeholder="Sujet de votre message" required>
+          </div>
+          <div class="champ">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" placeholder="Votre message ici..." required></textarea>
+          </div>
+          <button class="bouton bouton-envoyer" type="submit">Envoyer le message</button>
+          <p class="statut-formulaire" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+<!-- apres -->
+<!-- ═══════════ Fenêtre de candidature (MODAL Banani) ═══════════ -->
+<dialog class="candidature" id="candidature" closedby="any" aria-labelledby="candidature-titre">
+  <form method="dialog" data-demo>
+    <div class="candidature-tete">
+      <h2 id="candidature-titre">Construisez votre carrière à la SNHG</h2>
+      <button class="candidature-fermer" type="button" data-ferme aria-label="Fermer"><svg class="icone" aria-hidden="true"><use href="#i-fermer"/></svg></button>
+    </div>
+    <p class="candidature-chapo">Vous cherchez un défi à la hauteur de vos ambitions ? Déposez ici votre candidature spontanée.</p>
+
+    <div class="candidature-champs">
+      <div class="duo">
+        <div class="champ">
+          <label for="cand-nom">Nom complet</label>
+          <input id="cand-nom" name="nom" type="text" autocomplete="name" placeholder="Votre nom">
+        </div>
+        <div class="champ">
+          <label for="cand-email">Email</label>
+          <input id="cand-email" name="email" type="email" autocomplete="email" placeholder="vous@exemple.com">
+        </div>
+      </div>
+      <div class="duo">
+        <div class="champ">
+          <label for="cand-poste">Poste visé</label>
+          <input id="cand-poste" name="poste" type="text" placeholder="ex : Responsable des Opérations">
+        </div>
+        <div class="champ">
+          <label for="cand-domaine">Domaine</label>
+          <select id="cand-domaine" name="domaine">
+            <option value="">Sélectionner</option>
+            <option>Ingénierie</option>
+            <option>Géosciences</option>
+            <option>Forage</option>
+            <option>Maintenance</option>
+            <option>Finance</option>
+            <option>Juridique</option>
+            <option>Achats</option>
+            <option>RH</option>
+            <option>Communication</option>
+            <option>HSE</option>
+          </select>
+        </div>
+      </div>
+      <div class="champ">
+        <label for="cand-experience">Années d'expérience</label>
+        <select id="cand-experience" name="experience">
+          <option value="">Sélectionner</option>
+          <option>Moins de 2 ans</option>
+          <option>2 à 5 ans</option>
+          <option>5 à 10 ans</option>
+          <option>Plus de 10 ans</option>
+        </select>
+      </div>
+      <div class="champ">
+        <label for="cand-message">Message</label>
+        <textarea id="cand-message" name="message" placeholder="Parlez de votre intérêt..."></textarea>
+      </div>
+      <div class="champ">
+        <label for="cand-documents">Documents (CV, lettre)</label>
+        <div class="depot">
+          <svg class="icone" aria-hidden="true"><use href="#i-televerser"/></svg>
+          <span>Déposer CV &amp; lettre de motivation</span>
+          <span>PDF, DOCX – 5 Mo max.</span>
+          <span class="depot-nom" aria-live="polite"></span>
+          <input id="cand-documents" name="documents" type="file" accept=".pdf,.doc,.docx" multiple>
+        </div>
+      </div>
+      <div class="consentement">
+        <input id="cand-consentement" name="consentement" type="checkbox">
+        <label for="cand-consentement">J'accepte le traitement de mes données selon la <a href="confidentialite.html" target="_blank" rel="noopener">politique de confidentialité<span class="visuellement-masque"> (nouvel onglet)</span></a> de la SNHG.</label>
+      </div>
+      <p class="statut-formulaire" role="status"></p>
+    </div>
+
+    <div class="candidature-actions">
+      <button class="bouton" type="submit" value="envoyer">Envoyer ma candidature</button>
+      <button class="bouton bouton-neutre" type="button" data-ferme>Annuler</button>
+    </div>
+  </form>
+</dialog>

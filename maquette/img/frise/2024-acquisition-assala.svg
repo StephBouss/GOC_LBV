@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+<title>Acquisition de 100 % d'Assala Energy</title>
+<rect width="320" height="200" fill="#F6F6F7"/>
+<circle cx="160" cy="100" r="84" fill="#E6EFF9"/>
+<rect y="164" width="320" height="36" fill="#E9EAEC"/>
+<line x1="132" y1="152" x2="232" y2="152" stroke="#818286" stroke-width="4"/>
+<path d="M88 106 Q123 92 158 106 V164 H88Z" fill="#FFFFFF" stroke="#33373D" stroke-width="2" stroke-linejoin="round"/>
+<rect x="88" y="126" width="70" height="7" fill="#ED1C24"/>
+<line x1="88" y1="146" x2="158" y2="146" stroke="#E3E4E6" stroke-width="1.5"/>
+<path d="M166 124 Q189 115 212 124 V164 H166Z" fill="#FFFFFF" stroke="#33373D" stroke-width="2" stroke-linejoin="round"/>
+<rect x="166" y="140" width="46" height="5" fill="#ED1C24"/>
+<line x1="246" y1="52" x2="246" y2="164" stroke="#33373D" stroke-width="4"/>
+<line x1="238" y1="164" x2="246" y2="120" stroke="#33373D" stroke-width="2"/><line x1="254" y1="164" x2="246" y2="120" stroke="#33373D" stroke-width="2"/>
+<path d="M246 22 C256 32 258 42 246 52 C234 42 236 32 246 22Z" fill="#FF9800"/>
+<path d="M246 33 C251 38 251 44 246 50 C241 44 241 38 246 33Z" fill="#FCD116"/>
+<line x1="282" y1="90" x2="282" y2="164" stroke="#33373D" stroke-width="3" stroke-linecap="round"/><rect x="283.5" y="94" width="30" height="7" fill="#009E60"/><rect x="283.5" y="101" width="30" height="7" fill="#FCD116"/><rect x="283.5" y="108" width="30" height="7" fill="#3A75C4"/>
+<g transform="rotate(-12 64 62)">
+  <circle cx="64" cy="62" r="34" fill="#ED1C24"/>
+  <circle cx="64" cy="62" r="28" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-dasharray="2.4 2" opacity=".8"/>
+  <text x="64" y="68" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF" font-family="Archivo, 'Segoe UI', Roboto, Arial, sans-serif">100&#160;%</text>
+</g>
+<rect x="99.5" y="172" width="121" height="21" rx="10.5" fill="#14171B"/><text x="160" y="186.5" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.6" fill="#FFFFFF" font-family="Archivo, 'Segoe UI', Roboto, Arial, sans-serif">ASSALA ENERGY</text>
+</svg>

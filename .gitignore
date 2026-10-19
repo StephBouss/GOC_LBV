@@ -1,0 +1,22 @@
+# Le dépôt ne contient que le site : pages, sources, scripts de génération.
+
+# Documents de travail (références Banani, captures, méthode) et traces d'outils
+references/
+.playwright-mcp/
+.claude/
+
+# Outils WordPress de la phase 5 : reçoivent des identifiants, ne jamais les publier
+scripts/wp.sh
+.mcp-sid
+*.mcpb
+.env
+.env.*
+
+# Script qui alimente references/ (exclu)
+scripts/telecharger-visuels-banani.js
+
+# Système et dépendances
+node_modules/
+.DS_Store
+Thumbs.db
+desktop.ini

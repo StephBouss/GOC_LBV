@@ -1,0 +1,71 @@
+<!-- {
+  "titre": "Actualités · SNHG – Gabon Oil Company",
+  "description": "Actualités et faits marquants de la SNHG – Gabon Oil Company : acquisitions, partenariats, filiales, sites et opérations, nominations et transformation du groupe.",
+  "onglet": "information",
+  "precharger": { "src": "img/actualites-hero.jpg", "srcset": "img/actualites-hero-768.jpg 768w, img/actualites-hero.jpg 1536w" },
+  "css": ["css/pages.css"]
+} -->
+
+  <!-- Navigation de la rubrique -->
+  <nav class="sous-nav" aria-label="Information et contact">
+    <ul>
+      <li><a href="actualites.html" aria-current="page">Actualités</a></li>
+      <li><a href="contact.html#candidature">Carrières</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════ 1 · Ouverture ═══════════ -->
+  <section class="page-hero" aria-labelledby="page-titre">
+    <img class="page-hero-image" src="img/actualites-hero.jpg" srcset="img/actualites-hero-768.jpg 768w, img/actualites-hero.jpg 1536w" sizes="100vw" alt="" width="1536" height="658" fetchpriority="high">
+    <div class="voile" aria-hidden="true"></div>
+    <div class="conteneur page-hero-contenu">
+      <div class="page-hero-bloc">
+        <p class="sur-titre clair">Actualités</p>
+        <h1 class="page-hero-titre" id="page-titre">Actualités et faits marquants</h1>
+        <p class="page-hero-chapo">Découvrez les dernières initiatives, les étapes stratégiques et les réalisations opérationnelles de la SNHG.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 2 · Articles (modèle home.html : 20 articles au plus, filtrables par catégorie) ═══════════ -->
+  <section class="section" aria-labelledby="liste-titre">
+    <div class="conteneur">
+      <div data-apparition>
+        <p class="sur-titre">Toutes les actualités</p>
+        <h2 class="titre-section marge-40" id="liste-titre">Les dernières nouvelles du groupe</h2>
+      </div>
+
+      <div class="filtres-barre" data-apparition>
+        <nav class="filtres" aria-label="Filtrer les actualités par catégorie">
+          <ul>
+          <!-- actualites:filtres -->
+          </ul>
+        </nav>
+        <p class="filtres-statut" role="status">{{actualites:nombre}} actualités</p>
+      </div>
+
+      <div class="liste-actus" data-cascade>
+        <!-- actualites:liste -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 3 · Lettre d'information ═══════════ -->
+  <section class="section fond-surface" aria-labelledby="lettre-titre">
+    <div class="conteneur lettre" data-apparition>
+      <div>
+        <p class="sur-titre">Newsletter</p>
+        <h2 class="titre-section marge-16" id="lettre-titre">Restez informé</h2>
+        <p class="lettre-texte">Abonnez-vous à notre newsletter pour recevoir les dernières actualités SNHG.</p>
+      </div>
+      <form class="lettre-formulaire" action="#" method="post" data-demo>
+        <div class="lettre-champ">
+          <label class="visuellement-masque" for="lettre-email">Adresse e-mail</label>
+          <input id="lettre-email" name="email" type="email" autocomplete="email" placeholder="vous@exemple.com" required>
+          <button class="bouton" type="submit">S'abonner</button>
+        </div>
+        <p class="statut-formulaire" role="status"></p>
+      </form>
+    </div>
+  </section>

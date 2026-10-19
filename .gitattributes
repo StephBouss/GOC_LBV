@@ -1,0 +1,9 @@
+# Fins de ligne Unix dans le dépôt et à l'extraction (scripts bash et node exécutables partout)
+* text=auto eol=lf
+
+*.jpg binary
+*.png binary
+*.ico binary
+*.woff2 binary
+*.mp4 binary
+*.pdf binary

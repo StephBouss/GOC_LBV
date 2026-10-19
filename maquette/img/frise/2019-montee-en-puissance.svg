@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+<title>Montée en puissance : des actifs en hausse</title>
+<rect width="320" height="200" fill="#F6F6F7"/>
+<circle cx="166" cy="104" r="84" fill="#E6EFF9"/>
+<line x1="74" y1="34" x2="74" y2="164" stroke="#C9CACD" stroke-width="2" stroke-linecap="round"/>
+<line x1="74" y1="164" x2="270" y2="164" stroke="#C9CACD" stroke-width="2" stroke-linecap="round"/>
+<rect x="90" y="128" width="30" height="36" rx="4" fill="#C9CACD"/>
+<rect x="132" y="106" width="30" height="58" rx="4" fill="#818286"/>
+<rect x="174" y="80" width="30" height="84" rx="4" fill="#33373D"/>
+<rect x="216" y="50" width="30" height="114" rx="4" fill="#ED1C24"/>
+<defs><marker id="f2019" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#ED1C24"/></marker></defs>
+<polyline points="96,112 140,90 182,66 228,34" fill="none" stroke="#14171B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#f2019)"/>
+<rect x="20" y="20" width="144" height="21" rx="10.5" fill="#14171B"/><text x="92" y="34.5" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.6" fill="#FFFFFF" font-family="Archivo, 'Segoe UI', Roboto, Arial, sans-serif">DUSSAFU · EZANGA</text>
+</svg>

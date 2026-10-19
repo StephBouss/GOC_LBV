@@ -1,0 +1,3 @@
+PDF.js 4.10.38 (Mozilla, licence Apache 2.0), version « legacy » pour les navigateurs plus anciens.
+Source : paquet npm pdfjs-dist, fichiers legacy/build/pdf.min.mjs et pdf.worker.min.mjs, renommés en .js
+pour être servis comme JavaScript par tout hébergement. Utilisé par la liseuse de documents (app.js).
