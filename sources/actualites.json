@@ -69,9 +69,9 @@
       "date": "2025-12-01",
       "extrait": "La marque nationale continue d’étendre son empreinte au plus près des populations.",
       "image": {
-        "src": "img/actu-gaboil-reseau",
+        "src": "img/photos/actu-gaboil-station",
         "largeur": 1536,
-        "hauteur": 858
+        "hauteur": 864
       },
       "contenu": [
         "En décembre 2025, Gab’Oil, filiale stratégique de la SNHG, confirme son rôle d’acteur essentiel de la sécurité énergétique nationale en poursuivant une modernisation ambitieuse de son réseau.",
@@ -123,9 +123,9 @@
       "date": "2025-02-01",
       "extrait": "Une stratégie nationale de consolidation et de modernisation du portefeuille pétrolier.",
       "image": {
-        "src": "img/actu-gop",
+        "src": "img/photos/actu-gop",
         "largeur": 1536,
-        "hauteur": 858
+        "hauteur": 864
       },
       "contenu": [
         "Les discussions entourant les participations de Tullow Oil Gabon, désormais intégrées sous l’appellation Gabon Oil Participations (GOP), s’inscrivent dans une stratégie nationale clairement affirmée de consolidation et de modernisation du portefeuille pétrolier.",
@@ -141,9 +141,9 @@
       "date": "2025-01-01",
       "extrait": "La SNHG pose les fondations d'une filiale 100% gabonaise dédiée aux services techniques pétroliers.",
       "image": {
-        "src": "img/actu-smp",
+        "src": "img/photos/actu-smp",
         "largeur": 1536,
-        "hauteur": 1016
+        "hauteur": 864
       },
       "contenu": [
         "La reprise de la Société de Maintenance Pétrolière (SMP) constitue un levier essentiel dans la stratégie de renforcement industriel de la SNHG. En intégrant cette entité au sein de son périmètre, la SNHG pose les fondations d’une filiale 100 % gabonaise, entièrement dédiée aux services techniques pétroliers.",
@@ -195,16 +195,16 @@
       "date": "2024-03-01",
       "extrait": "Un tournant historique pour la reconquête de la souveraineté énergétique gabonaise.",
       "image": {
-        "src": "img/actu-addax",
+        "src": "img/photos/actu-addax-tsiengui",
         "largeur": 1536,
-        "hauteur": 858
+        "hauteur": 864
       },
       "galerie": [
         {
-          "src": "img/actu-addax-2",
+          "src": "img/photos/actu-addax-obangue",
           "largeur": 1536,
-          "hauteur": 858,
-          "alt": "Installations pétrolières reprises par la SNHG"
+          "hauteur": 864,
+          "alt": "Installations du champ d’Obangué, repris par la SNHG en mars 2024"
         }
       ],
       "contenu": [

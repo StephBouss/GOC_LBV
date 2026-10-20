@@ -1,0 +1,114 @@
+{
+  "_lisezmoi": [
+    "Médiathèque : préfiguration des galeries WordPress (un bloc Galerie par site, ou un album par site dans la médiathèque).",
+    "Une galerie = un site (dossier du reportage « Opérations GOC »), avec un titre, un type de site, une courte présentation et 5 à 7 photos. La première photo est mise en avant.",
+    "« source » : chemin de la photo d'origine dans « Img/Inspiration images/Site web GOC/Photo Autre/Opérations GOC ». Les versions web (800 et 1600 px) sont produites par node scripts/preparer-mediatheque.js dans maquette/img/mediatheque/<galerie>/.",
+    "« alt » : description de la photo, lue par les lecteurs d'écran et affichée en légende dans la visionneuse.",
+    "Régénération des pages : node scripts/assembler-pages.js (ou automatiquement avec --surveiller)."
+  ],
+  "ouverture": { "source": "Tsiengui/Tsiengui - Vues aériennes/DJI_0301.jpg" },
+  "galeries": [
+    {
+      "slug": "sardine",
+      "titre": "Sardine",
+      "type": "Champ offshore",
+      "description": "En mer, les équipes développent le champ Sardine : injection d'eau, opérations de work-over et forage de nouveaux puits, avec la sécurité pour priorité.",
+      "photos": [
+        { "source": "Sardine/Sardine - Opérateur manipulant les têtes de puits/DSC03702.jpg", "alt": "Opérateur manœuvrant les vannes d'une tête de puits sur la plateforme Sardine, face à la mer" },
+        { "source": "Sardine/Sardine - Installations détails/DSC03132.jpg", "alt": "Structure métallique rouge et blanche de la plateforme de forage Sardine, vue en contre-plongée" },
+        { "source": "Sardine/Sardine - Opérateurs dans les installations/DSC03200.jpg", "alt": "Opérateur en combinaison orange marchant sur le pont de la plateforme Sardine" },
+        { "source": "Sardine/Sardine - Opérateurs en discussion/DSC03483.jpg", "alt": "Opérateurs échangeant sur le pont de la plateforme, entre passerelles et équipements" },
+        { "source": "Sardine/Sardine - Équipe GOC & prestataire/DSC03684.jpg", "alt": "Équipe GOC et prestataire au travail sur un équipement de la plateforme" },
+        { "source": "Sardine/Sardine - Local électrique/DSC03870.jpg", "alt": "Technicien inspectant une armoire du local électrique de la plateforme" },
+        { "source": "Sardine/Sardine - Sécurité/DSC03150.jpg", "alt": "Caisse rouge de gilets de sauvetage sur le pont de la plateforme" }
+      ]
+    },
+    {
+      "slug": "tsiengui",
+      "titre": "Tsiengui",
+      "type": "Champ terrestre",
+      "description": "Repris par la SNHG en mars 2024 avec le champ d'Obangué, Tsiengui marque la reconquête par l'État de sa souveraineté énergétique. Ses capacités de stockage sont en cours d'extension.",
+      "photos": [
+        { "source": "Tsiengui/Tsiengui - Vues aériennes/DJI_0319.jpg", "alt": "Vue aérienne du site de Tsiengui et de ses bacs de stockage au milieu de la forêt" },
+        { "source": "Tsiengui/Tsiengui - Opérateurs dans les installations/Tsiengui - Opérateur et tanks/DSC01337.jpg", "alt": "Opérateur de dos, logo Gabon Oil sur la combinaison, face aux bacs de stockage de Tsiengui" },
+        { "source": "Tsiengui/Tsiengui - Salle de controle/DSC01587.jpg", "alt": "Opérateur surveillant les écrans de la salle de contrôle de Tsiengui" },
+        { "source": "Tsiengui/Tsiengui - Installations/DSC01527.jpg", "alt": "Séparateur et tuyauteries des installations de production de Tsiengui" },
+        { "source": "Tsiengui/Tsiengui - Portraits opérateurs/DSC00998.jpg", "alt": "Portrait d'un opérateur en casque et lunettes de protection à Tsiengui" },
+        { "source": "Tsiengui/Tsiengui - Prélèvement/DSC01464.jpg", "alt": "Opérateur équipé d'un masque respiratoire pendant un prélèvement d'échantillon" },
+        { "source": "Tsiengui/Tsiengui - Installations/DSC01057.jpg", "alt": "Tête de puits rouge et verte du site de Tsiengui, en lisière de forêt" }
+      ]
+    },
+    {
+      "slug": "mboumba",
+      "titre": "Mboumba",
+      "type": "Champ terrestre",
+      "description": "Premier permis d'exploitation obtenu par la société, en 2016, le champ mature de Mboumba illustre le savoir-faire des équipes : production, analyses en laboratoire et culture de la sécurité.",
+      "photos": [
+        { "source": "Mboumba/Mboumba - Portrait opérateur & drapeau/DSC09258.jpg", "alt": "Opérateur de dos, logo Gabon Oil sur la combinaison, devant les drapeaux du site de Mboumba" },
+        { "source": "Mboumba/Mboumba - Installations/DSC09231.jpg", "alt": "Ballon et tuyauteries jaunes des installations de Mboumba, en pleine forêt" },
+        { "source": "Mboumba/Mboumba - Portrait opérateurs dans les installations/DSC00189.jpg", "alt": "Opérateur marchant devant un grand ballon de production à Mboumba" },
+        { "source": "Mboumba/Mboumba - Chimiste/DSC09957.jpg", "alt": "Chimiste en combinaison et gants de protection manipulant un flacon de laboratoire" },
+        { "source": "Mboumba/Mboumba - Portrait opérateurs dans les installations/DSC00329.jpg", "alt": "Opérateur casqué, radio en main, devant les installations de Mboumba" },
+        { "source": "Mboumba/Mboumba - Réunion HSSE/DSC09274.jpg", "alt": "Réunion de sécurité HSSE devant le panneau d'accueil du centre de production de Mboumba" },
+        { "source": "Mboumba/Mboumba - Salle de controle/DSC09933.jpg", "alt": "Deux opérateurs dans la salle de contrôle de Mboumba" }
+      ]
+    },
+    {
+      "slug": "obangue",
+      "titre": "Obangué",
+      "type": "Champ terrestre",
+      "description": "Premier champ opéré en direct par la société, Obangué a été repris en mars 2024. Ses capacités de stockage sont en cours d'extension.",
+      "photos": [
+        { "source": "Obangué/Obangué - Opérateurs dans les installations/DSC02340.jpg", "alt": "Portrait en gros plan d'un opérateur portant un casque Gabon Oil et des lunettes de protection" },
+        { "source": "Obangué/Obangué - Opérateurs dans les installations/DSC02495.jpg", "alt": "Trois opérateurs riant ensemble sur le site d'Obangué" },
+        { "source": "Obangué/Obangué - Portrait opérateur mixte dans les installations/DSC01944.jpg", "alt": "Deux opérateurs marchant entre deux grands réservoirs à Obangué" },
+        { "source": "Obangué/Obangué - Installations/DSC01687.jpg", "alt": "Installations de production d'Obangué, avec réservoirs et cheminées" },
+        { "source": "Obangué/Obangué - Opérateur salle électrique/DSC01793.jpg", "alt": "Opérateur en casque à visière dans la salle électrique d'Obangué" },
+        { "source": "Obangué/Obangué - Portrait opérateur mixte dans les installations/DSC01896.jpg", "alt": "Une opératrice et un opérateur observant les installations d'Obangué depuis une passerelle" },
+        { "source": "Obangué/Obangué - Casque sur table/DSC02725.jpg", "alt": "Casque blanc frappé du logo Gabon Oil posé sur une table de réunion" }
+      ]
+    },
+    {
+      "slug": "mandji",
+      "titre": "Mandji",
+      "type": "Territoire et communautés",
+      "description": "Sur la zone de Mandji, la SNHG agit aux côtés des communautés : chantier d'un hôpital, construction d'une aire de jeux, et installations vues du ciel.",
+      "photos": [
+        { "source": "Mandji/Mandji - Equipe & nature/DSC02843.jpg", "alt": "Deux membres de l'équipe en combinaison orange au bord d'une rivière" },
+        { "source": "Mandji/Mandji - Vues aériennes/DJI_0388.jpg", "alt": "Vue aérienne d'une installation clôturée au milieu de la savane, zone de Mandji" },
+        { "source": "Mandji/Mandji - Vues aériennes/DJI_0399.jpg", "alt": "Vue aérienne d'un site aménagé dans la zone de Mandji" },
+        { "source": "Mandji/Mandji - Projet communautaire - Chantier hopital/DSC02981.jpg", "alt": "Chantier d'un hôpital, projet communautaire de la zone de Mandji" },
+        { "source": "Mandji/Mandji - Projet communautaire - Construction aire de jeu/DSC03088.jpg", "alt": "Construction d'une aire de jeux, projet communautaire de la zone de Mandji" },
+        { "source": "Mandji/Mandji - Vues aériennes/DJI_0345.jpg", "alt": "Vue aérienne d'un village de la zone de Mandji" }
+      ]
+    },
+    {
+      "slug": "port-gentil",
+      "titre": "Port-Gentil",
+      "type": "Bureaux",
+      "description": "À Port-Gentil, capitale économique du Gabon, les équipes travaillent au plus près des activités pétrolières du pays.",
+      "photos": [
+        { "source": "Port-Gentil/POG - Travail d_équipe/DSC04150.jpg", "alt": "Trois collaboratrices travaillant ensemble sur un dossier dans les bureaux de Port-Gentil" },
+        { "source": "Port-Gentil/POG - Portraits dans les bureaux/DSC04484.jpg", "alt": "Collaboratrice souriante à son poste de travail à Port-Gentil" },
+        { "source": "Port-Gentil/POG - Travail d_équipe/DSC04499.jpg", "alt": "Deux collaborateurs relisant un document dans les bureaux de Port-Gentil" },
+        { "source": "Port-Gentil/POG - Portraits dans les bureaux/DSC04586.jpg", "alt": "Deux collaboratrices échangeant dans l'escalier des bureaux de Port-Gentil" },
+        { "source": "Port-Gentil/POG - Portraits dans les bureaux/DSC04320.jpg", "alt": "Collaborateur en polo GOC travaillant sur son ordinateur" },
+        { "source": "Port-Gentil/POG - Travail d_équipe/DSC04289.jpg", "alt": "Deux collaborateurs travaillant ensemble devant un ordinateur" }
+      ]
+    },
+    {
+      "slug": "libreville",
+      "titre": "Libreville",
+      "type": "Siège",
+      "description": "Au siège de Libreville, les équipes pilotent la stratégie du groupe et la gestion des actifs pétroliers de l'État.",
+      "photos": [
+        { "source": "Libreville/Libreville - Portrait hommes bureaux/DSC05067.jpg", "alt": "Portrait d'un cadre, bras croisés, au siège de Libreville" },
+        { "source": "Libreville/Libreville - Travail d_équipe/DSC04772.jpg", "alt": "Collaboratrice présentant au tableau lors d'une réunion d'équipe au siège" },
+        { "source": "Libreville/Libreville - Travail d_équipe/DSC04902.jpg", "alt": "Deux collaborateurs échangeant devant un écran au siège de Libreville" },
+        { "source": "Libreville/Libreville - Portrait femmes bureaux/DSC04879.jpg", "alt": "Collaboratrice souriante à son bureau au siège de Libreville" },
+        { "source": "Libreville/Libreville - Travail d_équipe/DSC04754.jpg", "alt": "Réunion d'équipe autour de la table du siège de Libreville" },
+        { "source": "Libreville/Libreville - Portrait hommes bureaux/DSC04958.jpg", "alt": "Collaborateur travaillant sur son ordinateur au siège de Libreville" }
+      ]
+    }
+  ]
+}

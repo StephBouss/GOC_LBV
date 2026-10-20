@@ -109,6 +109,7 @@ function pageArticle(a, d) {
   <nav class="sous-nav" aria-label="Information et contact">
     <ul>
       <li><a href="actualites.html" aria-current="true">Actualités</a></li>
+      <li><a href="mediatheque.html">Médiathèque</a></li>
       <li><a href="contact.html#candidature">Carrières</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>

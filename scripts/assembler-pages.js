@@ -16,6 +16,9 @@
  * Diaporama de l'accueil : sources/diaporama-accueil.json décrit les diapositives (futur bloc WordPress) ;
  * scripts/diaporama.js remplit le repère <!-- diaporama:accueil -->, et "precharger": "diaporama" précharge son premier fond.
  *
+ * Médiathèque : sources/mediatheque.json décrit les galeries (une par site) ; scripts/mediatheque.js remplit les
+ * repères <!-- mediatheque:… --> (photos préparées par scripts/preparer-mediatheque.js).
+ *
  * Sortie : maquette/<nom>.html
  * Usage  : node scripts/assembler-pages.js [--surveiller]
  */
@@ -23,6 +26,7 @@ const fs = require('fs');
 const path = require('path');
 const actualites = require('./actualites');
 const diaporama = require('./diaporama');
+const mediatheque = require('./mediatheque');
 
 const RACINE = path.join(__dirname, '..');
 const SOURCES = path.join(RACINE, 'sources');
@@ -34,19 +38,20 @@ const NAV = [
     ['À propos', 'presentation-groupe.html#a-propos'],
     ['Missions', 'presentation-groupe.html#missions'],
     ['Vision et valeurs', 'presentation-groupe.html#vision-valeurs'],
-    ['Gouvernance', 'historique-gouvernance.html#gouvernance'],
     ['Historique', 'historique-gouvernance.html#historique'],
+    ['Gouvernance', 'historique-gouvernance.html#gouvernance'],
     ['Filiales', 'filiales.html'],
   ] },
   { id: 'activites', libelle: 'Activités et engagements', pied: 'Activités', liens: [
     ['Exploration', 'exploration-production.html#exploration'],
     ['Production', 'exploration-production.html#production'],
     ['Projets stratégiques', 'projets-strategiques.html'],
-    ['Engagements HSSE', 'activites-engagements.html#hsse'],
-    ['RSE', 'activites-engagements.html#rse'],
+    ['Engagements HSEI', 'engagements-hsei.html'],
+    ['Engagements RSE', 'engagements-rse.html'],
   ] },
   { id: 'information', libelle: 'Information et contact', pied: 'Informations', liens: [
     ['Actualités', 'actualites.html'],
+    ['Médiathèque', 'mediatheque.html'],
     ['Carrières', 'contact.html#candidature'],
     ['Contact', 'contact.html'],
   ] },
@@ -79,7 +84,17 @@ const ICONES = {
   'i-televerser': '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/>',
   'i-fleche-droite': '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
   'i-telecharger': '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>',
-  'i-livre': '<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
+  'i-chevron-gauche': '<path d="m15 18-6-6 6-6"/>',
+  'i-chevron-droite': '<path d="m9 18 6-6-6-6"/>',
+  'i-livre':'<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
+  // Engagements RSE : une icône par politique (poignée de main, balance, personnes, toque) ; l'environnement reprend i-feuille
+  'i-mains': '<path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/>',
+  'i-balance': '<path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>',
+  'i-personnes': '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  'i-toque': '<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>',
+  // Engagements HSEI : conduite des véhicules et 10 Règles d'or (l'HSSE reprend i-bouclier, l'intégrité i-usine)
+  'i-voiture': '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>',
+  'i-medaille': '<path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/>',
 };
 
 const lien = (page) => ([texte, href]) => `<li><a href="${href}"${href === page ? ' aria-current="page"' : ''}>${texte}</a></li>`;
@@ -147,6 +162,7 @@ function assembler() {
   const gabarit = fs.readFileSync(path.join(SOURCES, 'gabarit.html'), 'utf8');
   const actus = actualites.charger(SOURCES);
   const diapos = diaporama.charger(SOURCES);
+  const galeries = mediatheque.charger(SOURCES);
   const pages = fs.readdirSync(path.join(SOURCES, 'pages')).filter((f) => f.endsWith('.html'));
   for (const fichier of pages) {
     const brut = fs.readFileSync(path.join(SOURCES, 'pages', fichier), 'utf8');
@@ -155,7 +171,7 @@ function assembler() {
     const meta = JSON.parse(m[1]);
     if (meta.precharger === 'diaporama') meta.precharger = diaporama.precharger(diapos);
     const [contenu, apres = ''] = brut.slice(m[0].length).split('<!-- apres -->\n');
-    construire(gabarit, fichier, meta, diaporama.remplir(actualites.remplacer(contenu, actus), diapos), apres);
+    construire(gabarit, fichier, meta, mediatheque.remplir(diaporama.remplir(actualites.remplacer(contenu, actus), diapos), galeries), apres);
   }
   // Une page par article (modèle single.html) ; les pages d'articles retirés du fichier de données sont supprimées
   const articles = actus.articles.map((a) => {

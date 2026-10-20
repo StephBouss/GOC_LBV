@@ -136,11 +136,89 @@
   .liseuse-pages { gap: 1.25rem; padding: 1rem .75rem 1.5rem; }
 }
 
+/* ─── Médiathèque : une galerie par site, mosaïque dont la première photo est mise en avant ─── */
+.mediatheque-intro { padding-bottom: 3.5rem; }
+.mediatheque-tete { max-width: 48rem; margin-bottom: 2rem; }
+.mediatheque-tete .texte-doux { margin-top: 1rem; }
+.galerie { scroll-margin-top: calc(var(--entete) - 2.5rem); }
+.galerie-tete { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); align-items: end; gap: 1rem 4rem; margin-bottom: 2.5rem; }
+.galerie-tete .titre-section { margin-bottom: 0; }
+.galerie-texte { font-size: 1.0625rem; line-height: 1.75rem; color: var(--encre-douce); text-wrap: pretty; }
+.galerie-nombre { display: block; margin-top: .5rem; font-size: .8125rem; font-weight: 700; line-height: 1.25rem; letter-spacing: .08em; text-transform: uppercase; color: var(--rouge-action); }
+/* 5 et 7 photos : 4 colonnes ; 6 photos : 3 colonnes. Aucune case vide dans les trois cas. */
+.galerie-grille { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(8.5rem, 12.5vw, 17rem); gap: .75rem; }
+.galerie-grille[data-nombre="6"] { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: clamp(10rem, 16vw, 22rem); }
+.galerie-grille > :first-child { grid-column: span 2; grid-row: span 2; }
+.galerie-grille[data-nombre="7"] > :nth-child(n+6) { grid-column: span 2; }
+.galerie-photo { position: relative; display: block; height: 100%; overflow: hidden; border-radius: .75rem; background: var(--ligne); }
+.galerie-photo img { width: 100%; height: 100%; object-fit: cover; transition: scale .6s var(--doux); }
+.galerie-photo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(20, 23, 27, .4), transparent 50%); opacity: 0; transition: opacity .3s;
+}
+.galerie-photo:hover::after, .galerie-photo:focus-visible::after { opacity: 1; }
+.galerie-photo:focus-visible { outline-offset: 3px; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .galerie-photo:hover img { scale: 1.04; }
+}
+
+/* Visionneuse : plein écran sombre, photo entière, légende, navigation au clavier, aux boutons et au doigt */
+.visionneuse {
+  width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 0; border: 0;
+  color: var(--blanc); background: #0C0E11;
+}
+.visionneuse:modal { display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.visionneuse::backdrop { background: rgba(0, 0, 0, .6); }
+:root:has(.visionneuse[open]) { overflow: hidden; scrollbar-gutter: stable; }
+.visionneuse :focus-visible { outline-color: var(--blanc); }
+.visionneuse-tete { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem 1rem .75rem 1.5rem; }
+.visionneuse-titre { font-size: .9375rem; font-weight: 700; line-height: 1.375rem; }
+.visionneuse-compteur { margin-left: .5rem; font-weight: 400; color: var(--acier); }
+.visionneuse-fermer { display: flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: .5rem; color: var(--texte-sombre); transition: color .15s, background-color .15s; }
+.visionneuse-fermer:hover { color: var(--blanc); background: rgba(255, 255, 255, .1); }
+.visionneuse-fermer .icone { width: 1.25rem; height: 1.25rem; }
+.visionneuse-figure { display: flex; flex-direction: column; align-items: center; gap: 1rem; min-height: 0; margin: 0; padding: 0 6rem 1.5rem; }
+.visionneuse-cadre { display: flex; flex: 1; align-items: center; justify-content: center; width: 100%; min-height: 0; }
+.visionneuse-image { width: auto; max-width: 100%; height: auto; max-height: 100%; border-radius: .25rem; transition: opacity .25s; user-select: none; }
+.visionneuse-image.est-chargement { opacity: .4; }
+.visionneuse-legende { max-width: 48rem; min-height: 1.5rem; font-size: .9375rem; line-height: 1.5rem; text-align: center; color: var(--texte-sombre); text-wrap: balance; }
+.visionneuse-nav {
+  position: absolute; top: 50%; display: flex; align-items: center; justify-content: center;
+  width: 3.25rem; height: 3.25rem; border-radius: 50%; translate: 0 -50%;
+  color: var(--blanc); background: rgba(255, 255, 255, .1); transition: background-color .2s;
+}
+.visionneuse-nav:hover { background: var(--rouge-action); }
+.visionneuse-nav .icone { width: 1.5rem; height: 1.5rem; }
+.visionneuse-precedente { left: 1.25rem; }
+.visionneuse-suivante { right: 1.25rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .visionneuse:modal { animation: fondu .3s var(--doux); }
+  .visionneuse:modal .visionneuse-cadre { animation: entree-fenetre .4s var(--doux); }
+}
+@media (max-width: 1023px) {
+  .galerie-tete { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2rem; }
+}
+@media (max-width: 767px) {
+  .mediatheque-intro { padding-bottom: 2.5rem; }
+  /* Deux colonnes : la première photo sur toute la largeur, la dernière aussi si elle reste seule */
+  .galerie-grille, .galerie-grille[data-nombre="6"] { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 7.5rem; gap: .5rem; }
+  .galerie-grille[data-nombre="7"] > :nth-child(n+6) { grid-column: auto; }
+  .galerie-grille > :last-child:nth-child(even) { grid-column: span 2; }
+  .galerie-photo { border-radius: .5rem; }
+  /* Visionneuse : flèches sous la photo, à portée de pouce */
+  .visionneuse-tete { padding-left: var(--marge); }
+  .visionneuse-figure { padding: 0 .75rem 5.5rem; }
+  .visionneuse-nav { top: auto; bottom: 1.25rem; width: 3rem; height: 3rem; translate: none; }
+  .visionneuse-precedente { left: calc(50% - 3.75rem); }
+  .visionneuse-suivante { right: calc(50% - 3.75rem); }
+}
+
 /* ═══════════ Présentation du groupe ═══════════ */
 .apropos { display: grid; grid-template-columns: 480fr 696fr; gap: 4rem; align-items: start; }
 .apropos-texte .titre-section { margin-bottom: 1.25rem; }
 .apropos-texte p { margin-bottom: 1.75rem; }
 .apropos-texte p:last-child { margin-bottom: 0; }
+.apropos-texte .points-forts { margin: -.75rem 0 1.75rem; }   /* liste annoncée par le paragraphe qui précède (pages Engagements) */
 .apropos-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 1rem; }
 
 .missions-grille { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
@@ -161,7 +239,7 @@
 /* Photo sous la vision : occupe la hauteur laissée libre à côté des valeurs, les deux colonnes finissent ensemble */
 .vision { display: flex; flex-direction: column; }
 .vision-photo { position: relative; flex: 1; min-height: 14rem; margin-top: 2.5rem; overflow: hidden; border-radius: 1rem; }
-.vision-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 35% 22%; border-radius: 1rem; }
+.vision-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 42% 65%; border-radius: 1rem; }
 .liste-valeurs li {
   margin-bottom: .75rem; padding-bottom: .75rem; border-bottom: 1px solid var(--ligne);
   font-size: .9375rem; line-height: 1.5rem; color: var(--encre-douce);
@@ -311,6 +389,7 @@
 .engagement ul { display: flex; flex-direction: column; gap: .75rem; }
 .engagement li { display: flex; align-items: flex-start; gap: .75rem; font-size: .875rem; line-height: 1.375rem; color: var(--encre-douce); }
 .engagement li .icone { width: 1.125rem; height: 1.125rem; margin-top: .125rem; color: var(--teinte); }
+.engagement .lien-fleche { margin-top: 1.5rem; }   /* renvoi vers la page Engagements HSEI ou RSE */
 
 /* ═══════════ Activités détaillées (Exploration & Production) ═══════════ */
 .detail { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
@@ -330,6 +409,36 @@
 .aspect .icone-boite .icone { width: 1.5rem; height: 1.5rem; }
 .aspect h3 { font-size: 1.125rem; font-weight: 700; line-height: 1.625rem; }
 .aspect p { font-size: .875rem; line-height: 1.375rem; color: var(--encre-douce); }
+
+/* Engagements RSE : cartes « aspect » des cinq politiques (numéro, devise, engagements clés), puis renvoi au document */
+.politique { --teinte: var(--rouge-logo); border-top: 3px solid var(--teinte); }
+.politique.bleu { --teinte: var(--bleu-banani); }
+.politique.vert { --teinte: var(--vert-banani); }
+.politique.orange { --teinte: var(--orange-banani); }
+.politique.social { --teinte: var(--rouge-social); }
+.politique-tete { display: flex; align-items: center; justify-content: space-between; }
+.politique .icone-boite { background: var(--teinte); color: var(--blanc); }
+.politique-numero { font-size: 2rem; font-weight: 700; line-height: 1; color: var(--ligne); }
+.politique .politique-devise { font-weight: 600; color: var(--noir); }
+.politique ul { display: flex; flex-direction: column; gap: .625rem; margin-top: auto; padding-top: 1.25rem; border-top: 1px solid var(--ligne); }
+.politique li { display: flex; align-items: flex-start; gap: .625rem; font-size: .875rem; line-height: 1.375rem; color: var(--encre-douce); }
+.politique li .icone { flex-shrink: 0; width: 1.125rem; height: 1.125rem; margin-top: .125rem; color: var(--teinte); }
+.politique-document { justify-content: center; background: var(--noir); border-color: var(--noir); color: var(--blanc); }
+.politique-document h3 { font-size: 1.5rem; line-height: 1.9375rem; }
+.politique-document p:not(.sur-titre) { color: var(--texte-sombre); }
+/* Engagements HSEI : quatre piliers sur deux colonnes ; le pilier « 10 Règles d'or » renvoie à sa section */
+.politiques.quatre { grid-template-columns: repeat(2, 1fr); }
+.politique-lien { align-self: flex-start; margin-top: auto; }
+/* 10 Règles d'or : tuiles numérotées sur fond sombre, puis la phrase qui les résume */
+.fond-sombre .intro-section { color: var(--texte-sombre); }
+.regles-or { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+.regles-or li {
+  display: flex; flex-direction: column; gap: .75rem; padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, .14); border-radius: .75rem;
+  font-size: .9375rem; font-weight: 600; line-height: 1.375rem; color: var(--blanc);
+}
+.regle-numero { font-size: 1.75rem; font-weight: 700; line-height: 1; color: var(--rouge-logo); }
+.regles-citation { max-width: 45rem; margin-top: 3rem; padding-left: 1.25rem; border-left: 3px solid var(--rouge-logo); font-size: 1.125rem; line-height: 1.75rem; color: var(--texte-sombre); }
 
 /* ═══════════ Contact ═══════════ */
 .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
@@ -468,6 +577,47 @@ a.joindre-valeur:hover { color: var(--rouge-survol); text-decoration: underline;
 mark.a-completer {
   padding: .0625rem .375rem; border-radius: .25rem; -webkit-box-decoration-break: clone; box-decoration-break: clone;
   background: color-mix(in srgb, var(--jaune) 40%, transparent); color: var(--noir); font-weight: 600;
+}
+
+.legal-texte code { font-family: ui-monospace, Consolas, "Cascadia Mono", monospace; font-size: .875em; color: var(--noir); overflow-wrap: anywhere; }
+
+/* Tableau des cookies : lignes à filet ; quand le bloc est étroit, chaque ligne devient une fiche (en-têtes repris en libellés) */
+.legal-tableau { container-type: inline-size; margin-bottom: 1.25rem; }
+.legal-tableau table { width: 100%; border-collapse: collapse; font-size: .9375rem; line-height: 1.5; }
+.legal-tableau caption { margin-bottom: .75rem; text-align: left; font-size: .8125rem; font-weight: 700; line-height: 1.25rem; letter-spacing: .04em; text-transform: uppercase; color: var(--encre-douce); }
+.legal-tableau :is(th, td) { padding: .875rem 1rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--ligne); }
+.legal-tableau thead th { font-size: .8125rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--encre-douce); background: var(--surface); border-bottom: 2px solid var(--rouge-logo); }
+.legal-tableau tbody th { font-weight: 700; color: var(--noir); }
+.legal-tableau td { color: var(--encre-douce); }
+.legal-tableau td:last-child { white-space: nowrap; }
+@container (width < 34rem) {
+  .legal-tableau :is(table, caption, tbody, tr, th, td) { display: block; }
+  .legal-tableau thead { display: none; }
+  .legal-tableau tr { margin-bottom: .75rem; padding: 1rem 1.25rem; background: var(--surface); border-left: 4px solid var(--rouge-logo); border-radius: .5rem; }
+  .legal-tableau :is(th, td) { padding: 0; border: 0; }
+  .legal-tableau tbody th { margin-bottom: .5rem; }
+  .legal-tableau td + td { margin-top: .25rem; }
+  .legal-tableau td:last-child { white-space: normal; }
+  .legal-tableau td::before { font-weight: 700; color: var(--noir); }
+  .legal-tableau td:nth-child(2)::before { content: "Finalité : "; }
+  .legal-tableau td:nth-child(3)::before { content: "Durée : "; }
+}
+
+/* Refus de la mesure d'audience : interrupteur (switch natif de Safari, case redessinée partout ailleurs) */
+.choix-mesure {
+  display: grid; gap: .5rem; margin-top: 1.5rem; padding: 1.25rem 1.75rem;
+  background: var(--surface); border-left: 4px solid var(--rouge-logo); border-radius: .5rem;
+}
+.choix-mesure label { display: flex; align-items: center; gap: .875rem; font-weight: 700; color: var(--noir); cursor: pointer; }
+.choix-mesure input {
+  appearance: none; flex-shrink: 0; width: 2.75rem; height: 1.5rem; margin: 0; border-radius: 1rem; cursor: pointer;
+  background: var(--acier) radial-gradient(circle, var(--blanc) .5625rem, transparent calc(.5625rem + .5px)) no-repeat left center / 1.5rem 1.5rem;
+}
+.choix-mesure input:checked { background-color: var(--rouge-action); background-position: right center; }
+.choix-mesure input:focus-visible { outline: 2px solid var(--rouge-action); outline-offset: 3px; }
+.legal-texte .choix-mesure-etat { margin: 0; font-size: .9375rem; line-height: 1.5; }
+@media (prefers-reduced-motion: no-preference) {
+  .choix-mesure input { transition: background-color .2s, background-position .2s; }
 }
 
 /* ═══════════ Actualités : liste filtrable, lettre d'information, article ═══════════ */
@@ -653,6 +803,7 @@ mark.a-completer {
   .vision-valeurs { gap: 2.5rem; }
   .missions-grille, .secteurs, .aspects { gap: 1.25rem; }
   .aspects { grid-template-columns: 1fr 1fr; }
+  .regles-or { grid-template-columns: repeat(2, 1fr); }
   .engagements-grille { gap: 2.5rem 2rem; }
 
   .filiales-grille { grid-template-columns: repeat(2, 1fr); }
@@ -684,7 +835,8 @@ mark.a-completer {
   .titre-section.marge-40 { margin-bottom: 1.75rem; }
   .intro-section { margin-bottom: 2.5rem; }
 
-  .missions-grille, .vision-valeurs, .secteurs, .aspects, .engagements-grille, .joindre { grid-template-columns: 1fr; }
+  .missions-grille, .vision-valeurs, .secteurs, .aspects, .politiques.quatre, .engagements-grille, .joindre { grid-template-columns: 1fr; }
+  .regles-or li { padding: 1.25rem; }
   .carte-mission, .secteur { padding: 1.75rem; }
   .vision-titre { font-size: 1.5rem; line-height: 2rem; }
   .vision-photo { flex: none; min-height: 0; aspect-ratio: 3 / 2; margin-top: 1.75rem; }
@@ -734,6 +886,7 @@ mark.a-completer {
   .legal-article { padding-bottom: 2.5rem; margin-bottom: 2.5rem; }
   .legal-article h2 { font-size: 1.25rem; }
   .legal-fiche { padding: 1.25rem; }
+  .choix-mesure { padding: 1.25rem; }
   .legal-fiche div { grid-template-columns: 1fr; }
 
   .liste-actus { grid-template-columns: 1fr; gap: 1.25rem; }

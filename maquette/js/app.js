@@ -402,6 +402,78 @@
     }
   });
 
+  /* ─── Médiathèque : visionneuse plein écran (<dialog> modal), photo par photo dans la galerie choisie.
+         Sans script, chaque vignette ouvre simplement la grande image. ─── */
+  const visionneuse = document.getElementById('visionneuse');
+  if (visionneuse) {
+    const cadre = visionneuse.querySelector('.visionneuse-cadre');
+    const legende = visionneuse.querySelector('.visionneuse-legende');
+    const nomGalerie = visionneuse.querySelector('.visionneuse-galerie');
+    const compteur = visionneuse.querySelector('.visionneuse-compteur');
+    const image = document.createElement('img');
+    image.className = 'visionneuse-image';
+    image.decoding = 'async';
+    image.draggable = false;
+    cadre.append(image);
+    image.addEventListener('load', () => image.classList.remove('est-chargement'));
+    let serie = [];
+    let rang = 0;
+
+    const afficher = (i) => {
+      rang = (i + serie.length) % serie.length;
+      const lien = serie[rang];
+      const vignette = lien.querySelector('img');
+      image.classList.add('est-chargement');
+      image.width = Number(lien.dataset.largeur);
+      image.height = Number(lien.dataset.hauteur);
+      image.src = lien.href;
+      image.alt = vignette.alt;
+      legende.textContent = vignette.alt;
+      compteur.textContent = `${rang + 1} / ${serie.length}`;
+      // Photos voisines chargées d'avance, en priorité basse : le passage à la suivante est immédiat
+      [rang + 1, rang - 1].forEach((j) => {
+        const voisine = new Image();
+        voisine.fetchPriority = 'low';
+        voisine.src = serie[(j + serie.length) % serie.length].href;
+      });
+    };
+
+    document.querySelectorAll('[data-visionneuse]').forEach((lien) => {
+      lien.setAttribute('aria-haspopup', 'dialog');
+      lien.addEventListener('click', (e) => {
+        e.preventDefault();
+        serie = [...document.querySelectorAll(`[data-visionneuse="${lien.dataset.visionneuse}"]`)];
+        nomGalerie.textContent = document.getElementById(`galerie-${lien.dataset.visionneuse}`)?.textContent || '';
+        afficher(serie.indexOf(lien));
+        visionneuse.showModal();
+      });
+    });
+    visionneuse.querySelector('.visionneuse-precedente').addEventListener('click', () => afficher(rang - 1));
+    visionneuse.querySelector('.visionneuse-suivante').addEventListener('click', () => afficher(rang + 1));
+    visionneuse.querySelector('[data-ferme]').addEventListener('click', () => visionneuse.close());
+    visionneuse.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); afficher(rang + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); afficher(rang - 1); }
+    });
+    // Balayage horizontal au doigt ; le clic qui le termine n'est pas pris pour une fermeture
+    let depart = null;
+    let balaye = false;
+    visionneuse.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') depart = e.clientX; });
+    visionneuse.addEventListener('pointerup', (e) => {
+      if (depart === null) return;
+      const ecart = e.clientX - depart;
+      depart = null;
+      if (Math.abs(ecart) > 50) { balaye = true; afficher(rang + (ecart < 0 ? 1 : -1)); }
+    });
+    // Clic sur le fond sombre, à côté de la photo : fermeture (la fenêtre couvre tout l'écran, sans fond cliquable)
+    visionneuse.addEventListener('click', (e) => {
+      if (balaye) { balaye = false; return; }
+      if (e.target === visionneuse || e.target === cadre || e.target.classList.contains('visionneuse-figure')) visionneuse.close();
+    });
+    // À la fermeture, le focus revient sur la vignette de la dernière photo regardée
+    visionneuse.addEventListener('close', () => serie[rang]?.focus());
+  }
+
   /* ─── Sous-navigation de rubrique (défilante sur smartphone) : l'élément actif est amené dans la bande ─── */
   const sousNav = document.querySelector('.sous-nav ul');
   const actif = sousNav && sousNav.querySelector('[aria-current]');
@@ -474,6 +546,30 @@
     });
     const demandee = new URLSearchParams(location.search).get('categorie');
     if (demandee && pastilles.some((a) => a.dataset.filtre === demandee)) appliquer(demandee);
+  }
+
+  /* ─── Gestion des cookies : refus de la mesure d'audience ───
+     Sur le site WordPress, l'interrupteur pilote Matomo (_paq). Dans la maquette, sans Matomo, il pose lui-même
+     le cookie de refus que Matomo lit (mtm_consent_removed), pour que le choix survive au rechargement. */
+  const choixMesure = document.querySelector('[data-mesure-audience]');
+  if (choixMesure) {
+    const interrupteur = choixMesure.querySelector('input');
+    const etat = choixMesure.querySelector('.choix-mesure-etat');
+    const afficher = (accepte) => {
+      interrupteur.checked = accepte;
+      etat.textContent = accepte ? 'Acceptée : vos visites sont comptées de façon anonyme.' : 'Refusée : vos visites ne sont plus comptées.';
+    };
+    const matomo = window._paq;
+    if (matomo) matomo.push([function () { afficher(!this.isUserOptedOut()); }]);
+    else afficher(!/(?:^|; )mtm_consent_removed=/.test(document.cookie));
+    interrupteur.addEventListener('change', () => {
+      const accepte = interrupteur.checked;
+      if (matomo) matomo.push([accepte ? 'forgetUserOptOut' : 'optUserOut']);
+      else document.cookie = accepte
+        ? 'mtm_consent_removed=; max-age=0; path=/; SameSite=Lax'
+        : `mtm_consent_removed=${Date.now()}; max-age=${60 * 60 * 24 * 395}; path=/; SameSite=Lax`;
+      afficher(accepte);
+    });
   }
 
   /* ─── Formulaires de la maquette : contrôlés par le navigateur, mais pas encore reliés à un envoi ─── */

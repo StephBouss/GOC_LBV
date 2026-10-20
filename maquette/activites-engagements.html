@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#14171B">
   <link rel="icon" href="img/favicon.png" type="image/png">
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" href="img/activites-hero.jpg" imagesrcset="img/activites-hero-768.jpg 768w, img/activites-hero.jpg 1536w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="image" href="img/photos/activites-hero.jpg" imagesrcset="img/photos/activites-hero-768.jpg 768w, img/photos/activites-hero.jpg 1536w" imagesizes="100vw" fetchpriority="high">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/pages.css">
   <script>document.documentElement.classList.add('js');</script>
@@ -58,8 +58,8 @@
               <li><a href="presentation-groupe.html#a-propos">À propos</a></li>
               <li><a href="presentation-groupe.html#missions">Missions</a></li>
               <li><a href="presentation-groupe.html#vision-valeurs">Vision et valeurs</a></li>
-              <li><a href="historique-gouvernance.html#gouvernance">Gouvernance</a></li>
               <li><a href="historique-gouvernance.html#historique">Historique</a></li>
+              <li><a href="historique-gouvernance.html#gouvernance">Gouvernance</a></li>
               <li><a href="filiales.html">Filiales</a></li>
             </ul>
           </div>
@@ -71,8 +71,8 @@
               <li><a href="exploration-production.html#exploration">Exploration</a></li>
               <li><a href="exploration-production.html#production">Production</a></li>
               <li><a href="projets-strategiques.html">Projets stratégiques</a></li>
-              <li><a href="activites-engagements.html#hsse">Engagements HSSE</a></li>
-              <li><a href="activites-engagements.html#rse">RSE</a></li>
+              <li><a href="engagements-hsei.html">Engagements HSEI</a></li>
+              <li><a href="engagements-rse.html">Engagements RSE</a></li>
             </ul>
           </div>
         </li>
@@ -81,6 +81,7 @@
           <div class="sous-menu" id="sous-menu-information">
             <ul class="sous-menu-liens">
               <li><a href="actualites.html">Actualités</a></li>
+              <li><a href="mediatheque.html">Médiathèque</a></li>
               <li><a href="contact.html#candidature">Carrières</a></li>
               <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -112,8 +113,8 @@
         <li><a href="presentation-groupe.html#a-propos">À propos</a></li>
         <li><a href="presentation-groupe.html#missions">Missions</a></li>
         <li><a href="presentation-groupe.html#vision-valeurs">Vision et valeurs</a></li>
-        <li><a href="historique-gouvernance.html#gouvernance">Gouvernance</a></li>
         <li><a href="historique-gouvernance.html#historique">Historique</a></li>
+        <li><a href="historique-gouvernance.html#gouvernance">Gouvernance</a></li>
         <li><a href="filiales.html">Filiales</a></li>
       </ul>
     </details>
@@ -123,14 +124,15 @@
         <li><a href="exploration-production.html#exploration">Exploration</a></li>
         <li><a href="exploration-production.html#production">Production</a></li>
         <li><a href="projets-strategiques.html">Projets stratégiques</a></li>
-        <li><a href="activites-engagements.html#hsse">Engagements HSSE</a></li>
-        <li><a href="activites-engagements.html#rse">RSE</a></li>
+        <li><a href="engagements-hsei.html">Engagements HSEI</a></li>
+        <li><a href="engagements-rse.html">Engagements RSE</a></li>
       </ul>
     </details>
     <details class="accordeon" name="menu-mobile">
       <summary>Information et contact <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
         <li><a href="actualites.html">Actualités</a></li>
+        <li><a href="mediatheque.html">Médiathèque</a></li>
         <li><a href="contact.html#candidature">Carrières</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -150,8 +152,8 @@
       <li><a href="presentation-groupe.html#a-propos">À propos</a></li>
       <li><a href="presentation-groupe.html#missions">Missions</a></li>
       <li><a href="presentation-groupe.html#vision-valeurs">Vision et valeurs</a></li>
-      <li><a href="historique-gouvernance.html#gouvernance">Gouvernance</a></li>
       <li><a href="historique-gouvernance.html#historique">Historique</a></li>
+      <li><a href="historique-gouvernance.html#gouvernance">Gouvernance</a></li>
       <li><a href="filiales.html">Filiales</a></li>
       <li><a href="activites-engagements.html" aria-current="page">Activités</a></li>
     </ul>
@@ -159,7 +161,7 @@
 
   <!-- ═══════════ 1 · Ouverture ═══════════ -->
   <section class="page-hero" aria-labelledby="page-titre">
-    <img class="page-hero-image" src="img/activites-hero.jpg" srcset="img/activites-hero-768.jpg 768w, img/activites-hero.jpg 1536w" sizes="100vw" alt="" width="1536" height="1024" fetchpriority="high">
+    <img class="page-hero-image" style="object-position: 50% 10%" src="img/photos/activites-hero.jpg" srcset="img/photos/activites-hero-768.jpg 768w, img/photos/activites-hero.jpg 1536w" sizes="100vw" alt="" width="1536" height="1024" fetchpriority="high">
     <div class="voile" aria-hidden="true"></div>
     <div class="conteneur page-hero-contenu">
       <div class="page-hero-bloc">
@@ -236,6 +238,7 @@
             <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Investir continuellement dans la formation et la montée en compétences des cadres gabonais.</li>
             <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Développer le contenu local et la formation d'une élite technique nationale.</li>
           </ul>
+          <a class="lien-fleche" href="engagements-rse.html">Nos engagements RSE <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
         </div>
         <div class="engagement bleu" id="gouvernance-transparence">
           <div class="engagement-tete"><h3>Gouvernance et transparence</h3></div>
@@ -254,6 +257,7 @@
             <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Appliquer des protocoles HSSE rigoureux sur chaque site pour préserver la sécurité de tous.</li>
             <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Un Comité QHSEI qui veille au respect des normes et à la protection des personnes, des installations et de l'environnement.</li>
           </ul>
+          <a class="lien-fleche" href="engagements-hsei.html">Nos engagements HSEI <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
         </div>
       </div>
     </div>
@@ -316,8 +320,8 @@
             <li><a href="presentation-groupe.html#a-propos">À propos</a></li>
             <li><a href="presentation-groupe.html#missions">Missions</a></li>
             <li><a href="presentation-groupe.html#vision-valeurs">Vision et valeurs</a></li>
-            <li><a href="historique-gouvernance.html#gouvernance">Gouvernance</a></li>
             <li><a href="historique-gouvernance.html#historique">Historique</a></li>
+            <li><a href="historique-gouvernance.html#gouvernance">Gouvernance</a></li>
             <li><a href="filiales.html">Filiales</a></li>
           </ul>
         </details>
@@ -327,14 +331,15 @@
             <li><a href="exploration-production.html#exploration">Exploration</a></li>
             <li><a href="exploration-production.html#production">Production</a></li>
             <li><a href="projets-strategiques.html">Projets stratégiques</a></li>
-            <li><a href="activites-engagements.html#hsse">Engagements HSSE</a></li>
-            <li><a href="activites-engagements.html#rse">RSE</a></li>
+            <li><a href="engagements-hsei.html">Engagements HSEI</a></li>
+            <li><a href="engagements-rse.html">Engagements RSE</a></li>
           </ul>
         </details>
         <details class="pied-colonne" open>
           <summary>Informations <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
             <li><a href="actualites.html">Actualités</a></li>
+            <li><a href="mediatheque.html">Médiathèque</a></li>
             <li><a href="contact.html#candidature">Carrières</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>

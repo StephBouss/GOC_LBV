@@ -1,13 +1,13 @@
 # Site web Gabon Oil Company (SNHG)
 
-Maquette HTML, CSS et JavaScript du site institutionnel de la Société nationale des hydrocarbures du Gabon (SNHG), Gabon Oil Company. Elle préfigure le futur thème WordPress : les contenus appelés à être gérés dans l'administration (actualités, diaporama d'accueil, rapport PDF) sont déjà séparés de la mise en page.
+Maquette HTML, CSS et JavaScript du site institutionnel de la Société nationale des hydrocarbures du Gabon (SNHG), Gabon Oil Company. Elle préfigure le futur thème WordPress : les contenus appelés à être gérés dans l'administration (actualités, diaporama d'accueil, galeries de la médiathèque, rapport PDF) sont déjà séparés de la mise en page.
 
 ## Structure
 
 | Dossier | Contenu |
 |---|---|
-| `maquette/` | Le site prêt à servir : 23 pages HTML, `css/`, `js/` (dont PDF.js dans `js/pdfjs/`), `img/`, `video/`, `documents/`, `fonts/` |
-| `sources/` | Sources des pages : gabarit commun, contenu de chaque page, données des actualités et du diaporama |
+| `maquette/` | Le site prêt à servir : 27 pages HTML, `css/`, `js/` (dont PDF.js dans `js/pdfjs/`), `img/`, `video/`, `documents/`, `fonts/` |
+| `sources/` | Sources des pages : gabarit commun, contenu de chaque page, données des actualités, du diaporama et de la médiathèque |
 | `scripts/` | Génération des pages, serveur local, préparation des médias |
 | `INVENTAIRE.md` | État du site : pages créées, pages à créer, photos à remplacer, textes à relire, points WordPress |
 
@@ -29,7 +29,8 @@ Les pages `maquette/*.html` sont générées : on ne les modifie jamais à la ma
    - `sources/gabarit.html` pour l'en-tête, les menus et le pied de page ;
    - `sources/pages/*.html` pour le contenu de chaque page ;
    - `sources/actualites.json` pour les articles (l'accueil affiche les 3 plus récents, la page Actualités les 20 plus récents) ;
-   - `sources/diaporama-accueil.json` pour les diapositives de l'accueil.
+   - `sources/diaporama-accueil.json` pour les diapositives de l'accueil ;
+   - `sources/mediatheque.json` pour les galeries de la médiathèque (titre, texte, photos et leurs légendes).
 2. Régénérer les pages :
 
    ```bash
@@ -37,7 +38,7 @@ Les pages `maquette/*.html` sont générées : on ne les modifie jamais à la ma
    node scripts/assembler-pages.js --surveiller # à chaque enregistrement
    ```
 
-La navigation (menu, menu mobile, plan du pied de page) se règle en tête de `scripts/assembler-pages.js`. La mise en page des articles est dans `scripts/actualites.js`, celle du diaporama dans `scripts/diaporama.js`.
+La navigation (menu, menu mobile, plan du pied de page) se règle en tête de `scripts/assembler-pages.js`. La mise en page des articles est dans `scripts/actualites.js`, celle du diaporama dans `scripts/diaporama.js`, celle des galeries dans `scripts/mediatheque.js`.
 
 ## Médias
 
@@ -45,7 +46,9 @@ Les images, vidéos et documents du site sont déjà préparés dans `maquette/`
 
 - `scripts/creer-vignettes-frise.js` : vignettes SVG de la frise historique. Il est autonome.
 - `scripts/telecharger-police.js` : police Archivo, depuis Google Fonts.
-- `scripts/preparer-images.sh` et `scripts/preparer-logos-filiales.js` : photos, vidéos et logos. Ils lisent les fichiers d'origine du client et du site de référence, qui ne sont pas dans ce dépôt pour ne pas l'alourdir. Il faut `ffmpeg`.
+- `scripts/preparer-photos.js` : photos réelles des pages (ouvertures, accueil, sections illustrées, actualités dont les photos d'origine étaient générées par IA), dans `img/photos/`. Il lit les reportages du client, hors du dépôt (dossier modifiable par la variable `PHOTOS_SOURCE`). Le choix et le recadrage de chaque photo sont listés en tête du script. Il faut `ffmpeg`.
+- `scripts/preparer-images.sh` et `scripts/preparer-logos-filiales.js` : photos des actualités, vidéos, portraits et logos. Ils lisent les fichiers d'origine du client et du site de référence, qui ne sont pas dans ce dépôt pour ne pas l'alourdir. Il faut `ffmpeg`.
+- `scripts/preparer-mediatheque.js` : photos de la médiathèque (vignettes de 800 px, grandes images de 1 600 px), d'après `sources/mediatheque.json`. Il lit le reportage « Opérations GOC » du client, hors du dépôt (dossier modifiable par la variable `MEDIATHEQUE_SOURCE`). Il faut `ffmpeg`. Après l'ajout d'une photo dans le fichier de données, on le relance, puis on régénère les pages.
 
 ## Licences des composants
 

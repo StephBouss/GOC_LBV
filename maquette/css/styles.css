@@ -287,7 +287,8 @@ body.menu-ouvert { overflow: hidden; }
 .chiffres { display: grid; grid-template-columns: 360fr 816fr; gap: 4rem; align-items: start; }
 .chiffres-texte .texte-doux { margin: 1.25rem 0 1.75rem; }
 .vignette-legendee { position: relative; aspect-ratio: 360 / 280; overflow: hidden; border-radius: .75rem; }
-.vignette-legendee img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--doux); }
+/* Photo de groupe : cadrée sur les visages (les cadres 16:10 des tablettes et téléphones coupent surtout le bas) */
+.vignette-legendee img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; transform-origin: 50% 30%; transition: transform .6s var(--doux); }
 .vignette-legendee figcaption {
   position: absolute; left: 0; right: 0; bottom: 0; padding: 1.5rem;
   background: linear-gradient(to top, rgba(20, 23, 27, .92) 0%, transparent 100%);
@@ -502,7 +503,7 @@ body.menu-ouvert { overflow: hidden; }
   .carte-actu:hover { transform: translateY(-.25rem); box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .10); }
   .carte-actu:hover .carte-actu-photo img { transform: scale(1.05); }
   .carte-actu:hover .lire { gap: .5rem; }
-  .vignette-legendee:hover img { transform: scale(1.04); }
+  .vignette-legendee:is(:hover, :focus-visible) img { transform: scale(1.08); }
   .bouton:hover::after { translate: 110% 0; transition: translate .75s var(--doux); }
   .bouton .fleche { transition: translate .25s var(--doux); }
   .bouton:hover .fleche { translate: .1875rem 0; }

@@ -1,0 +1,59 @@
+<!-- {
+  "titre": "Médiathèque · SNHG – Gabon Oil Company",
+  "description": "Les opérations de la SNHG – Gabon Oil Company en images : plateforme offshore Sardine, champs de Tsiengui, Mboumba et Obangué, projets communautaires, bureaux de Port-Gentil et siège de Libreville.",
+  "onglet": "information",
+  "precharger": { "src": "img/mediatheque/ouverture.jpg", "srcset": "img/mediatheque/ouverture-768.jpg 768w, img/mediatheque/ouverture.jpg 1536w" },
+  "css": ["css/pages.css"]
+} -->
+
+  <!-- Navigation de la rubrique -->
+  <nav class="sous-nav" aria-label="Information et contact">
+    <ul>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li><a href="mediatheque.html" aria-current="page">Médiathèque</a></li>
+      <li><a href="contact.html#candidature">Carrières</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════ 1 · Ouverture ═══════════ -->
+  <section class="page-hero" aria-labelledby="page-titre">
+    <img class="page-hero-image" src="img/mediatheque/ouverture.jpg" srcset="img/mediatheque/ouverture-768.jpg 768w, img/mediatheque/ouverture.jpg 1536w" sizes="100vw" alt="" width="1536" height="1024" fetchpriority="high">
+    <div class="voile" aria-hidden="true"></div>
+    <div class="conteneur page-hero-contenu">
+      <div class="page-hero-bloc">
+        <p class="sur-titre clair">Médiathèque</p>
+        <h1 class="page-hero-titre" id="page-titre">Nos opérations en images</h1>
+        <p class="page-hero-chapo">De la plateforme Sardine aux champs de Tsiengui, Mboumba et Obangué, découvrez les sites, les installations et les équipes de la SNHG.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 2 · Galeries (sources/mediatheque.json, futures galeries WordPress) ═══════════ -->
+  <section class="section mediatheque-intro" aria-labelledby="galeries-titre">
+    <div class="conteneur">
+      <div class="mediatheque-tete" data-apparition>
+        <p class="sur-titre">Galeries</p>
+        <h2 class="titre-section" id="galeries-titre">{{mediatheque:galeries}} sites, une même exigence</h2>
+        <p class="texte-doux">{{mediatheque:photos}} photos de reportage au cœur des opérations : en mer, sur les champs terrestres, aux côtés des communautés et dans nos bureaux. Cliquez sur une photo pour l'agrandir.</p>
+      </div>
+      <nav class="filtres galeries-sommaire" aria-label="Galeries">
+        <!-- mediatheque:sommaire -->
+      </nav>
+    </div>
+  </section>
+<!-- mediatheque:galeries -->
+<!-- apres -->
+<!-- ═══════════ Visionneuse : <dialog> modal plein écran, photo par photo dans la galerie choisie ═══════════ -->
+<dialog class="visionneuse" id="visionneuse" closedby="any" aria-labelledby="visionneuse-titre">
+  <div class="visionneuse-tete">
+    <p class="visionneuse-titre" id="visionneuse-titre"><span class="visionneuse-galerie">Médiathèque</span> <span class="visionneuse-compteur"></span></p>
+    <button class="visionneuse-fermer" type="button" data-ferme aria-label="Fermer la visionneuse"><svg class="icone" aria-hidden="true"><use href="#i-fermer"/></svg></button>
+  </div>
+  <figure class="visionneuse-figure">
+    <div class="visionneuse-cadre"></div>
+    <figcaption class="visionneuse-legende" aria-live="polite"></figcaption>
+  </figure>
+  <button class="visionneuse-nav visionneuse-precedente" type="button" aria-label="Photo précédente"><svg class="icone" aria-hidden="true"><use href="#i-chevron-gauche"/></svg></button>
+  <button class="visionneuse-nav visionneuse-suivante" type="button" aria-label="Photo suivante"><svg class="icone" aria-hidden="true"><use href="#i-chevron-droite"/></svg></button>
+</dialog>
