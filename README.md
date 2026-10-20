@@ -19,6 +19,8 @@ node scripts/serve.js
 
 Le site est alors visible sur http://127.0.0.1:4321, et la page se recharge à chaque modification. Il ne faut aucune dépendance, seulement Node.js 20 ou plus récent.
 
+La version en ligne est publiée par Vercel à chaque envoi sur GitHub : https://snhg-vert.vercel.app. Le fichier `vercel.json` lui indique de ne publier que le dossier `maquette/`.
+
 Tout serveur statique pointé sur `maquette/` convient aussi, à condition qu'il accepte les requêtes partielles (en-tête `Range`), ce qui est le cas d'Apache et de Nginx. Les vidéos de l'accueil et la liseuse PDF en ont besoin. Ouvrir les fichiers directement depuis le disque ne suffit pas : la liseuse PDF ne fonctionnerait pas.
 
 ## Modifier le site
