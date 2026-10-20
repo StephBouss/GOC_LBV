@@ -1,0 +1,9 @@
+# Vercel publie le site, qui est à la racine du dépôt (index.html, css/, js/, img/, video/, documents/, fonts/).
+# Les outils de travail restent dans le dépôt mais ne sont pas mis en ligne.
+sources/
+scripts/
+references/
+README.md
+INVENTAIRE.md
+.gitattributes
+.gitignore

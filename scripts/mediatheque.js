@@ -6,9 +6,13 @@
  *  galerie()    une section par site : type de site, titre, présentation, mosaïque de 5 à 7 photos
  *               dont la première est mise en avant ; chaque photo ouvre la visionneuse (app.js)
  *
+ * Langues : le fichier français décrit tout (photos, ordre) ; sources/<langue>/mediatheque.json ne donne que ce qui se
+ * traduit (type de site, titre, présentation, texte alternatif de chaque photo, dans l'ordre). Une traduction manquante
+ * arrête la génération.
+ *
  * Utilisé par scripts/assembler-pages.js : repères <!-- mediatheque:sommaire -->, <!-- mediatheque:galeries -->,
  * {{mediatheque:photos}} et {{mediatheque:galeries}} dans la source de la page.
- * Les photos sont produites par scripts/preparer-mediatheque.js dans maquette/img/mediatheque/<galerie>/.
+ * Les photos sont produites par scripts/preparer-mediatheque.js dans img/mediatheque/<galerie>/.
  */
 const fs = require('fs');
 const path = require('path');
@@ -25,9 +29,23 @@ function dimensions(fichier) {
   throw new Error(`dimensions illisibles : ${fichier}`);
 }
 
-function charger(sources) {
+/* Traduction des galeries : textes de sources/<langue>/mediatheque.json sur les données françaises */
+function traduire(d, sources, langue) {
+  const trad = JSON.parse(fs.readFileSync(path.join(sources, langue, 'mediatheque.json'), 'utf8'));
+  const manque = (quoi) => { throw new Error(`${langue}/mediatheque.json : pas de traduction pour ${quoi}`); };
+  for (const g of d.galeries) {
+    const t = trad.galeries[g.slug] || manque(`la galerie « ${g.slug} »`);
+    for (const champ of ['type', 'titre', 'description']) g[champ] = t[champ] || manque(`« ${g.slug} ».${champ}`);
+    if ((t.photos || []).length !== g.photos.length) manque(`les ${g.photos.length} photos de « ${g.slug} »`);
+    g.photos.forEach((p, i) => { p.alt = t.photos[i]; });
+  }
+}
+
+function charger(sources, langue, t) {
   const d = JSON.parse(fs.readFileSync(path.join(sources, 'mediatheque.json'), 'utf8'));
-  const img = path.join(sources, '..', 'maquette', 'img', 'mediatheque');
+  if (langue !== 'fr') traduire(d, sources, langue);
+  d.t = t;
+  const img = path.join(sources, '..', 'img', 'mediatheque');
   for (const g of d.galeries) {
     g.photos.forEach((p, i) => {
       const n = String(i + 1).padStart(2, '0');
@@ -40,10 +58,10 @@ function charger(sources) {
   return d;
 }
 
-const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
+const nombrePhotos = (n, t) => `${n} ${n > 1 ? t.photos : t.photo}`;
 
 const sommaire = (d) => `        <ul>
-${d.galeries.map((g) => `          <li><a href="#${g.slug}">${g.titre} <span class="filtre-nombre">${g.photos.length}<span class="visuellement-masque"> photos</span></span></a></li>`).join('\n')}
+${d.galeries.map((g) => `          <li><a href="#${g.slug}">${g.titre} <span class="filtre-nombre">${g.photos.length}<span class="visuellement-masque"> ${d.t.photos}</span></span></a></li>`).join('\n')}
         </ul>`;
 
 /* Photo de la mosaïque : lien vers la grande image (ouverte telle quelle sans JavaScript, dans la visionneuse sinon) */
@@ -53,7 +71,7 @@ function photo(g, p, i) {
     + `<img src="${p.petite}" srcset="${p.petite} 800w, ${p.grande} 1600w" sizes="${tailles}" alt="${p.alt}" width="${p.taillePetite.largeur}" height="${p.taillePetite.hauteur}" loading="lazy"></a></li>`;
 }
 
-const galerie = (g, rang) => `
+const galerie = (g, rang, t) => `
   <!-- Galerie : ${g.titre} -->
   <section class="section galerie${rang % 2 ? '' : ' fond-surface'}" id="${g.slug}" aria-labelledby="galerie-${g.slug}">
     <div class="conteneur">
@@ -62,7 +80,7 @@ const galerie = (g, rang) => `
           <p class="sur-titre">${g.type}</p>
           <h2 class="titre-section" id="galerie-${g.slug}">${g.titre}</h2>
         </div>
-        <p class="galerie-texte">${g.description} <span class="galerie-nombre">${pluriel(g.photos.length, 'photo')}</span></p>
+        <p class="galerie-texte">${g.description} <span class="galerie-nombre">${nombrePhotos(g.photos.length, t)}</span></p>
       </div>
       <ul class="galerie-grille" data-nombre="${g.photos.length}" data-cascade>
 ${g.photos.map((p, i) => photo(g, p, i)).join('\n')}
@@ -74,7 +92,7 @@ function remplir(contenu, d) {
   const photos = d.galeries.reduce((t, g) => t + g.photos.length, 0);
   return contenu
     .replace(/^[ \t]*<!-- mediatheque:sommaire -->/m, () => sommaire(d))
-    .replace(/^[ \t]*<!-- mediatheque:galeries -->/m, () => d.galeries.map(galerie).join('\n'))
+    .replace(/^[ \t]*<!-- mediatheque:galeries -->/m, () => d.galeries.map((g, rang) => galerie(g, rang, d.t)).join('\n'))
     .replace(/\{\{mediatheque:photos\}\}/g, () => String(photos))
     .replace(/\{\{mediatheque:galeries\}\}/g, () => String(d.galeries.length));
 }

@@ -4,8 +4,8 @@
  * Elles viennent des reportages fournis par le client (hors du dépôt) : « Photo Autre/Opérations GOC »,
  * « GOC-SNHG - Contenus/Images GOC - SNHG » et « Station ».
  *
- *  maquette/img/photos/<nom>.jpg       1536 × 1024 (paysage) ou 1024 × 1536 (portrait)
- *  maquette/img/photos/<nom>-768.jpg   768 px de large, pour les attributs srcset
+ *  img/photos/<nom>.jpg       1536 × 1024 (paysage) ou 1024 × 1536 (portrait)
+ *  img/photos/<nom>-768.jpg   768 px de large, pour les attributs srcset
  *
  * « zone » (facultative) : partie de la photo d'origine à garder, en fractions [x, y, largeur, hauteur].
  * La photo est ensuite recadrée au centre au format voulu. Le cadrage fin des ouvertures (bandeaux très larges)
@@ -18,7 +18,7 @@ const { execFileSync } = require('child_process');
 
 const RACINE = path.join(__dirname, '..');
 const SOURCE = process.env.PHOTOS_SOURCE || path.join(RACINE, '..', 'Img', 'Inspiration images', 'Site web GOC');
-const DST = path.join(RACINE, 'maquette', 'img', 'photos');
+const DST = path.join(RACINE, 'img', 'photos');
 
 const OPERATIONS = 'Photo Autre/Opérations GOC';
 const BUREAUX = 'GOC-SNHG - Contenus/Images GOC - SNHG/Bureaux et staffs bureau_site & NATURE';
@@ -52,6 +52,9 @@ const PHOTOS = [
   { nom: 'projets-hero', source: `${OPERATIONS}/Tsiengui/Tsiengui - Vues aériennes/DJI_0301.jpg` },                                     // champ et réservoirs en forêt
   { nom: 'projets-equipe', source: `${OPERATIONS}/Sardine/Sardine - Opérateurs en discussion/DSC03483.jpg` },                            // plateforme Sardine
   { nom: 'hsei-approche', source: `${OPERATIONS}/Mboumba/Mboumba - Réunion HSSE/DSC09324.jpg` },                                        // tableau HSSE et 10 Règles d'or
+  { nom: 'distribution-station', source: 'Station/Inauguration de la station GabOil 1.png', zone: [0.12, 0.08, 0.84, 0.92] },          // pompe et boutique (l'ouverture reprend actu-gaboil-station)
+  { nom: 'services-hero', source: `${OPERATIONS}/Sardine/Sardine - Local électrique/DSC03872.jpg` },                                    // technicien devant une armoire électrique
+  { nom: 'services-intervention', source: `${OPERATIONS}/Mboumba/Mboumba - Permis de travail/DSC09762.jpg` },                          // deux opérateurs relisent un permis de travail
   // Images à la une et galeries des actualités (sources/actualites.json), au format 16:9 des cartes et des articles
   { nom: 'actu-addax-tsiengui', source: `${OPERATIONS}/Tsiengui/Tsiengui - Vues aériennes/DJI_0299.jpg`, format: 'actualite' },
   { nom: 'actu-addax-obangue', source: `${OPERATIONS}/Obangué/Obangué - Installations/DSC01687.jpg`, format: 'actualite' },

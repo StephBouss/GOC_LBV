@@ -13,13 +13,21 @@
  * pourrait pas occuper. Il n'y a donc aucune raison de déplacer le projet
  * hors du dossier de travail de l'utilisateur.
  *
- * Adapter RACINE au dossier qui contient index.html.
+ * Adapter RACINE au dossier qui contient index.html (par défaut, la racine du projet).
  */
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const RACINE = process.env.RACINE || path.join(__dirname, '..', 'maquette');
+const RACINE = process.env.RACINE || path.join(__dirname, '..');
+
+// Le site est à la racine du projet, à côté des outils de travail : ceux-ci ne sont ni servis ni surveillés
+// (comme sur Vercel, voir .vercelignore). Les dossiers cachés (.git, .claude…) sont toujours exclus.
+const PRIVES = new Set(['sources', 'scripts', 'references', 'node_modules']);
+const prive = (rel) => {
+  const tete = rel.split(/[\\/]/).find(Boolean) || '';
+  return tete.startsWith('.') || PRIVES.has(tete) || /\.md$/i.test(rel);
+};
 const PORT = Number(process.env.PORT || 4321);
 
 const TYPES = {
@@ -36,7 +44,8 @@ const TYPES = {
   '.mp4': 'video/mp4',
   '.webm': 'video/webm',
   '.pdf': 'application/pdf',
-  '.txt': 'text/plain; charset=utf-8'
+  '.txt': 'text/plain; charset=utf-8',
+  '.xml': 'application/xml; charset=utf-8'
 };
 
 const RACINE_ABS = path.resolve(RACINE);
@@ -56,7 +65,7 @@ const signaler = () => {
 const DEMARRAGE = Date.now();
 const DATES = new Map();
 fs.watch(RACINE_ABS, { recursive: true }, (type, nom) => {
-  if (!nom) return;
+  if (!nom || prive(nom)) return;
   const fichier = path.join(RACINE_ABS, nom);
   fs.stat(fichier, (err, st) => {
     if (err) return signaler();                 // fichier supprimé ou renommé
@@ -78,13 +87,19 @@ const serveur = http.createServer((req, res) => {
     return req.on('close', () => ABONNES.delete(res));
   }
 
-  const fichier = path.join(RACINE_ABS, rel === '/' ? 'index.html' : rel);
+  // une adresse de dossier (/, /activites/) sert la page index.html du dossier, comme sur Vercel
+  const fichier = path.join(RACINE_ABS, rel.endsWith('/') ? rel + 'index.html' : rel);
 
   // ne jamais servir hors de la racine — le séparateur final évite
   // qu'un dossier frère au nom préfixé (site vs siteX) passe le contrôle
   if (fichier !== RACINE_ABS && !fichier.startsWith(RACINE_ABS + path.sep)) {
     res.writeHead(403, { 'Content-Type': 'text/plain' });
     return res.end('403');
+  }
+  // les outils de travail ne font pas partie du site
+  if (prive(path.relative(RACINE_ABS, fichier))) {
+    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+    return res.end('404 — ' + rel);
   }
 
   // Vidéos et PDF : envoi par plages d'octets (en-tête Range), sans quoi le navigateur ne peut pas se
@@ -129,7 +144,7 @@ const serveur = http.createServer((req, res) => {
 // planter ni pousser à tuer le processus voisin : on essaie le suivant.
 // Le port annoncé est lu sur le serveur lui-même, jamais déduit.
 serveur.on('listening', () => {
-  console.log('Maquette servie sur http://127.0.0.1:' + serveur.address().port + '  (racine : ' + RACINE + ')');
+  console.log('Site servi sur http://127.0.0.1:' + serveur.address().port + '  (racine : ' + RACINE + ')');
 });
 function ecouter(port, essaisRestants) {
   serveur.once('error', (err) => {

@@ -4,16 +4,16 @@
  * Illustrations vectorielles en aplats, aux couleurs de la charte : rouge GOC, noirs et gris, touches du drapeau gabonais.
  * Format 16:10 (320 × 200), affichées à 17,5rem de large au plus.
  *
- * Sortie : maquette/img/frise/<annee>-<sujet>.svg
+ * Sortie : img/frise/<annee>-<sujet>.svg
  * Usage  : node scripts/creer-vignettes-frise.js
  * Pour remplacer une vignette par une photo, il suffit de changer le src de l'image dans sources/pages/historique-gouvernance.html.
  */
 const fs = require('fs');
 const path = require('path');
 
-const SORTIE = path.join(__dirname, '..', 'maquette', 'img', 'frise');
+const SORTIE = path.join(__dirname, '..', 'img', 'frise');
 
-/* Couleurs de la charte (voir maquette/css/styles.css) */
+/* Couleurs de la charte (voir css/styles.css) */
 const R = '#ED1C24', RF = '#CC1219', N = '#14171B', E = '#33373D', ED = '#5E6268', A = '#818286', G = '#C9CACD', L = '#E3E4E6', S = '#F6F6F7', B = '#FFFFFF';
 const V = '#009E60', J = '#FCD116', BL = '#3A75C4';
 const ROSE = '#FDECEC', CIEL = '#E6EFF9', VERDURE = '#E1F2E8';

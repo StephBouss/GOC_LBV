@@ -1,0 +1,29 @@
+{
+  "_lisezmoi": [
+    "Traduction anglaise du diaporama d'accueil (sources/diaporama-accueil.json). Seuls les textes se traduisent : fonds, durées et liens restent ceux du fichier français.",
+    "Chaque diapositive est repérée par son « id » ; « boutons » donne le texte de ses boutons, dans l'ordre du fichier français.",
+    "Dans WordPress : la traduction anglaise du bloc « Diaporama d'accueil » sur l'accueil anglais (Polylang).",
+    "Régénération : node scripts/assembler-pages.js (ou automatiquement avec --surveiller)."
+  ],
+  "libelle": "Featured",
+  "diapositives": {
+    "foret": {
+      "surTitre": "Gabon's national hydrocarbons company",
+      "titre": "The leading player in Gabon's oil sector",
+      "chapo": "SNHG plays a key role in the strategic management of the State's oil assets.",
+      "boutons": ["Discover the Group", "Our activities"]
+    },
+    "expertise": {
+      "surTitre": "Since 2011",
+      "titre": "15 years of expertise",
+      "chapo": "Celebrating 15 years at the heart of Gabon's energy sector.",
+      "boutons": ["Our history", "Our subsidiaries"]
+    },
+    "sardine": {
+      "surTitre": "Strategic projects",
+      "titre": "Developing the offshore Sardine field",
+      "chapo": "Improving hydrocarbon recovery through water injection, workover operations and the drilling of new wells.",
+      "boutons": ["Exploration and production", "Strategic projects"]
+    }
+  }
+}

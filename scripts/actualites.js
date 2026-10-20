@@ -8,33 +8,63 @@
  *  filtres()      catégories non vides : liens vers les archives de catégorie, filtrés sur place par app.js
  *  pageArticle()  modèle single.html : en-tête, image à la une, contenu, « À lire aussi » (même catégorie d'abord)
  *
+ * Langues : le fichier français décrit tout (date, catégorie, images) ; sources/<langue>/actualites.json ne donne que
+ * ce qui se traduit (adresse, titre, extrait, contenu, textes alternatifs, noms des catégories), comme une traduction
+ * liée dans Polylang. Une traduction manquante arrête la génération. Les textes de l'interface viennent de libelles.json.
+ *
  * Utilisé par scripts/assembler-pages.js : repères <!-- actualites:accueil -->, <!-- actualites:filtres -->,
- * <!-- actualites:liste --> dans les sources des pages, et une page actualite-<slug>.html par article.
+ * <!-- actualites:liste --> dans les sources des pages, et une page actualites/<slug>.html par article (dans chaque langue).
  */
 const fs = require('fs');
 const path = require('path');
 
 const MAX_LISTE = 20;
 const MAX_ACCUEIL = 3;
-const MOIS = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
+const remplacerRepere = (modele, valeurs) => modele.replace(/\{(\w+)\}/g, (tout, cle) => valeurs[cle]);
 /* Le jour de publication n'est pas toujours connu : la date s'affiche au mois, comme sur le site de référence. */
-const dateAffichee = (iso) => { const [annee, mois] = iso.split('-'); return `${MOIS[Number(mois) - 1]} ${annee}`; };
+const dateAffichee = (iso, t) => { const [annee, mois] = iso.split('-'); return `${t.mois[Number(mois) - 1]} ${annee}`; };
 const dateMachine = (iso) => iso.slice(0, 7);
 const texteBrut = (html) => html.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&');
 const minutesDeLecture = (a) => Math.max(1, Math.round(a.contenu.map(texteBrut).join(' ').split(/\s+/).length / 200));
-const lienArticle = (a) => `actualite-${a.slug}.html`;
+/* Adresse d'un article, toujours écrite avec son slug français : l'assembleur la remplace par celle de sa traduction */
+const lienArticle = (a) => `actualites/${a.slug}.html`;
 const fichierImage = (img) => (img.src.endsWith('.svg') ? img.src : `${img.src}.jpg`);
 
-function charger(sources) {
-  const donnees = JSON.parse(fs.readFileSync(path.join(sources, 'actualites.json'), 'utf8'));
+/* Traduction d'un article ou d'une catégorie : textes de sources/<langue>/actualites.json sur les données françaises */
+function traduire(donnees, sources, langue) {
+  const trad = JSON.parse(fs.readFileSync(path.join(sources, langue, 'actualites.json'), 'utf8'));
+  const manque = (quoi) => { throw new Error(`${langue}/actualites.json : pas de traduction pour ${quoi}`); };
+  const categories = donnees.categories.map((c) => ({ ...c, nom: trad.categories[c.slug] || manque(`la catégorie « ${c.slug} »`) }));
+  const articles = donnees.articles.map((a) => {
+    const t = trad.articles[a.slug] || manque(`l'article « ${a.slug} »`);
+    for (const champ of ['slug', 'titre', 'extrait', 'contenu']) if (!t[champ]) manque(`« ${a.slug} ».${champ}`);
+    if (a.image.alt && !(t.image && t.image.alt)) manque(`le texte alternatif de l'image de « ${a.slug} »`);
+    const galerie = a.galerie || [];
+    if (galerie.length !== (t.galerie || []).length) manque(`la galerie de « ${a.slug} » (${galerie.length} photo(s))`);
+    return {
+      ...a,
+      slugTraduit: t.slug,
+      titre: t.titre,
+      extrait: t.extrait,
+      contenu: t.contenu,
+      image: { ...a.image, alt: t.image && t.image.alt },
+      galerie: galerie.map((g, i) => ({ ...g, alt: t.galerie[i].alt })),
+    };
+  });
+  return { categories, articles };
+}
+
+function charger(sources, langue, t) {
+  let donnees = JSON.parse(fs.readFileSync(path.join(sources, 'actualites.json'), 'utf8'));
+  if (langue !== 'fr') donnees = traduire(donnees, sources, langue);
   const noms = Object.fromEntries(donnees.categories.map((c) => [c.slug, c.nom]));
   for (const a of donnees.articles) {
     if (!noms[a.categorie]) throw new Error(`actualites.json : catégorie inconnue « ${a.categorie} » (${a.slug})`);
   }
   // Ordre de publication : du plus récent au plus ancien, quel que soit l'ordre du fichier
   const articles = [...donnees.articles].sort((x, y) => y.date.localeCompare(x.date));
-  return { categories: donnees.categories, noms, articles };
+  return { categories: donnees.categories, noms, articles, t };
 }
 
 /* Image à la une : variantes 768 px et pleine taille (photos), fichier unique (illustrations vectorielles) */
@@ -48,12 +78,12 @@ function image(img, { sizes, alt = '', prioritaire = false }) {
 function carte(a, d, { sizes, retrait = '        ' }) {
   const r = retrait;
   return `${r}<article class="carte-actu" data-categorie="${a.categorie}">
-${r}  <div class="carte-actu-photo">${image(a.image, { sizes })}</div>
+${r}  <div class="carte-actu-photo">${image(a.image, { sizes, alt: a.image.alt })}</div>
 ${r}  <div class="carte-actu-corps">
-${r}    <p class="carte-actu-meta"><span class="categorie">${d.noms[a.categorie]}</span><time datetime="${dateMachine(a.date)}">${dateAffichee(a.date)}</time></p>
+${r}    <p class="carte-actu-meta"><span class="categorie">${d.noms[a.categorie]}</span><time datetime="${dateMachine(a.date)}">${dateAffichee(a.date, d.t)}</time></p>
 ${r}    <h3><a href="${lienArticle(a)}">${a.titre}</a></h3>
 ${r}    <p class="extrait">${a.extrait}</p>
-${r}    <span class="lire" aria-hidden="true">Lire la suite <svg><use href="#i-fleche"/></svg></span>
+${r}    <span class="lire" aria-hidden="true">${d.t['lire-la-suite']} <svg><use href="#i-fleche"/></svg></span>
 ${r}  </div>
 ${r}</article>`;
 }
@@ -67,11 +97,11 @@ const liste = (d) => d.articles.slice(0, MAX_LISTE).map((a) => carte(a, d, { siz
 function filtres(d) {
   const affiches = d.articles.slice(0, MAX_LISTE);
   const nombre = (slug) => affiches.filter((a) => a.categorie === slug).length;
-  const compte = (n) => `<span class="filtre-nombre">${n}<span class="visuellement-masque"> article${n > 1 ? 's' : ''}</span></span>`;
+  const compte = (n) => `<span class="filtre-nombre">${n}<span class="visuellement-masque"> ${n > 1 ? d.t.articles : d.t.article}</span></span>`;
   const items = [
-    `<li><a href="actualites.html" data-filtre="" aria-current="true">Toutes ${compte(affiches.length)}</a></li>`,
+    `<li><a href="actualites/index.html" data-filtre="" aria-current="true">${d.t['toutes-categories']} ${compte(affiches.length)}</a></li>`,
     ...d.categories.filter((c) => nombre(c.slug)).map((c) =>
-      `<li><a href="actualites.html?categorie=${c.slug}" data-filtre="${c.slug}" data-nom="${c.nom}">${c.nom} ${compte(nombre(c.slug))}</a></li>`),
+      `<li><a href="actualites/index.html?categorie=${c.slug}" data-filtre="${c.slug}" data-nom="${c.nom}">${c.nom} ${compte(nombre(c.slug))}</a></li>`),
   ];
   return items.map((i) => `          ${i}`).join('\n');
 }
@@ -86,6 +116,7 @@ function remplacer(contenu, d) {
 }
 
 function pageArticle(a, d) {
+  const { t } = d;
   const categorie = d.noms[a.categorie];
   const memeCategorie = d.articles.filter((x) => x.slug !== a.slug && x.categorie === a.categorie);
   const autres = d.articles.filter((x) => x.slug !== a.slug && x.categorie !== a.categorie);
@@ -98,42 +129,43 @@ function pageArticle(a, d) {
   return {
     fichier: lienArticle(a),
     meta: {
-      titre: `${texteBrut(a.titre)} · Actualités · SNHG – Gabon Oil Company`,
+      titre: remplacerRepere(t['titre-article'], { titre: texteBrut(a.titre) }),
       description: texteBrut(a.extrait),
       onglet: 'information',
+      article: true,   // og:type article
       precharger: img.src.endsWith('.svg') ? { src: img.src } : { src: `${img.src}.jpg`, srcset: `${img.src}-768.jpg 768w, ${img.src}.jpg ${img.largeur}w`, sizes: '(max-width: 767px) 100vw, 54rem' },
       css: ['css/pages.css'],
     },
     contenu: `
   <!-- Navigation de la rubrique -->
-  <nav class="sous-nav" aria-label="Information et contact">
+  <nav class="sous-nav" aria-label="${t['rubrique-information']}">
     <ul>
-      <li><a href="actualites.html" aria-current="true">Actualités</a></li>
-      <li><a href="mediatheque.html">Médiathèque</a></li>
-      <li><a href="contact.html#candidature">Carrières</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="actualites/index.html" aria-current="true">${t.actualites}</a></li>
+      <li><a href="mediatheque/index.html">${t.mediatheque}</a></li>
+      <li><a href="contact/index.html#candidature">${t.carrieres}</a></li>
+      <li><a href="contact/index.html">${t.contact}</a></li>
     </ul>
   </nav>
 
   <!-- ═══════════ Article (modèle single.html) ═══════════ -->
   <article class="article" aria-labelledby="article-titre">
     <header class="conteneur article-tete">
-      <nav class="fil-ariane" aria-label="Fil d'Ariane">
+      <nav class="fil-ariane" aria-label="${t['fil-ariane']}">
         <ol>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="actualites.html">Actualités</a></li>
-          <li><a href="actualites.html?categorie=${a.categorie}">${categorie}</a></li>
+          <li><a href="index.html">${t.accueil}</a></li>
+          <li><a href="actualites/index.html">${t.actualites}</a></li>
+          <li><a href="actualites/index.html?categorie=${a.categorie}">${categorie}</a></li>
         </ol>
       </nav>
       <p class="sur-titre">${categorie}</p>
       <h1 class="article-titre" id="article-titre">${a.titre}</h1>
       <p class="article-chapo">${a.extrait}</p>
-      <p class="article-meta"><time datetime="${dateMachine(a.date)}">${dateAffichee(a.date)}</time><span aria-hidden="true">·</span>${minutesDeLecture(a)} min de lecture</p>
+      <p class="article-meta"><time datetime="${dateMachine(a.date)}">${dateAffichee(a.date, t)}</time><span aria-hidden="true">·</span>${remplacerRepere(t['minutes-lecture'], { n: minutesDeLecture(a) })}</p>
     </header>
-    <figure class="conteneur article-image${img.src.endsWith('.svg') ? ' illustration' : ''}">${image(img, { sizes: '(max-width: 767px) 100vw, 54rem', prioritaire: true })}</figure>
+    <figure class="conteneur article-image${img.src.endsWith('.svg') ? ' illustration' : ''}">${image(img, { sizes: '(max-width: 767px) 100vw, 54rem', alt: img.alt, prioritaire: true })}</figure>
     <div class="conteneur article-corps">
 ${blocs.join('\n')}
-      <p class="article-retour"><a class="lien-fleche" href="actualites.html">Toutes les actualités <svg aria-hidden="true"><use href="#i-fleche"/></svg></a></p>
+      <p class="article-retour"><a class="lien-fleche" href="actualites/index.html">${t['toutes-actualites']} <svg aria-hidden="true"><use href="#i-fleche"/></svg></a></p>
     </div>
   </article>
 
@@ -142,10 +174,10 @@ ${blocs.join('\n')}
     <div class="conteneur">
       <div class="tete-section" data-apparition>
         <div>
-          <p class="sur-titre">À lire aussi</p>
-          <h2 class="titre-section" id="autres-titre">Autres actualités</h2>
+          <p class="sur-titre">${t['a-lire-aussi']}</p>
+          <h2 class="titre-section" id="autres-titre">${t['autres-actualites']}</h2>
         </div>
-        <a class="lien-fleche" href="actualites.html">Toutes les actualités <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        <a class="lien-fleche" href="actualites/index.html">${t['toutes-actualites']} <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
       </div>
       <div class="liste-actus" data-cascade>
 ${aLire.map((x) => carte(x, d, { sizes: TAILLES_LISTE })).join('\n')}

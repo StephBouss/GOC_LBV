@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="fr">
+<html lang="{{langue}}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{titre}}</title>
   <meta name="description" content="{{description}}">
-  <meta name="theme-color" content="#14171B">
+{{partage}}  <meta name="theme-color" content="#14171B">
   <link rel="icon" href="img/favicon.png" type="image/png">
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 {{precharger}}  <link rel="stylesheet" href="css/styles.css">
@@ -30,43 +30,41 @@
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></symbol>
 {{icones}}</svg>
 
-<a class="evitement" href="#contenu">Aller au contenu</a>
+<a class="evitement" href="#contenu">{{t:evitement}}</a>
 
 <!-- ═══════════ En-tête (GOCHeader) ═══════════ -->
 <header class="entete">
   <div class="lisere" aria-hidden="true"></div>
   <div class="entete-barre">
-    <a class="entete-logo" href="index.html" aria-label="Gabon Oil Company, retour à l'accueil">
+    <a class="entete-logo" href="index.html" aria-label="{{t:logo-accueil}}">
       <img src="img/logo-goc.png" alt="Gabon Oil Company" width="962" height="184">
     </a>
 
-    <nav class="nav-principale" aria-label="Navigation principale">
+    <nav class="nav-principale" aria-label="{{t:nav-principale}}">
       <ul class="nav-onglets">
 {{nav-principale}}      </ul>
     </nav>
 
     <div class="entete-actions">
-      <p class="langues"><a href="{{page}}" aria-current="true" lang="fr">FR</a> <span aria-hidden="true">|</span> <a href="#" lang="en">EN</a></p>
-      <a class="bouton bouton-entete" href="contact.html">Contact</a>
-      <button class="bouton-menu" type="button" aria-expanded="false" aria-controls="menu-mobile" aria-label="Ouvrir le menu"><svg class="icone" aria-hidden="true"><use href="#i-menu"/></svg></button>
+{{langues-entete}}      <a class="bouton bouton-entete" href="contact/index.html">{{t:contact}}</a>
+      <button class="bouton-menu" type="button" aria-expanded="false" aria-controls="menu-mobile" aria-label="{{t:ouvrir-menu}}"><svg class="icone" aria-hidden="true"><use href="#i-menu"/></svg></button>
     </div>
   </div>
   <div class="progression" aria-hidden="true"></div>
 </header>
 
 <!-- Menu tablette et smartphone -->
-<div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+<div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="{{t:menu}}" hidden>
   <div class="lisere" aria-hidden="true"></div>
   <div class="menu-mobile-tete">
     <img src="img/logo-goc.png" alt="Gabon Oil Company" width="962" height="184">
-    <button type="button" class="fermer-menu" aria-label="Fermer le menu"><svg class="icone" aria-hidden="true"><use href="#i-fermer"/></svg></button>
+    <button type="button" class="fermer-menu" aria-label="{{t:fermer-menu}}"><svg class="icone" aria-hidden="true"><use href="#i-fermer"/></svg></button>
   </div>
-  <nav class="menu-mobile-nav" aria-label="Navigation mobile">
+  <nav class="menu-mobile-nav" aria-label="{{t:nav-mobile}}">
 {{nav-mobile}}  </nav>
   <div class="menu-mobile-pied">
-    <a class="bouton" href="contact.html">Contact</a>
-    <p class="langues"><a href="{{page}}" aria-current="true" lang="fr">FR</a> <span aria-hidden="true">|</span> <a href="#" lang="en">EN</a></p>
-  </div>
+    <a class="bouton" href="contact/index.html">{{t:contact}}</a>
+{{langues-menu}}  </div>
 </div>
 
 <main id="contenu">
@@ -79,32 +77,32 @@
     <div class="pied-haut" data-cascade>
       <div class="pied-identite">
         <div class="pied-logo"><img src="img/logo-goc-blanc.svg" alt="Gabon Oil Company" width="1413" height="938" loading="lazy"></div>
-        <p>La Société Nationale des Hydrocarbures du Gabon (SNHG) est l'acteur clé du secteur des hydrocarbures au Gabon.</p>
+        <p>{{t:pied-texte}}</p>
         <address class="pied-coordonnees">
           <span><svg class="icone" aria-hidden="true"><use href="#i-lieu"/></svg>1586 avenue Paul Moukambi, BP 635 Libreville, Gabon</span>
           <a href="tel:+24111484100"><svg class="icone" aria-hidden="true"><use href="#i-tel"/></svg>+241 11 48 41 00</a>
           <a href="mailto:contact@gabonoil.com"><svg class="icone" aria-hidden="true"><use href="#i-mail"/></svg>contact@gabonoil.com</a>
         </address>
-        <ul class="reseaux" aria-label="Réseaux sociaux">
-          <li><a href="https://facebook.com/snhggabon" aria-label="Facebook"><svg class="icone" aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
-          <li><a href="https://linkedin.com/company/snhg" aria-label="LinkedIn"><svg class="icone" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
-          <li><a href="https://youtube.com/@snhggabon" aria-label="YouTube"><svg class="icone" aria-hidden="true"><use href="#i-youtube"/></svg></a></li>
-          <li><a href="https://twitter.com/snhggabon" aria-label="X"><svg class="icone" aria-hidden="true"><use href="#i-x"/></svg></a></li>
+        <ul class="reseaux" aria-label="{{t:reseaux}}">
+          <li><a href="https://facebook.com/snhggabon" target="_blank" rel="noopener noreferrer" aria-label="Facebook ({{t:nouvel-onglet}})"><svg class="icone" aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
+          <li><a href="https://linkedin.com/company/snhg" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn ({{t:nouvel-onglet}})"><svg class="icone" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
+          <li><a href="https://youtube.com/@snhggabon" target="_blank" rel="noopener noreferrer" aria-label="YouTube ({{t:nouvel-onglet}})"><svg class="icone" aria-hidden="true"><use href="#i-youtube"/></svg></a></li>
+          <li><a href="https://twitter.com/snhggabon" target="_blank" rel="noopener noreferrer" aria-label="X ({{t:nouvel-onglet}})"><svg class="icone" aria-hidden="true"><use href="#i-x"/></svg></a></li>
         </ul>
       </div>
-      <nav class="pied-liens" aria-label="Plan du site">
+      <nav class="pied-liens" aria-label="{{t:plan-du-site}}">
 {{pied-colonnes}}      </nav>
     </div>
     <div class="pied-separateur" aria-hidden="true"></div>
     <div class="pied-bas">
-      <p>© 2026 SNHG – Gabon Oil Company. Tous droits réservés.</p>
+      <p>{{t:droits}}</p>
       <ul>
 {{pied-legal}}      </ul>
     </div>
   </div>
 </footer>
 {{apres}}
-<button class="haut-de-page" type="button" aria-label="Revenir en haut de la page"><svg class="icone" aria-hidden="true"><use href="#i-haut"/></svg></button>
+<button class="haut-de-page" type="button" aria-label="{{t:haut-de-page}}"><svg class="icone" aria-hidden="true"><use href="#i-haut"/></svg></button>
 
 <script src="js/app.js" defer></script>
 </body>

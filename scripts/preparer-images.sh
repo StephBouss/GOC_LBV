@@ -9,7 +9,7 @@ set -euo pipefail
 RACINE="$(cd "$(dirname "$0")/.." && pwd)"
 BANANI="$RACINE/references/banani/visuels"
 GOC="$(cd "$RACINE/../gaboil/public/images" && pwd)"
-DST="$RACINE/maquette/img"
+DST="$RACINE/img"
 rm -f "$DST"/*.jpg
 
 # Actualités : photos réelles des articles du site SNHG (gaboil/public/images/news). Les images du site SNHG
@@ -27,14 +27,19 @@ actu "actu6-pizolub.webp"             actu-pizolub             "scale=758:-2"   
 actu "../about/activity (9).jpg"      actu-modernisation       "scale=1536:-2"
 actu "new dg gaboil2.png"             actu-nomination-gaboil-2 "scale=1057:-2"     # portrait, dans le corps de l'article
 
-# Vidéos du diaporama de l'accueil (fournies par le client, 720p, 15 s, sans son) et leurs affiches
-# Remise en forme sans réencodage : l'index de la vidéo est placé en tête (+faststart) pour une lecture immédiate
+# Vidéos du diaporama de l'accueil (fournies par le client, 15 s, sans son) et leurs affiches.
+# Réencodées depuis le 1080p en 1280 × 720, légères pour les réseaux mobiles (audit du 20/10/2026 : moins de 1,5 Mo) :
+# WebM (VP9), proposé d'abord aux navigateurs qui le lisent, et MP4 (H.264) pour les autres, index en tête (+faststart).
 VIDEOS="$(cd "$RACINE/../Img/Inspiration images/Site web GOC/GOC Vidéos/Hero" && pwd)"
-mkdir -p "$RACINE/maquette/video"
-video() { # nom (hero-<nom>-720p.mp4 et hero-<nom>-poster.jpg)  affiche
-  ffmpeg -v error -y -i "$VIDEOS/hero-$1-720p.mp4" -c copy -an -movflags +faststart -map_metadata -1 "$RACINE/maquette/video/hero-$1-720p.mp4"
+mkdir -p "$RACINE/video"
+video() { # nom (hero-<nom>-1080p.mp4 et hero-<nom>-poster.jpg)  affiche
+  local source="$VIDEOS/hero-$1-1080p.mp4" sortie="$RACINE/video/hero-$1-720p"
+  ffmpeg -v error -y -i "$source" -vf "scale=1280:720:flags=lanczos" -c:v libvpx-vp9 -b:v 0 -crf 42 -row-mt 1 -deadline good -cpu-used 2 \
+    -pix_fmt yuv420p -an -map_metadata -1 "$sortie.webm"
+  ffmpeg -v error -y -i "$source" -vf "scale=1280:720:flags=lanczos" -c:v libx264 -preset veryslow -crf 29 -profile:v high \
+    -pix_fmt yuv420p -an -movflags +faststart -map_metadata -1 "$sortie.mp4"
   ffmpeg -v error -y -i "$VIDEOS/hero-$1-poster.jpg" -vf "scale=1536:-2,format=yuvj420p" -map_metadata -1 -q:v 4 "$DST/$2.jpg"
-  printf '%-30s <- %s\n' "video/hero-$1-720p.mp4" "GOC Vidéos/Hero/hero-$1-720p.mp4"
+  printf '%-30s <- %s\n' "video/hero-$1-720p.webm/.mp4" "GOC Vidéos/Hero/hero-$1-1080p.mp4"
 }
 video goc     hero-video-affiche           # diapositive 1 : site en forêt
 video sardine hero-video-sardine-affiche   # diapositive 3 : champ offshore Sardine

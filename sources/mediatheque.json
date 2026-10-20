@@ -2,7 +2,7 @@
   "_lisezmoi": [
     "Médiathèque : préfiguration des galeries WordPress (un bloc Galerie par site, ou un album par site dans la médiathèque).",
     "Une galerie = un site (dossier du reportage « Opérations GOC »), avec un titre, un type de site, une courte présentation et 5 à 7 photos. La première photo est mise en avant.",
-    "« source » : chemin de la photo d'origine dans « Img/Inspiration images/Site web GOC/Photo Autre/Opérations GOC ». Les versions web (800 et 1600 px) sont produites par node scripts/preparer-mediatheque.js dans maquette/img/mediatheque/<galerie>/.",
+    "« source » : chemin de la photo d'origine dans « Img/Inspiration images/Site web GOC/Photo Autre/Opérations GOC ». Les versions web (800 et 1600 px) sont produites par node scripts/preparer-mediatheque.js dans img/mediatheque/<galerie>/.",
     "« alt » : description de la photo, lue par les lecteurs d'écran et affichée en légende dans la visionneuse.",
     "Régénération des pages : node scripts/assembler-pages.js (ou automatiquement avec --surveiller)."
   ],

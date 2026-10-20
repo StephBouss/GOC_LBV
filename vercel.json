@@ -1,5 +1,141 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "outputDirectory": "maquette"
+  "redirects": [
+    {
+      "source": "/presentation-groupe.html",
+      "destination": "/groupe/presentation.html",
+      "permanent": true
+    },
+    {
+      "source": "/historique-gouvernance.html",
+      "destination": "/groupe/historique-gouvernance.html",
+      "permanent": true
+    },
+    {
+      "source": "/filiales.html",
+      "destination": "/filiales/",
+      "permanent": true
+    },
+    {
+      "source": "/activites-engagements.html",
+      "destination": "/activites/",
+      "permanent": true
+    },
+    {
+      "source": "/exploration-production.html",
+      "destination": "/activites/exploration-production.html",
+      "permanent": true
+    },
+    {
+      "source": "/projets-strategiques.html",
+      "destination": "/activites/projets-strategiques.html",
+      "permanent": true
+    },
+    {
+      "source": "/engagements-hsei.html",
+      "destination": "/engagements/hsei.html",
+      "permanent": true
+    },
+    {
+      "source": "/engagements-rse.html",
+      "destination": "/engagements/rse.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualites.html",
+      "destination": "/actualites/",
+      "permanent": true
+    },
+    {
+      "source": "/mediatheque.html",
+      "destination": "/mediatheque/",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/mentions-legales.html",
+      "destination": "/informations-legales/mentions-legales.html",
+      "permanent": true
+    },
+    {
+      "source": "/confidentialite.html",
+      "destination": "/informations-legales/confidentialite.html",
+      "permanent": true
+    },
+    {
+      "source": "/cookies.html",
+      "destination": "/informations-legales/cookies.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-nomination-dg-gaboil.html",
+      "destination": "/actualites/nomination-dg-gaboil.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-deploiement-gaboil.html",
+      "destination": "/actualites/deploiement-gaboil.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-modernisation-outils.html",
+      "destination": "/actualites/modernisation-outils.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-pizolub-renaissance.html",
+      "destination": "/actualites/pizolub-renaissance.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-tullow-oil-gop.html",
+      "destination": "/actualites/tullow-oil-gop.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-smp-maintenance.html",
+      "destination": "/actualites/smp-maintenance.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-assala-energy.html",
+      "destination": "/actualites/assala-energy.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-dinonga-irondu.html",
+      "destination": "/actualites/dinonga-irondu.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-retrocession-addax.html",
+      "destination": "/actualites/retrocession-addax.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-dussafu-ezanga.html",
+      "destination": "/actualites/dussafu-ezanga.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-perenco-participations-etat.html",
+      "destination": "/actualites/perenco-participations-etat.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-cepp-mboga-ii.html",
+      "destination": "/actualites/cepp-mboga-ii.html",
+      "permanent": true
+    },
+    {
+      "source": "/actualite-joint-venture-bourbon.html",
+      "destination": "/actualites/joint-venture-bourbon.html",
+      "permanent": true
+    }
+  ]
 }

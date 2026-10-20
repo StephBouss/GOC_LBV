@@ -1,0 +1,659 @@
+/* Gabon Oil Company — maquette d'accueil.
+   Le script ne fait que basculer des classes et des attributs ARIA : tout le rendu est en CSS. */
+(() => {
+  const reduit = matchMedia('(prefers-reduced-motion: reduce)');
+  const navComplete = matchMedia('(min-width: 1141px)');
+  // Messages écrits par ce script : dans la langue de la page (<html lang>). Dans WordPress : chaînes traduisibles du thème.
+  const anglais = document.documentElement.lang === 'en';
+  const t = (fr, en) => (anglais ? en : fr);
+
+  /* ─── Sous-menus : ouverts au survol de l'onglet, refermés quand la souris s'en va ─── */
+  const items = [...document.querySelectorAll('.nav-item')];
+  let minuterieOuverture = 0;
+  let minuterieFermeture = 0;
+  let dernierPointeur = 'mouse';
+
+  const basculer = (item, ouvrir) => {
+    item.classList.toggle('est-ouvert', ouvrir);
+    item.querySelector('.nav-onglet').setAttribute('aria-expanded', String(ouvrir));
+  };
+  const fermerTout = (sauf) => items.forEach((it) => { if (it !== sauf) basculer(it, false); });
+  const ouvert = () => items.find((it) => it.classList.contains('est-ouvert'));
+
+  document.addEventListener('pointerdown', (e) => {
+    dernierPointeur = e.pointerType;
+    if (!e.target.closest('.nav-principale')) fermerTout();
+  });
+
+  items.forEach((item) => {
+    const onglet = item.querySelector('.nav-onglet');
+
+    item.addEventListener('pointerenter', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      clearTimeout(minuterieFermeture);
+      clearTimeout(minuterieOuverture);
+      // Petite intention de survol pour ne pas ouvrir en traversant la barre ;
+      // passage immédiat d'un onglet à l'autre quand un sous-menu est déjà ouvert.
+      minuterieOuverture = setTimeout(() => { fermerTout(item); basculer(item, true); }, ouvert() ? 0 : 90);
+    });
+
+    item.addEventListener('pointerleave', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      clearTimeout(minuterieOuverture);
+      minuterieFermeture = setTimeout(() => basculer(item, false), 180);
+    });
+
+    // Clavier et écrans tactiles : le clic bascule. À la souris, l'onglet est déjà ouvert par le survol.
+    onglet.addEventListener('click', (e) => {
+      const estOuvert = item.classList.contains('est-ouvert');
+      if (e.detail > 0 && dernierPointeur === 'mouse') { fermerTout(item); basculer(item, true); return; }
+      fermerTout(item);
+      basculer(item, !estOuvert);
+    });
+
+    item.addEventListener('focusout', (e) => {
+      if (!item.contains(e.relatedTarget)) basculer(item, false);
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const item = ouvert();
+    if (item) { basculer(item, false); item.querySelector('.nav-onglet').focus(); }
+  });
+
+  /* ─── Menu tablette / smartphone ─── */
+  const menu = document.getElementById('menu-mobile');
+  const boutonMenu = document.querySelector('.bouton-menu');
+  const fermerMenuBtn = menu.querySelector('.fermer-menu');
+
+  const ouvrirMenu = () => {
+    menu.hidden = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => menu.classList.add('est-ouvert')));
+    boutonMenu.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-ouvert');
+    fermerMenuBtn.focus();
+  };
+  const fermerMenu = (rendreFocus = true) => {
+    menu.classList.remove('est-ouvert');
+    boutonMenu.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-ouvert');
+    const masquer = () => { if (!menu.classList.contains('est-ouvert')) menu.hidden = true; };
+    // transitionend ne vient pas si l'animation est coupée : délai de secours
+    if (reduit.matches) masquer(); else { menu.addEventListener('transitionend', masquer, { once: true }); setTimeout(masquer, 400); }
+    if (rendreFocus) boutonMenu.focus();
+  };
+
+  boutonMenu.addEventListener('click', ouvrirMenu);
+  fermerMenuBtn.addEventListener('click', () => fermerMenu());
+  menu.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { fermerMenu(); return; }
+    if (e.key !== 'Tab') return;
+    const focusables = [...menu.querySelectorAll('a, button, summary')].filter((el) => el.offsetParent !== null);
+    const premier = focusables[0];
+    const dernier = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === premier) { e.preventDefault(); dernier.focus(); }
+    else if (!e.shiftKey && document.activeElement === dernier) { e.preventDefault(); premier.focus(); }
+  });
+  navComplete.addEventListener('change', (e) => {
+    if (e.matches && !menu.hidden) fermerMenu(false);
+    if (!e.matches) fermerTout();
+  });
+
+  /* ─── Choix de la langue : la traduction s'ouvre au même endroit (catégorie filtrée ?categorie=…, partie visée #…),
+         les identifiants étant les mêmes dans les deux langues ─── */
+  document.querySelectorAll('.langues a[hreflang]:not([aria-current])').forEach((a) => {
+    const suivre = () => {
+      const cible = new URL(a.href);
+      cible.search = location.search;
+      cible.hash = location.hash;
+      a.href = cible.href;
+    };
+    ['click', 'auxclick', 'contextmenu'].forEach((type) => a.addEventListener(type, suivre));
+  });
+
+  /* ─── Ouverture de page : entrée du texte (accueil et pages intérieures), pause du zoom lent (accueil) ─── */
+  const hero = document.querySelector('.hero, .page-hero');
+  if (hero) requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add('est-pret')));
+
+  const pause = (bouton, cible, libelles) => {
+    if (!bouton || !cible) return;
+    bouton.addEventListener('click', () => {
+      const enPause = bouton.getAttribute('aria-pressed') !== 'true';
+      bouton.setAttribute('aria-pressed', String(enPause));
+      bouton.setAttribute('aria-label', enPause ? libelles[1] : libelles[0]);
+      cible.classList.toggle('est-en-pause', enPause);
+    });
+  };
+  if (hero && !hero.matches('[data-diaporama]')) pause(hero.querySelector('.hero-pause'), hero, [t("Mettre l'animation en pause", 'Pause the animation'), t("Relancer l'animation", 'Resume the animation')]);
+
+  /* ─── Diaporama de l'accueil : la vidéo joue jusqu'au bout, chaque photo reste data-duree secondes ;
+         à chaque fond sa légende et ses boutons. Les diapositives sont générées depuis sources/diaporama-accueil.json. ─── */
+  const diaporama = document.querySelector('.hero[data-diaporama]');
+  if (diaporama) {
+    const fonds = [...diaporama.querySelectorAll('.hero-fond')];
+    const blocs = [...diaporama.querySelectorAll('.hero-bloc')];
+    const reperes = [...diaporama.querySelectorAll('.hero-repere')];
+    const legendes = diaporama.querySelector('.hero-legendes');
+    const boutonPause = diaporama.querySelector('.hero-pause');
+    let index = 0;
+    let enPause = false;       // demandé par la personne (bouton, focus clavier, « réduire les animations »)
+    let survol = false;        // pointeur sur la légende : on ne change pas les boutons sous la souris
+    let horsEcran = false;
+    let ecoule = 0;            // temps passé sur une photo, en ms
+    let dernier = 0;
+    let boucle = 0;
+    let minuterieSortie = 0;
+
+    const video = (i) => (fonds[i].tagName === 'VIDEO' && !('bloquee' in fonds[i].dataset) ? fonds[i] : null);
+    const enMouvement = () => !enPause && !horsEcran && !document.hidden;
+    // Vidéo : sa propre position de lecture ; photo (ou vidéo bloquée) : le temps écoulé sur sa durée
+    const progression = () => {
+      const v = video(index);
+      if (v) return v.ended ? 1 : v.currentTime / (v.duration || Infinity);
+      return ecoule / (Number(blocs[index].dataset.duree || 8) * 1000);
+    };
+    const tic = (t) => {
+      if (!video(index) && !survol) ecoule += Math.min(t - (dernier || t), 100);
+      dernier = t;
+      const p = Math.min(1, progression());
+      reperes[index]?.style.setProperty('--progression', p);
+      if (p >= 1 && !survol && blocs.length > 1) aller(index + 1);
+      boucle = requestAnimationFrame(tic);
+    };
+    const lire = (v) => v.play().catch((e) => {
+      // lecture automatique refusée (mode économie d'énergie…) : l'affiche reste, la diapositive dure data-duree
+      if (e.name === 'NotAllowedError') v.dataset.bloquee = '';
+    });
+    const synchroniser = () => {
+      const v = video(index);
+      const bouge = enMouvement();
+      if (v) { if (bouge && v.paused && !v.ended) lire(v); else if (!bouge) v.pause(); }
+      if (bouge && !boucle) { dernier = 0; boucle = requestAnimationFrame(tic); }
+      if (!bouge) { cancelAnimationFrame(boucle); boucle = 0; }
+      diaporama.classList.toggle('est-en-pause', !bouge);
+      legendes.setAttribute('aria-live', enPause ? 'polite' : 'off');   // annonce des changements seulement à l'arrêt
+    };
+
+    const aller = (cible) => {
+      const suivant = (cible + blocs.length) % blocs.length;
+      if (suivant === index) return;
+      const precedent = index;
+      index = suivant;
+      ecoule = 0;
+      diaporama.style.setProperty('--attente', '.35s');   // la nouvelle légende entre après la sortie de l'ancienne
+      [fonds, blocs].forEach((liste) => {
+        liste[suivant].classList.remove('est-sortant');
+        liste[suivant].classList.add('est-actif');
+        liste[precedent].classList.replace('est-actif', 'est-sortant');
+      });
+      blocs.forEach((b, i) => { b.inert = i !== suivant; });
+      reperes.forEach((r, i) => {
+        if (i === suivant) r.setAttribute('aria-current', 'true'); else r.removeAttribute('aria-current');
+        if (i !== suivant) r.style.setProperty('--progression', 0);
+      });
+      const v = video(suivant);
+      if (v) { v.currentTime = 0; if (!enMouvement()) v.pause(); }
+      // la vidéo de la diapositive d'après se charge pendant celle-ci : elle démarrera sans attente
+      const prochaine = video((suivant + 1) % blocs.length);
+      if (prochaine && enMouvement()) prochaine.preload = 'auto';
+      clearTimeout(minuterieSortie);
+      minuterieSortie = setTimeout(() => {   // fin du fondu : l'ancien fond et l'ancienne légende disparaissent
+        diaporama.querySelectorAll('.est-sortant').forEach((el) => el.classList.remove('est-sortant'));
+        fonds.forEach((f, i) => { if (i !== index && f.tagName === 'VIDEO') f.pause(); });
+      }, 1200);
+      synchroniser();
+    };
+
+    const basculer = (pause) => {
+      enPause = pause;
+      boutonPause.setAttribute('aria-pressed', String(pause));
+      boutonPause.setAttribute('aria-label', pause ? t('Relancer le diaporama', 'Resume the slideshow') : t('Mettre le diaporama en pause', 'Pause the slideshow'));
+      synchroniser();
+    };
+    boutonPause.addEventListener('click', () => basculer(!enPause));
+    reperes.forEach((r, i) => r.addEventListener('click', () => {
+      reperes[index].style.setProperty('--progression', 0);
+      if (i === index) { ecoule = 0; const v = video(i); if (v) v.currentTime = 0; } else aller(i);
+    }));
+
+    // Arrêt automatique : focus clavier dans le hero (il ne reprend qu'avec le bouton), pointeur sur la légende
+    diaporama.addEventListener('focusin', (e) => { if (!enPause && e.target.matches(':focus-visible')) basculer(true); });
+    legendes.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') survol = true; });
+    legendes.addEventListener('pointerleave', () => { survol = false; });
+
+    // Hors de l'écran ou onglet masqué : vidéo et minuterie s'arrêtent, sans toucher au choix de la personne
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { horsEcran = !e.isIntersecting; synchroniser(); }).observe(diaporama);
+    }
+    document.addEventListener('visibilitychange', synchroniser);
+
+    // Téléphone ou mode économie de données : la vidéo n'est pas chargée, l'affiche reste et la diapositive dure data-duree
+    const sansVideo = matchMedia('(max-width: 767px)').matches || Boolean(navigator.connection?.saveData);
+    fonds.forEach((f) => {
+      if (f.tagName !== 'VIDEO') return;
+      if (sansVideo) { f.dataset.bloquee = ''; return; }
+      const echec = () => { f.dataset.bloquee = ''; };   // fichier introuvable ou illisible : la diapositive passe en minuterie
+      f.addEventListener('error', echec);
+      // erreur sur la dernière source seulement : avant elle, le navigateur essaie la suivante (MP4 après WebM)
+      f.querySelector('source:last-of-type')?.addEventListener('error', echec);
+    });
+
+    // « Réduire les animations » : rien ne bouge par défaut, le bouton permet de lancer le diaporama
+    reduit.addEventListener('change', (e) => { if (e.matches) basculer(true); });
+    basculer(reduit.matches);
+  }
+
+  /* ─── Bandeau des filiales (accueil) ─── */
+  pause(document.querySelector('.bouton-pause'), document.querySelector('.bandeau'), [t('Mettre le défilement en pause', 'Pause the scrolling'), t('Relancer le défilement', 'Resume the scrolling')]);
+
+  /* ─── Compteurs des chiffres clés ─── */
+  const formater = (n) => (n < 10000 ? String(n) : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, t(' ', ',')));
+  const compter = (el) => {
+    const fin = Number(el.dataset.compteur);
+    const debut = fin > 1900 && fin < 2100 ? fin - 30 : 0;   // une année défile depuis 30 ans plus tôt
+    const t0 = performance.now();
+    const pas = (t) => {
+      const p = Math.min(1, (t - t0) / 1500);
+      el.textContent = formater(Math.round(debut + (fin - debut) * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) requestAnimationFrame(pas);
+    };
+    requestAnimationFrame(pas);
+  };
+
+  /* ─── Apparitions au défilement (fondus, cascades, photos en rideau, traits qui se dessinent) ─── */
+  const animes = document.querySelectorAll('[data-apparition], [data-cascade], [data-devoile], [data-trace]');
+  // Rang de chaque élément dans sa liste : sert de délai aux cascades (grilles, sous-menus, menu mobile)
+  document.querySelectorAll('[data-cascade], .sous-menu-liens, .accordeon ul, .menu-mobile-nav')
+    .forEach((c) => [...c.children].forEach((el, i) => el.style.setProperty('--rang', i)));
+
+  if (reduit.matches || !('IntersectionObserver' in window)) {
+    animes.forEach((el) => el.classList.add('est-visible'));
+  } else {
+    const io = new IntersectionObserver((entrees) => entrees.forEach((entree) => {
+      if (!entree.isIntersecting) return;
+      entree.target.classList.add('est-visible');
+      entree.target.querySelectorAll('[data-compteur]').forEach(compter);
+      io.unobserve(entree.target);
+    }), { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    animes.forEach((el) => io.observe(el));
+  }
+
+  /* ─── Frise des dates clés : chaque date apparaît quand le trait rouge l'atteint (aux 4/5 de l'écran) ─── */
+  const etapes = document.querySelectorAll('.frise .etape');
+  if (reduit.matches || !('IntersectionObserver' in window)) {
+    etapes.forEach((el) => el.classList.add('est-visible'));
+  } else {
+    const ioEtapes = new IntersectionObserver((entrees) => entrees.forEach((entree) => {
+      if (!entree.isIntersecting) return;
+      entree.target.classList.add('est-visible');
+      ioEtapes.unobserve(entree.target);
+    }), { rootMargin: '0px 0px -20% 0px' });
+    etapes.forEach((el) => ioEtapes.observe(el));
+  }
+
+  /* ─── En-tête : ombre portée dès que la page défile ─── */
+  const entete = document.querySelector('.entete');
+  let majPrevue = false;
+  const majEntete = () => { entete.classList.toggle('est-defile', window.scrollY > 4); majPrevue = false; };
+  window.addEventListener('scroll', () => {
+    if (!majPrevue) { majPrevue = true; requestAnimationFrame(majEntete); }
+  }, { passive: true });
+  majEntete();
+
+  /* ─── Bouton « haut de page » : visible une fois l'ouverture de page entièrement dépassée ─── */
+  const hautDePage = document.querySelector('.haut-de-page');
+  if (hero && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => hautDePage.classList.toggle('est-visible', !e.isIntersecting)).observe(hero);
+  }
+  hautDePage.addEventListener('click', () => {
+    window.scrollTo({ top: 0 });   // défilement doux via scroll-behavior (sauf « réduire les animations »)
+    document.querySelector('.entete-logo').focus({ preventScroll: true });
+  });
+
+  /* ─── Pied de page : colonnes ouvertes dès la tablette, en accordéon sur smartphone ─── */
+  const piedLarge = matchMedia('(min-width: 768px)');
+  const colonnes = document.querySelectorAll('.pied-colonne');
+  // En grand écran les intitulés de colonnes sont de simples titres : ni repliables, ni atteignables au clavier.
+  const appliquer = () => colonnes.forEach((d) => {
+    d.open = piedLarge.matches;
+    d.querySelector('summary').tabIndex = piedLarge.matches ? -1 : 0;
+  });
+  appliquer();
+  piedLarge.addEventListener('change', appliquer);
+  colonnes.forEach((d) => d.querySelector('summary').addEventListener('click', (e) => {
+    if (piedLarge.matches) e.preventDefault();
+  }));
+
+  /* ─── Fenêtre de candidature (page Contact) : <dialog> modal, ouvert par « Carrières » ou l'adresse #candidature ─── */
+  const candidature = document.getElementById('candidature');
+  if (candidature) {
+    const ouvrir = () => { if (!candidature.open) candidature.showModal(); };
+    document.querySelectorAll('[data-ouvre-candidature]').forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); ouvrir(); }));
+    candidature.querySelectorAll('[data-ferme]').forEach((b) => b.addEventListener('click', () => candidature.close()));
+    // Fermeture au clic sur le fond : native avec closedby="any", à reproduire là où l'attribut n'est pas pris en charge (Safari)
+    if (!('closedBy' in HTMLDialogElement.prototype)) {
+      candidature.addEventListener('click', (e) => {
+        if (e.target !== candidature) return;
+        const r = candidature.getBoundingClientRect();
+        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) candidature.close();
+      });
+    }
+    // Liens vers contact.html#candidature (menu « Carrières ») : ouverture à l'arrivée ou sans recharger la page
+    const parAdresse = () => { if (location.hash === '#candidature') ouvrir(); };
+    parAdresse();
+    window.addEventListener('hashchange', parAdresse);
+    candidature.addEventListener('close', () => {
+      if (location.hash === '#candidature') history.replaceState(null, '', location.pathname + location.search);
+    });
+    // Pièces jointes : nom des fichiers choisis dans la zone de dépôt, ou la règle non respectée (format, nombre, taille),
+    // qui bloque aussi l'envoi. Le serveur d'envoi doit refaire ces contrôles.
+    const fichiers = candidature.querySelector('.depot input');
+    const nom = candidature.querySelector('.depot-nom');
+    if (fichiers && nom) {
+      fichiers.addEventListener('change', () => {
+        const liste = [...fichiers.files];
+        const { maxFichiers, maxMo } = fichiers.dataset;
+        let erreur = '';
+        if (liste.length > Number(maxFichiers)) erreur = t(`${maxFichiers} fichiers au maximum.`, `${maxFichiers} files at most.`);
+        else if (liste.some((x) => !/\.(pdf|docx)$/i.test(x.name))) erreur = t('Formats acceptés : PDF ou DOCX.', 'Accepted formats: PDF or DOCX.');
+        else if (liste.some((x) => x.size > Number(maxMo) * 1024 * 1024)) erreur = t(`Chaque fichier doit peser ${maxMo} Mo au maximum.`, `Each file must be ${maxMo} MB or smaller.`);
+        fichiers.setCustomValidity(erreur);
+        nom.textContent = erreur || liste.map((x) => x.name).join(', ');
+        nom.classList.toggle('est-erreur', Boolean(erreur));
+      });
+      fichiers.form.addEventListener('reset', () => { fichiers.setCustomValidity(''); nom.textContent = ''; nom.classList.remove('est-erreur'); });
+    }
+  }
+
+  /* ─── Liseuse de documents (rapport de la page Activités) : <dialog> modal, pages du PDF dessinées par PDF.js,
+         ce qui permet la lecture sur place sur tous les appareils (Android n'affiche pas les PDF dans une page).
+         PDF.js (js/pdfjs/) n'est chargé qu'à la première ouverture ; sans script, le lien ouvre le PDF dans un nouvel onglet. ─── */
+  // PDF.js est rangé à côté de ce script : son adresse se déduit de celle du script, quel que soit le dossier de la page
+  const scriptApp = document.currentScript || document.querySelector('script[src$="js/app.js"]');
+  const dossierScripts = new URL('.', scriptApp ? scriptApp.src : location.href);
+  document.querySelectorAll('dialog.liseuse').forEach((liseuse) => {
+    const zone = liseuse.querySelector('.liseuse-pages');
+    const statut = liseuse.querySelector('.liseuse-statut');
+    const adresse = new URL(liseuse.dataset.pdf, location.href).href;
+    let chargement = null;
+
+    // Page dessinée à la largeur affichée (écrans haute densité compris), puis son texte pour les lecteurs d'écran
+    const dessiner = async (doc, figure) => {
+      const page = await doc.getPage(Number(figure.dataset.page));
+      const largeur = figure.clientWidth * Math.min(window.devicePixelRatio || 1, 2);
+      const vue = page.getViewport({ scale: largeur / page.getViewport({ scale: 1 }).width });
+      const canvas = figure.querySelector('canvas');
+      canvas.width = Math.floor(vue.width);
+      canvas.height = Math.floor(vue.height);
+      await page.render({ canvasContext: canvas.getContext('2d'), viewport: vue }).promise;
+      figure.classList.add('est-dessinee');
+      const texte = await page.getTextContent();
+      figure.querySelector('.liseuse-texte').textContent = texte.items.map((t) => t.str + (t.hasEOL ? '\n' : '')).join('');
+    };
+
+    const preparer = async () => {
+      const pdfjs = await import(new URL('pdfjs/pdf.min.js', dossierScripts).href);
+      pdfjs.GlobalWorkerOptions.workerSrc = new URL('pdfjs/pdf.worker.min.js', dossierScripts).href;
+      const doc = await pdfjs.getDocument(adresse).promise;
+      // Toutes les pages sont posées à leurs proportions, puis dessinées à l'approche de l'écran
+      const figures = [];
+      for (let n = 1; n <= doc.numPages; n++) {
+        const { width, height } = (await doc.getPage(n)).getViewport({ scale: 1 });
+        const figure = document.createElement('figure');
+        figure.className = 'liseuse-page';
+        figure.dataset.page = n;
+        figure.innerHTML = `<div class="liseuse-feuille" style="aspect-ratio: ${width} / ${height}"><canvas aria-hidden="true"></canvas></div>`
+          + `<figcaption class="liseuse-numero">${t(`Page ${n} sur ${doc.numPages}`, `Page ${n} of ${doc.numPages}`)}</figcaption><div class="visuellement-masque liseuse-texte"></div>`;
+        figures.push(figure);
+      }
+      statut.hidden = true;
+      zone.append(...figures);
+      const io = new IntersectionObserver((entrees) => entrees.forEach((e) => {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        dessiner(doc, e.target).catch(() => {});
+      }), { root: zone, rootMargin: '100% 0px' });
+      figures.forEach((f) => io.observe(f));
+    };
+
+    const ouvrir = () => {
+      if (!liseuse.open) liseuse.showModal();
+      chargement ??= preparer().catch(() => {
+        chargement = null;   // nouvel essai à la prochaine ouverture
+        statut.hidden = false;
+        statut.innerHTML = t(
+          `Le document ne peut pas s'afficher ici. <a href="${adresse}" target="_blank">Ouvrir le PDF dans un nouvel onglet</a> ou utilisez le bouton Télécharger.`,
+          `The document cannot be displayed here. <a href="${adresse}" target="_blank">Open the PDF in a new tab</a> or use the Download button.`);
+      });
+    };
+    document.querySelectorAll(`[data-liseuse="${liseuse.id}"]`).forEach((l) => l.addEventListener('click', (e) => { e.preventDefault(); ouvrir(); }));
+    liseuse.querySelectorAll('[data-ferme]').forEach((b) => b.addEventListener('click', () => liseuse.close()));
+    // Fermeture au clic sur le fond : native avec closedby="any", à reproduire là où l'attribut n'est pas pris en charge (Safari)
+    if (!('closedBy' in HTMLDialogElement.prototype)) {
+      liseuse.addEventListener('click', (e) => {
+        if (e.target !== liseuse) return;
+        const r = liseuse.getBoundingClientRect();
+        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) liseuse.close();
+      });
+    }
+  });
+
+  /* ─── Médiathèque : visionneuse plein écran (<dialog> modal), photo par photo dans la galerie choisie.
+         Sans script, chaque vignette ouvre simplement la grande image. ─── */
+  const visionneuse = document.getElementById('visionneuse');
+  if (visionneuse) {
+    const cadre = visionneuse.querySelector('.visionneuse-cadre');
+    const legende = visionneuse.querySelector('.visionneuse-legende');
+    const nomGalerie = visionneuse.querySelector('.visionneuse-galerie');
+    const compteur = visionneuse.querySelector('.visionneuse-compteur');
+    const image = document.createElement('img');
+    image.className = 'visionneuse-image';
+    image.decoding = 'async';
+    image.draggable = false;
+    cadre.append(image);
+    image.addEventListener('load', () => image.classList.remove('est-chargement'));
+    let serie = [];
+    let rang = 0;
+
+    const afficher = (i) => {
+      rang = (i + serie.length) % serie.length;
+      const lien = serie[rang];
+      const vignette = lien.querySelector('img');
+      image.classList.add('est-chargement');
+      image.width = Number(lien.dataset.largeur);
+      image.height = Number(lien.dataset.hauteur);
+      image.src = lien.href;
+      image.alt = vignette.alt;
+      legende.textContent = vignette.alt;
+      compteur.textContent = `${rang + 1} / ${serie.length}`;
+      // Photos voisines chargées d'avance, en priorité basse : le passage à la suivante est immédiat
+      [rang + 1, rang - 1].forEach((j) => {
+        const voisine = new Image();
+        voisine.fetchPriority = 'low';
+        voisine.src = serie[(j + serie.length) % serie.length].href;
+      });
+    };
+
+    document.querySelectorAll('[data-visionneuse]').forEach((lien) => {
+      lien.setAttribute('aria-haspopup', 'dialog');
+      lien.addEventListener('click', (e) => {
+        e.preventDefault();
+        serie = [...document.querySelectorAll(`[data-visionneuse="${lien.dataset.visionneuse}"]`)];
+        nomGalerie.textContent = document.getElementById(`galerie-${lien.dataset.visionneuse}`)?.textContent || '';
+        afficher(serie.indexOf(lien));
+        visionneuse.showModal();
+      });
+    });
+    visionneuse.querySelector('.visionneuse-precedente').addEventListener('click', () => afficher(rang - 1));
+    visionneuse.querySelector('.visionneuse-suivante').addEventListener('click', () => afficher(rang + 1));
+    visionneuse.querySelector('[data-ferme]').addEventListener('click', () => visionneuse.close());
+    visionneuse.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); afficher(rang + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); afficher(rang - 1); }
+    });
+    // Balayage horizontal au doigt ; le clic qui le termine n'est pas pris pour une fermeture
+    let depart = null;
+    let balaye = false;
+    visionneuse.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') depart = e.clientX; });
+    visionneuse.addEventListener('pointerup', (e) => {
+      if (depart === null) return;
+      const ecart = e.clientX - depart;
+      depart = null;
+      if (Math.abs(ecart) > 50) { balaye = true; afficher(rang + (ecart < 0 ? 1 : -1)); }
+    });
+    // Clic sur le fond sombre, à côté de la photo : fermeture (la fenêtre couvre tout l'écran, sans fond cliquable)
+    visionneuse.addEventListener('click', (e) => {
+      if (balaye) { balaye = false; return; }
+      if (e.target === visionneuse || e.target === cadre || e.target.classList.contains('visionneuse-figure')) visionneuse.close();
+    });
+    // À la fermeture, le focus revient sur la vignette de la dernière photo regardée
+    visionneuse.addEventListener('close', () => serie[rang]?.focus());
+  }
+
+  /* ─── Sous-navigation de rubrique (défilante sur smartphone) : l'élément actif est amené dans la bande ─── */
+  const sousNav = document.querySelector('.sous-nav ul');
+  const actif = sousNav && sousNav.querySelector('[aria-current]');
+  if (actif && sousNav.scrollWidth > sousNav.clientWidth) {
+    const ecart = actif.getBoundingClientRect().left - sousNav.getBoundingClientRect().left;
+    sousNav.scrollLeft += ecart - (sousNav.clientWidth - actif.offsetWidth) / 2;
+  }
+
+  /* ─── Sommaire des pages légales : la partie en cours de lecture est signalée ─── */
+  const sommaire = document.querySelector('.legal-sommaire ol');
+  if (sommaire) {
+    const liens = [...sommaire.querySelectorAll('a')];
+    const signaler = (actif) => liens.forEach((a) => {
+      if (a === actif) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+    if (CSS.supports('scroll-target-group: auto')) {
+      // Le surlignage est natif (:target-current) ; l'état est recopié pour les lecteurs d'écran une fois le défilement arrêté
+      const synchroniser = () => signaler(sommaire.querySelector('a:target-current'));
+      synchroniser();
+      document.addEventListener('scrollend', synchroniser);
+    } else if ('IntersectionObserver' in window) {
+      // Firefox, Safari : la partie qui franchit une ligne au tiers haut de l'écran devient la partie courante
+      // (au milieu, une partie courte atteinte par le sommaire laisserait la main à la suivante)
+      const io = new IntersectionObserver((entrees) => entrees.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const actif = liens.find((a) => a.hash === `#${e.target.id}`);
+        liens.forEach((a) => a.classList.toggle(':target-current', a === actif));
+        signaler(actif);
+      }), { rootMargin: '-30% 0px -70% 0px', threshold: 0 });
+      liens.forEach((a) => { const cible = document.getElementById(a.hash.slice(1)); if (cible) io.observe(cible); });
+    }
+  }
+
+  /* ─── Actualités : filtre par catégorie ───
+     Les pastilles sont des liens vers la catégorie (archives de catégorie dans WordPress) ; ici le filtrage se fait sur place,
+     l'adresse garde la catégorie (?categorie=…) pour être partagée ou rouverte. */
+  const filtres = document.querySelector('.filtres');
+  const grille = document.querySelector('.liste-actus');
+  if (filtres && grille) {
+    const pastilles = [...filtres.querySelectorAll('a[data-filtre]')];
+    const cartes = [...grille.querySelectorAll('.carte-actu')];
+    const statut = document.querySelector('.filtres-statut');
+    const centrer = (a) => {
+      const bande = a.closest('ul');
+      if (bande.scrollWidth > bande.clientWidth) bande.scrollLeft += a.getBoundingClientRect().left - bande.getBoundingClientRect().left - (bande.clientWidth - a.offsetWidth) / 2;
+    };
+    const appliquer = (filtre) => {
+      let n = 0;
+      cartes.forEach((c) => { c.hidden = Boolean(filtre) && c.dataset.categorie !== filtre; if (!c.hidden) n += 1; });
+      const active = pastilles.find((a) => a.dataset.filtre === filtre);
+      pastilles.forEach((a) => a.setAttribute('aria-current', String(a === active)));
+      const nombre = t(`${n} actualité${n > 1 ? 's' : ''}`, `${n} article${n === 1 ? '' : 's'}`);
+      if (statut) statut.textContent = `${nombre}${filtre ? ` · ${active.dataset.nom}` : ''}`;
+      centrer(active);
+    };
+    // Les cartes glissent vers leur nouvelle place : transition de vue limitée à la grille, le reste de la page reste utilisable.
+    // Navigateurs sans transition de vue d'élément : mise à jour immédiate.
+    const avecTransition = (maj) => {
+      if (reduit.matches || !('startViewTransition' in Element.prototype)) { maj(); return; }
+      grille.startViewTransition(maj).ready.catch(() => {});
+    };
+    filtres.addEventListener('click', (e) => {
+      const a = e.target.closest('a[data-filtre]');
+      if (!a) return;
+      e.preventDefault();
+      if (a.getAttribute('aria-current') === 'true') return;
+      avecTransition(() => appliquer(a.dataset.filtre));
+      const adresse = new URL(location.href);
+      if (a.dataset.filtre) adresse.searchParams.set('categorie', a.dataset.filtre); else adresse.searchParams.delete('categorie');
+      history.replaceState(null, '', adresse);
+    });
+    const demandee = new URLSearchParams(location.search).get('categorie');
+    if (demandee && pastilles.some((a) => a.dataset.filtre === demandee)) appliquer(demandee);
+  }
+
+  /* ─── Gestion des cookies : refus de la mesure d'audience ───
+     Sur le site WordPress, l'interrupteur pilote Matomo (_paq). Dans la maquette, sans Matomo, il pose lui-même
+     le cookie de refus que Matomo lit (mtm_consent_removed), pour que le choix survive au rechargement. */
+  const choixMesure = document.querySelector('[data-mesure-audience]');
+  if (choixMesure) {
+    const interrupteur = choixMesure.querySelector('input');
+    const etat = choixMesure.querySelector('.choix-mesure-etat');
+    const afficher = (accepte) => {
+      interrupteur.checked = accepte;
+      etat.textContent = accepte
+        ? t('Acceptée : vos visites sont comptées de façon anonyme.', 'Accepted: your visits are counted anonymously.')
+        : t('Refusée : vos visites ne sont plus comptées.', 'Refused: your visits are no longer counted.');
+    };
+    const matomo = window._paq;
+    if (matomo) matomo.push([function () { afficher(!this.isUserOptedOut()); }]);
+    else afficher(!/(?:^|; )mtm_consent_removed=/.test(document.cookie));
+    interrupteur.addEventListener('change', () => {
+      const accepte = interrupteur.checked;
+      if (matomo) matomo.push([accepte ? 'forgetUserOptOut' : 'optUserOut']);
+      else document.cookie = accepte
+        ? 'mtm_consent_removed=; max-age=0; path=/; SameSite=Lax'
+        : `mtm_consent_removed=${Date.now()}; max-age=${60 * 60 * 24 * 395}; path=/; SameSite=Lax`;
+      afficher(accepte);
+    });
+  }
+
+  /* ─── Formulaires (contact, lettre d'information, candidature) : contrôlés par le navigateur, puis envoyés sans quitter
+         la page vers l'adresse de leur attribut action (service d'envoi, en attendant les formulaires WordPress).
+         Sans adresse, rien n'est transmis et le message le dit. aria-invalid suit :user-invalid pour les lecteurs d'écran. ─── */
+  const ADRESSE_CONTACT = 'contact@gabonoil.com';
+  document.querySelectorAll('form[data-envoi]').forEach((f) => {
+    const statut = f.querySelector('.statut-formulaire');
+    const bouton = f.querySelector('[type="submit"]');
+    const dire = (texte, etat, avecAdresse = false) => {
+      statut.dataset.etat = etat;
+      statut.replaceChildren(texte);
+      if (avecAdresse) {
+        const lien = document.createElement('a');
+        lien.href = `mailto:${ADRESSE_CONTACT}`;
+        lien.textContent = ADRESSE_CONTACT;
+        statut.append(lien, '.');
+      }
+    };
+    const signaler = (champ) => { if (champ.willValidate) champ.setAttribute('aria-invalid', String(champ.matches(':user-invalid'))); };
+    f.addEventListener('focusout', (e) => signaler(e.target));
+    f.addEventListener('input', (e) => { if (e.target.hasAttribute('aria-invalid')) signaler(e.target); });
+    f.addEventListener('invalid', (e) => e.target.setAttribute('aria-invalid', 'true'), true);   // envoi tenté avec un champ à corriger
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const adresse = f.getAttribute('action');
+      if (!adresse || adresse === '#') {
+        dire(t("L'envoi en ligne n'est pas encore activé : rien n'a été transmis. Pour nous joindre dès maintenant, écrivez à ",
+          'Online sending is not yet enabled: nothing has been sent. To reach us now, write to '), 'info', true);
+        return;
+      }
+      bouton.disabled = true;   // pas de double envoi
+      dire(t('Envoi en cours…', 'Sending…'), 'attente');
+      try {
+        const reponse = await fetch(adresse, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } });
+        if (!reponse.ok) throw new Error(`HTTP ${reponse.status}`);
+        f.reset();
+        f.querySelectorAll('[aria-invalid]').forEach((c) => c.removeAttribute('aria-invalid'));
+        dire(f.dataset.merci, 'ok');
+      } catch {
+        dire(t("L'envoi n'a pas abouti. Réessayez dans un instant, ou écrivez-nous à ", 'Sending failed. Please try again in a moment, or write to us at '), 'erreur', true);
+      } finally {
+        bouton.disabled = false;
+      }
+    });
+  });
+})();

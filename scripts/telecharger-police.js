@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Télécharge Archivo depuis Google Fonts (graisses 400 à 700, largeur normale)
- * et l'enregistre dans maquette/fonts pour un hébergement local.
+ * et l'enregistre dans le dossier fonts/ du site pour un hébergement local.
  * Les visiteurs reçoivent la police avec le site : aucune dépendance aux polices
  * installées sur leur appareil, aucun appel aux serveurs de Google à la visite.
  *
@@ -10,7 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DOSSIER = path.join(__dirname, '..', 'maquette', 'fonts');
+const DOSSIER = path.join(__dirname, '..', 'fonts');
 const API = 'https://fonts.googleapis.com/css2?family=Archivo:wght@400..700&display=swap';
 // Un navigateur récent obtient des fichiers WOFF2 variables.
 const NAVIGATEUR = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';

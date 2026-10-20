@@ -1,7 +1,7 @@
 {
   "_lisezmoi": [
     "Articles du site : préfiguration des articles WordPress (type « post »).",
-    "Un article = titre, slug (adresse), catégorie (une seule, principale), date de publication, extrait, image à la une, galerie facultative, contenu (paragraphes).",
+    "Un article = titre, slug (adresse), catégorie (une seule, principale), date de publication, extrait, image à la une (« alt » : description de la photo pour les lecteurs d'écran ; les vignettes SVG de la frise, décoratives, n'en ont pas), galerie facultative, contenu (paragraphes).",
     "L'accueil affiche automatiquement les 3 plus récents, la page Actualités les 20 plus récents (filtre par catégorie), chaque article a sa page actualite-<slug>.html.",
     "« archive » : article composé à partir de la frise historique du site de référence, à valider, compléter ou supprimer.",
     "Régénération : node scripts/assembler-pages.js (ou automatiquement avec --surveiller)."
@@ -42,6 +42,7 @@
       "extrait": "Monsieur Éric Alain Sounda a été nommé Directeur Général de Gab’Oil.",
       "image": {
         "src": "img/actu-nomination-gaboil",
+        "alt": "Trois hommes posent au milieu d'invités dans un hall",
         "largeur": 1076,
         "hauteur": 580
       },
@@ -70,6 +71,7 @@
       "extrait": "La marque nationale continue d’étendre son empreinte au plus près des populations.",
       "image": {
         "src": "img/photos/actu-gaboil-station",
+        "alt": "Station-service Gab'Oil : auvent gris et rouge, pompes et atelier de vidange",
         "largeur": 1536,
         "hauteur": 864
       },
@@ -88,6 +90,7 @@
       "extrait": "Vaste programme de modernisation interne visant à renforcer la performance globale.",
       "image": {
         "src": "img/actu-modernisation",
+        "alt": "Une délégation visite un bureau équipé de postes de travail",
         "largeur": 1536,
         "hauteur": 1152
       },
@@ -106,6 +109,7 @@
       "extrait": "Pizolub confirme son retour parmi les acteurs industriels stratégiques du pays.",
       "image": {
         "src": "img/actu-pizolub",
+        "alt": "Opérateur casqué à côté d'un fût de lubrifiant jaune, sur une machine de l'usine Pizolub",
         "largeur": 758,
         "hauteur": 380
       },
@@ -124,6 +128,7 @@
       "extrait": "Une stratégie nationale de consolidation et de modernisation du portefeuille pétrolier.",
       "image": {
         "src": "img/photos/actu-gop",
+        "alt": "Un homme et une femme échangent, assis à un bureau",
         "largeur": 1536,
         "hauteur": 864
       },
@@ -142,6 +147,7 @@
       "extrait": "La SNHG pose les fondations d'une filiale 100% gabonaise dédiée aux services techniques pétroliers.",
       "image": {
         "src": "img/photos/actu-smp",
+        "alt": "Technicien en combinaison orange et casque à visière, écusson du drapeau gabonais sur l'épaule",
         "largeur": 1536,
         "hauteur": 864
       },
@@ -160,6 +166,7 @@
       "extrait": "Le rachat des actifs d'Assala Energy vise à renforcer la souveraineté énergétique et repositionner l'État.",
       "image": {
         "src": "img/actu-assala",
+        "alt": "Opératrice d'Assala Energy en combinaison orange, casque et lunettes de protection, talkie-walkie à la main",
         "largeur": 1414,
         "hauteur": 788,
         "position": "center top"
@@ -196,6 +203,7 @@
       "extrait": "Un tournant historique pour la reconquête de la souveraineté énergétique gabonaise.",
       "image": {
         "src": "img/photos/actu-addax-tsiengui",
+        "alt": "Vue aérienne des installations du champ de Tsiengui, au cœur de la forêt",
         "largeur": 1536,
         "hauteur": 864
       },

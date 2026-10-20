@@ -3,11 +3,11 @@
  * Prépare les photos de la médiathèque décrites dans sources/mediatheque.json, depuis le reportage
  * « Opérations GOC » fourni par le client (photos de 4 600 à 7 000 px, hors du dépôt).
  *
- *  maquette/img/mediatheque/<galerie>/<nn>-800.jpg    vignette de la grille
- *  maquette/img/mediatheque/<galerie>/<nn>-1600.jpg   grande image (visionneuse, cases mises en avant)
- *  maquette/img/mediatheque/ouverture(-768).jpg       photo d'ouverture de la page, au format 3:2
+ *  img/mediatheque/<galerie>/<nn>-800.jpg    vignette de la grille
+ *  img/mediatheque/<galerie>/<nn>-1600.jpg   grande image (visionneuse, cases mises en avant)
+ *  img/mediatheque/ouverture(-768).jpg       photo d'ouverture de la page, au format 3:2
  *
- * Les photos sont rangées dans un sous-dossier : scripts/preparer-images.sh vide maquette/img/*.jpg.
+ * Les photos sont rangées dans un sous-dossier : scripts/preparer-images.sh vide img/*.jpg.
  * Usage : node scripts/preparer-mediatheque.js   (dossier source modifiable par MEDIATHEQUE_SOURCE ; ffmpeg requis)
  */
 const fs = require('fs');
@@ -17,7 +17,7 @@ const { execFileSync } = require('child_process');
 const RACINE = path.join(__dirname, '..');
 const SOURCE = process.env.MEDIATHEQUE_SOURCE
   || path.join(RACINE, '..', 'Img', 'Inspiration images', 'Site web GOC', 'Photo Autre', 'Opérations GOC');
-const DST = path.join(RACINE, 'maquette', 'img', 'mediatheque');
+const DST = path.join(RACINE, 'img', 'mediatheque');
 const donnees = JSON.parse(fs.readFileSync(path.join(RACINE, 'sources', 'mediatheque.json'), 'utf8'));
 
 // Les accents des noms de dossiers peuvent être enregistrés décomposés (copie depuis un Mac) :

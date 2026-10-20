@@ -1,0 +1,5 @@
+# Exploration ouverte à tous les robots ; le plan du site liste les pages publiées.
+User-agent: *
+Allow: /
+
+Sitemap: https://snhg-vert.vercel.app/sitemap.xml

@@ -16,7 +16,7 @@ const path = require('path');
 const GOC = path.join(__dirname, '..', '..');
 const LOGOS = path.join(GOC, 'Img', 'Inspiration images', 'Logo Partenaire');
 const SITE = path.join(GOC, 'gaboil', 'public', 'images', 'subsidiaries');
-const DST = path.join(__dirname, '..', 'maquette', 'img', 'filiales');
+const DST = path.join(__dirname, '..', 'img', 'filiales');
 
 const SOURCES = [
   { nom: 'assala', fichier: path.join(LOGOS, 'assala.png'), fondBlanc: true },

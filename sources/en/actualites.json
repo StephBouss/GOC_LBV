@@ -1,0 +1,158 @@
+{
+  "_lisezmoi": [
+    "Traduction anglaise des articles (sources/actualites.json). Seuls les textes se traduisent : date, catégorie, images et ordre restent ceux du fichier français.",
+    "Chaque article est repéré par son slug français. « slug » donne son adresse anglaise (news/<slug>.html), puis titre, extrait, contenu (paragraphes), « image.alt » (description de la photo à la une, si le français en a une) et « galerie » (une description par photo, dans l'ordre du fichier français).",
+    "« categories » donne le nom anglais de chaque catégorie, repérée par son slug.",
+    "Dans WordPress : chaque article anglais est la traduction liée de l'article français (Polylang), avec ses propres catégories traduites.",
+    "Régénération : node scripts/assembler-pages.js (ou automatiquement avec --surveiller)."
+  ],
+  "categories": {
+    "acquisition": "Acquisition",
+    "partenariat": "Partnership",
+    "sites-operations": "Sites and operations",
+    "filiales": "Subsidiaries",
+    "nomination": "Appointment",
+    "transformation": "Transformation"
+  },
+  "articles": {
+    "nomination-dg-gaboil": {
+      "slug": "gaboil-new-managing-director",
+      "titre": "GAB’OIL: Éric Alain Sounda takes the helm of SNHG's distribution subsidiary",
+      "extrait": "Mr Éric Alain Sounda has been appointed Managing Director of Gab’Oil.",
+      "image": { "alt": "Three men posing among guests in a hall" },
+      "galerie": [
+        { "alt": "Éric Alain Sounda, Managing Director of Gab'Oil" }
+      ],
+      "contenu": [
+        "Following the Council of Ministers of 22 May 2026, chaired by the Head of State, Brigadier General <strong>BRICE CLOTAIRE OLIGUI NGUEMA</strong>, Mr <strong>ÉRIC ALAIN SOUNDA</strong> was appointed Managing Director of <strong>GAB’OIL</strong>, the distribution and marketing subsidiary of the <strong><span lang=\"fr\">SOCIÉTÉ NATIONALE DES HYDROCARBURES DU GABON</span></strong> (<strong>SNHG</strong>). He succeeds Ms <strong>RENÉE PATRICIA KU-KUMBE IVUGU</strong>, who had headed the company for sixteen months.",
+        "This appointment comes as the highest authorities seek to stabilise the governance of this strategic subsidiary, which has seen several changes of management in recent years. Gab’Oil also faces major financial and structural challenges, including the restoration of its accounts and the settlement of significant cross-debts with other State-owned companies such as the <strong><span lang=\"fr\">Société Gabonaise de Raffinage</span></strong> (<strong>SOGARA</strong>) and the <strong><span lang=\"fr\">Société d'Énergie et d'Eau du Gabon</span></strong> (<strong>SEEG</strong>).",
+        "A seasoned insider, <strong>ÉRIC ALAIN SOUNDA</strong> has held important positions within the company, having previously served as Sales Director before working as Head of the Sales Department. His in-depth knowledge of the field, of distribution logistics and of customer relations will be essential to meet the company's profitability and efficiency challenges.",
+        "The priorities set for the new Managing Director include streamlining operating costs, restructuring internal teams, strengthening management transparency and modernising the national network of service stations. This network, which currently has 12 active stations across the country, spearheads the energy sovereignty and price regulation policy pursued by the <strong>SNHG GROUP</strong>.",
+        "The General Management of <strong>SNHG</strong> extends its warmest congratulations to Mr <strong>ÉRIC ALAIN SOUNDA</strong> and assures him of its full support in implementing his roadmap for the recovery and sustainable growth of <strong>GAB’OIL</strong>."
+      ]
+    },
+    "deploiement-gaboil": {
+      "slug": "gaboil-network-expansion",
+      "titre": "Gab'Oil expansion: a network serving citizens",
+      "extrait": "The national brand continues to extend its footprint, ever closer to the people.",
+      "image": { "alt": "Gab'Oil service station: grey and red canopy, fuel pumps and oil-change workshop" },
+      "contenu": [
+        "In December 2025, Gab’Oil, a strategic subsidiary of SNHG, confirmed its role as a key player in national energy security by pursuing an ambitious modernisation of its network.",
+        "2025 was marked by the opening of new modern stations, the renovation of existing infrastructure and improved service for customers.",
+        "Beyond distribution, every Gab’Oil station carries a mission: to make energy accessible everywhere, including in remote areas."
+      ]
+    },
+    "modernisation-outils": {
+      "slug": "management-tools-modernisation",
+      "titre": "Modernising management tools and transforming the organisation",
+      "extrait": "A wide-ranging internal modernisation programme to strengthen overall performance.",
+      "image": { "alt": "A delegation visiting an office equipped with workstations" },
+      "contenu": [
+        "SNHG has launched a wide-ranging internal modernisation programme to strengthen its overall performance. This transformation rests first and foremost on the digitalisation of processes, which automates many tasks, shortens operational lead times and improves data reliability.",
+        "The company is also optimising its technical data flows, a key issue for obtaining real-time information on oil and gas operations.",
+        "However, this internal transformation cannot succeed without upskilling the teams. SNHG is therefore rolling out continuous training programmes."
+      ]
+    },
+    "pizolub-renaissance": {
+      "slug": "pizolub-industrial-revival",
+      "titre": "Pizolub: an industrial revival that adds value locally",
+      "extrait": "Pizolub confirms its return among the country's strategic industrial players.",
+      "image": { "alt": "Operator in a helmet next to a yellow drum of lubricant, on a machine at the Pizolub plant" },
+      "contenu": [
+        "Based in Port-Gentil, Pizolub confirmed in 2025 its return among the country's strategic industrial players, driven by a modernisation programme led by SNHG.",
+        "After several years of slowdown, Pizolub is upgrading its production lines, which now meet international standards.",
+        "This revival is part of SNHG's strategy to reduce dependence on imports, stimulate local value chains and strengthen Gabon's industrial base."
+      ]
+    },
+    "tullow-oil-gop": {
+      "slug": "tullow-oil-gabon-becomes-gop",
+      "titre": "Tullow Oil Gabon becomes Gabon Oil Participations",
+      "extrait": "A national strategy to consolidate and modernise the oil portfolio.",
+      "image": { "alt": "A man and a woman talking, seated at a desk" },
+      "contenu": [
+        "The discussions surrounding the interests of Tullow Oil Gabon, now integrated under the name Gabon Oil Participations (GOP), are part of a clearly stated national strategy to consolidate and modernise the oil portfolio.",
+        "This gradual integration also makes it possible to optimise the national portfolio by harmonising asset management under a single strategic direction.",
+        "Finally, this transaction contributes directly to strengthening Gabon's long-term energy resilience."
+      ]
+    },
+    "smp-maintenance": {
+      "slug": "smp-maintenance-expertise",
+      "titre": "SMP: securing maintenance and technical expertise",
+      "extrait": "SNHG lays the foundations of a 100% Gabonese subsidiary dedicated to oil technical services.",
+      "image": { "alt": "Technician in orange coveralls and a visor helmet, with a Gabonese flag badge on the shoulder" },
+      "contenu": [
+        "The takeover of the <span lang=\"fr\">Société de Maintenance Pétrolière</span> (SMP) is a key lever in SNHG's strategy to strengthen its industrial base. By bringing this entity into its scope, SNHG is laying the foundations of a 100% Gabonese subsidiary entirely dedicated to oil technical services.",
+        "This development marks a major turning point for the country's operational sovereignty. With SMP, SNHG is able to consolidate cutting-edge local skills.",
+        "By bringing this expertise in-house, SNHG improves cost control, raises the quality of its interventions and ensures greater responsiveness at production sites."
+      ]
+    },
+    "assala-energy": {
+      "slug": "assala-energy-milestone",
+      "titre": "Assala Energy: a decisive milestone",
+      "extrait": "The acquisition of Assala Energy's assets aims to strengthen energy sovereignty and reposition the State.",
+      "image": { "alt": "Assala Energy operator in orange coveralls, helmet and safety glasses, holding a walkie-talkie" },
+      "contenu": [
+        "The negotiations that led to the acquisition of Assala Energy's assets are among the most significant undertakings for Gabon's energy future. Completed in June 2024, this purchase by the Gabonese State, through SNHG/Gabon Oil Company (GOC), was part of a clear strategy: to bring more of the upstream oil sector under national control, strengthen energy sovereignty and put the State back at the centre of resource governance. However, integrating the country's second-largest producer has proved complex, and recent news has been mixed, alternating between operational progress and major technical challenges.",
+        "On the one hand, Assala's production has recovered markedly. In December 2025, a 26.6% increase brought output to 57,000 barrels per day, a direct result of investment in the mature Rabi field, one of the historic pillars of Gabon's oil industry. This performance shows the ability of the State and SNHG to revive mature assets, optimise existing operations and consolidate the value generated by national resources.",
+        "At the same time, however, the subsidiary has faced significant setbacks in exploration. In early 2025, three wells (Rabunga-A, Rossignol-A, Totou-NE) turned out to be dry, and another was abandoned. These failures, common in the industry but strategically sensitive for a country relaunching its oil sector, have affected Assala's ability to offset the natural decline of mature fields. They also raise questions about the exploration strategy, the quality of the geological portfolio and, above all, the transparency of management, as the figures were published late, fuelling concern among partners and industry observers.",
+        "At a time when Gabon is seeking to stabilise its oil industry to finance economic diversification, Assala plays a central role. The company must now show that it can not only sustain the performance of its mature assets but also deliver on its exploration projects. SNHG, for its part, will need to turn this acquisition into a real driver of growth, innovation and energy sovereignty."
+      ]
+    },
+    "dinonga-irondu": {
+      "slug": "dinonga-irondu-operator",
+      "titre": "SNHG becomes operator of the Dinonga and Irondu permits",
+      "extrait": "A new step in consolidating local expertise.",
+      "contenu": [
+        "SNHG becomes operator of the Dinonga and Irondu permits, expanding its scope for action and taking a new step in consolidating local expertise."
+      ]
+    },
+    "retrocession-addax": {
+      "slug": "addax-assets-transfer",
+      "titre": "Transfer of Addax Petroleum's assets: a historic turning point",
+      "extrait": "A historic turning point in Gabon's drive to regain its energy sovereignty.",
+      "image": { "alt": "Aerial view of the Tsiengui field facilities, deep in the forest" },
+      "galerie": [
+        { "alt": "Facilities of the Obangué field, taken over by SNHG in March 2024" }
+      ],
+      "contenu": [
+        "The takeover by the <span lang=\"fr\">Société Nationale des Hydrocarbures du Gabon</span> (SNHG), in March 2024, of the OBANGUE and TSIENGUI fields, previously operated by Addax Petroleum, marks a decisive step in the State's recovery of its energy sovereignty.",
+        "The result of close cooperation between the Gabonese State and SNHG, this asset takeover first and foremost strengthens operational management capability.",
+        "It also fully secures the share of production due to the Nation, a central issue at a time when transparency and good governance of resources have become strategic imperatives.",
+        "Finally, this transaction is a major opportunity to transfer skills to Gabonese managers and technicians."
+      ]
+    },
+    "dussafu-ezanga": {
+      "slug": "dussafu-ezanga-stakes",
+      "titre": "Ramping up: stakes in the Dussafu and Ezanga CEPPs",
+      "extrait": "SNHG gradually builds up its portfolio of strategic assets.",
+      "contenu": [
+        "The company acquires stakes in the Dussafu (BW Energy) and Ezanga (Maurel &amp; Prom Gabon) exploration and production sharing contracts (CEPP). SNHG gradually builds up its portfolio of strategic assets."
+      ]
+    },
+    "perenco-participations-etat": {
+      "slug": "perenco-state-interests",
+      "titre": "Strategic partnership with Perenco for the State's 32 interests",
+      "extrait": "The State regains a consolidated view and stronger oversight of its asset portfolio.",
+      "contenu": [
+        "SNHG enters into a strategic partnership to manage the State's 32 interests in the oil assets held by Perenco Oil &amp; Gas Gabon (POGG).",
+        "A major turning point: the State regains a consolidated view and stronger oversight of its asset portfolio."
+      ]
+    },
+    "cepp-mboga-ii": {
+      "slug": "mboga-ii-expansion",
+      "titre": "Expansion on the Mboga II CEPP",
+      "extrait": "SNHG takes over operations of the Mboga II CEPP and confirms its standing as a technical operator.",
+      "contenu": [
+        "The company strengthens its activities by taking over operations of the Mboga II exploration and production sharing contract (CEPP), confirming its standing as a major technical operator."
+      ]
+    },
+    "joint-venture-bourbon": {
+      "slug": "bourbon-gabon-joint-venture",
+      "titre": "First joint venture with Bourbon Gabon",
+      "extrait": "A key step in bringing in new expertise and strengthening national operating capacity.",
+      "contenu": [
+        "SNHG sets up a joint venture with Bourbon Gabon, a key step in bringing in new expertise and strengthening national operating capacity."
+      ]
+    }
+  }
+}

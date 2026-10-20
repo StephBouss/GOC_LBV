@@ -1,0 +1,52 @@
+{
+  "_lisezmoi": [
+    "Menus du site, dans chaque langue : menu principal et menu mobile (« groupes »), plan du pied de page (titre « pied » de chaque groupe), liens légaux du bas de page.",
+    "Les liens s'écrivent avec l'adresse de la page française, depuis la racine du site : la version anglaise mène automatiquement à la traduction de cette page (sources/en/pages/, clé « fr » de l'en-tête).",
+    "Dans WordPress : un menu par langue (Polylang, « Apparence > Menus », un emplacement par langue).",
+    "Les pages encore à créer sont listées dans INVENTAIRE.md."
+  ],
+  "groupes": [
+    {
+      "id": "groupe",
+      "libelle": { "fr": "Présentation du groupe", "en": "About the Group" },
+      "pied": { "fr": "Le groupe", "en": "The Group" },
+      "liens": [
+        { "fr": "À propos", "en": "About us", "lien": "groupe/presentation.html#a-propos" },
+        { "fr": "Missions", "en": "Missions", "lien": "groupe/presentation.html#missions" },
+        { "fr": "Vision et valeurs", "en": "Vision and values", "lien": "groupe/presentation.html#vision-valeurs" },
+        { "fr": "Historique", "en": "History", "lien": "groupe/historique-gouvernance.html#historique" },
+        { "fr": "Gouvernance", "en": "Governance", "lien": "groupe/historique-gouvernance.html#gouvernance" },
+        { "fr": "Filiales", "en": "Subsidiaries", "lien": "filiales/index.html" }
+      ]
+    },
+    {
+      "id": "activites",
+      "libelle": { "fr": "Activités et engagements", "en": "Activities and commitments" },
+      "pied": { "fr": "Activités", "en": "Activities" },
+      "liens": [
+        { "fr": "Exploration et production", "en": "Exploration and production", "lien": "activites/exploration-production.html" },
+        { "fr": "Distribution et transformation", "en": "Distribution and processing", "lien": "activites/distribution-transformation.html" },
+        { "fr": "Services pétroliers", "en": "Oil services", "lien": "activites/services-petroliers.html" },
+        { "fr": "Projets stratégiques", "en": "Strategic projects", "lien": "activites/projets-strategiques.html" },
+        { "fr": "Engagements HSEI", "en": "HSEI commitments", "lien": "engagements/hsei.html" },
+        { "fr": "Engagements RSE", "en": "CSR commitments", "lien": "engagements/rse.html" }
+      ]
+    },
+    {
+      "id": "information",
+      "libelle": { "fr": "Information et contact", "en": "News and contact" },
+      "pied": { "fr": "Informations", "en": "Information" },
+      "liens": [
+        { "fr": "Actualités", "en": "News", "lien": "actualites/index.html" },
+        { "fr": "Médiathèque", "en": "Media library", "lien": "mediatheque/index.html" },
+        { "fr": "Carrières", "en": "Careers", "lien": "contact/index.html#candidature" },
+        { "fr": "Contact", "en": "Contact", "lien": "contact/index.html" }
+      ]
+    }
+  ],
+  "legal": [
+    { "fr": "Mentions légales", "en": "Legal notice", "lien": "informations-legales/mentions-legales.html" },
+    { "fr": "Politique de confidentialité", "en": "Privacy policy", "lien": "informations-legales/confidentialite.html" },
+    { "fr": "Gestion des cookies", "en": "Cookie management", "lien": "informations-legales/cookies.html" }
+  ]
+}

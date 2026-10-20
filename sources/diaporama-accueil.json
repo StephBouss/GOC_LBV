@@ -1,8 +1,8 @@
 {
   "_lisezmoi": [
     "Diaporama d'ouverture de l'accueil : préfiguration du bloc WordPress « Diaporama d'accueil » (une liste répétable de diapositives, modifiable depuis l'administration).",
-    "Une diapositive = un fond (vidéo ou photo), une durée, un sur-titre, un titre, un chapô et un ou deux boutons (texte, lien, style « principal » ou « contour »).",
-    "Fond vidéo : fichier MP4 sans son, image d'affiche (affichée pendant le chargement et pour les visiteurs qui limitent les animations), largeur et hauteur en pixels. La vidéo passe à la diapositive suivante quand elle se termine ; « duree » sert seulement si la lecture automatique est bloquée.",
+    "Une diapositive = un identifiant (« id », qui relie ses traductions dans sources/en/), un fond (vidéo ou photo), une durée, un sur-titre, un titre, un chapô et un ou deux boutons (texte, lien, style « principal » ou « contour »).",
+    "Fond vidéo : fichier MP4 sans son, sa version WebM (plus légère, facultative), image d'affiche, largeur et hauteur en pixels. L'affiche s'affiche pendant le chargement, sur téléphone (la vidéo n'y est pas chargée) et pour les visiteurs qui limitent les animations. La vidéo passe à la diapositive suivante quand elle se termine ; sinon la diapositive dure « duree » secondes.",
     "Fond photo : fichier en 1536 px, variante en 768 px pour les téléphones. La photo reste affichée « duree » secondes.",
     "La première diapositive porte le titre principal de la page (h1) : son titre doit rester une phrase qui présente la SNHG.",
     "Régénération : node scripts/assembler-pages.js (ou automatiquement avec --surveiller)."
@@ -10,9 +10,11 @@
   "libelle": "À la une",
   "diapositives": [
     {
+      "id": "foret",
       "fond": {
         "type": "video",
         "src": "video/hero-goc-720p.mp4",
+        "webm": "video/hero-goc-720p.webm",
         "affiche": "img/hero-video-affiche.jpg",
         "largeur": 1280,
         "hauteur": 720
@@ -22,11 +24,20 @@
       "titre": "Leader du secteur pétrolier au Gabon",
       "chapo": "La SNHG, acteur clé de la gestion stratégique des actifs pétroliers de l'État.",
       "boutons": [
-        { "texte": "Découvrir le groupe", "lien": "presentation-groupe.html", "style": "principal" },
-        { "texte": "Nos activités", "lien": "activites-engagements.html", "style": "contour" }
+        {
+          "texte": "Découvrir le groupe",
+          "lien": "groupe/presentation.html",
+          "style": "principal"
+        },
+        {
+          "texte": "Nos activités",
+          "lien": "activites/index.html",
+          "style": "contour"
+        }
       ]
     },
     {
+      "id": "expertise",
       "fond": {
         "type": "image",
         "src": "img/photos/accueil-expertise",
@@ -38,14 +49,24 @@
       "titre": "15 ans d'expertise",
       "chapo": "Célébrons 15 ans au cœur de l'énergie gabonaise.",
       "boutons": [
-        { "texte": "Notre histoire", "lien": "historique-gouvernance.html#historique", "style": "principal" },
-        { "texte": "Nos filiales", "lien": "filiales.html", "style": "contour" }
+        {
+          "texte": "Notre histoire",
+          "lien": "groupe/historique-gouvernance.html#historique",
+          "style": "principal"
+        },
+        {
+          "texte": "Nos filiales",
+          "lien": "filiales/index.html",
+          "style": "contour"
+        }
       ]
     },
     {
+      "id": "sardine",
       "fond": {
         "type": "video",
         "src": "video/hero-sardine-720p.mp4",
+        "webm": "video/hero-sardine-720p.webm",
         "affiche": "img/hero-video-sardine-affiche.jpg",
         "largeur": 1280,
         "hauteur": 720
@@ -55,8 +76,16 @@
       "titre": "Développement du champ offshore Sardine",
       "chapo": "Optimisation de la récupération des hydrocarbures grâce à l'injection d'eau, à des opérations de work-over et au forage de nouveaux puits.",
       "boutons": [
-        { "texte": "Exploration et production", "lien": "exploration-production.html", "style": "principal" },
-        { "texte": "Projets stratégiques", "lien": "projets-strategiques.html", "style": "contour" }
+        {
+          "texte": "Exploration et production",
+          "lien": "activites/exploration-production.html",
+          "style": "principal"
+        },
+        {
+          "texte": "Projets stratégiques",
+          "lien": "activites/projets-strategiques.html",
+          "style": "contour"
+        }
       ]
     }
   ]

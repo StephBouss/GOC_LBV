@@ -1,0 +1,105 @@
+{
+  "_lisezmoi": [
+    "Traduction anglaise de la médiathèque (sources/mediatheque.json). Seuls les textes se traduisent : les photos, leur ordre et les fichiers restent ceux du fichier français.",
+    "Chaque galerie est repérée par son slug ; « photos » donne le texte alternatif de chaque photo (lu par les lecteurs d'écran, affiché en légende dans la visionneuse), dans l'ordre du fichier français.",
+    "Dans WordPress : la traduction anglaise de la page Médiathèque, avec les textes alternatifs traduits dans la médiathèque WordPress (Polylang).",
+    "Régénération : node scripts/assembler-pages.js (ou automatiquement avec --surveiller)."
+  ],
+  "galeries": {
+    "sardine": {
+      "type": "Offshore field",
+      "titre": "Sardine",
+      "description": "At sea, the teams are developing the Sardine field through water injection, workover operations and the drilling of new wells, with safety as the top priority.",
+      "photos": [
+        "Operator turning the valves of a wellhead on the Sardine platform, facing the sea",
+        "Red and white steel structure of the Sardine drilling platform, seen from below",
+        "Operator in orange coveralls walking across the deck of the Sardine platform",
+        "Operators talking on the platform deck, between walkways and equipment",
+        "GOC team and contractor working on a piece of equipment on the platform",
+        "Technician inspecting a cabinet in the platform's electrical room",
+        "Red box of life jackets on the platform deck"
+      ]
+    },
+    "tsiengui": {
+      "type": "Onshore field",
+      "titre": "Tsiengui",
+      "description": "Taken over by SNHG in March 2024 together with the Obangué field, Tsiengui marks the State's recovery of its energy sovereignty. Its storage capacity is being expanded.",
+      "photos": [
+        "Aerial view of the Tsiengui site and its storage tanks in the middle of the forest",
+        "Operator seen from behind, with the Gabon Oil logo on the coveralls, facing the Tsiengui storage tanks",
+        "Operator monitoring the screens in the Tsiengui control room",
+        "Separator and pipework of the Tsiengui production facilities",
+        "Portrait of an operator wearing a helmet and safety glasses in Tsiengui",
+        "Operator wearing a respirator while taking a sample",
+        "Red and green wellhead at the Tsiengui site, on the edge of the forest"
+      ]
+    },
+    "mboumba": {
+      "type": "Onshore field",
+      "titre": "Mboumba",
+      "description": "The company's first production permit, obtained in 2016, the mature Mboumba field showcases the teams' expertise: production, laboratory analysis and a strong safety culture.",
+      "photos": [
+        "Operator seen from behind, with the Gabon Oil logo on the coveralls, in front of the flags at the Mboumba site",
+        "Yellow vessel and pipework of the Mboumba facilities, deep in the forest",
+        "Operator walking past a large production vessel in Mboumba",
+        "Chemist in coveralls and protective gloves handling a laboratory flask",
+        "Operator in a helmet, radio in hand, in front of the Mboumba facilities",
+        "HSSE safety briefing in front of the welcome sign of the Mboumba production centre",
+        "Two operators in the Mboumba control room"
+      ]
+    },
+    "obangue": {
+      "type": "Onshore field",
+      "titre": "Obangué",
+      "description": "The first field operated directly by the company, Obangué was taken over in March 2024. Its storage capacity is being expanded.",
+      "photos": [
+        "Close-up portrait of an operator wearing a Gabon Oil helmet and safety glasses",
+        "Three operators laughing together at the Obangué site",
+        "Two operators walking between two large tanks in Obangué",
+        "Obangué production facilities, with tanks and stacks",
+        "Operator in a visor helmet in the Obangué electrical room",
+        "Two operators, a woman and a man, looking at the Obangué facilities from a walkway",
+        "White helmet bearing the Gabon Oil logo on a meeting table"
+      ]
+    },
+    "mandji": {
+      "type": "Territory and communities",
+      "titre": "Mandji",
+      "description": "In the Mandji area, SNHG works alongside local communities: a hospital under construction, a new playground, and facilities seen from the air.",
+      "photos": [
+        "Two team members in orange coveralls on a riverbank",
+        "Aerial view of a fenced facility in the middle of the savannah, Mandji area",
+        "Aerial view of a developed site in the Mandji area",
+        "Hospital construction site, a community project in the Mandji area",
+        "Playground under construction, a community project in the Mandji area",
+        "Aerial view of a village in the Mandji area"
+      ]
+    },
+    "port-gentil": {
+      "type": "Offices",
+      "titre": "Port-Gentil",
+      "description": "In Port-Gentil, Gabon's economic capital, the teams work close to the country's oil activities.",
+      "photos": [
+        "Three colleagues working together on a file in the Port-Gentil offices",
+        "Smiling employee at her workstation in Port-Gentil",
+        "Two colleagues reviewing a document in the Port-Gentil offices",
+        "Two colleagues talking on the staircase of the Port-Gentil offices",
+        "Employee in a GOC polo shirt working on a computer",
+        "Two colleagues working together at a computer"
+      ]
+    },
+    "libreville": {
+      "type": "Head office",
+      "titre": "Libreville",
+      "description": "At the Libreville head office, the teams steer the Group's strategy and the management of the State's oil assets.",
+      "photos": [
+        "Portrait of a manager, arms folded, at the Libreville head office",
+        "Employee presenting at the whiteboard during a team meeting at the head office",
+        "Two colleagues talking in front of a screen at the Libreville head office",
+        "Smiling employee at her desk at the Libreville head office",
+        "Team meeting around the table at the Libreville head office",
+        "Employee working on a computer at the Libreville head office"
+      ]
+    }
+  }
+}

@@ -1,25 +1,43 @@
 #!/usr/bin/env node
 /**
- * Assemble les pages de la maquette : gabarit commun (en-tête, menus, pied de page) + contenu de chaque page.
+ * Assemble les pages de la maquette : gabarit commun (en-tête, menus, pied de page) + contenu de chaque page, en français
+ * (langue par défaut, à la racine du site) et en anglais (dossier en/).
  *
- *  sources/gabarit.html       squelette commun, avec des repères {{…}}
- *  sources/pages/<nom>.html   un commentaire JSON en tête (titre, description, onglet, precharger, css),
- *                             puis le contenu du <main>. Un repère <!-- apres --> facultatif sépare ce qui
- *                             se place après le pied de page (fenêtres modales).
+ *  sources/gabarit.html            squelette commun, avec des repères {{…}} ; ses textes ({{t:…}}) viennent de libelles.json
+ *  sources/libelles.json           textes de l'interface dans chaque langue (gabarit et modèles générés)
+ *  sources/navigation.json         menus dans chaque langue : menu principal, menu mobile, plan du pied de page, liens légaux
+ *  sources/pages/<nom>.html        pages françaises : un commentaire JSON en tête (titre, description, onglet, precharger,
+ *                                  css, partage), puis le contenu du <main>. Un repère <!-- apres --> facultatif sépare ce
+ *                                  qui se place après le pied de page (fenêtres modales).
+ *  sources/en/pages/<nom>.html     pages anglaises, rangées sous leur adresse anglaise (group/about.html…). La clé « fr » de
+ *                                  leur en-tête donne la page française qu'elles traduisent, comme une traduction liée dans
+ *                                  Polylang : le sélecteur FR | EN, les liens hreflang et les menus s'en servent.
  *
- * La navigation (menu principal, menu mobile, plan du site) est décrite une seule fois ci-dessous.
- * Seules les icônes réellement utilisées par une page sont ajoutées à son sprite.
+ * Toute page ou tout article sans traduction arrête la génération : aucune page ne peut rester dans une seule langue.
+ * (TRADUCTION_PARTIELLE=1 en fait un simple avertissement, pour un travail en cours.)
+ * Dans une page traduite, chaque lien vers une page du site, écrit avec l'adresse française ou avec celle de la traduction,
+ * mène à la version dans la langue de la page. Seules les icônes réellement utilisées par une page sont ajoutées à son sprite.
  *
- * Actualités : sources/actualites.json décrit les articles (futurs articles WordPress) ; scripts/actualites.js
- * remplit les repères <!-- actualites:… --> des pages et écrit une page actualite-<slug>.html par article.
+ * Actualités : sources/actualites.json décrit les articles (futurs articles WordPress), sources/en/actualites.json leurs
+ * traductions ; scripts/actualites.js remplit les repères <!-- actualites:… --> et écrit une page par article et par langue.
  *
- * Diaporama de l'accueil : sources/diaporama-accueil.json décrit les diapositives (futur bloc WordPress) ;
- * scripts/diaporama.js remplit le repère <!-- diaporama:accueil -->, et "precharger": "diaporama" précharge son premier fond.
+ * Diaporama de l'accueil : sources/diaporama-accueil.json (et sa traduction dans sources/en/) décrit les diapositives
+ * (futur bloc WordPress) ; scripts/diaporama.js remplit le repère <!-- diaporama:accueil -->, et "precharger": "diaporama"
+ * précharge son premier fond.
  *
- * Médiathèque : sources/mediatheque.json décrit les galeries (une par site) ; scripts/mediatheque.js remplit les
- * repères <!-- mediatheque:… --> (photos préparées par scripts/preparer-mediatheque.js).
+ * Médiathèque : sources/mediatheque.json (et sa traduction dans sources/en/) décrit les galeries (une par site) ;
+ * scripts/mediatheque.js remplit les repères <!-- mediatheque:… --> (photos préparées par scripts/preparer-mediatheque.js).
  *
- * Sortie : maquette/<nom>.html
+ * Rangement : chaque page est écrite à la même place que sa source (l'accueil à la racine du site, les autres dans le dossier
+ * de leur rubrique : groupe/, filiales/, activites/…, et en/group/, en/activities/… pour l'anglais).
+ * Dans les sources, liens et chemins s'écrivent depuis la racine du site de leur langue (« engagements/rse.html »,
+ * « img/photos/… ») ; relocaliser() les rend relatifs à chaque page générée (« ../img/photos/… » dans un dossier de rubrique).
+ *
+ * Référencement : scripts/partage.js donne à chaque page ses balises canonical, hreflang et Open Graph (image de 1200 × 630 px
+ * tirée de sa photo d'ouverture par scripts/preparer-partage.js), et écrit sitemap.xml et robots.txt à la racine.
+ *
+ * Sortie : <rubrique>/<nom>.html, en/<rubrique>/<nom>.html, sitemap.xml et robots.txt, à côté de css/, js/, img/, video/,
+ *          documents/ et fonts/
  * Usage  : node scripts/assembler-pages.js [--surveiller]
  */
 const fs = require('fs');
@@ -27,41 +45,20 @@ const path = require('path');
 const actualites = require('./actualites');
 const diaporama = require('./diaporama');
 const mediatheque = require('./mediatheque');
+const partage = require('./partage');
 
 const RACINE = path.join(__dirname, '..');
 const SOURCES = path.join(RACINE, 'sources');
-const SORTIE = path.join(RACINE, 'maquette');
+const SORTIE = RACINE;
 
-/* Navigation du site : [libellé, lien]. Les pages encore à créer sont listées dans INVENTAIRE.md. */
-const NAV = [
-  { id: 'groupe', libelle: 'Présentation du groupe', pied: 'Le groupe', liens: [
-    ['À propos', 'presentation-groupe.html#a-propos'],
-    ['Missions', 'presentation-groupe.html#missions'],
-    ['Vision et valeurs', 'presentation-groupe.html#vision-valeurs'],
-    ['Historique', 'historique-gouvernance.html#historique'],
-    ['Gouvernance', 'historique-gouvernance.html#gouvernance'],
-    ['Filiales', 'filiales.html'],
-  ] },
-  { id: 'activites', libelle: 'Activités et engagements', pied: 'Activités', liens: [
-    ['Exploration et production', 'exploration-production.html'],
-    ['Projets stratégiques', 'projets-strategiques.html'],
-    ['Engagements HSEI', 'engagements-hsei.html'],
-    ['Engagements RSE', 'engagements-rse.html'],
-  ] },
-  { id: 'information', libelle: 'Information et contact', pied: 'Informations', liens: [
-    ['Actualités', 'actualites.html'],
-    ['Médiathèque', 'mediatheque.html'],
-    ['Carrières', 'contact.html#candidature'],
-    ['Contact', 'contact.html'],
-  ] },
-];
+/* Langues du site : le français à la racine (langue par défaut, comme dans Polylang), les autres dans leur dossier */
+const LANGUES = ['fr', 'en'];
+const DEFAUT = 'fr';
+const NOMS_LANGUES = { fr: 'français', en: 'English' };
+const prefixe = (langue) => (langue === DEFAUT ? '' : `${langue}/`);
+const PARTIELLE = process.env.TRADUCTION_PARTIELLE === '1';
 
-/* Liens légaux du bas de page */
-const LEGAL = [
-  ['Mentions légales', 'mentions-legales.html'],
-  ['Politique de confidentialité', 'confidentialite.html'],
-  ['Gestion des cookies', 'cookies.html'],
-];
+const lireJSON = (fichier) => JSON.parse(fs.readFileSync(fichier, 'utf8'));
 
 /* Icônes Lucide (24 × 24, trait) utilisées par les écrans Banani */
 const ICONES = {
@@ -103,33 +100,70 @@ const ICONES = {
   'i-maison': '<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
 };
 
-const lien = (page) => ([texte, href]) => `<li><a href="${href}"${href === page ? ' aria-current="page"' : ''}>${texte}</a></li>`;
+/* Menus : les liens sont écrits avec l'adresse française de la page (son identité) ; celui de la page courante est signalé.
+   Dans une page traduite, traduireLiens() les fait ensuite mener aux traductions. */
+const lien = (identite, texte, href) => `<li><a href="${href}"${href === identite ? ' aria-current="page"' : ''}>${texte}</a></li>`;
 
-const navPrincipale = (page, onglet) => NAV.map((n) => `        <li class="nav-item">
-          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-${n.id}"${n.id === onglet ? ' aria-current="true"' : ''}>${n.libelle} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+const navPrincipale = ({ identite, langue, navigation }, onglet) => navigation.groupes.map((n) => `        <li class="nav-item">
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-${n.id}"${n.id === onglet ? ' aria-current="true"' : ''}>${n.libelle[langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
           <div class="sous-menu" id="sous-menu-${n.id}">
             <ul class="sous-menu-liens">
-${n.liens.map((l) => `              ${lien(page)(l)}`).join('\n')}
+${n.liens.map((l) => `              ${lien(identite, l[langue], l.lien)}`).join('\n')}
             </ul>
           </div>
         </li>
 `).join('');
 
-const navMobile = (page) => NAV.map((n) => `    <details class="accordeon" name="menu-mobile">
-      <summary>${n.libelle} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+const navMobile = ({ identite, langue, navigation }) => navigation.groupes.map((n) => `    <details class="accordeon" name="menu-mobile">
+      <summary>${n.libelle[langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
-${n.liens.map((l) => `        ${lien(page)(l)}`).join('\n')}
+${n.liens.map((l) => `        ${lien(identite, l[langue], l.lien)}`).join('\n')}
       </ul>
     </details>
 `).join('');
 
-const piedColonnes = (page) => NAV.map((n) => `        <details class="pied-colonne" open>
-          <summary>${n.pied} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+const piedColonnes = ({ identite, langue, navigation }) => navigation.groupes.map((n) => `        <details class="pied-colonne" open>
+          <summary>${n.pied[langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
-${n.liens.map((l) => `            ${lien(page)(l)}`).join('\n')}
+${n.liens.map((l) => `            ${lien(identite, l[langue], l.lien)}`).join('\n')}
           </ul>
         </details>
 `).join('');
+
+const piedLegal = ({ identite, langue, navigation }) => navigation.legal.map((l) => `        ${lien(identite, l[langue], l.lien)}\n`).join('');
+
+/* Sélecteur de langue (en-tête et menu mobile) : chaque langue mène à la version de la page courante dans cette langue.
+   Le nom de la langue est lu dans cette langue (« FR (français) », « EN (English) »). */
+function selecteurLangues({ langue, versions }, retrait) {
+  const liens = LANGUES.map((l) => `<a href="${versions[l] || `${prefixe(l)}index.html`}" hreflang="${l}" lang="${l}"${l === langue ? ' aria-current="true"' : ''}>`
+    + `${l.toUpperCase()}<span class="visuellement-masque"> (${NOMS_LANGUES[l]})</span></a>`);
+  return `${retrait}<p class="langues">${liens.join(' <span aria-hidden="true">|</span> ')}</p>\n`;
+}
+
+/* Liens d'une page traduite : chaque lien vers une page du site (adresse française ou adresse de la traduction) mène à la
+   version dans la langue de la page ; ancres et paramètres (#missions, ?categorie=…) sont conservés. */
+function traduireLiens(html, fichier, { langue, toutesVersions, adresses }) {
+  return html.replace(/\bhref="([^"#?]+\.html)([#?][^"]*)?"/g, (tout, cible, suite = '') => {
+    if (/^(?:[a-z][a-z0-9+.-]*:|\/)/i.test(cible)) return tout;
+    const traduite = (toutesVersions[cible] && toutesVersions[cible][langue])
+      || (adresses.has(prefixe(langue) + cible) ? prefixe(langue) + cible : null);
+    if (traduite) return `href="${traduite}${suite}"`;
+    if (!PARTIELLE) throw new Error(`${fichier} : lien vers une page sans version « ${langue} » : ${cible}`);
+    return tout;
+  });
+}
+
+/* Chemins écrits depuis la racine du site → chemins relatifs à la page générée. Seuls les attributs qui portent une adresse
+   sont concernés (pas type="video/mp4") ; ancres, adresses absolues (https:, mailto:, tel:, /…) et requêtes restent telles quelles. */
+const ATTRIBUTS_URL = /\b(href|src|srcset|imagesrcset|poster|data-pdf)="([^"]*)"/g;
+const relocaliser = (html, fichier) => {
+  const prefixeDossier = '../'.repeat(fichier.split('/').length - 1);
+  if (!prefixeDossier) return html;
+  const corriger = (u) => (!u || /^(?:[a-z][a-z0-9+.-]*:|[#/?])/i.test(u) ? u : prefixeDossier + u);
+  return html.replace(ATTRIBUTS_URL, (tout, attr, valeur) => `${attr}="${attr.endsWith('srcset')
+    ? valeur.split(',').map((v) => v.trim().replace(/^\S+/, corriger)).join(', ')
+    : corriger(valeur)}"`);
+};
 
 /* Image d'ouverture préchargée : photo en plusieurs largeurs (srcset) ou fichier unique */
 const prechargement = (p) => {
@@ -138,61 +172,135 @@ const prechargement = (p) => {
   return `  <link rel="preload" as="image" href="${p.src}"${variantes} fetchpriority="high">\n`;
 };
 
-function construire(gabarit, fichier, meta, contenu, apres = '') {
+/* Écrit un fichier seulement s'il change : le rechargement automatique du navigateur ne se déclenche pas pour rien */
+const ecrire = (fichier, texte) => {
+  const cible = path.join(SORTIE, fichier);
+  fs.mkdirSync(path.dirname(cible), { recursive: true });
+  if (!fs.existsSync(cible) || fs.readFileSync(cible, 'utf8') !== texte) fs.writeFileSync(cible, texte);
+};
+
+/* Image d'aperçu : celle tirée de la photo de la page si elle a été préparée, sinon l'image par défaut */
+const imagePartage = (meta, contenu) => {
+  const image = partage.source(meta, contenu);
+  const prevue = image && partage.cible(image.src);
+  return prevue && fs.existsSync(path.join(SORTIE, prevue)) ? prevue : partage.cible(partage.IMAGE_DEFAUT.src);
+};
+
+/* contexte : langue de la page, identité (adresse de la page française), versions de la page dans chaque langue,
+   textes de l'interface (t), menus, et toutes les versions du site (pour traduire les liens) */
+function construire(gabarit, fichier, meta, contenu, apres, contexte) {
+  const { langue, t } = contexte;
   const corps = contenu + apres;
   const icones = Object.keys(ICONES).filter((id) => corps.includes(`#${id}"`))
     .map((id) => `  <symbol id="${id}" viewBox="0 0 24 24">${ICONES[id]}</symbol>\n`).join('');
   const valeurs = {
+    langue,
     titre: meta.titre,
     description: meta.description,
-    page: fichier,
+    partage: partage.balises(fichier, meta, imagePartage(meta, contenu), langue, contexte.versions),
     precharger: prechargement(meta.precharger),
     css: (meta.css || []).map((c) => `  <link rel="stylesheet" href="${c}">\n`).join(''),
     icones,
-    'nav-principale': navPrincipale(fichier, meta.onglet),
-    'nav-mobile': navMobile(fichier),
-    'pied-colonnes': piedColonnes(fichier),
-    'pied-legal': LEGAL.map((l) => `        ${lien(fichier)(l)}\n`).join(''),
+    // sélecteur de langue : posé après la traduction des liens, qui ne doit pas le toucher
+    'langues-entete': '{{langues-entete}}',
+    'langues-menu': '{{langues-menu}}',
+    'nav-principale': navPrincipale(contexte, meta.onglet),
+    'nav-mobile': navMobile(contexte),
+    'pied-colonnes': piedColonnes(contexte),
+    'pied-legal': piedLegal(contexte),
     contenu,
     apres: apres ? '\n' + apres : '',
   };
-  const html = gabarit.replace(/\{\{([a-z-]+)\}\}/g, (tout, cle) => {
-    if (!(cle in valeurs)) throw new Error(`repère inconnu {{${cle}}}`);
-    return valeurs[cle];
+  let html = gabarit.replace(/\{\{(t:)?([a-z-]+)\}\}/g, (tout, texte, cle) => {
+    const source = texte ? t : valeurs;
+    if (!(cle in source)) throw new Error(`${texte ? 'texte' : 'repère'} inconnu {{${texte || ''}${cle}}} (${langue})`);
+    return source[cle];
   });
-  const cible = path.join(SORTIE, fichier);
-  if (!fs.existsSync(cible) || fs.readFileSync(cible, 'utf8') !== html) fs.writeFileSync(cible, html);
+  if (langue !== DEFAUT) html = traduireLiens(html, fichier, contexte);
+  html = html.replace(/\{\{langues-(entete|menu)\}\}/g, (tout, ou) => selecteurLangues(contexte, ou === 'entete' ? '      ' : '    '));
+  ecrire(fichier, relocaliser(html, fichier));
+}
+
+/* Sources des pages d'une langue : chemins relatifs à son dossier pages/, écrits avec « / » quel que soit le système */
+function lirePages(langue) {
+  const dossier = path.join(SOURCES, prefixe(langue), 'pages');
+  if (!fs.existsSync(dossier)) return [];
+  return fs.readdirSync(dossier, { recursive: true }).map((f) => f.split(path.sep).join('/')).filter((f) => f.endsWith('.html')).sort()
+    .map((rel) => {
+      const brut = fs.readFileSync(path.join(dossier, rel), 'utf8');
+      const m = brut.match(/^<!--([\s\S]*?)-->\n/);
+      if (!m) throw new Error(`${prefixe(langue)}pages/${rel} : commentaire JSON manquant en tête`);
+      const meta = JSON.parse(m[1]);
+      const identite = langue === DEFAUT ? rel : meta.fr;
+      if (!identite) throw new Error(`${langue}/pages/${rel} : clé « fr » manquante (adresse de la page française traduite)`);
+      return { langue, fichier: prefixe(langue) + rel, identite, meta, corps: brut.slice(m[0].length) };
+    });
 }
 
 function assembler() {
   const gabarit = fs.readFileSync(path.join(SOURCES, 'gabarit.html'), 'utf8');
-  const actus = actualites.charger(SOURCES);
-  const diapos = diaporama.charger(SOURCES);
-  const galeries = mediatheque.charger(SOURCES);
-  const pages = fs.readdirSync(path.join(SOURCES, 'pages')).filter((f) => f.endsWith('.html'));
-  for (const fichier of pages) {
-    const brut = fs.readFileSync(path.join(SOURCES, 'pages', fichier), 'utf8');
-    const m = brut.match(/^<!--([\s\S]*?)-->\n/);
-    if (!m) throw new Error(`${fichier} : commentaire JSON manquant en tête`);
-    const meta = JSON.parse(m[1]);
-    if (meta.precharger === 'diaporama') meta.precharger = diaporama.precharger(diapos);
-    const [contenu, apres = ''] = brut.slice(m[0].length).split('<!-- apres -->\n');
-    construire(gabarit, fichier, meta, mediatheque.remplir(diaporama.remplir(actualites.remplacer(contenu, actus), diapos), galeries), apres);
+  const libelles = lireJSON(path.join(SOURCES, 'libelles.json'));
+  const navigation = lireJSON(path.join(SOURCES, 'navigation.json'));
+  const pages = LANGUES.flatMap(lirePages);
+  const donnees = Object.fromEntries(LANGUES.map((l) => [l, {
+    actus: actualites.charger(SOURCES, l, libelles[l]),
+    diapos: diaporama.charger(SOURCES, l, libelles[l]),
+    galeries: mediatheque.charger(SOURCES, l, libelles[l]),
+  }]));
+
+  // Versions de chaque page et de chaque article, repérées par l'adresse française : { 'groupe/presentation.html': { fr, en } }
+  const versions = {};
+  const ajouter = (identite, langue, fichier) => { versions[identite] = { ...versions[identite], [langue]: fichier }; };
+  for (const p of pages) {
+    if (p.langue !== DEFAUT && !pages.some((x) => x.langue === DEFAUT && x.fichier === p.identite)) {
+      throw new Error(`${p.fichier} : « fr » désigne une page française inconnue (${p.identite})`);
+    }
+    ajouter(p.identite, p.langue, p.fichier);
   }
-  // Une page par article (modèle single.html) ; les pages d'articles retirés du fichier de données sont supprimées
-  const articles = actus.articles.map((a) => {
-    const { fichier, meta, contenu } = actualites.pageArticle(a, actus);
-    construire(gabarit, fichier, meta, contenu);
-    return fichier;
-  });
-  for (const f of fs.readdirSync(SORTIE)) {
-    if (/^actualite-.+\.html$/.test(f) && !articles.includes(f)) fs.unlinkSync(path.join(SORTIE, f));
+  for (const langue of LANGUES) {
+    const liste = versions['actualites/index.html'] && versions['actualites/index.html'][langue];
+    const dossier = path.posix.dirname(liste || `${prefixe(langue)}actualites/index.html`);
+    for (const a of donnees[langue].actus.articles) {
+      ajouter(actualites.lienArticle(a), langue, langue === DEFAUT ? actualites.lienArticle(a) : `${dossier}/${a.slugTraduit}.html`);
+    }
   }
-  return [...pages, `${articles.length} articles`];
+  const manquantes = Object.entries(versions).filter(([, v]) => LANGUES.some((l) => !v[l]))
+    .map(([identite, v]) => `${identite} (manque : ${LANGUES.filter((l) => !v[l]).join(', ')})`);
+  if (manquantes.length) {
+    const message = `${manquantes.length} page(s) sans traduction :\n  ${manquantes.join('\n  ')}`;
+    if (!PARTIELLE) throw new Error(message);
+    console.warn(`Avertissement : ${message}`);
+  }
+  const adresses = new Set(Object.values(versions).flatMap((v) => Object.values(v)));
+  const contexte = (langue, identite) => ({ langue, identite, versions: versions[identite], t: libelles[langue], navigation, toutesVersions: versions, adresses });
+
+  for (const p of pages) {
+    const { actus, diapos, galeries } = donnees[p.langue];
+    if (p.meta.precharger === 'diaporama') p.meta.precharger = diaporama.precharger(diapos);
+    const [contenu, apres = ''] = p.corps.split('<!-- apres -->\n');
+    construire(gabarit, p.fichier, p.meta, mediatheque.remplir(diaporama.remplir(actualites.remplacer(contenu, actus), diapos), galeries), apres, contexte(p.langue, p.identite));
+  }
+  // Une page par article et par langue (modèle single.html) ; les pages d'articles retirés du fichier de données sont supprimées
+  const articles = [];
+  for (const langue of LANGUES) {
+    for (const a of donnees[langue].actus.articles) {
+      const { fichier: identite, meta, contenu } = actualites.pageArticle(a, donnees[langue].actus);
+      construire(gabarit, versions[identite][langue], meta, contenu, '', contexte(langue, identite));
+      articles.push(versions[identite][langue]);
+    }
+  }
+  for (const dossier of new Set(articles.map((f) => path.posix.dirname(f)))) {
+    for (const f of fs.readdirSync(path.join(SORTIE, dossier))) {
+      if (f.endsWith('.html') && f !== 'index.html' && !articles.includes(`${dossier}/${f}`)) fs.unlinkSync(path.join(SORTIE, dossier, f));
+    }
+  }
+  ecrire('sitemap.xml', partage.plan([...pages.map((p) => p.fichier), ...articles]));
+  ecrire('robots.txt', partage.robots());
+  return LANGUES.map((l) => `${l} : ${pages.filter((p) => p.langue === l).length} pages et ${donnees[l].actus.articles.length} articles`);
 }
 
-const pages = assembler();
-console.log(`${pages.length} page(s) assemblée(s) : ${pages.join(', ')}`);
+const bilan = assembler();
+console.log(`Pages assemblées (${bilan.join(' ; ')})`);
 
 if (process.argv.includes('--surveiller')) {
   let minuterie;
