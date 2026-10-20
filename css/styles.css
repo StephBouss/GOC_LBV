@@ -317,7 +317,6 @@ body.menu-ouvert { overflow: hidden; }
 .unite { font-size: 1.75rem; font-weight: 700; line-height: 1; letter-spacing: 0; color: var(--rouge-logo); }
 .trait { width: 1.75rem; height: .25rem; margin-bottom: .5rem; background: var(--rouge-logo); }
 .chiffre-libelle { font-size: .875rem; line-height: 1.375rem; color: var(--encre-douce); }
-.source { margin-top: .75rem; padding-left: 3rem; font-size: .8125rem; line-height: 1.2188rem; color: var(--acier); }
 
 /* ═══════════ 3 · Présentation du groupe ═══════════ */
 .presentation { display: grid; grid-template-columns: 480fr 696fr; gap: 4rem; align-items: start; }
@@ -654,7 +653,6 @@ body.menu-ouvert { overflow: hidden; }
   .nav-onglets { gap: 1.75rem; }
   .entete-actions { gap: 1.25rem; }
   .chiffre { padding: 2.25rem 2.25rem; }
-  .source { padding-left: 2.25rem; }
 }
 
 /* Navigation repliée : la barre complète ne tient plus */
@@ -676,7 +674,6 @@ body.menu-ouvert { overflow: hidden; }
   .chiffres-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end; }
   .vignette-legendee { aspect-ratio: 16 / 10; }
   .chiffre { padding: 2rem; }
-  .source { padding-left: 2rem; }
 
   .presentation { grid-template-columns: 5fr 7fr; gap: 2.5rem; }
   .presentation-photo { margin-top: -7rem; }
@@ -735,7 +732,6 @@ body.menu-ouvert { overflow: hidden; }
   .chiffre { padding: 1.5rem 1rem; }
   .chiffre-valeur { font-size: 2.25rem; }
   .unite { font-size: 1.125rem; }
-  .source { padding-left: 1rem; }
 
   .presentation { grid-template-columns: 1fr; gap: 2rem; }
   .presentation-photo { margin-top: 0; }

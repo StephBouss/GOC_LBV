@@ -395,7 +395,8 @@
     const preparer = async () => {
       const pdfjs = await import(new URL('pdfjs/pdf.min.js', dossierScripts).href);
       pdfjs.GlobalWorkerOptions.workerSrc = new URL('pdfjs/pdf.worker.min.js', dossierScripts).href;
-      const doc = await pdfjs.getDocument(adresse).promise;
+      // isEvalSupported: false : PDF.js n'essaie pas de compiler du code (new Function), interdit par la politique de contenu
+      const doc = await pdfjs.getDocument({ url: adresse, isEvalSupported: false }).promise;
       // Toutes les pages sont posées à leurs proportions, puis dessinées à l'approche de l'écran
       const figures = [];
       for (let n = 1; n <= doc.numPages; n++) {

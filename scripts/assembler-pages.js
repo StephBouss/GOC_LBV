@@ -36,10 +36,14 @@
  * Référencement : scripts/partage.js donne à chaque page ses balises canonical, hreflang et Open Graph (image de 1200 × 630 px
  * tirée de sa photo d'ouverture par scripts/preparer-partage.js), et écrit sitemap.xml et robots.txt à la racine.
  *
+ * Sécurité : les en-têtes de sécurité sont déclarés dans vercel.json ; verifierScripts() s'assure que chaque script écrit
+ * dans une page est autorisé par sa politique de contenu (Content-Security-Policy).
+ *
  * Sortie : <rubrique>/<nom>.html, en/<rubrique>/<nom>.html, sitemap.xml et robots.txt, à côté de css/, js/, img/, video/,
  *          documents/ et fonts/
  * Usage  : node scripts/assembler-pages.js [--surveiller]
  */
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const actualites = require('./actualites');
@@ -179,6 +183,20 @@ const ecrire = (fichier, texte) => {
   if (!fs.existsSync(cible) || fs.readFileSync(cible, 'utf8') !== texte) fs.writeFileSync(cible, texte);
 };
 
+/* Sécurité : la politique de contenu de vercel.json (Content-Security-Policy) n'autorise un script écrit dans la page que
+   par son empreinte SHA-256, et aucun attribut onclick, onload… Un script en ligne ajouté ou modifié sans mettre à jour
+   l'empreinte dans vercel.json serait bloqué en ligne : la génération s'arrête et donne l'empreinte à déclarer. */
+function verifierScripts(html, fichier) {
+  const config = lireJSON(path.join(RACINE, 'vercel.json'));
+  const politique = ((config.headers || []).flatMap((r) => r.headers).find((h) => h.key === 'Content-Security-Policy') || {}).value || '';
+  for (const [, code] of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) {
+    const empreinte = `'sha256-${crypto.createHash('sha256').update(code, 'utf8').digest('base64')}'`;
+    if (!politique.includes(empreinte)) throw new Error(`${fichier} : script en ligne non autorisé, ajouter ${empreinte} à script-src dans vercel.json`);
+  }
+  const gestionnaire = html.match(/<[^>]*\son[a-z]+="[^>]*>/);
+  if (gestionnaire) throw new Error(`${fichier} : attribut de script interdit par la politique de contenu : ${gestionnaire[0].slice(0, 80)}`);
+}
+
 /* Image d'aperçu : celle tirée de la photo de la page si elle a été préparée, sinon l'image par défaut */
 const imagePartage = (meta, contenu) => {
   const image = partage.source(meta, contenu);
@@ -218,6 +236,7 @@ function construire(gabarit, fichier, meta, contenu, apres, contexte) {
   });
   if (langue !== DEFAUT) html = traduireLiens(html, fichier, contexte);
   html = html.replace(/\{\{langues-(entete|menu)\}\}/g, (tout, ou) => selecteurLangues(contexte, ou === 'entete' ? '      ' : '    '));
+  verifierScripts(html, fichier);
   ecrire(fichier, relocaliser(html, fichier));
 }
 

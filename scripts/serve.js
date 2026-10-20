@@ -45,16 +45,26 @@ const TYPES = {
   '.webm': 'video/webm',
   '.pdf': 'application/pdf',
   '.txt': 'text/plain; charset=utf-8',
-  '.xml': 'application/xml; charset=utf-8'
+  '.xml': 'application/xml; charset=utf-8',
+  '.ico': 'image/x-icon'
 };
 
 const RACINE_ABS = path.resolve(RACINE);
 
+// En-têtes de sécurité : ceux que vercel.json déclare pour tout le site (règle « /(.*) »), appliqués aussi en
+// local pour voir aussitôt ce que la politique de contenu (Content-Security-Policy) bloquerait en ligne.
+const ENTETES_SECURITE = (() => {
+  try {
+    const config = JSON.parse(fs.readFileSync(path.join(RACINE_ABS, 'vercel.json'), 'utf8'));
+    return (config.headers || []).filter((r) => r.source === '/(.*)').flatMap((r) => r.headers);
+  } catch { return []; }
+})();
+
 // Rechargement automatique : chaque page HTML ouvre un flux SSE ; toute
 // modification sous RACINE relance l'affichage des navigateurs connectés.
+// Script externe (pas en ligne) : la politique de contenu n'autorise que les scripts du site.
 const ABONNES = new Set();
-const SCRIPT_RECHARGEMENT =
-  '<script>new EventSource("/__rechargement").onmessage=function(){location.reload()}</script>';
+const SCRIPT_RECHARGEMENT = '<script src="/__rechargement.js"></script>';
 let minuterie = null;
 const signaler = () => {
   clearTimeout(minuterie);
@@ -80,6 +90,12 @@ const serveur = http.createServer((req, res) => {
   try { rel = decodeURIComponent(req.url.split('?')[0]); }
   catch (e) { res.writeHead(400, { 'Content-Type': 'text/plain' }); return res.end('400'); }
 
+  for (const { key, value } of ENTETES_SECURITE) res.setHeader(key, value);
+
+  if (rel === '/__rechargement.js') {
+    res.writeHead(200, { 'Content-Type': 'text/javascript; charset=utf-8', 'Cache-Control': 'no-store' });
+    return res.end('new EventSource("/__rechargement").onmessage = () => location.reload();\n');
+  }
   if (rel === '/__rechargement') {
     res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-store', Connection: 'keep-alive' });
     res.write('\n');

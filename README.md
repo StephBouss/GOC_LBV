@@ -68,6 +68,8 @@ La mise en page des articles est dans `scripts/actualites.js`, celle du diaporam
 
 Le référencement est dans `scripts/partage.js` : adresse canonique, liens `hreflang` vers la traduction et balises Open Graph de chaque page, `sitemap.xml` et `robots.txt`. L'adresse publique du site (`ADRESSE_SITE`) y est notée une seule fois : elle est à changer au passage sur le nom de domaine définitif.
 
+Les en-têtes de sécurité (politique de contenu, protection contre l'intégration dans un cadre, HTTPS imposé…) sont dans `vercel.json`. `scripts/serve.js` les applique aussi en local, et la génération s'arrête si une page contient un script en ligne non autorisé. Le détail est dans `INVENTAIRE.md`.
+
 Les formulaires (contact, candidature, lettre d'information) s'envoient vers l'adresse de leur attribut `action`, à renseigner dans les sources avec celle du service d'envoi retenu. Sans adresse, ils préviennent le visiteur que rien n'a été transmis. Le détail est dans `INVENTAIRE.md`.
 
 ## Médias

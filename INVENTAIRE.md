@@ -127,9 +127,25 @@ Points critiques et hauts, traités le 20/10/2026 :
 | Consentement absent | Haute | Case obligatoire sur les trois formulaires. La politique de confidentialité couvre désormais la lettre d'information. |
 | robots.txt, sitemap.xml, Open Graph, canonical | Haute | Générés pour toutes les pages (voir « Référencement et partage »). |
 | Vidéo d'accueil de 3,1 Mo | Haute | 0,79 Mo en WebM, 1,22 Mo en MP4, rien sur téléphone (voir « Diaporama d'accueil »). |
+| En-têtes de sécurité | Moyenne | En place le 21/10/2026 (voir « En-têtes de sécurité » ci-dessous). |
 | Textes alternatifs | Haute | Les 8 photos d'actualités sont décrites. Restent vides, à dessein (règle RGAA des images décoratives et des liens composites) : les fonds de bandeau, les logos et photos placés dans un lien qui affiche déjà le nom ou le titre (les décrire ferait lire le nom deux fois), les copies masquées du bandeau des filiales, les vignettes de la frise et les portraits à côté du nom. |
 
-Points moyens, à traiter ensuite : contrastes des gris et des étiquettes sur photo, bouton « retour en haut » sur le texte, zones cliquables de moins de 44 px, en-têtes de sécurité dans `vercel.json`, données structurées `Organization`, titre de l'accueil (70 caractères), description de l'article « nomination DG Gab'Oil », comptes de réseaux sociaux à confirmer (et `twitter.com` à remplacer par `x.com`), règle de dénomination SNHG et GOC à arbitrer avec le client.
+Points moyens, à traiter ensuite : contrastes des gris et des étiquettes sur photo, bouton « retour en haut » sur le texte, zones cliquables de moins de 44 px, données structurées `Organization`, titre de l'accueil (70 caractères), description de l'article « nomination DG Gab'Oil », comptes de réseaux sociaux à confirmer (et `twitter.com` à remplacer par `x.com`), règle de dénomination SNHG et GOC à arbitrer avec le client.
+
+Les mentions « Source : SNHG – Gabon Oil Company » sous les chiffres clés de l'accueil et de la page Distribution et transformation ont été retirées le 21/10/2026, à la demande du client, dans les deux langues.
+
+## En-têtes de sécurité
+
+Déclarés dans `vercel.json` pour toutes les adresses du site, et appliqués aussi par le serveur local (`scripts/serve.js`) : ce qui marche en local marche en ligne.
+
+- **Content-Security-Policy** : scripts, styles, polices, images, vidéos et requêtes ne viennent que du site lui-même. Pas de cadre, pas d'objet, pas d'intégration du site dans une autre page. Le seul script en ligne (`document.documentElement.classList.add('js')`, dans `sources/gabarit.html`) est autorisé par son empreinte SHA-256. Les attributs `style` (point focal des photos) restent permis. La liseuse PDF.js tourne sans `eval` (`isEvalSupported: false`).
+- **X-Frame-Options** `DENY`, **X-Content-Type-Options** `nosniff`, **Referrer-Policy** `strict-origin-when-cross-origin`, **Strict-Transport-Security** (2 ans, sous-domaines compris), **Permissions-Policy** (caméra, micro, géolocalisation, paiement, USB et suivi publicitaire coupés), **Cross-Origin-Opener-Policy** `same-origin`.
+- **Contrôle à la génération** : `scripts/assembler-pages.js` s'arrête si une page contient un script en ligne dont l'empreinte n'est pas dans `script-src`, ou un attribut `onclick`, `onload`… Le message donne l'empreinte à ajouter.
+- **À faire** :
+  - Au branchement des formulaires, ajouter le domaine du service d'envoi à `connect-src` et `form-action`.
+  - Matomo étant hébergé sur le serveur de la SNHG, il reste couvert par `'self'`. Un outil externe demanderait d'ajouter son domaine.
+  - Vérifier la note du site en ligne sur securityheaders.com une fois le nom de domaine définitif en place.
+- **WordPress** : poser les mêmes en-têtes chez l'hébergeur (configuration du serveur) ou par une extension. Réserver la politique de contenu aux pages publiques : l'administration et l'éditeur de blocs ont besoin de scripts en ligne et d'`eval`. Les scripts que WordPress ajoute dans les pages (`wp_add_inline_script`, emojis) sont à retirer ou à autoriser par empreinte ou par nonce.
 
 Ce document liste ce qui reste à faire : les pages liées mais pas encore créées, les photos à remplacer et les textes à revoir.
 
