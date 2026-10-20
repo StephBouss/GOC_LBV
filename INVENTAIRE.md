@@ -73,6 +73,7 @@ Ce document liste ce qui reste à faire : les pages liées mais pas encore cré�
 | Médiathèque (7 galeries, 46 photos) | `maquette/mediatheque.html` | aucun : sous-navigation, ouverture, pastilles des actualités, fenêtres des autres pages |
 | Engagements HSEI | `maquette/engagements-hsei.html` | aucun : composants des pages Activités, Présentation et Exploration (ouverture, cartes, appel, carte du rapport) |
 | Engagements RSE | `maquette/engagements-rse.html` | idem |
+| Projets stratégiques | `maquette/projets-strategiques.html` | aucun : composants des pages Exploration (ouverture, texte et photo, appel) et Engagements RSE (cartes numérotées) |
 | Articles (13 pages) | `maquette/actualite-<slug>.html` | aucun : en-tête éditorial, colonne de lecture, « À lire aussi » |
 
 On modifie les sources dans `sources/pages/*.html`, ainsi que l'en-tête et le pied communs dans `sources/gabarit.html`.
@@ -84,7 +85,6 @@ Ces liens existent déjà dans la maquette. Ils mènent aujourd'hui à une page 
 
 | Page à créer | Lien attendu | Où se trouve le lien | Contenu disponible sur snhg.vercel.app | Modèle Banani à réutiliser |
 |---|---|---|---|---|
-| Projets stratégiques | `projets-strategiques.html` | Menu Activités, sous-navigation Exploration, pied de page | Rubrique « Projets Stratégiques » | Exploration-production : ouverture, points forts, aspects |
 | Distribution et transformation (aval) | `distribution-transformation.html` | Sous-navigation et bouton d'appel de la page Exploration-production | Textes aval de « Nos activités » (Gab'Oil, Pizolub) | Exploration-production |
 | Services pétroliers | `services-petroliers.html` | Sous-navigation et bouton d'appel de la page Exploration-production | Textes SMP de « Nos activités » | Exploration-production |
 | Version anglaise | lien « EN » (`#` pour l'instant) | Sélecteur de langue, en-tête et menu mobile | Le site de référence a une version `/en` | Toutes les pages, traduites |
@@ -112,7 +112,7 @@ Pour l'instant, elles sont traitées comme des sections ou des ancres des pages 
 | Accueil, cartes Exploration, Production, Projets stratégiques | `accueil-exploration`, `accueil-production`, `accueil-projets` | Tour de forage (Sardine), opérateur à la vanne, nouvelle installation vue du ciel (Mandji) |
 | Accueil, « Bâtir un avenir énergétique responsable » | `accueil-engagements` | Réunion sécurité HSSE, Mboumba |
 | Accueil, « Cap vers 2030 » | `accueil-cap-2030` | Champ de Tsiengui dans la forêt, vue aérienne |
-| Présentation : ouverture, « Qui sommes-nous ? », Vision | `presentation-hero`, `presentation-apropos`, `presentation-vision` | Opérateur devant les drapeaux (Mboumba), réunion d'équipe à Libreville, tête de puits en forêt (Tsiengui) |
+| Présentation : ouverture, Le mot de l'ADG, Vision | `presentation-hero`, `presentation-adg` (portrait), `presentation-vision` | Opérateur devant les drapeaux (Mboumba), portrait officiel de l'ADG (dossier « CA »), une opératrice montre l'horizon à son collègue (Obangué) |
 | Historique et gouvernance | `historique-hero` | Opérateur GOC face aux drapeaux du Gabon, Mboumba |
 | Filiales | `filiales-hero` | Station Gab'Oil |
 | Activités et engagements | `activites-hero` | Opérateur devant les réservoirs, Tsiengui |
@@ -120,6 +120,7 @@ Pour l'instant, elles sont traitées comme des sections ou des ancres des pages 
 | Contact | `contact-hero` | Collaborateur au service d'une collègue, bureaux de Port-Gentil |
 | Actualités | `actualites-hero` | Visite officielle dans les bureaux |
 | Mentions légales, Confidentialité | `mentions-legales-hero`, `confidentialite-hero` | Bureaux de Port-Gentil |
+| Projets stratégiques : ouverture, actions prioritaires | `projets-hero`, `projets-equipe` | Champ de Tsiengui et ses réservoirs en forêt, vue aérienne ; opérateurs en discussion sur la plateforme Sardine |
 | Gestion des cookies | `cookies-hero` | Collaborateur à son poste informatique, bureaux de Libreville |
 | Articles Addax, SMP, GOP, Gab'Oil | `actu-addax-tsiengui`, `actu-addax-obangue`, `actu-smp`, `actu-gop`, `actu-gaboil-station` | Champs repris de Tsiengui et d'Obangué, opérateur en salle électrique, réunion à Libreville, inauguration d'une station Gab'Oil (titre incrusté retiré) |
 
@@ -132,6 +133,9 @@ Le logo Gab'Oil est à confirmer dans une meilleure définition.
 
 Les textes viennent de snhg.vercel.app, mot pour mot quand c'était possible. Là où Banani demandait plus d'éléments que le site n'en fournit, j'ai assemblé des phrases du site :
 
+- **Présentation, Le mot de l'ADG** (20/10/2026) : la section « Qui sommes-nous ? » devient le message de l'ADG, texte fourni par le client et signé Marcellin SIMBA NGABI, avec son portrait. Le menu « À propos » y mène toujours (ancre `#a-propos`).
+- **Projets stratégiques** (20/10/2026) : les 8 projets, l'introduction et « Horizon 2026 » sont repris mot pour mot de snhg.vercel.app/fr/activites/projets. Sont nouveaux : le titre et le chapeau d'ouverture, le texte d'introduction de la grille, et les 3 axes qui regroupent les projets (Accroître la production, Renouveler les réserves, Moderniser les infrastructures), avec leur phrase.
+- **Pictogrammes des cartes numérotées** (Engagements RSE et HSEI, Projets stratégiques), 20/10/2026 : ils reprennent le modèle des cartes Missions (pastille rosée, trait rouge), à la demande du client. Les variantes de couleur bleue, verte, orange et violette des cartes sont retirées : tout est dans le rouge de la charte.
 - **Présentation, missions** : les 4 cartes reprennent les missions SNHG. La 4e, sur la transition énergétique, est reformulée.
 - **Activités, engagements** : les 4 thèmes (Environnement, RSE, Gouvernance, HSSE) ont chacun 4 puces tirées des phrases du site.
 - **Activités et Exploration, encadrés d'appel** : titres et phrases de conclusion recomposés.

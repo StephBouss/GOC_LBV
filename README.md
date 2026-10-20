@@ -6,7 +6,7 @@ Maquette HTML, CSS et JavaScript du site institutionnel de la Société national
 
 | Dossier | Contenu |
 |---|---|
-| `maquette/` | Le site prêt à servir : 27 pages HTML, `css/`, `js/` (dont PDF.js dans `js/pdfjs/`), `img/`, `video/`, `documents/`, `fonts/` |
+| `maquette/` | Le site prêt à servir : 28 pages HTML, `css/`, `js/` (dont PDF.js dans `js/pdfjs/`), `img/`, `video/`, `documents/`, `fonts/` |
 | `sources/` | Sources des pages : gabarit commun, contenu de chaque page, données des actualités, du diaporama et de la médiathèque |
 | `scripts/` | Génération des pages, serveur local, préparation des médias |
 | `INVENTAIRE.md` | État du site : pages créées, pages à créer, photos à remplacer, textes à relire, points WordPress |

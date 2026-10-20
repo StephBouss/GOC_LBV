@@ -220,6 +220,14 @@
 .apropos-texte p:last-child { margin-bottom: 0; }
 .apropos-texte .points-forts { margin: -.75rem 0 1.75rem; }   /* liste annoncée par le paragraphe qui précède (pages Engagements) */
 .apropos-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 1rem; }
+/* Mot de l'ADG (Présentation) : le texte prend la grande colonne, le portrait en 4:5 la petite */
+.apropos.mot-adg { grid-template-columns: 696fr 480fr; align-items: center; }
+.apropos-photo.portrait { justify-self: end; width: 100%; max-width: 36rem; }   /* grands écrans : le portrait ne dépasse pas trop le texte */
+.apropos-photo.portrait img { aspect-ratio: 4 / 5; object-position: 50% 15%; }
+.sur-titre abbr { text-decoration: none; }
+.apropos-texte .mot-signature { display: flex; flex-direction: column; gap: .25rem; padding-top: 1.5rem; border-top: 1px solid var(--ligne); }
+.mot-signature strong { font-size: 1.125rem; font-weight: 700; line-height: 1.5rem; color: var(--noir); }
+.mot-signature span { font-size: .875rem; line-height: 1.25rem; color: var(--encre-douce); }
 
 .missions-grille { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
 .carte-mission {
@@ -239,7 +247,7 @@
 /* Photo sous la vision : occupe la hauteur laissée libre à côté des valeurs, les deux colonnes finissent ensemble */
 .vision { display: flex; flex-direction: column; }
 .vision-photo { position: relative; flex: 1; min-height: 14rem; margin-top: 2.5rem; overflow: hidden; border-radius: 1rem; }
-.vision-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 42% 65%; border-radius: 1rem; }
+.vision-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 35% 50%; border-radius: 1rem; }
 .liste-valeurs li {
   margin-bottom: .75rem; padding-bottom: .75rem; border-bottom: 1px solid var(--ligne);
   font-size: .9375rem; line-height: 1.5rem; color: var(--encre-douce);
@@ -410,14 +418,12 @@
 .aspect h3 { font-size: 1.125rem; font-weight: 700; line-height: 1.625rem; }
 .aspect p { font-size: .875rem; line-height: 1.375rem; color: var(--encre-douce); }
 
-/* Engagements RSE : cartes « aspect » des cinq politiques (numéro, devise, engagements clés), puis renvoi au document */
+/* Engagements RSE et HSEI, Projets stratégiques : cartes numérotées (numéro, devise, engagements clés), puis renvoi au document.
+   Pictogramme des cartes Missions : pastille rosée, trait rouge (demande client) */
 .politique { --teinte: var(--rouge-logo); border-top: 3px solid var(--teinte); }
-.politique.bleu { --teinte: var(--bleu-banani); }
-.politique.vert { --teinte: var(--vert-banani); }
-.politique.orange { --teinte: var(--orange-banani); }
-.politique.social { --teinte: var(--rouge-social); }
 .politique-tete { display: flex; align-items: center; justify-content: space-between; }
-.politique .icone-boite { background: var(--teinte); color: var(--blanc); }
+.politique .icone-boite { width: 3.5rem; height: 3.5rem; border-radius: .75rem; }
+.politique .icone-boite .icone { width: 1.75rem; height: 1.75rem; }
 .politique-numero { font-size: 2rem; font-weight: 700; line-height: 1; color: var(--ligne); }
 .politique .politique-devise { font-weight: 600; color: var(--noir); }
 .politique ul { display: flex; flex-direction: column; gap: .625rem; margin-top: auto; padding-top: 1.25rem; border-top: 1px solid var(--ligne); }
@@ -429,6 +435,15 @@
 /* Engagements HSEI : quatre piliers sur deux colonnes ; le pilier « 10 Règles d'or » renvoie à sa section */
 .politiques.quatre { grid-template-columns: repeat(2, 1fr); }
 .politique-lien { align-self: flex-start; margin-top: auto; }
+/* Projets stratégiques : un groupe par axe (étiquette, titre, phrase), puis ses cartes ; trois par ligne, deux pour l'axe Réserves */
+.axe + .axe { margin-top: 4.5rem; }
+.axe-tete { max-width: 45rem; margin-bottom: 2rem; }
+.axe-numero { margin-bottom: .5rem; font-size: .8125rem; font-weight: 700; line-height: 1.25rem; letter-spacing: .12em; text-transform: uppercase; color: var(--rouge-logo); }
+.axe-tete h3 { margin-bottom: .5rem; font-size: 1.5rem; font-weight: 700; line-height: 2rem; }
+.axe-tete p:not(.axe-numero) { font-size: 1rem; line-height: 1.625rem; color: var(--encre-douce); }
+.aspects.projets { grid-template-columns: repeat(3, 1fr); }
+.aspects.projets.deux { grid-template-columns: repeat(2, 1fr); }
+.projet h4 { font-size: 1.125rem; font-weight: 700; line-height: 1.625rem; }
 /* 10 Règles d'or : tuiles numérotées sur fond sombre, puis la phrase qui les résume */
 .fond-sombre .intro-section { color: var(--texte-sombre); }
 .regles-or { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
@@ -798,11 +813,14 @@ mark.a-completer {
   .page-hero { height: clamp(24rem, 52vw, 30rem); }
   .page-hero-titre { font-size: 2.5rem; line-height: 3rem; }
 
-  .apropos, .detail, .contact { grid-template-columns: 1fr; gap: 2.5rem; }
+  .apropos, .apropos.mot-adg, .detail, .contact { grid-template-columns: 1fr; gap: 2.5rem; }
   .apropos-texte, .detail-texte { max-width: 45rem; }
+  .apropos-photo.portrait { justify-self: start; max-width: 30rem; }
   .vision-valeurs { gap: 2.5rem; }
   .missions-grille, .secteurs, .aspects { gap: 1.25rem; }
   .aspects { grid-template-columns: 1fr 1fr; }
+  .aspects.projets { grid-template-columns: 1fr 1fr; }
+  .aspects.projets > :last-child:nth-child(odd) { grid-column: 1 / -1; }   /* groupe de trois : la dernière carte prend toute la ligne */
   .regles-or { grid-template-columns: repeat(2, 1fr); }
   .engagements-grille { gap: 2.5rem 2rem; }
 
@@ -835,7 +853,7 @@ mark.a-completer {
   .titre-section.marge-40 { margin-bottom: 1.75rem; }
   .intro-section { margin-bottom: 2.5rem; }
 
-  .missions-grille, .vision-valeurs, .secteurs, .aspects, .politiques.quatre, .engagements-grille, .joindre { grid-template-columns: 1fr; }
+  .missions-grille, .vision-valeurs, .secteurs, .aspects, .politiques.quatre, .aspects.projets, .aspects.projets.deux, .engagements-grille, .joindre { grid-template-columns: 1fr; }
   .regles-or li { padding: 1.25rem; }
   .carte-mission, .secteur { padding: 1.75rem; }
   .vision-titre { font-size: 1.5rem; line-height: 2rem; }

@@ -157,7 +157,7 @@ body.menu-ouvert { overflow: hidden; }
   background: var(--blanc); border-bottom: 1px solid var(--ligne);
 }
 .entete-logo { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 9.9375rem; height: 2.875rem; }
-.entete-logo img { width: auto; height: 1.5625rem; }
+.entete-logo img { width: auto; height: 1.875rem; }   /* légèrement agrandi (demande client) : 157 px de large, dans la case de 159 px */
 
 .nav-principale { flex: 1; align-self: stretch; display: flex; justify-content: center; }
 .nav-onglets { display: flex; gap: 2.5rem; }
@@ -213,7 +213,7 @@ body.menu-ouvert { overflow: hidden; }
 .menu-mobile[hidden] { display: none; }
 .menu-mobile.est-ouvert { transform: none; }
 .menu-mobile-tete { display: flex; align-items: center; justify-content: space-between; min-height: 4rem; padding: 0 var(--marge); border-bottom: 1px solid var(--ligne); }
-.menu-mobile-tete img { width: auto; height: 1.375rem; }
+.menu-mobile-tete img { width: auto; height: 1.625rem; }
 .fermer-menu { display: flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; margin-right: -.625rem; }
 .fermer-menu .icone { width: 1.5rem; height: 1.5rem; }
 .menu-mobile-nav { flex: 1; padding: .5rem var(--marge) 1.5rem; }
@@ -702,7 +702,7 @@ body.menu-ouvert { overflow: hidden; }
   :root { --marge: 1rem; --section: 4rem; --entete: 4.375rem; }
   .entete-barre { height: 4rem; padding: 0 var(--marge); }
   .entete-logo { width: auto; height: 2.75rem; }
-  .entete-logo img { height: 1.375rem; }
+  .entete-logo img { height: 1.625rem; }
   .bouton-entete { height: 2.75rem; padding: 0 1rem; }
 
   .sur-titre { line-height: 1.25rem; letter-spacing: .12em; }

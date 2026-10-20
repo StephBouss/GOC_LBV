@@ -34,7 +34,7 @@ const PHOTOS = [
   { nom: 'accueil-cap-2030', source: `${OPERATIONS}/Tsiengui/Tsiengui - Vues aériennes/DJI_0296.jpg` },
   // Pages intérieures
   { nom: 'presentation-hero', source: `${OPERATIONS}/Mboumba/Mboumba - Portrait opérateurs dans les installations/DSC09826.jpg` },
-  { nom: 'presentation-apropos', source: `${OPERATIONS}/Libreville/Libreville - Travail d_équipe/DSC04764.jpg` },
+  { nom: 'presentation-adg', source: 'CA/01.10.26AL(headshots)-0014.jpg', format: 'portrait' },                                      // portrait de l'ADG (Mot de l'ADG)
   { nom: 'historique-hero', source: `${OPERATIONS}/Mboumba/Mboumba - Portrait opérateur & drapeau/DSC09258.jpg` },
   { nom: 'filiales-hero', source: 'Station/Inauguration de la station GabOil 1.png' },
   { nom: 'activites-hero', source: `${OPERATIONS}/Tsiengui/Tsiengui - Opérateurs dans les installations/Tsiengui - Opérateur et tanks/DSC01337.jpg` },
@@ -44,11 +44,13 @@ const PHOTOS = [
   { nom: 'mentions-legales-hero', source: `${OPERATIONS}/Port-Gentil/POG - Portraits dans les bureaux/DSC04531.jpg` },
   { nom: 'confidentialite-hero', source: `${OPERATIONS}/Port-Gentil/POG - Portraits dans les bureaux/DSC04330.jpg` },
   { nom: 'cookies-hero', source: `${OPERATIONS}/Libreville/Libreville - Portrait hommes bureaux/DSC04958.jpg` },                        // poste informatique
-  { nom: 'presentation-vision', source: `${OPERATIONS}/Tsiengui/Tsiengui - Installations/DSC01040.jpg` },                               // tête de puits en forêt
+  { nom: 'presentation-vision', source: `${OPERATIONS}/Obangué/Obangué - Portrait opérateur mixte dans les installations/DSC01896.jpg` }, // regard tourné vers l'horizon
   { nom: 'actualites-hero', source: `${BUREAUX}/20231108_084030.jpg` },                                                                  // visite officielle
   { nom: 'rse-hero', source: `${OPERATIONS}/Mandji/Mandji - Vues aériennes/DJI_0353.jpg` },                                             // communautés riveraines
   { nom: 'rse-approche', source: `${OPERATIONS}/Mandji/Mandji - Equipe & nature/DSC02843.jpg` },
   { nom: 'hsei-hero', source: `${OPERATIONS}/Tsiengui/Tsiengui - Prélèvement/DSC01488.jpg` },                                             // opérateur sous masque respiratoire
+  { nom: 'projets-hero', source: `${OPERATIONS}/Tsiengui/Tsiengui - Vues aériennes/DJI_0301.jpg` },                                     // champ et réservoirs en forêt
+  { nom: 'projets-equipe', source: `${OPERATIONS}/Sardine/Sardine - Opérateurs en discussion/DSC03483.jpg` },                            // plateforme Sardine
   { nom: 'hsei-approche', source: `${OPERATIONS}/Mboumba/Mboumba - Réunion HSSE/DSC09324.jpg` },                                        // tableau HSSE et 10 Règles d'or
   // Images à la une et galeries des actualités (sources/actualites.json), au format 16:9 des cartes et des articles
   { nom: 'actu-addax-tsiengui', source: `${OPERATIONS}/Tsiengui/Tsiengui - Vues aériennes/DJI_0299.jpg`, format: 'actualite' },
