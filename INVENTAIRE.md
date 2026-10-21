@@ -145,6 +145,7 @@ Déclarés dans `vercel.json` pour toutes les adresses du site, et appliqués au
   - Au branchement des formulaires, ajouter le domaine du service d'envoi à `connect-src` et `form-action`.
   - Matomo étant hébergé sur le serveur de la SNHG, il reste couvert par `'self'`. Un outil externe demanderait d'ajouter son domaine.
   - Vérifier la note du site en ligne sur securityheaders.com une fois le nom de domaine définitif en place.
+- **Cache du navigateur** (21/10/2026) : par défaut, Vercel fait redemander chaque image au serveur à chaque page vue, et chaque mise en ligne vide son cache. Après un envoi, chaque photo mettait environ une demi-seconde à s'afficher. Désormais, chaque fichier appelé par une page porte l'empreinte de son contenu (`?ver=…`, ajoutée par `scripts/assembler-pages.js`), et ces adresses restent un an dans le navigateur (`Cache-Control: public, max-age=31536000, immutable`). Une page déjà vue s'affiche sans rien redemander, et un fichier modifié change d'adresse. En WordPress : passer l'empreinte ou la date du fichier comme version à `wp_enqueue_style` et `wp_enqueue_script`, et poser le même cache longue durée sur `/wp-content/uploads/` et le dossier du thème chez l'hébergeur.
 - **WordPress** : poser les mêmes en-têtes chez l'hébergeur (configuration du serveur) ou par une extension. Réserver la politique de contenu aux pages publiques : l'administration et l'éditeur de blocs ont besoin de scripts en ligne et d'`eval`. Les scripts que WordPress ajoute dans les pages (`wp_add_inline_script`, emojis) sont à retirer ou à autoriser par empreinte ou par nonce.
 
 Ce document liste ce qui reste à faire : les pages liées mais pas encore créées, les photos à remplacer et les textes à revoir.
@@ -240,7 +241,13 @@ Les textes viennent de snhg.vercel.app, mot pour mot quand c'était possible. L�
 - **Exploration, points forts** : 4 chiffres (27 000 b/j, 90 000 b/j, Dinonga/Irondu, participations CEPP) à faire valider.
 - **Historique, frise** : 13 dates, de 2011 à « Cap vers 2030 », à vérifier.
 - **Gouvernance** : les deux ministères de tutelle tiennent la place du haut de l'organigramme Banani. L'administrateur directeur général figure dans le comité de direction.
-- **Filiales** : la carte GOC est classée dans « Amont ». La carte GOP renvoie vers l'historique, faute de site officiel.
+- **Filiales** (refaite le 21/10/2026 d'après le visuel « One group. One integrated energy value chain. » du stand du groupe) :
+  - **Chaîne de valeur** : le titre « Un groupe. Une chaîne de valeur énergétique intégrée. », puis 4 maillons reliés par un trait rouge, avec les pictogrammes, les intitulés et le classement des entités du visuel. Amont : Gabon Oil Company, Assala Energy, Gabon Oil Participations. Services pétroliers amont : SMP Afrique. Intermédiaire : Gab'Oil, Gabon Oil Company. Aval : Gab'Oil, Pizolub.
+  - **Traduction des intitulés** : Upstream devient Amont, Upstream Oilfield Services devient Services pétroliers amont, Midstream devient Intermédiaire, Downstream devient Aval. La page anglaise garde les intitulés du visuel.
+  - **Pictogrammes** : redessinés en SVG d'après le visuel (`PICTOGRAMMES` dans `scripts/assembler-pages.js`).
+  - **Fiches des entités** : une seule par entité, dans l'ordre de la chaîne. Une étiquette donne le ou les secteurs de chacune (GOC : Amont · Intermédiaire ; Gab'Oil : Intermédiaire · Aval). Chaque nom de la chaîne mène à sa fiche. La carte GOP renvoie vers l'historique, faute de site officiel.
+  - **À valider** : le visuel nomme la filiale de services « SMP Afrique ». La chaîne reprend ce nom, la fiche garde « SMP – Société de Maintenance Pétrolière » en attendant l'arbitrage (voir Services pétroliers).
+  - **WordPress** : la chaîne devient un bloc à liste répétable (pictogramme, secteur, entités liées), et les fiches un bloc de cartes (logo, secteurs, texte, lien).
 - **Contact** : la section « Bureaux régionaux » de Banani est retirée, à ta demande. Le champ « Sujet » est une saisie libre.
 - **Gouvernance** : Marcellin SIMBA NGABI figure aussi parmi les administrateurs du conseil (en premier, comme sur le site de référence), en plus de son rôle d'ADG au comité de direction.
 - **Pages légales** : textes du site de référence mot pour mot. Seuls les chapeaux d'ouverture et la date de mise à jour sont nouveaux.

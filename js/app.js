@@ -370,7 +370,8 @@
          ce qui permet la lecture sur place sur tous les appareils (Android n'affiche pas les PDF dans une page).
          PDF.js (js/pdfjs/) n'est chargé qu'à la première ouverture ; sans script, le lien ouvre le PDF dans un nouvel onglet. ─── */
   // PDF.js est rangé à côté de ce script : son adresse se déduit de celle du script, quel que soit le dossier de la page
-  const scriptApp = document.currentScript || document.querySelector('script[src$="js/app.js"]');
+  // (src*= et non src$= : l'adresse du script porte sa version, « js/app.js?ver=… »)
+  const scriptApp = document.currentScript || document.querySelector('script[src*="js/app.js"]');
   const dossierScripts = new URL('.', scriptApp ? scriptApp.src : location.href);
   document.querySelectorAll('dialog.liseuse').forEach((liseuse) => {
     const zone = liseuse.querySelector('.liseuse-pages');

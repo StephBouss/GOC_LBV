@@ -332,22 +332,49 @@
 .fond-rose { background: var(--rouge-pale); }
 
 /* ═══════════ Filiales ═══════════ */
-.familles { display: flex; flex-direction: column; gap: 5rem; }
-.famille { --teinte: var(--rouge-logo); --texte: var(--rouge-action); --fond: var(--rouge-pale); }
-.famille.bleu { --teinte: var(--bleu-banani); --texte: var(--bleu-banani); --fond: #EFF4FB; }
-.famille.vert { --teinte: var(--vert-banani); --texte: var(--vert-banani); --fond: #F0F7F0; }
-.famille-tete { display: flex; align-items: center; margin-bottom: 2.5rem; }
-.famille-tete h3 {
-  display: flex; align-items: center; gap: .625rem; padding: .5rem 1.25rem;
-  border-radius: .25rem 0 0 .25rem; background: var(--teinte); color: var(--blanc);
-  font-size: .8125rem; font-weight: 700; line-height: 1.25rem; letter-spacing: .06em; text-transform: uppercase;
+/* Chaîne de valeur, d'après le visuel « One group » du groupe : le titre à gauche, à droite quatre maillons (pictogramme
+   dans un cercle rouge, secteur, entités) reliés par un trait rouge, sur des ondes concentriques en filigrane. */
+.chaine-grille { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 3rem 6rem; align-items: start; }
+.chaine-tete { position: sticky; top: calc(var(--entete) + 3rem); }
+.chaine-tete .intro-section { margin-bottom: 0; }
+.chaine-titre { font-size: 1.75rem; font-weight: 600; line-height: 2.25rem; color: var(--encre-douce); }
+.chaine-titre span { display: block; margin-bottom: .375rem; font-size: 3rem; font-weight: 700; line-height: 3.375rem; color: var(--rouge-action); }
+.chaine-tete .titre-section { margin-bottom: 1.5rem; }
+
+/* largeur ajustée aux maillons : les ondes restent centrées derrière la chaîne, même sur un très grand écran */
+.chaine { --cercle: 6rem; --ecart: 2.75rem; position: relative; isolation: isolate; display: flex; flex-direction: column; gap: var(--ecart); width: fit-content; max-width: 100%; list-style: none; }
+.chaine::before {
+  content: ""; position: absolute; inset: calc(-1 * var(--ecart)) 0; z-index: -1; pointer-events: none;
+  background: repeating-radial-gradient(circle, transparent 0 1.75rem, var(--ligne) 1.75rem calc(1.75rem + 1px));
+  mask-image: radial-gradient(closest-side, #000 30%, transparent);   /* effacées avant les bords : aucune onde coupée net */
 }
-.famille-tete h3 .icone { width: 1rem; height: 1rem; }
-.famille-tete::after { content: ""; flex: 1; height: 2px; background: var(--ligne); }
+.maillon { position: relative; display: grid; grid-template-columns: var(--cercle) minmax(0, 1fr); gap: 2rem; align-items: start; }
+/* trait vers le maillon suivant, dans le prolongement de celui qui sort du pictogramme */
+.maillon:not(:last-child)::before {
+  content: ""; position: absolute; left: calc(var(--cercle) / 2 - 1px); top: var(--cercle); bottom: calc(-1 * var(--ecart));
+  width: 2px; background: var(--rouge-action); transform-origin: top;
+}
+.maillon-icone {
+  --picto-fond: var(--blanc);
+  display: block; width: var(--cercle); aspect-ratio: 1; overflow: hidden;
+  border: 2px solid var(--rouge-action); border-radius: 50%; background: var(--picto-fond); color: var(--rouge-action);
+}
+.maillon-icone svg { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.p-plein { fill: var(--picto-fond, #FFFFFF); }
+.maillon-texte { display: flex; flex-direction: column; justify-content: center; min-height: var(--cercle); }
+.maillon h3 { font-size: 1.625rem; font-weight: 700; line-height: 2rem; color: var(--rouge-action); }
+.maillon-entites { margin-top: .375rem; list-style: none; }
+.maillon-entites a {
+  display: inline-block; padding: .25rem 0;
+  font-size: .8125rem; font-weight: 600; line-height: 1.25rem; letter-spacing: .06em; text-transform: uppercase; color: var(--noir);
+  text-decoration: underline transparent; text-underline-offset: .3em; transition: color .2s, text-decoration-color .2s;
+}
+.maillon-entites a:hover { color: var(--rouge-action); text-decoration-color: currentColor; }
+
+/* Fiches des entités, dans l'ordre de la chaîne ; l'étiquette donne leur place (une entité peut en tenir deux) */
 .filiales-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
-.filiales-grille.deux { grid-template-columns: repeat(2, 1fr); }
-.filiales-grille.une { grid-template-columns: minmax(0, 35rem); }
 .carte-entite {
+  --teinte: var(--rouge-logo); --texte: var(--rouge-action); --fond: var(--rouge-pale);
   display: flex; flex-direction: column; overflow: hidden; scroll-margin-top: calc(var(--entete) + 1.5rem);
   background: var(--blanc); border: 1px solid var(--ligne); border-radius: .75rem;
   transition: transform .25s ease-out, box-shadow .25s ease-out;
@@ -358,8 +385,9 @@
 }
 .carte-entite-logo img { width: auto; max-width: 12.5rem; max-height: 5.625rem; object-fit: contain; transition: transform .35s var(--doux); }
 .carte-entite-corps { display: flex; flex: 1; flex-direction: column; gap: .75rem; padding: 1.75rem 1.75rem 1.5rem; }
-.carte-entite h4 { font-size: 1.0625rem; font-weight: 700; line-height: 1.5rem; }
+.carte-entite h3 { font-size: 1.0625rem; font-weight: 700; line-height: 1.5rem; }
 .carte-entite p { flex: 1; font-size: .875rem; line-height: 1.375rem; color: var(--encre-douce); }
+.carte-entite .categorie { flex: none; margin-bottom: -.25rem; font-size: .6875rem; line-height: 1rem; color: var(--texte); }
 .carte-entite-lien {
   display: inline-flex; align-items: center; gap: .5rem; align-self: stretch;
   margin-top: .5rem; padding-top: 1rem; border-top: 1px solid var(--ligne);
@@ -766,6 +794,9 @@ mark.a-completer {
   /* Organigramme : les traits se dessinent depuis leur origine */
   .js .org:not(.est-visible) .trait-h { scale: 0 1; }
   .js .org:not(.est-visible) .trait-v, .js .org:not(.est-visible) .org-attaches span::before { scale: 1 0; }
+  /* Filiales : chaque maillon apparaît, puis le trait se dessine jusqu'au suivant */
+  .maillon::before { transition: scale .6s var(--rideau) calc(var(--rang, 0) * 90ms + .4s); }
+  .js .chaine:not(.est-visible) .maillon::before { scale: 1 0; }
   .trait-h { transition: scale .8s var(--doux) .3s; }
   .trait-v, .org-attaches span::before { transform-origin: top; transition: scale .5s var(--doux) .2s; }
 
@@ -841,8 +872,9 @@ mark.a-completer {
   .regles-or { grid-template-columns: repeat(2, 1fr); }
   .engagements-grille { gap: 2.5rem 2rem; }
 
+  .chaine-grille { grid-template-columns: minmax(0, 1fr); }
+  .chaine-tete { position: static; max-width: 42.5rem; }
   .filiales-grille { grid-template-columns: repeat(2, 1fr); }
-  .filiales-grille.une { grid-template-columns: minmax(0, calc(50% - .875rem)); }
 
   .org { padding: 2.5rem 1.5rem; }
 
@@ -896,9 +928,13 @@ mark.a-completer {
   .org-rangee.ecart-32 .trait-v { display: none; }
   .membre-gris, .membre-rose { width: calc(50% - .5rem); }
 
-  .familles { gap: 3.5rem; }
-  .famille-tete { margin-bottom: 1.5rem; }
-  .filiales-grille, .filiales-grille.deux, .filiales-grille.une { grid-template-columns: 1fr; gap: 1.25rem; }
+  .chaine-titre { font-size: 1.375rem; line-height: 1.875rem; }
+  .chaine-titre span { font-size: 2.25rem; line-height: 2.625rem; }
+  .chaine { --cercle: 4.75rem; --ecart: 2rem; }
+  .maillon { gap: 1.25rem; }
+  .maillon h3 { font-size: 1.3125rem; line-height: 1.625rem; }
+  .maillon-entites a { padding: .3125rem 0; font-size: .75rem; }
+  .filiales-grille { grid-template-columns: 1fr; gap: 1.25rem; }
   .carte-entite-logo { min-height: 8.5rem; padding: 2rem 1.5rem; }
   .carte-entite-lien { min-height: 2.75rem; padding-top: .75rem; }
 

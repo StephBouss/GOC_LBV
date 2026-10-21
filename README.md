@@ -70,6 +70,8 @@ Le référencement est dans `scripts/partage.js` : adresse canonique, liens `hre
 
 Les en-têtes de sécurité (politique de contenu, protection contre l'intégration dans un cadre, HTTPS imposé…) sont dans `vercel.json`. `scripts/serve.js` les applique aussi en local, et la génération s'arrête si une page contient un script en ligne non autorisé. Le détail est dans `INVENTAIRE.md`.
 
+Chaque image, vidéo, PDF, feuille de style ou script appelé par une page porte l'empreinte de son contenu (`img/photos/accueil.jpg?ver=3fa9c1d2e4`), et `vercel.json` laisse le navigateur garder ces fichiers un an sans les redemander. Un fichier modifié change d'empreinte : il faut donc régénérer les pages après avoir changé une image, un style ou un script, avant de les mettre en ligne. La surveillance (`--surveiller`) le fait d'elle-même.
+
 Les formulaires (contact, candidature, lettre d'information) s'envoient vers l'adresse de leur attribut `action`, à renseigner dans les sources avec celle du service d'envoi retenu. Sans adresse, ils préviennent le visiteur que rien n'a été transmis. Le détail est dans `INVENTAIRE.md`.
 
 ## Médias

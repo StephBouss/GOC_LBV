@@ -1,6 +1,6 @@
 <!-- {
   "titre": "Filiales et entités · SNHG – Gabon Oil Company",
-  "description": "L'écosystème intégré de la SNHG au service de la souveraineté énergétique du Gabon : Gabon Oil Company, Assala Energy, Gabon Oil Participations, Gab'Oil, Pizolub et SMP.",
+  "description": "Un groupe, une chaîne de valeur énergétique intégrée : Gabon Oil Company, Assala Energy et Gabon Oil Participations en amont, SMP Afrique pour les services pétroliers, Gab'Oil et Pizolub en aval.",
   "onglet": "groupe",
   "precharger": { "src": "img/photos/filiales-hero.jpg", "srcset": "img/photos/filiales-hero-768.jpg 768w, img/photos/filiales-hero.jpg 1536w" },
   "css": ["css/pages.css"]
@@ -31,90 +31,124 @@
     </div>
   </section>
 
-  <!-- ═══════════ 2 · Filiales par secteur ═══════════ -->
-  <section class="section" aria-labelledby="filiales-titre">
-    <div class="conteneur">
-      <div data-apparition>
+  <!-- ═══════════ 2 · Chaîne de valeur (d'après le visuel « One group » du groupe) ═══════════ -->
+  <section class="section" aria-labelledby="chaine-titre">
+    <div class="conteneur chaine-grille">
+      <div class="chaine-tete" data-apparition>
         <p class="sur-titre">Nos filiales</p>
-        <h2 class="titre-section marge-16" id="filiales-titre">Acteurs de la chaîne de valeur</h2>
-        <p class="intro-section">En quinze années d'existence, la Société Nationale des Hydrocarbures du Gabon (SNHG) a progressivement bâti un groupe intégré couvrant l'ensemble de la chaîne de valeur pétrolière. Cette dynamique repose sur cinq filiales complémentaires qui constituent aujourd'hui les principaux leviers de sa croissance.</p>
+        <h2 class="titre-section chaine-titre" id="chaine-titre"><span>Un groupe.</span> Une chaîne de valeur énergétique intégrée.</h2>
+        <p class="intro-section">En quinze années d'existence, la Société Nationale des Hydrocarbures du Gabon (SNHG) a progressivement bâti un groupe intégré couvrant l'ensemble de la chaîne de valeur pétrolière, de l'amont à l'aval. Cette dynamique repose sur cinq filiales complémentaires qui constituent aujourd'hui les principaux leviers de sa croissance.</p>
       </div>
 
-      <div class="familles">
-        <!-- Amont -->
-        <div class="famille">
-          <div class="famille-tete" data-apparition>
-            <h3><svg class="icone" aria-hidden="true"><use href="#i-flamme"/></svg>Amont</h3>
+      <ol class="chaine" data-cascade>
+        <li class="maillon">
+          <span class="maillon-icone" aria-hidden="true"><svg><use href="#p-amont"/></svg></span>
+          <div class="maillon-texte">
+            <h3>Amont</h3>
+            <ul class="maillon-entites">
+              <li><a href="#gabon-oil-company">Gabon Oil Company</a></li>
+              <li><a href="#assala-energy">Assala Energy</a></li>
+              <li><a href="#gabon-oil-participations">Gabon Oil Participations</a></li>
+            </ul>
           </div>
-          <div class="filiales-grille" data-cascade>
-            <article class="carte-entite" id="assala-energy">
-              <div class="carte-entite-logo"><img src="img/filiales/assala.png" alt="Assala Energy" width="124" height="160" loading="lazy"></div>
-              <div class="carte-entite-corps">
-                <h4>Assala Energy</h4>
-                <p>Acquise en juin 2024, Assala Energy constitue un actif stratégique majeur avec une production autour de 57 000 barils/jour.</p>
-                <a class="carte-entite-lien" href="https://www.assalaenergy.com/fr/" target="_blank" rel="noopener noreferrer">Visiter le site officiel <svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a>
-              </div>
-            </article>
-            <article class="carte-entite" id="gabon-oil-company">
-              <div class="carte-entite-logo"><img src="img/filiales/goc.png" alt="Gabon Oil Company" width="272" height="180" loading="lazy"></div>
-              <div class="carte-entite-corps">
-                <h4>Gabon Oil Company (GOC)</h4>
-                <p>Entité mère et pivot stratégique de la SNHG, assurant la cohérence et le pilotage de l'ensemble des filiales.</p>
-                <a class="carte-entite-lien" href="groupe/presentation.html">Entité mère <svg class="icone" aria-hidden="true"><use href="#i-fleche-droite"/></svg></a>
-              </div>
-            </article>
-            <article class="carte-entite" id="gabon-oil-participations">
-              <div class="carte-entite-logo"><img src="img/filiales/gop.png" alt="Gabon Oil Participations" width="176" height="160" loading="lazy"></div>
-              <div class="carte-entite-corps">
-                <h4>Gabon Oil Participations (GOP)</h4>
-                <p>Intégration des participations Tullow Oil Gabon dans la stratégie nationale de consolidation du portefeuille pétrolier.</p>
-                <a class="carte-entite-lien" href="groupe/historique-gouvernance.html#historique">Infos groupe <svg class="icone" aria-hidden="true"><use href="#i-fleche-droite"/></svg></a>
-              </div>
-            </article>
+        </li>
+        <li class="maillon">
+          <span class="maillon-icone" aria-hidden="true"><svg><use href="#p-services"/></svg></span>
+          <div class="maillon-texte">
+            <h3>Services pétroliers amont</h3>
+            <ul class="maillon-entites">
+              <li><a href="#smp">SMP Afrique</a></li>
+            </ul>
           </div>
-        </div>
+        </li>
+        <li class="maillon">
+          <span class="maillon-icone" aria-hidden="true"><svg><use href="#p-intermediaire"/></svg></span>
+          <div class="maillon-texte">
+            <h3>Intermédiaire</h3>
+            <ul class="maillon-entites">
+              <li><a href="#gab-oil">Gab'Oil</a></li>
+              <li><a href="#gabon-oil-company">Gabon Oil Company</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="maillon">
+          <span class="maillon-icone" aria-hidden="true"><svg><use href="#p-aval"/></svg></span>
+          <div class="maillon-texte">
+            <h3>Aval</h3>
+            <ul class="maillon-entites">
+              <li><a href="#gab-oil">Gab'Oil</a></li>
+              <li><a href="#pizolub">Pizolub</a></li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
 
-        <!-- Aval -->
-        <div class="famille bleu">
-          <div class="famille-tete" data-apparition>
-            <h3><svg class="icone" aria-hidden="true"><use href="#i-gouttes"/></svg>Aval</h3>
-          </div>
-          <div class="filiales-grille deux" data-cascade>
-            <article class="carte-entite" id="gab-oil">
-              <div class="carte-entite-logo"><img src="img/filiales/gab-oil.png" alt="Gab'Oil" width="220" height="146" loading="lazy"></div>
-              <div class="carte-entite-corps">
-                <h4>Gab'Oil</h4>
-                <p>Réseau de 12 stations-service, acteur essentiel de la sécurité énergétique nationale, distribution de carburants sur tout le territoire gabonais.</p>
-                <a class="carte-entite-lien" href="https://www.linkedin.com/company/gaboil-sa/" target="_blank" rel="noopener noreferrer">Page officielle <svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a>
-              </div>
-            </article>
-            <article class="carte-entite" id="pizolub">
-              <div class="carte-entite-logo"><img src="img/filiales/pizolub.png" alt="Pizolub" width="282" height="114" loading="lazy"></div>
-              <div class="carte-entite-corps">
-                <h4>Pizolub</h4>
-                <p>Site de Port-Gentil modernisé, production de lubrifiants conforme aux standards internationaux de qualité industrielle.</p>
-                <a class="carte-entite-lien" href="https://www.pizolub.com" target="_blank" rel="noopener noreferrer">Visiter le site officiel <svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a>
-              </div>
-            </article>
-          </div>
-        </div>
+  <!-- ═══════════ 3 · Filiales et entités, dans l'ordre de la chaîne ═══════════ -->
+  <section class="section fond-surface" aria-labelledby="filiales-titre">
+    <div class="conteneur">
+      <div data-apparition>
+        <p class="sur-titre">Filiales et entités</p>
+        <h2 class="titre-section marge-16" id="filiales-titre">Acteurs de la chaîne de valeur</h2>
+        <p class="intro-section">Des gisements au réseau de stations-service, chaque entité du groupe tient un maillon de la chaîne.</p>
+      </div>
 
-        <!-- Services pétroliers -->
-        <div class="famille vert">
-          <div class="famille-tete" data-apparition>
-            <h3><svg class="icone" aria-hidden="true"><use href="#i-eclair"/></svg>Services pétroliers</h3>
+      <div class="filiales-grille" data-cascade>
+        <article class="carte-entite" id="gabon-oil-company">
+          <div class="carte-entite-logo"><img src="img/filiales/goc.png" alt="Gabon Oil Company" width="272" height="180" loading="lazy"></div>
+          <div class="carte-entite-corps">
+            <p class="categorie">Amont · Intermédiaire</p>
+            <h3>Gabon Oil Company (GOC)</h3>
+            <p>Entité mère et pivot stratégique de la SNHG, assurant la cohérence et le pilotage de l'ensemble des filiales.</p>
+            <a class="carte-entite-lien" href="groupe/presentation.html">Entité mère <svg class="icone" aria-hidden="true"><use href="#i-fleche-droite"/></svg></a>
           </div>
-          <div class="filiales-grille une" data-cascade>
-            <article class="carte-entite" id="smp">
-              <div class="carte-entite-logo"><img src="img/filiales/smp.png" alt="SMP – Société de Maintenance Pétrolière" width="136" height="136" loading="lazy"></div>
-              <div class="carte-entite-corps">
-                <h4>SMP – Société de Maintenance Pétrolière</h4>
-                <p>Filiale dédiée aux services techniques pétroliers : mécanique, instrumentation, électricité, maintenance industrielle.</p>
-                <a class="carte-entite-lien" href="https://www.smp-energies.com" target="_blank" rel="noopener noreferrer">Visiter le site officiel <svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a>
-              </div>
-            </article>
+        </article>
+        <article class="carte-entite" id="assala-energy">
+          <div class="carte-entite-logo"><img src="img/filiales/assala.png" alt="Assala Energy" width="124" height="160" loading="lazy"></div>
+          <div class="carte-entite-corps">
+            <p class="categorie">Amont</p>
+            <h3>Assala Energy</h3>
+            <p>Acquise en juin 2024, Assala Energy constitue un actif stratégique majeur avec une production autour de 57 000 barils/jour.</p>
+            <a class="carte-entite-lien" href="https://www.assalaenergy.com/fr/" target="_blank" rel="noopener noreferrer">Visiter le site officiel <svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a>
           </div>
-        </div>
+        </article>
+        <article class="carte-entite" id="gabon-oil-participations">
+          <div class="carte-entite-logo"><img src="img/filiales/gop.png" alt="Gabon Oil Participations" width="176" height="160" loading="lazy"></div>
+          <div class="carte-entite-corps">
+            <p class="categorie">Amont</p>
+            <h3>Gabon Oil Participations (GOP)</h3>
+            <p>Intégration des participations Tullow Oil Gabon dans la stratégie nationale de consolidation du portefeuille pétrolier.</p>
+            <a class="carte-entite-lien" href="groupe/historique-gouvernance.html#historique">Infos groupe <svg class="icone" aria-hidden="true"><use href="#i-fleche-droite"/></svg></a>
+          </div>
+        </article>
+        <article class="carte-entite" id="smp">
+          <div class="carte-entite-logo"><img src="img/filiales/smp.png" alt="SMP – Société de Maintenance Pétrolière" width="136" height="136" loading="lazy"></div>
+          <div class="carte-entite-corps">
+            <p class="categorie">Services pétroliers amont</p>
+            <h3>SMP – Société de Maintenance Pétrolière</h3>
+            <p>Filiale dédiée aux services techniques pétroliers : mécanique, instrumentation, électricité, maintenance industrielle.</p>
+            <a class="carte-entite-lien" href="https://www.smp-energies.com" target="_blank" rel="noopener noreferrer">Visiter le site officiel <svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a>
+          </div>
+        </article>
+        <article class="carte-entite" id="gab-oil">
+          <div class="carte-entite-logo"><img src="img/filiales/gab-oil.png" alt="Gab'Oil" width="220" height="146" loading="lazy"></div>
+          <div class="carte-entite-corps">
+            <p class="categorie">Intermédiaire · Aval</p>
+            <h3>Gab'Oil</h3>
+            <p>Réseau de 12 stations-service, acteur essentiel de la sécurité énergétique nationale, distribution de carburants sur tout le territoire gabonais.</p>
+            <a class="carte-entite-lien" href="https://www.linkedin.com/company/gaboil-sa/" target="_blank" rel="noopener noreferrer">Page officielle <svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a>
+          </div>
+        </article>
+        <article class="carte-entite" id="pizolub">
+          <div class="carte-entite-logo"><img src="img/filiales/pizolub.png" alt="Pizolub" width="282" height="114" loading="lazy"></div>
+          <div class="carte-entite-corps">
+            <p class="categorie">Aval</p>
+            <h3>Pizolub</h3>
+            <p>Site de Port-Gentil modernisé, production de lubrifiants conforme aux standards internationaux de qualité industrielle.</p>
+            <a class="carte-entite-lien" href="https://www.pizolub.com" target="_blank" rel="noopener noreferrer">Visiter le site officiel <svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a>
+          </div>
+        </article>
       </div>
     </div>
   </section>

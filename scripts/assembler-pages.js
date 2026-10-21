@@ -39,6 +39,9 @@
  * Sécurité : les en-têtes de sécurité sont déclarés dans vercel.json ; verifierScripts() s'assure que chaque script écrit
  * dans une page est autorisé par sa politique de contenu (Content-Security-Policy).
  *
+ * Cache : versionner() ajoute à chaque fichier appelé par une page l'empreinte de son contenu (?ver=…), que vercel.json met
+ * en cache longue durée. La surveillance régénère donc aussi les pages quand une image, un style ou un script change.
+ *
  * Sortie : <rubrique>/<nom>.html, en/<rubrique>/<nom>.html, sitemap.xml et robots.txt, à côté de css/, js/, img/, video/,
  *          documents/ et fonts/
  * Usage  : node scripts/assembler-pages.js [--surveiller]
@@ -104,6 +107,32 @@ const ICONES = {
   'i-maison': '<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
 };
 
+/* Pictogrammes de la chaîne de valeur (page Filiales), d'après le visuel « One group » du groupe : grille de 64, trait.
+   Le cercle est celui de la page (.maillon-icone, qui les rogne) : le sol et les conduites vont jusqu'à son bord, et le
+   trait vertical qui sort par le bas prolonge celui qui relie les maillons. La classe p-plein masque ce qui est derrière. */
+const PICTOGRAMMES = {
+  // Amont : trois derricks, reliés sous le sol
+  'p-amont': '<path d="M0 44h64"/><path d="M15 44v4q0 3 3 3h11q3 0 3 3v10M49 44v4q0 3-3 3H35q-3 0-3 3M32 44v10"/>'
+    + '<path d="M25 44 30 12M39 44 34 12M29 12h6M30.5 12V8h3v4M26.6 34h10.8M28.1 24h7.8M25 44l12.4-10M39 44 26.6 34M26.6 34l9.3-10M37.4 34l-9.3-10"/>'
+    + '<path d="M10 44 13.5 24M20 44 16.5 24M13 24h4M14 24v-3h2v3M11.75 34h6.5M10 44l8.25-10M20 44l-8.25-10M11.75 34 16.5 24M18.25 34 13.5 24"/>'
+    + '<path d="M44 44 47.5 24M54 44 50.5 24M47 24h4M48 24v-3h2v3M45.75 34h6.5M44 44l8.25-10M54 44l-8.25-10M45.75 34 50.5 24M52.25 34 47.5 24"/>',
+  // Services pétroliers amont : derrick et ateliers sur une plateforme
+  'p-services': '<path d="M0 46h64M10 40h44M13 40v6M51 40v6M32 40v24"/>'
+    + '<path d="M26 40 30 12M38 40 34 12M29 12h6M30.5 12V8h3v4M27.3 31h9.4M28.6 22h6.8M26 40l10.7-9M38 40 27.3 31M27.3 31l8.1-9M36.7 31l-8.1-9"/>'
+    + '<path d="M14 40v-8h10v8M13 32h12M17.5 40v-4.5h3V40"/>'
+    + '<path d="M40 40V27h10v13M47 27v-4h2v4M42.5 30h2v2h-2zM45.5 30h2v2h-2zM42.5 34h2v2h-2zM45.5 34h2v2h-2z"/>',
+  // Intermédiaire : conduite et trois réservoirs
+  'p-intermediaire': '<path d="M0 36 36 0M0 44 44 0M5.3 29.3l5.4 5.4M27.3 7.3l5.4 5.4M0 50h64M32 50v14"/>'
+    + '<path class="p-plein" d="M16 18v10a6 2 0 0 0 12 0V18a6 2 0 0 0-12 0z"/><path d="M16 18a6 2 0 0 0 12 0"/>'
+    + '<path class="p-plein" d="M22 26v14a8 2.5 0 0 0 16 0V26a8 2.5 0 0 0-16 0z"/><path d="M22 26a8 2.5 0 0 0 16 0"/>'
+    + '<path class="p-plein" d="M31 33v14a11 3 0 0 0 22 0V33a11 3 0 0 0-22 0z"/><path d="M31 33a11 3 0 0 0 22 0M31 40a11 3 0 0 0 22 0"/>',
+  // Aval : station-service et camion-citerne (dernier maillon : rien ne sort par le bas)
+  'p-aval': '<path d="M0 46h64M7 16.5h19v3H7zM24 19.5V46"/>'
+    + '<path d="M9 46V26h9v20M10.5 26v-2h6v2M11 29h5v4h-5zM18 30h1.5q2 0 2 2v8.5q0 1.5 1.5 1.5"/>'
+    + '<path d="M32 28h11q3.5 0 3.5 3.5v5q0 3.5-3.5 3.5H32q-3.5 0-3.5-3.5v-5Q28.5 28 32 28zM28.5 40H59M48.5 40v-9h5.5l4.5 5v4M50.5 33h3l2.5 3h-5.5z"/>'
+    + '<circle cx="34" cy="43" r="3"/><circle cx="53" cy="43" r="3"/>',
+};
+
 /* Menus : les liens sont écrits avec l'adresse française de la page (son identité) ; celui de la page courante est signalé.
    Dans une page traduite, traduireLiens() les fait ensuite mener aux traductions. */
 const lien = (identite, texte, href) => `<li><a href="${href}"${href === identite ? ' aria-current="page"' : ''}>${texte}</a></li>`;
@@ -160,14 +189,32 @@ function traduireLiens(html, fichier, { langue, toutesVersions, adresses }) {
 /* Chemins écrits depuis la racine du site → chemins relatifs à la page générée. Seuls les attributs qui portent une adresse
    sont concernés (pas type="video/mp4") ; ancres, adresses absolues (https:, mailto:, tel:, /…) et requêtes restent telles quelles. */
 const ATTRIBUTS_URL = /\b(href|src|srcset|imagesrcset|poster|data-pdf)="([^"]*)"/g;
+const relative = (u) => u && !/^(?:[a-z][a-z0-9+.-]*:|[#/?])/i.test(u);
+// applique f à chaque adresse de ces attributs (à chacune des adresses d'un srcset)
+const remplacerAdresses = (html, f) => html.replace(ATTRIBUTS_URL, (tout, attr, valeur) => `${attr}="${attr.endsWith('srcset')
+  ? valeur.split(',').map((v) => v.trim().replace(/^\S+/, f)).join(', ')
+  : f(valeur)}"`);
 const relocaliser = (html, fichier) => {
   const prefixeDossier = '../'.repeat(fichier.split('/').length - 1);
   if (!prefixeDossier) return html;
-  const corriger = (u) => (!u || /^(?:[a-z][a-z0-9+.-]*:|[#/?])/i.test(u) ? u : prefixeDossier + u);
-  return html.replace(ATTRIBUTS_URL, (tout, attr, valeur) => `${attr}="${attr.endsWith('srcset')
-    ? valeur.split(',').map((v) => v.trim().replace(/^\S+/, corriger)).join(', ')
-    : corriger(valeur)}"`);
+  return remplacerAdresses(html, (u) => (relative(u) ? prefixeDossier + u : u));
 };
+
+/* Cache du navigateur : chaque fichier appelé par une page (image, vidéo, PDF, feuille de style, script) porte l'empreinte de
+   son contenu, « img/photos/accueil.jpg?ver=3fa9c1d2e4 », comme le ?ver= que WordPress ajoute aux fichiers de son thème.
+   vercel.json laisse le navigateur garder un an les adresses ?ver= sans les redemander : un fichier inchangé ne se recharge
+   plus d'une page à l'autre ni d'un envoi à l'autre, et un fichier modifié change d'adresse. Les polices restent sans
+   version : leur préchargement (gabarit) doit garder l'adresse que donne la feuille de style, qui n'est pas générée. */
+const VERSIONNES = /\.(?:jpe?g|png|webp|svg|ico|mp4|webm|pdf|css|js)$/i;
+let empreintes = new Map();   // vidée à chaque génération : un fichier a pu changer entre deux
+const versionner = (html) => remplacerAdresses(html, (u) => {
+  if (!relative(u) || !VERSIONNES.test(u)) return u;
+  const fichier = path.join(SORTIE, u);
+  if (!empreintes.has(fichier)) {
+    empreintes.set(fichier, fs.existsSync(fichier) ? crypto.createHash('sha256').update(fs.readFileSync(fichier)).digest('hex').slice(0, 10) : '');
+  }
+  return empreintes.get(fichier) ? `${u}?ver=${empreintes.get(fichier)}` : u;
+});
 
 /* Image d'ouverture préchargée : photo en plusieurs largeurs (srcset) ou fichier unique */
 const prechargement = (p) => {
@@ -209,8 +256,9 @@ const imagePartage = (meta, contenu) => {
 function construire(gabarit, fichier, meta, contenu, apres, contexte) {
   const { langue, t } = contexte;
   const corps = contenu + apres;
-  const icones = Object.keys(ICONES).filter((id) => corps.includes(`#${id}"`))
-    .map((id) => `  <symbol id="${id}" viewBox="0 0 24 24">${ICONES[id]}</symbol>\n`).join('');
+  const symboles = (dessins, vue) => Object.keys(dessins).filter((id) => corps.includes(`#${id}"`))
+    .map((id) => `  <symbol id="${id}" viewBox="${vue}">${dessins[id]}</symbol>\n`).join('');
+  const icones = symboles(ICONES, '0 0 24 24') + symboles(PICTOGRAMMES, '0 0 64 64');
   const valeurs = {
     langue,
     titre: meta.titre,
@@ -237,7 +285,7 @@ function construire(gabarit, fichier, meta, contenu, apres, contexte) {
   if (langue !== DEFAUT) html = traduireLiens(html, fichier, contexte);
   html = html.replace(/\{\{langues-(entete|menu)\}\}/g, (tout, ou) => selecteurLangues(contexte, ou === 'entete' ? '      ' : '    '));
   verifierScripts(html, fichier);
-  ecrire(fichier, relocaliser(html, fichier));
+  ecrire(fichier, relocaliser(versionner(html), fichier));
 }
 
 /* Sources des pages d'une langue : chemins relatifs à son dossier pages/, écrits avec « / » quel que soit le système */
@@ -257,6 +305,7 @@ function lirePages(langue) {
 }
 
 function assembler() {
+  empreintes = new Map();
   const gabarit = fs.readFileSync(path.join(SOURCES, 'gabarit.html'), 'utf8');
   const libelles = lireJSON(path.join(SOURCES, 'libelles.json'));
   const navigation = lireJSON(path.join(SOURCES, 'navigation.json'));
@@ -323,12 +372,28 @@ console.log(`Pages assemblées (${bilan.join(' ; ')})`);
 
 if (process.argv.includes('--surveiller')) {
   let minuterie;
-  fs.watch(SOURCES, { recursive: true }, () => {
+  const reconstruire = () => {
     clearTimeout(minuterie);
     minuterie = setTimeout(() => {
       try { assembler(); console.log(new Date().toLocaleTimeString('fr-FR'), 'pages reconstruites'); }
       catch (e) { console.error('Erreur :', e.message); }
     }, 120);
-  });
-  console.log('Surveillance de sources/ …');
+  };
+  // Les sources, et les fichiers appelés par les pages : un fichier modifié change d'empreinte, donc d'adresse (?ver=…).
+  // Windows signale aussi les simples lectures, dont celles de versionner() : seule une date de modification qui avance compte.
+  const DEMARRAGE = Date.now();
+  const DATES = new Map();
+  const DOSSIERS = ['sources', 'css', 'js', 'img', 'video', 'documents'];
+  for (const dossier of DOSSIERS) {
+    fs.watch(path.join(RACINE, dossier), { recursive: true }, (type, nom) => {
+      if (!nom) return reconstruire();
+      const fichier = path.join(RACINE, dossier, nom);
+      fs.stat(fichier, (err, st) => {
+        if (err) return reconstruire();                 // fichier supprimé ou renommé
+        if (st.isDirectory()) return;
+        if (st.mtimeMs > (DATES.get(fichier) ?? DEMARRAGE)) { DATES.set(fichier, st.mtimeMs); reconstruire(); }
+      });
+    });
+  }
+  console.log(`Surveillance de ${DOSSIERS.map((d) => `${d}/`).join(', ')} …`);
 }

@@ -51,12 +51,14 @@ const TYPES = {
 
 const RACINE_ABS = path.resolve(RACINE);
 
-// En-têtes de sécurité : ceux que vercel.json déclare pour tout le site (règle « /(.*) »), appliqués aussi en
-// local pour voir aussitôt ce que la politique de contenu (Content-Security-Policy) bloquerait en ligne.
+// En-têtes de sécurité : ceux que vercel.json déclare pour tout le site (règle « /(.*) » sans condition), appliqués aussi
+// en local pour voir aussitôt ce que la politique de contenu (Content-Security-Policy) bloquerait en ligne.
+// Le cache longue durée des adresses ?ver= (règle à condition « has ») reste propre à Vercel : en local, tout est
+// servi en « no-store », pour qu'un fichier modifié s'affiche tout de suite.
 const ENTETES_SECURITE = (() => {
   try {
     const config = JSON.parse(fs.readFileSync(path.join(RACINE_ABS, 'vercel.json'), 'utf8'));
-    return (config.headers || []).filter((r) => r.source === '/(.*)').flatMap((r) => r.headers);
+    return (config.headers || []).filter((r) => r.source === '/(.*)' && !r.has).flatMap((r) => r.headers);
   } catch { return []; }
 })();
 
