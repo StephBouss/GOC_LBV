@@ -44,28 +44,36 @@ video() { # nom (hero-<nom>-1080p.mp4 et hero-<nom>-poster.jpg)  affiche
 video goc     hero-video-affiche           # diapositive 1 : site en forêt
 video sardine hero-video-sardine-affiche   # diapositive 3 : champ offshore Sardine
 
-# Gouvernance : portraits officiels du site SNHG, recadrés sur le visage (avatars ronds, 160 px = 2 × 80 px)
+# Gouvernance : portraits officiels remis par le client le 23/10/2026, recadrés sur le visage (avatars ronds,
+# 160 px = 2 × 80 px). Dossiers hors du dépôt, modifiables par les variables PHOTOS_CA et PHOTOS_CODIR ; chaque photo
+# est retrouvée par le nom de la personne au début du nom de fichier. Le fichier est lu sur l'entrée standard :
+# ffmpeg sous Windows n'ouvre pas un chemin accentué (« Président du Conseil… », « Hervé… »).
 mkdir -p "$DST/gouvernance"
 rm -f "$DST/gouvernance"/*.jpg
-portrait() { # source  nom  recadrage (carré autour du visage : les photos sources sont cadrées différemment)
-  ffmpeg -v error -y -i "$GOC/governance/$1" -vf "crop=$3,scale=160:160:flags=lanczos,format=yuvj420p" -map_metadata -1 -q:v 3 "$DST/gouvernance/$2.jpg"
-  printf '%-30s <- %s\n' "gouvernance/$2.jpg" "governance/$1"
+PHOTOS_CA="${PHOTOS_CA:-$HOME/Downloads/GrosFichiers - Lemien LENDZEYI/Photo CA}"
+PHOTOS_CODIR="${PHOTOS_CODIR:-$HOME/Downloads/GrosFichiers - Lemien LENDZEYI/CoDIR}"
+portrait() { # dossier  début du nom de fichier  nom  recadrage (carré autour du visage)
+  local sources=("$1/$2"*.png)
+  ffmpeg -v error -y -f png_pipe -i - -vf "crop=$4,scale=160:160:flags=lanczos,format=yuvj420p" -map_metadata -1 -q:v 3 "$DST/gouvernance/$3.jpg" < "${sources[0]}"
+  printf '%-30s <- %s\n' "gouvernance/$3.jpg" "$(basename "$1")/$(basename "${sources[0]}")"
 }
-portrait jean-tsire.png                 jean-tsire                "672:672:64:0"
-portrait jacques-lebama.png             jacques-lebama            "800:800:0:0"
-portrait franck-yann-koubdje.png        franck-yann-koubdje       "624:624:88:0"
-portrait jacob-thaty-tsioba.png         jacob-thaty-tsioba        "800:800:0:0"
-portrait luther-abouna.png              luther-abouna-yangui      "720:720:20:0"
-portrait fernand-ngoussi.png            fernand-ngoussi-mayangui  "800:800:0:0"
-portrait marcellin-simba-ngabi.png      marcellin-simba-ngabi     "720:720:20:0"
-portrait herve-nnang-engue.png          herve-nnang-engue         "672:672:64:0"
-portrait emery-lepo.png                 emery-lepo                "576:576:72:0"
-portrait jean-leon-mbourou.png          jean-leon-mbourou         "624:624:88:0"
-portrait christian-joly-yogoulou.png    christian-joly-yogoulou   "800:800:0:0"
-portrait jean-flavien-fame.png          jean-flavien-fame         "720:720:0:0"
-portrait wilfridoondagui.png            wilfrid-ondagui           "720:720:40:0"
-portrait guyllain-owono-simba.png       guyllain-owono            "800:800:0:0"
-portrait hermann-oura.png               hermann-oura              "652:652:116:0"
+# Conseil d'Administration
+portrait "$PHOTOS_CA" "Jean TSIRE"                jean-tsire                "840:840:193:10"
+portrait "$PHOTOS_CA" "Marcellin SIMBA NGABI"     marcellin-simba-ngabi     "1045:1045:63:0"
+portrait "$PHOTOS_CA" "Jacques LEBAMA"            jacques-lebama            "1060:1060:136:0"
+portrait "$PHOTOS_CA" "Franck-Yann KOUBDJE"       franck-yann-koubdje       "1010:1010:101:4"
+portrait "$PHOTOS_CA" "Jacob Thaty TSIOBA"        jacob-thaty-tsioba        "1117:1117:69:12"
+portrait "$PHOTOS_CA" "Luther ABOUNA"             luther-abouna-yangui      "1031:1031:104:0"
+portrait "$PHOTOS_CA" "Fernand NGOUSSI"           fernand-ngoussi-mayangah  "1254:1254:0:0"
+# Comité de Direction (l'ADG, Marcellin SIMBA NGABI, a le portrait du Conseil)
+portrait "$PHOTOS_CODIR" "Herv"                   herve-nnang-engue         "936:936:159:0"
+portrait "$PHOTOS_CODIR" "Jean L"                 jean-leon-mbourou         "1045:1045:105:0"
+portrait "$PHOTOS_CODIR" "Christian Joly"         christian-joly-yogoulou   "901:901:168:0"
+portrait "$PHOTOS_CODIR" "Jean Flavien FAME"      jean-flavien-fame         "1060:1060:84:0"
+portrait "$PHOTOS_CODIR" "Vladimir"               vladimir-meyoua           "1040:1040:99:0"
+portrait "$PHOTOS_CODIR" "Wilfrid Davy ONDAGUI"   wilfrid-ondagui-antchouo  "879:879:167:0"
+portrait "$PHOTOS_CODIR" "Guyllain"               guyllain-owono-simba      "880:880:187:0"
+portrait "$PHOTOS_CODIR" "Hermann OURA"           hermann-oura              "720:720:283:0"
 
 # Ministères de tutelle : emblème de leur logo, centré sur fond blanc (avatar rond)
 ministere() { # source  nom  recadrage

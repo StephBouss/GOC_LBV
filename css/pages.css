@@ -316,14 +316,14 @@
 /* Bordé rouge : président du conseil, directeur général adjoint */
 .membre-accent { width: 13.75rem; padding: 1.5rem 1.75rem; background: var(--rouge-pale); border: 2px solid var(--rouge-logo); }
 .membre-accent.large { padding: 1.5rem 2rem; }
-.membre-accent img { width: 4rem; height: 4rem; }
+.membre-accent img { width: 5rem; height: 5rem; }   /* président du Conseil, DGA : comme l'ADG */
 .membre-accent .membre-nom { font-size: .875rem; line-height: 1.25rem; }
 .membre-accent .membre-role { font-size: .6875rem; line-height: 1rem; font-weight: 600; color: var(--rouge-action); }
 /* Administrateurs et directeurs */
 .membre-gris, .membre-rose { gap: .625rem; padding: 1.25rem 1rem; }
 .membre-gris { width: 9.5rem; background: var(--surface); border: 1px solid var(--ligne); }
 .membre-rose { width: 9rem; padding: 1.25rem .75rem; background: var(--rouge-pale); border: 1px solid var(--rouge-bord); }
-.membre-gris img, .membre-rose img { width: 3.5rem; height: 3.5rem; }
+.membre-gris img, .membre-rose img { width: 4.5rem; height: 4.5rem; }   /* administrateurs et directeurs (agrandis, demande client) */
 .membre-gris .membre-nom { font-size: .8125rem; line-height: 1.125rem; }
 .membre-rose .membre-nom { font-size: .75rem; line-height: 1.125rem; }
 .membre-gris .membre-role { font-size: .6875rem; line-height: 1rem; }
