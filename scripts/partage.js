@@ -14,7 +14,8 @@ const path = require('path');
 
 /* Adresse publique du site, sans « / » final. À changer au passage sur le nom de domaine définitif, puis régénérer les pages. */
 const ADRESSE_SITE = 'https://snhg-vert.vercel.app';
-const NOM_SITE = 'SNHG – Gabon Oil Company';
+/* Nom du site dans chaque langue (règle du client, 23/10/2026) : SNHG en français, GOC (nom commercial) en anglais */
+const NOM_SITE = { fr: 'SNHG – Gabon Oil Company', en: 'Gabon Oil Company' };
 /* Langue de chaque version (Open Graph) ; le français est la langue par défaut (x-default) */
 const LOCALES = { fr: 'fr_FR', en: 'en_GB' };
 const DOSSIER = 'img/partage';
@@ -42,7 +43,7 @@ function source(meta, contenu = '') {
 const cible = (src) => `${DOSSIER}/${path.posix.basename(src)}`;
 
 /* Titre de l'aperçu : le titre de l'onglet sans le nom du site, que og:site_name porte déjà */
-const titrePartage = (titre) => titre.replace(/ · ((Actualités|News) · )?SNHG – Gabon Oil Company$/, '');
+const titrePartage = (titre) => titre.replace(/ · ((Actualités|News) · )?(SNHG – )?Gabon Oil Company$/, '');
 
 /* versions : fichier de la page dans chaque langue ({ fr: 'groupe/presentation.html', en: 'en/group/about.html' }) */
 function balises(fichier, meta, image, langue, versions) {
@@ -52,7 +53,7 @@ function balises(fichier, meta, image, langue, versions) {
     ...Object.entries(versions).map(([l, f]) => `<link rel="alternate" hreflang="${l}" href="${adresse(f)}">`),
     `<link rel="alternate" hreflang="x-default" href="${adresse(versions.fr)}">`,
     `<meta property="og:type" content="${meta.article ? 'article' : 'website'}">`,
-    `<meta property="og:site_name" content="${NOM_SITE}">`,
+    `<meta property="og:site_name" content="${NOM_SITE[langue]}">`,
     `<meta property="og:locale" content="${LOCALES[langue]}">`,
     ...Object.keys(versions).filter((l) => l !== langue).map((l) => `<meta property="og:locale:alternate" content="${LOCALES[l]}">`),
     `<meta property="og:url" content="${url}">`,

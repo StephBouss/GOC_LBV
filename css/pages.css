@@ -226,8 +226,10 @@
 .apropos-photo.portrait img { aspect-ratio: 4 / 5; object-position: 50% 15%; }
 .sur-titre abbr { text-decoration: none; }
 .apropos-texte .mot-signature { display: flex; flex-direction: column; gap: .25rem; padding-top: 1.5rem; border-top: 1px solid var(--ligne); }
+/* Le mot lui-même en gris italique justifié (contraste 6,1:1 sur blanc, au-dessus du minimum de 4,5:1) ; la fonction en rouge */
+.mot-adg .texte-doux { font-style: italic; color: var(--encre-douce); text-align: justify; }
 .mot-signature strong { font-size: 1.125rem; font-weight: 700; line-height: 1.5rem; color: var(--noir); }
-.mot-signature span { font-size: .875rem; line-height: 1.25rem; color: var(--encre-douce); }
+.mot-signature span { font-size: .875rem; font-weight: 600; line-height: 1.25rem; color: var(--rouge-action); }
 
 .missions-grille { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
 .carte-mission {
@@ -267,9 +269,10 @@
 .etape-texte { grid-column: 3; }
 .etape:nth-child(odd) .etape-texte { grid-column: 1; grid-row: 1; text-align: right; }
 .etape-point { grid-column: 2; grid-row: 1; }
-.etape-annee { margin-bottom: .5rem; font-size: 1.125rem; font-weight: 700; line-height: 1.5rem; color: var(--rouge-logo); }
+.etape .etape-annee { margin-bottom: .5rem; font-size: 1.125rem; font-weight: 700; line-height: 1.5rem; color: var(--rouge-action); }   /* « .etape » : passe devant « .etape p » */
 .etape h3 { margin-bottom: .5rem; font-size: 1rem; font-weight: 700; line-height: 1.375rem; }
 .etape p { font-size: .875rem; line-height: 1.375rem; color: var(--encre-douce); }
+.etape p time { font-weight: 600; color: var(--rouge-action); }   /* dates citées dans le texte (rouge des boutons : 5,7:1 sur blanc) */
 /* Vignette illustrée : du côté libre de la ligne, contre elle (à droite quand le texte est à gauche, et inversement) */
 .etape-vignette { grid-column: 3; grid-row: 1; justify-self: start; width: min(100%, 17.5rem); }
 .etape:nth-child(even) .etape-vignette { grid-column: 1; justify-self: end; }
@@ -901,6 +904,7 @@ mark.a-completer {
   .titre-section.marge-56, .titre-section.marge-60 { margin-bottom: 2rem; }
   .titre-section.marge-40 { margin-bottom: 1.75rem; }
   .intro-section { margin-bottom: 2.5rem; }
+  .mot-adg .texte-doux { hyphens: auto; }   /* lignes courtes : la césure évite les grands blancs du texte justifié */
 
   .missions-grille, .vision-valeurs, .secteurs, .aspects, .politiques.quatre, .aspects.projets, .aspects.projets.deux, .engagements-grille, .joindre { grid-template-columns: 1fr; }
   .regles-or li { padding: 1.25rem; }

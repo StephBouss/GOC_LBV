@@ -24,10 +24,18 @@ const SOURCES = [
   { nom: 'addax', fichier: path.join(SITE, 'addax1.png') },
   { nom: 'smp', fichier: path.join(LOGOS, 'smp.png'), densite: 0.85 },   // carré plein : visuellement plus lourd
   { nom: 'pizolub', fichier: path.join(LOGOS, 'Pizolub.jpg'), fondBlanc: true },
-  { nom: 'gab-oil', fichier: path.join(SITE, 'gaboil.png') },
 ];
+// Gab'Oil : logo vectoriel remis par le client le 23/10/2026 (celui du site SNHG était le logo de Gabon Oil Company),
+// copié tel quel ; son cadre (viewBox) est serré sur le dessin. Fichier hors du dépôt, modifiable par GABOIL_SVG.
+const GABOIL_SVG = process.env.GABOIL_SVG || path.join(require('os').homedir(), 'Downloads', 'GABOIL-logo.svg');
 
 const SURFACE = 8000, H_MAX = 80, L_MAX = 200, MARGE = 0.02;
+// Taille optique (px) d'un logo de proportions données : même surface visuelle pour tous, dans le cadre maximal
+const tailleOptique = (ratio, densite = 1) => {
+  const lw = Math.sqrt(SURFACE * ratio), lh = Math.sqrt(SURFACE / ratio);
+  const k = Math.min(1, H_MAX / lh, L_MAX / lw) * densite;
+  return [Math.round(lw * k), Math.round(lh * k)];
+};
 
 const dimensions = (f) => execFileSync('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', f])
   .toString().trim().split(',').map(Number);
@@ -80,13 +88,16 @@ for (const s of SOURCES) {
   const px = decoder(s.fichier);
   if (s.fondBlanc) detourerFondBlanc(px, w, h);
   const r = rogner(px, w, h);
-  const ratio = r.w / r.h;
-  let lw = Math.sqrt(SURFACE * ratio), lh = Math.sqrt(SURFACE / ratio);
-  const k = Math.min(1, H_MAX / lh, L_MAX / lw) * (s.densite || 1);
-  lw = Math.round(lw * k); lh = Math.round(lh * k);
+  const [lw, lh] = tailleOptique(r.w / r.h, s.densite);
   execFileSync('ffmpeg', ['-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${r.w}x${r.h}`, '-i', '-',
     '-vf', `scale=${lw * 2}:${lh * 2}:flags=lanczos`, '-pix_fmt', 'rgba', path.join(DST, `${s.nom}.png`)], { input: r.px });
   tailles[s.nom] = { largeur: lw, hauteur: lh };
   console.log(`${s.nom.padEnd(8)} ${String(lw).padStart(3)} × ${lh} px (fichier ${lw * 2} × ${lh * 2})`);
 }
+const svg = fs.readFileSync(GABOIL_SVG, 'utf8');
+fs.writeFileSync(path.join(DST, 'gab-oil.svg'), svg);
+const [, , vw, vh] = svg.match(/viewBox="([^"]+)"/)[1].trim().split(/[\s,]+/).map(Number);
+const [lw, lh] = tailleOptique(vw / vh);
+tailles['gab-oil'] = { largeur: lw, hauteur: lh };
+console.log(`${'gab-oil'.padEnd(8)} ${String(lw).padStart(3)} × ${lh} px (SVG)`);
 fs.writeFileSync(path.join(DST, 'tailles.json'), JSON.stringify(tailles, null, 2));

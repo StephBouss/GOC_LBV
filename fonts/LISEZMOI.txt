@@ -1,5 +1,5 @@
 Archivo — Google Fonts (https://fonts.google.com/specimen/Archivo), Omnibus-Type.
-Fichiers variables WOFF2, graisses 400 à 700, sous-ensembles latin et latin-ext.
+Fichiers variables WOFF2, graisses 400 à 700, droit et italique (« -italique »), sous-ensembles latin et latin-ext.
 Obtenus par : node scripts/telecharger-police.js
 Licence : SIL Open Font License 1.1 — https://openfontlicense.org
 Hébergés avec le site : les visiteurs reçoivent la police avec la page, quel que soit leur appareil.

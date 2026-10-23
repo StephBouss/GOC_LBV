@@ -55,7 +55,7 @@ const fleche = (id, c) => `<marker id="${id}" viewBox="0 0 10 10" refX="8" refY=
 
 const VIGNETTES = {
   /* 2011 · Création de la société : décret signé, sceau et stylo-plume */
-  '2011-creation-goc': ['Création de la GOC : décret signé', `
+  '2011-creation-goc': ['Création de la SNHG : décret signé', `
 ${halo(160, 100, 84, ROSE)}
 ${ombre(166, 186, 70, 5)}
 <g transform="rotate(-4 166 104)">
@@ -63,7 +63,7 @@ ${ombre(166, 186, 70, 5)}
   <rect x="108" y="22" width="124" height="158" rx="6" fill="${B}" stroke="${L}"/>
   <rect x="152" y="32" width="12" height="3" fill="${V}"/><rect x="164" y="32" width="12" height="3" fill="${J}"/><rect x="176" y="32" width="12" height="3" fill="${BL}"/>
   ${texte(170, 55, 'CRÉATION', { taille: 13 })}
-  ${texte(170, 70, 'DE LA GOC', { taille: 13, couleur: R })}
+  ${texte(170, 70, 'DE LA SNHG', { taille: 13, couleur: R })}
   ${texte(170, 82, 'Décret n°1017/PR/MMPH', { taille: 7, couleur: A, graisse: 600 })}
   <rect x="122" y="92" width="96" height="3" rx="1.5" fill="${L}"/><rect x="122" y="100" width="88" height="3" rx="1.5" fill="${L}"/>
   <rect x="122" y="108" width="96" height="3" rx="1.5" fill="${L}"/><rect x="122" y="116" width="70" height="3" rx="1.5" fill="${L}"/>
@@ -138,7 +138,7 @@ ${ombre(162, 142, 72, 5)}
 <circle cx="168" cy="94" r="15" fill="${ROSE}"/>
 <rect x="84" y="58" width="78" height="72" rx="9" fill="${R}"/>
 <circle cx="168" cy="94" r="12" fill="${R}"/>
-${texte(123, 99, 'GOC', { taille: 15, couleur: B })}
+${texte(123, 99, 'SNHG', { taille: 15, couleur: B })}
 ${texte(215, 98, 'BOURBON', { taille: 9, couleur: B, espace: 0.3 })}
 ${pastille(20, 20, 'JOINT-VENTURE')}`],
 
@@ -198,8 +198,8 @@ ${halo(160, 92, 80, ROSE)}
 ${texte(160, 96, '40&#160;%', { taille: 22 })}
 ${pastille(160, 160, 'CEPP ATORA', { ancre: 'middle' })}`],
 
-  /* Mars 2024 · Opérateur des permis Dinonga et Irondu : carte topographique et deux épingles */
-  '2024-dinonga-irondu': ['Opérateur des permis Dinonga et Irondu', `
+  /* Mars 2024 · Opérateur des permis Dinonga et Irondou : carte topographique et deux épingles */
+  '2024-dinonga-irondu': ['Opérateur des permis Dinonga et Irondou', `
 <g fill="none" stroke="#DADBDE" stroke-width="1.3">
   <path d="M40 120 C40 84 80 70 112 76 C150 84 160 116 140 140 C120 162 64 160 48 146 C42 140 40 130 40 120Z"/>
   <path d="M62 120 C62 98 86 90 108 94 C132 98 138 118 126 132 C112 146 76 146 66 136 C63 132 62 126 62 120Z"/>
@@ -213,7 +213,7 @@ ${pastille(160, 160, 'CEPP ATORA', { ancre: 'middle' })}`],
 ${epingle(104, 122)}
 ${epingle(232, 96)}
 ${pastille(104, 132, 'DINONGA', { ancre: 'middle' })}
-${pastille(232, 106, 'IRONDU', { ancre: 'middle' })}`],
+${pastille(232, 106, 'IRONDOU', { ancre: 'middle' })}`],
 
   /* Juin 2024 · Acquisition historique d'Assala Energy : installations et 100 % */
   '2024-acquisition-assala': ['Acquisition de 100 % d\'Assala Energy', `

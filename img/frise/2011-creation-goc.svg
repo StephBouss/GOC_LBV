@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
-<title>Création de la GOC : décret signé</title>
+<title>Création de la SNHG : décret signé</title>
 <rect width="320" height="200" fill="#F6F6F7"/>
 <circle cx="160" cy="100" r="84" fill="#FDECEC"/>
 <ellipse cx="166" cy="186" rx="70" ry="5" fill="#14171B" opacity=".08"/>
@@ -8,7 +8,7 @@
   <rect x="108" y="22" width="124" height="158" rx="6" fill="#FFFFFF" stroke="#E3E4E6"/>
   <rect x="152" y="32" width="12" height="3" fill="#009E60"/><rect x="164" y="32" width="12" height="3" fill="#FCD116"/><rect x="176" y="32" width="12" height="3" fill="#3A75C4"/>
   <text x="170" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#14171B" font-family="Archivo, 'Segoe UI', Roboto, Arial, sans-serif">CRÉATION</text>
-  <text x="170" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#ED1C24" font-family="Archivo, 'Segoe UI', Roboto, Arial, sans-serif">DE LA GOC</text>
+  <text x="170" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="#ED1C24" font-family="Archivo, 'Segoe UI', Roboto, Arial, sans-serif">DE LA SNHG</text>
   <text x="170" y="82" text-anchor="middle" font-size="7" font-weight="600" fill="#818286" font-family="Archivo, 'Segoe UI', Roboto, Arial, sans-serif">Décret n°1017/PR/MMPH</text>
   <rect x="122" y="92" width="96" height="3" rx="1.5" fill="#E3E4E6"/><rect x="122" y="100" width="88" height="3" rx="1.5" fill="#E3E4E6"/>
   <rect x="122" y="108" width="96" height="3" rx="1.5" fill="#E3E4E6"/><rect x="122" y="116" width="70" height="3" rx="1.5" fill="#E3E4E6"/>
