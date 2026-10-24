@@ -303,10 +303,11 @@ Les textes viennent de snhg.vercel.app, mot pour mot quand c'était possible. L�
 
 ## 5 bis. Informations légales à fournir avant la mise en ligne
 
-Ces informations sont surlignées en jaune dans la maquette.
+Depuis le 24/10/2026, plus aucun champ des mentions légales n'est surligné en jaune : adresse du site, hébergeur et concepteur sont renseignés (section 4 « Conception et réalisation » ajoutée, sommaire renuméroté). Restent les points ci-dessous.
 
 - **Adresse du site** : `www.gaboil.com` (choix du client, 24/10/2026), inscrite dans les mentions légales en français et en anglais. **À vérifier avant la mise en ligne** : ce domaine a été enregistré le 21/10/2026 chez Namecheap et affichait, le 24/10/2026, un site indonésien sans rapport avec la SNHG. Le client doit confirmer qu'il en a la maîtrise (accès au compte Namecheap et à ses réglages DNS). La messagerie reste sur `gabonoil.com` (domaine de 2000, Microsoft 365) : au changement d'hébergeur, ne pas toucher à ses réglages.
-- **Hébergeur** : nom, adresse et site web. Le site WordPress ne sera pas hébergé chez Vercel, qui hébergeait le site de référence. Conseil du 24/10/2026 : OVHcloud, en hébergement web à ressources garanties (gamme Performance), avec Cloudflare gratuit devant le site (son cookie technique sera à ajouter à la page Cookies).
+- **Hébergeur** : les mentions légales indiquent OVH SAS (OVHcloud), 2 rue Kellermann, 59100 Roubaix, France, www.ovhcloud.com : c'est l'hébergeur conseillé le 24/10/2026, en hébergement web à ressources garanties (gamme Performance), avec Cloudflare gratuit devant le site (son cookie technique sera à ajouter à la page Cookies). Si le client en retient un autre, changer la fiche « Hébergement du site » des deux pages (FR et EN).
+- **Conception et réalisation** (24/10/2026, demande client) : BCOM, https://b-com.pro, dans une nouvelle section des mentions légales (FR et EN).
 - **À valider par le service juridique** : faut-il ajouter le numéro RCCM, le NIF et le capital social de la SNHG ? Faut-il citer la loi gabonaise sur la protection des données personnelles et le recours auprès de l'autorité de contrôle (CNPDCP) ?
 - **Siège de Port-Gentil** : numéro de téléphone (à ajouter dans les deux pages Contact, en lien `tel:`).
 - **Cookies** : le tableau de `informations-legales/cookies.html` décrit la configuration conseillée (langue par Polylang, Matomo installé avec le site). Il faut l'ajuster aux extensions réellement installées : noms et durées des cookies, et tout cookie ajouté par l'hébergeur ou un pare-feu (Cloudflare, par exemple). La page cite déjà la CNPDCP.
