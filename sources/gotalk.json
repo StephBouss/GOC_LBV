@@ -1,0 +1,199 @@
+{
+  "_lisezmoi": [
+    "GO’TALK : portraits métier des talents de la SNHG, mis en forme par scripts/gotalk.js (repères <!-- gotalk:talents --> et <!-- gotalk:portraits --> de la page gotalk/index.html).",
+    "Chaque talent préfigure un contenu WordPress « Talent » : nom, fonction, service, photo, titre, chapeau, entretien (question, accroche en gras facultative, paragraphes de réponse) et « En quelques mots » (libellé, texte).",
+    "Photo : img/photos/gotalk-<id>.jpg (960 × 1200) et -768.jpg, produites par scripts/preparer-photos.js depuis le dossier « GOTALK » des photos du client.",
+    "Mise en forme dans les textes : *italique* et {en|texte en anglais} (attribut lang). Le reste est du texte simple.",
+    "Nom vide : la carte affiche la fonction à la place du nom (noms de l'ingénieur chimiste et du contrôleur de coûts à fournir par le client).",
+    "L'ordre du fichier est celui de la page. Traductions : sources/en/gotalk.json, par identifiant."
+  ],
+  "textes": {
+    "rubrique": "Portrait métier",
+    "lire": "Lire le portrait",
+    "fermer": "Fermer le portrait",
+    "precedent": "Portrait précédent",
+    "suivant": "Portrait suivant",
+    "mots": "En quelques mots…",
+    "autres": "Autres portraits"
+  },
+  "talents": [
+    {
+      "id": "axelle-manguiya-etoughe",
+      "nom": "Axelle MANGUIYA épouse ETOUGHE",
+      "fonction": "Cadre RSE",
+      "service": "Direction Business & Associations",
+      "alt": "Axelle MANGUIYA épouse ETOUGHE à son bureau",
+      "titre": "La RSE, un engagement au service de l'entreprise et des communautés",
+      "chapo": "De la prospection minière à la Responsabilité Sociétale d'Entreprise, Axelle MANGUIYA épouse ETOUGHE a construit un parcours où la connaissance du terrain rencontre l'engagement humain. Cadre RSE à la GOC, elle œuvre pour concilier les activités industrielles, les attentes des communautés et les exigences du développement durable.",
+      "entretien": [
+        {
+          "question": "En quoi consiste votre métier ?",
+          "reponse": [
+            "Au sein de la Direction Business & Associations, je coordonne les activités liées à la RSE, au Contenu Local et au développement durable.",
+            "Mon travail porte notamment sur la gouvernance RSE, les relations avec les communautés riveraines, le respect des obligations réglementaires et contractuelles, ainsi que le reporting environnemental, social et de gouvernance (ESG).",
+            "Je contribue également au volet social des projets de dépôts pétroliers et aux campagnes internes de sensibilisation, notamment Octobre Rose et Novembre Bleu.",
+            "Ces missions exigent une collaboration étroite avec les directions de la GOC, les administrations, les autorités locales et les communautés. Je m'appuie sur une équipe engagée, composée notamment de Larissa IGONDJO épouse MOUANDA, Cyrille MBA, Francine MOULOMBI et Mélisante MPIGA-BOUA."
+          ]
+        },
+        {
+          "question": "Quel est votre parcours ?",
+          "reponse": [
+            "Ingénieure géologue de formation, j'ai débuté en 2009 dans l'exploration du platine, dans les Monts de Cristal. J'ai ensuite travaillé chez Core Mining et AREVA Gabon, où j'ai notamment supervisé des campagnes de forage dans le Haut-Ogooué.",
+            "J'ai rejoint la GOC en novembre 2016, avant de me spécialiser dans le développement durable, la RSE et le reporting extra-financier. Je suis également l'autrice du récit *Mon chemin vers l'éveil*."
+          ]
+        },
+        {
+          "question": "Pourquoi avoir rejoint la GOC ?",
+          "reponse": [
+            "Je souhaitais mettre mes compétences au service de mon pays, dans un secteur stratégique. Lors du recrutement de 2016, j'avais la conviction profonde que cette opportunité était faite pour moi.",
+            "Aujourd'hui, mon parcours me permet de relier deux univers qui me passionnent : les ressources du sous-sol et les réalités humaines des territoires où nous intervenons."
+          ]
+        },
+        {
+          "question": "Qu'appréciez-vous particulièrement dans votre métier ?",
+          "accroche": "Le lien humain.",
+          "reponse": [
+            "La RSE permet de faire dialoguer l'entreprise et les communautés, les impératifs techniques et les attentes sociales.",
+            "J'aime contribuer à des décisions qui ont des effets concrets sur les populations, tout en accompagnant la performance responsable de la GOC."
+          ]
+        },
+        {
+          "question": "Quelle est votre plus belle réalisation à la GOC ?",
+          "reponse": [
+            "Avoir coordonné le premier exercice de reporting ESG de la GOC et contribué à l'élaboration de son premier Rapport Développement Durable. Ce travail participe à la structuration de notre démarche RSE.",
+            "Quant à mon meilleur souvenir, il reste le jour de mon recrutement : un moment qui symbolise, pour moi, la persévérance et la foi."
+          ]
+        },
+        {
+          "question": "Quelle valeur de la GOC vous représente le mieux ?",
+          "accroche": "La responsabilité.",
+          "reponse": [
+            "Elle résume mon engagement envers l'entreprise, les communautés riveraines et les générations futures. Chaque décision doit tenir compte de ses conséquences humaines, sociales et environnementales."
+          ]
+        }
+      ],
+      "mots": [
+        { "libelle": "Mon acronyme préféré", "texte": "LTELM : *Le Tout est Esprit, l'Univers est Mental.*" },
+        { "libelle": "Mon lieu de vacances idéal", "texte": "Là où se trouvent la forêt, le silence et ma famille." },
+        { "libelle": "Ma province de cœur", "texte": "L'Estuaire, pour les Monts de Cristal où mon parcours professionnel a commencé. La Ngounié demeure aussi une terre à laquelle je suis profondément attachée." },
+        { "libelle": "Ma citation préférée", "texte": "« Ce que tu cherches te cherche aussi. » (attribuée à Rûmî)" },
+        { "libelle": "Le mot que je refuse", "texte": "« Impossible ». Il existe surtout tant que l'on n'a pas trouvé la voie." },
+        { "libelle": "Mon remède contre le stress", "texte": "Le silence, la prière et les moments partagés avec mes enfants." }
+      ]
+    },
+    {
+      "id": "ingenieur-chimiste-mboumba",
+      "nom": "",
+      "fonction": "Ingénieur chimiste de production",
+      "service": "Champ de Mboumba",
+      "alt": "Ingénieur chimiste de production en tenue et casque de sécurité, talkie-walkie à l'épaule",
+      "titre": "Au cœur de la chimie de production à Mboumba",
+      "chapo": "Sur le champ de Mboumba, la chimie joue un rôle essentiel dans la production des hydrocarbures et la préservation des installations. Rencontre avec un ingénieur chimiste de production qui conjugue expertise scientifique, sens de l'anticipation et esprit d'équipe.",
+      "entretien": [
+        {
+          "question": "En quoi consiste votre métier ?",
+          "reponse": [
+            "Sous la responsabilité du Superviseur Senior du champ, je travaille en étroite collaboration avec les équipes de production pour optimiser la récupération des hydrocarbures et préserver l'intégrité des équipements et des conduites.",
+            "Mon rôle consiste notamment à anticiper la formation de dépôts, comme la paraffine, les asphaltènes, les carbonates ou les hydrates, et à proposer des traitements chimiques adaptés pour prévenir les perturbations de production."
+          ]
+        },
+        {
+          "question": "Quel est votre parcours ?",
+          "reponse": [
+            "Je suis diplômé en chimie verte, une discipline fondée sur des procédés plus économes en énergie et moins générateurs de déchets.",
+            "J'ai notamment participé au projet PARME, consacré au traitement des micropolluants dans l'eau, ainsi qu'à des travaux d'analyse spectroscopique par rayons X chez Total, à Feyzin, en France. Ces expériences ont renforcé mes compétences en chimie analytique et en synthèse."
+          ]
+        },
+        {
+          "question": "Pourquoi avoir choisi la GOC ?",
+          "reponse": [
+            "Participer au développement d'une entreprise gabonaise de production pétrolière représente pour moi une motivation majeure. C'est l'occasion de mettre mes compétences au service d'un projet industriel national."
+          ]
+        },
+        {
+          "question": "Qu'appréciez-vous particulièrement dans votre métier ?",
+          "accroche": "Sa diversité.",
+          "reponse": [
+            "Chaque situation demande de comprendre les procédés, d'analyser les contraintes et de trouver des solutions concrètes. J'apprécie également de travailler avec des équipements conventionnels, qui exigent une bonne maîtrise des fondamentaux de la chimie."
+          ]
+        },
+        {
+          "question": "Une réalisation dont vous êtes fier ?",
+          "reponse": [
+            "L'étude de l'origine de dépôts inorganiques sur le champ, ainsi que l'élaboration du cahier des charges relatif aux équipements et aux installations de chimie de production."
+          ]
+        },
+        {
+          "question": "Quelle valeur de la GOC vous représente le mieux ?",
+          "accroche": "L'esprit d'équipe.",
+          "reponse": [
+            "La performance d'un champ pétrolier repose sur la complémentarité des compétences et la collaboration quotidienne entre les métiers."
+          ]
+        }
+      ],
+      "mots": [
+        { "libelle": "Mon équipe de football", "texte": "Manchester United." },
+        { "libelle": "Mes verbes préférés", "texte": "Persévérer et s'adapter." },
+        { "libelle": "Le verbe que je déteste", "texte": "Abandonner." },
+        { "libelle": "Mon remède contre le stress", "texte": "La méditation et la concentration." }
+      ]
+    },
+    {
+      "id": "controleur-couts-senior",
+      "nom": "",
+      "fonction": "Contrôleur de coûts senior",
+      "service": "Département Assets Lead Opérés",
+      "alt": "Contrôleur de coûts senior en veste sombre, bras croisés, sur fond noir",
+      "titre": "La maîtrise des coûts au service de la performance",
+      "chapo": "Derrière chaque opération pétrolière se trouvent des investissements à planifier, des dépenses à maîtriser et des résultats à analyser. Au sein de la GOC, le Contrôleur de coûts senior veille à la bonne gestion des ressources financières des actifs opérés. Rencontre avec un professionnel animé par le goût des chiffres et l'attachement à son pays.",
+      "entretien": [
+        {
+          "question": "En quoi consiste votre métier ?",
+          "reponse": [
+            "Au sein du département Assets Lead Opérés, je travaille sous la supervision du Chef de Département. Je coordonne l'élaboration et le suivi des budgets, analyse les coûts d'exploitation et d'investissement et veille à leur maîtrise.",
+            "Mon rôle est de fournir des données fiables pour éclairer les décisions et contribuer à la rentabilité des actifs opérés par la GOC."
+          ]
+        },
+        {
+          "question": "Quel est votre parcours ?",
+          "reponse": [
+            "Après mon baccalauréat série B obtenu au lycée Mbelé en 2004, j'ai bénéficié d'une bourse pour poursuivre mes études en Afrique du Sud. Titulaire d'un master en gestion des achats et de la logistique de la {en|Vaal University of Technology}, j'ai été distingué par la SAPICS parmi les meilleurs étudiants des établissements technologiques sud-africains.",
+            "Avant la GOC, j'ai travaillé chez OGEC, prestataire de Shell Gabon au terminal de Gamba, puis chez BHP Billiton à Franceville, comme Administrateur des approvisionnements."
+          ]
+        },
+        {
+          "question": "Pourquoi avoir rejoint la GOC ?",
+          "reponse": [
+            "J'ai rejoint la GOC il y a huit ans, animé par le désir de contribuer au développement de mon pays. Participer à la construction d'une société nationale des hydrocarbures capable de devenir une référence dans l'industrie pétrolière était un défi que je souhaitais relever."
+          ]
+        },
+        {
+          "question": "Qu'appréciez-vous particulièrement dans votre métier ?",
+          "reponse": [
+            "Les chiffres, bien sûr, mais aussi les échanges avec les collègues des autres services. Le contrôle des coûts exige autant de rigueur analytique que de collaboration."
+          ]
+        },
+        {
+          "question": "Quel est votre meilleur souvenir à la GOC ?",
+          "reponse": [
+            "Les moments passés sur le site d'Obangué. Ils restent parmi les expériences les plus marquantes de mon parcours au sein de l'entreprise."
+          ]
+        },
+        {
+          "question": "Quelle valeur de la GOC vous représente le mieux ?",
+          "accroche": "Toutes : le respect, l'intégrité, le professionnalisme, l'esprit d'équipe et la responsabilité.",
+          "reponse": [
+            "Ces valeurs sont complémentaires et guident ma manière de travailler."
+          ]
+        }
+      ],
+      "mots": [
+        { "libelle": "Mon acronyme préféré", "texte": "JSLFDMP : *Je suis le fruit de mes pensées.*" },
+        { "libelle": "Ma province de cœur", "texte": "Le Haut-Ogooué, ma terre et mes racines." },
+        { "libelle": "Ma citation préférée", "texte": "« {en|Powers we have, will never be revealed until we challenge them!} » (*Nous ne découvrons nos capacités qu'en osant les mettre à l'épreuve.*)" },
+        { "libelle": "Les expressions que je refuse", "texte": "« Ça ne marchera jamais ! », « Je n'y arriverai pas ! », « C'est trop dur ! »" },
+        { "libelle": "Mon remède contre le stress", "texte": "Le sport." }
+      ]
+    }
+  ]
+}

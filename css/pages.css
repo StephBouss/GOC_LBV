@@ -150,6 +150,7 @@
 .galerie-grille[data-nombre="6"] { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: clamp(10rem, 16vw, 22rem); }
 .galerie-grille > :first-child { grid-column: span 2; grid-row: span 2; }
 .galerie-grille[data-nombre="7"] > :nth-child(n+6) { grid-column: span 2; }
+.galerie-grille[data-nombre="3"] > :nth-child(n+2) { grid-column: span 2; }   /* deux photos empilées à droite de la photo mise en avant */
 .galerie-photo { position: relative; display: block; height: 100%; overflow: hidden; border-radius: .75rem; background: var(--ligne); }
 .galerie-photo img { width: 100%; height: 100%; object-fit: cover; transition: scale .6s var(--doux); }
 .galerie-photo::after {
@@ -202,7 +203,7 @@
   .mediatheque-intro { padding-bottom: 2.5rem; }
   /* Deux colonnes : la première photo sur toute la largeur, la dernière aussi si elle reste seule */
   .galerie-grille, .galerie-grille[data-nombre="6"] { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 7.5rem; gap: .5rem; }
-  .galerie-grille[data-nombre="7"] > :nth-child(n+6) { grid-column: auto; }
+  .galerie-grille[data-nombre="7"] > :nth-child(n+6), .galerie-grille[data-nombre="3"] > :nth-child(n+2) { grid-column: auto; }
   .galerie-grille > :last-child:nth-child(even) { grid-column: span 2; }
   .galerie-photo { border-radius: .5rem; }
   /* Visionneuse : flèches sous la photo, à portée de pouce */
@@ -374,8 +375,48 @@
 }
 .maillon-entites a:hover { color: var(--rouge-action); text-decoration-color: currentColor; }
 
-/* Fiches des entités, dans l'ordre de la chaîne ; l'étiquette donne leur place (une entité peut en tenir deux) */
-.filiales-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+/* Fiches des entités en organigramme : Gabon Oil Company en tête, ses filiales dessous, dans l'ordre de la chaîne,
+   reliées par des traits rouges comme l'organigramme de la gouvernance ; l'étiquette donne leur place (une entité peut
+   en tenir deux). Selon la largeur du cadre : une rangée sous un trait commun, deux colonnes de part et d'autre d'un
+   tronc central, ou une colonne le long d'un tronc à gauche. Les traits sont sous les cartes, qui se soulèvent au survol. */
+.filiales-org { --ecart: 1.25rem; --trait: 2.5rem; --accroche: 5rem; --colonne: 3rem; --rangee: 1.5rem; --retrait: 1.75rem; container: filiales / inline-size; }
+.org-mere { width: min(100%, 26rem); margin-inline: auto; }
+.org-filiales { position: relative; isolation: isolate; display: grid; margin-top: var(--trait); list-style: none; }
+.org-filiales::before, .org-filiales > li::before, .org-filiales > li::after { content: ""; position: absolute; z-index: -1; background: var(--rouge-logo); }
+.org-filiales::before { top: calc(-1 * var(--trait)); left: calc(50% - 1px); width: 2px; height: var(--trait); }   /* sous la carte mère */
+.org-filiales > li { position: relative; isolation: isolate; display: flex; }
+.org-filiales .carte-entite { flex: 1; }
+.org-filiales .carte-entite-logo img { max-width: 100%; }
+@container filiales (width >= 75rem) {
+  .org-filiales { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--ecart); padding-top: var(--trait); }
+  .org-filiales > li::before { top: calc(-1 * var(--trait)); left: calc(var(--ecart) / -2); right: calc(var(--ecart) / -2); height: 2px; }   /* trait commun */
+  .org-filiales > li:first-child::before { left: 50%; }
+  .org-filiales > li:last-child::before { right: 50%; }
+  .org-filiales > li::after { top: calc(-1 * var(--trait)); left: calc(50% - 1px); width: 2px; height: var(--trait); }   /* descente vers la carte */
+  .org-filiales .carte-entite-logo, .org-filiales .carte-entite-corps { padding-inline: 1.25rem; }
+}
+@container filiales (width >= 40rem) {
+  /* bandeaux du logo à la même hauteur dans une rangée (logo le plus haut : 5,625rem + 2 × 2,5rem de marge) */
+  .org-filiales { --accroche: 5.3125rem; }
+  .org-filiales .carte-entite-logo { min-height: 10.625rem; }
+}
+@container filiales (40rem <= width < 75rem) {
+  .org-mere { width: calc((100% - var(--colonne)) / 2); }
+  .org-filiales { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--rangee) var(--colonne); }
+  .org-filiales > li::before { top: calc(-1 * var(--rangee)); bottom: 0; right: calc(var(--colonne) / -2 - 1px); width: 2px; }   /* tronc central */
+  .org-filiales > li:nth-child(even)::before { right: auto; left: calc(var(--colonne) / -2 - 1px); }
+  .org-filiales > li:last-child::before, .org-filiales > li:nth-last-child(2):nth-child(odd)::before { bottom: auto; height: calc(var(--rangee) + var(--accroche) + 1px); }   /* il s'arrête à la dernière rangée */
+  .org-filiales > li::after { top: var(--accroche); right: calc(var(--colonne) / -2); width: calc(var(--colonne) / 2); height: 2px; }   /* branche vers la carte */
+  .org-filiales > li:nth-child(even)::after { right: auto; left: calc(var(--colonne) / -2); }
+}
+@container filiales (width < 40rem) {
+  .org-mere { width: 100%; }
+  .org-filiales { gap: var(--rangee); padding-left: var(--retrait); }
+  .org-filiales::before { left: calc(var(--retrait) / 2 - 1px); }
+  .org-filiales > li::before { top: calc(-1 * var(--rangee)); bottom: 0; left: calc(var(--retrait) / -2 - 1px); width: 2px; }
+  .org-filiales > li:last-child::before { bottom: auto; height: calc(var(--rangee) + var(--accroche) + 1px); }
+  .org-filiales > li::after { top: var(--accroche); left: calc(var(--retrait) / -2); width: calc(var(--retrait) / 2); height: 2px; }
+}
 .carte-entite {
   --teinte: var(--rouge-logo); --texte: var(--rouge-action); --fond: var(--rouge-pale);
   display: flex; flex-direction: column; overflow: hidden; scroll-margin-top: calc(var(--entete) + 1.5rem);
@@ -497,6 +538,7 @@
 .siege h3 { margin-bottom: .5rem; font-size: 1.125rem; font-weight: 700; line-height: 1.5rem; }
 .siege p { margin-bottom: .5rem; font-size: .875rem; line-height: 1.375rem; color: var(--encre-douce); }
 .siege p:last-child { margin-bottom: 1rem; }
+.siege:has(+ .siege) { margin-bottom: 2rem; }   /* Libreville puis Port-Gentil */
 .joindre { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
 .etiquette {
   display: flex; align-items: center; gap: .75rem; margin-bottom: .5rem;
@@ -697,21 +739,21 @@ mark.a-completer {
   margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--ligne);
 }
 .filtres ul { display: flex; flex-wrap: wrap; gap: .625rem; }
-.filtres a {
+.filtres :is(a, button) {
   position: relative;   /* contient le texte masqué (« articles ») : sans cela il échappe au rognage de la bande défilante */
   display: inline-flex; align-items: center; gap: .5rem; min-height: 2.5rem; padding: 0 .5rem 0 1rem;
   background: var(--blanc); border: 1px solid var(--ligne); border-radius: 999px;
   font-size: .875rem; font-weight: 600; line-height: 1.3125rem; color: var(--noir); white-space: nowrap;
   transition: color .15s, background-color .15s, border-color .15s;
 }
-.filtres a:hover { border-color: var(--rouge-logo); color: var(--rouge-action); }
-.filtres a[aria-current="true"] { background: var(--rouge-action); border-color: var(--rouge-action); color: var(--blanc); }
+.filtres :is(a, button):hover { border-color: var(--rouge-logo); color: var(--rouge-action); }
+.filtres :is(a[aria-current="true"], button[aria-pressed="true"]) { background: var(--rouge-action); border-color: var(--rouge-action); color: var(--blanc); }
 .filtre-nombre {
   min-width: 1.625rem; padding: .0625rem .4375rem; border-radius: 999px; background: var(--surface);
   font-size: .75rem; font-weight: 700; line-height: 1.125rem; text-align: center; font-variant-numeric: tabular-nums; color: var(--encre-douce);
   transition: color .15s, background-color .15s;
 }
-.filtres a[aria-current="true"] .filtre-nombre { background: rgba(255, 255, 255, .22); color: var(--blanc); }
+.filtres :is(a[aria-current="true"], button[aria-pressed="true"]) .filtre-nombre { background: rgba(255, 255, 255, .22); color: var(--blanc); }
 .filtres-statut { font-size: .875rem; line-height: 1.3125rem; color: var(--encre-douce); }
 
 /* Lettre d'information (site de référence) */
@@ -802,6 +844,8 @@ mark.a-completer {
   .js .chaine:not(.est-visible) .maillon::before { scale: 1 0; }
   .trait-h { transition: scale .8s var(--doux) .3s; }
   .trait-v, .org-attaches span::before { transform-origin: top; transition: scale .5s var(--doux) .2s; }
+  .js .org-filiales:not(.est-visible)::before { scale: 1 0; }
+  .org-filiales::before { transform-origin: top; transition: scale .5s var(--doux); }
 
   /* Liste des actualités : photos qui reculent à l'apparition, cascade limitée aux premières cartes */
   .js .liste-actus:not(.est-visible) .carte-actu-photo img { scale: 1.15; }
@@ -845,6 +889,298 @@ mark.a-completer {
 @keyframes entree-fenetre { from { opacity: 0; translate: 0 1.5rem; } }
 @keyframes fondu { from { opacity: 0; } }
 
+/* ═══════════ Stations Gab'Oil : carte du Gabon et liste des stations (scripts/stations.js, app.js) ═══════════ */
+/* Couleur de chaque état, partagée par les points de la carte, la légende et la liste */
+[data-etat="service"] { --etat: var(--rouge-logo); }
+[data-etat="construction"] { --etat: #E39B00; }
+[data-etat="etudes"] { --etat: #8B8E94; }
+
+.stations-tete { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem 4rem; align-items: end; margin-bottom: 3rem; }
+.stations-tete .texte-doux { max-width: 34rem; }
+.stations-grille { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2.5rem; align-items: start; }
+
+/* Carte : reste en vue pendant que l'on parcourt la liste */
+.stations-carte { position: sticky; top: calc(var(--entete) + 1.5rem); margin: 0; padding: 1rem; background: var(--blanc); border: 1px solid var(--ligne); border-radius: .75rem; }
+.carte-cadre { position: relative; container: carte / inline-size; }
+.carte-gabon { width: 100%; height: auto; border-radius: .5rem; }
+.carte-ocean, .carte-encart-fond { fill: #EDF3F9; }
+.carte-voisins path { fill: #F8F8F9; }
+.carte-frontiere { fill: none; stroke: #B5B8BD; stroke-width: 2.4; stroke-linejoin: round; }
+.carte-provinces, .carte-encart-terre { fill: #E4E6E9; stroke: var(--blanc); stroke-width: 1; stroke-linejoin: round; }
+.carte-noms text { text-anchor: middle; text-transform: uppercase; pointer-events: none; }
+.carte-province-nom { font-size: 10.5px; font-weight: 600; letter-spacing: .08em; fill: #7A7D83; }
+.carte-voisin-nom, .carte-ocean-nom { font-size: 11px; font-weight: 500; letter-spacing: .18em; fill: #A3A6AB; }
+.carte-ocean-nom { fill: #8FA9C4; }
+.carte-zone, .carte-encart-cadre { fill: none; stroke: var(--rouge-logo); stroke-width: 1.2; }
+.carte-zone { transition: stroke-width .2s; }
+.carte-renvoi { fill: none; stroke: var(--rouge-logo); stroke-width: 1; stroke-dasharray: 3 3; }
+.carte-encart-nom { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; fill: var(--noir); }
+.carte-gabon:has(.point.est-active[data-encart]) .carte-zone { stroke-width: 2.6; }
+
+/* Points : plein pour une station en service ou en construction, cerclé pour une station en études ;
+   le point choisi grossit et pulse (halo fixe si les animations sont réduites), les autres s'estompent */
+.point { cursor: pointer; transition: opacity .2s; }
+.point-forme { transform-box: fill-box; transform-origin: center; }
+.point-coeur { fill: var(--etat); stroke: var(--blanc); stroke-width: 2; transform-box: fill-box; transform-origin: center; transition: transform .25s var(--doux); }
+.point[data-etat="etudes"] .point-coeur { fill: var(--blanc); stroke: var(--etat); stroke-width: 2.5; }
+.point-halo { fill: var(--etat); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.point.est-active .point-coeur { transform: scale(1.5); }
+.point.est-active .point-halo { opacity: .3; transform: scale(2.6); }
+.carte-gabon.a-un-point-actif .point:not(.est-active) { opacity: .35; }
+.point.est-masque { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .point.est-active .point-halo { animation: point-pulsation 1.3s ease-out infinite; }
+}
+@keyframes point-pulsation { from { opacity: .65; transform: scale(1); } to { opacity: 0; transform: scale(3.6); } }
+
+/* Bulle du point choisi : au-dessus du point, ou dessous près du haut de la carte, recalée près des bords */
+.carte-bulle {
+  position: absolute; z-index: 2; left: var(--x); top: var(--y); translate: -50% calc(-100% - .875rem);
+  width: 13.5rem; padding: .25rem; background: var(--noir); border-radius: .5rem; box-shadow: 0 .75rem 1.5rem -.75rem rgba(20, 23, 27, .6);
+  font-size: .8125rem; line-height: 1.25rem; color: var(--blanc); pointer-events: none;
+}
+/* Photo de la station (ou logo Gab'Oil en attendant), puis nom, lieu et état */
+.carte-bulle-photo { display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: .3125rem; background: var(--surface); }
+.carte-bulle-photo img { width: 100%; height: 100%; object-fit: cover; }
+.carte-bulle-photo img[hidden] { display: none; }   /* la remise à zéro des images passe avant l'attribut hidden */
+.carte-bulle-photo .carte-bulle-logo { padding: 1.5rem 2.5rem; object-fit: contain; }
+.carte-bulle-texte { display: block; padding: .4375rem .5rem .3125rem; }
+.carte-bulle-texte strong { display: block; font-weight: 700; }
+.carte-bulle-texte span { display: block; font-size: .75rem; font-weight: 500; line-height: 1.125rem; color: rgba(255, 255, 255, .78); }
+.carte-bulle::after { content: ""; position: absolute; left: 50%; bottom: -.3125rem; width: .625rem; height: .625rem; margin-left: -.3125rem; background: inherit; rotate: 45deg; }
+.carte-bulle.en-dessous { translate: -50% .875rem; }
+.carte-bulle.en-dessous::after { top: -.3125rem; bottom: auto; }
+.carte-bulle[data-cote="gauche"] { translate: -1.25rem calc(-100% - .875rem); }
+.carte-bulle[data-cote="droite"] { translate: calc(-100% + 1.25rem) calc(-100% - .875rem); }
+.carte-bulle[data-cote="gauche"]::after { left: 1.25rem; }
+.carte-bulle[data-cote="droite"]::after { left: calc(100% - 1.25rem); }
+.carte-bulle.en-dessous[data-cote="gauche"] { translate: -1.25rem .875rem; }
+.carte-bulle.en-dessous[data-cote="droite"] { translate: calc(-100% + 1.25rem) .875rem; }
+
+.carte-legende ul { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; padding: 1rem .25rem 0; font-size: .8125rem; font-weight: 600; line-height: 1.25rem; color: var(--encre-douce); }
+.carte-legende li { display: inline-flex; align-items: center; gap: .5rem; }
+.pastille-etat { flex: none; width: .75rem; height: .75rem; border-radius: 50%; background: var(--etat); }
+.pastille-etat[data-etat="etudes"] { background: var(--blanc); box-shadow: inset 0 0 0 2px var(--etat); }
+
+/* Petite carte (smartphone) : points agrandis, noms des provinces et des pays retirés (illisibles), nom de l'encart agrandi */
+@container carte (width < 32rem) {
+  .point-forme { scale: 1.7; }
+  .carte-province-nom, .carte-voisin-nom, .carte-ocean-nom { display: none; }
+  .carte-encart-nom { font-size: 17px; }
+}
+
+/* Liste : stations groupées par état ; la station survolée ou choisie est surlignée et son repère apparaît */
+.stations-filtres { margin-bottom: 1.75rem; }
+.stations-groupe + .stations-groupe { margin-top: 2.25rem; }
+.stations-etat {
+  display: flex; align-items: center; gap: .625rem; padding-bottom: .75rem; border-bottom: 2px solid var(--noir);
+  font-size: .8125rem; font-weight: 700; line-height: 1.25rem; letter-spacing: .08em; text-transform: uppercase; color: var(--noir);
+}
+.stations-nombre { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--encre-douce); }
+.stations-groupe li + li { border-top: 1px solid var(--ligne); }
+.station { display: flex; align-items: center; gap: .875rem; width: 100%; padding: .8125rem .75rem; border: 0; border-radius: .5rem; text-align: left; }
+button.station { transition: background-color .15s, box-shadow .15s; }
+.station-texte { display: flex; flex: 1; flex-direction: column; min-width: 0; }
+.station-nom { font-size: .9375rem; font-weight: 700; line-height: 1.375rem; color: var(--noir); }
+.station-lieu { font-size: .8125rem; line-height: 1.25rem; color: var(--encre-douce); }
+.station-repere { width: 1.125rem; height: 1.125rem; color: var(--rouge-action); opacity: 0; transition: opacity .15s; }
+button.station:is(:hover, :focus-visible, .est-active) { background: var(--rouge-pale); }
+button.station:is(:hover, :focus-visible, .est-active) .station-repere, button.station[aria-pressed="true"] .station-repere { opacity: 1; }
+button.station[aria-pressed="true"] { background: var(--rouge-pale); box-shadow: inset 3px 0 0 var(--rouge-logo); }
+.stations-liens { display: flex; flex-wrap: wrap; gap: .75rem 2rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--ligne); }
+
+/* ═══════════ Carrières : six raisons de nous rejoindre (accordéon <details>), puis la bande de candidature ═══════════ */
+.raisons-grille { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 3rem 6rem; align-items: start; }
+.raisons-tete { position: sticky; top: calc(var(--entete) + 3rem); }
+.raisons-chapo { margin: 1.75rem 0 1.25rem; font-size: 1.375rem; font-weight: 600; line-height: 2rem; color: var(--noir); text-wrap: pretty; }
+.raisons-invite { margin-top: 1.5rem; font-size: 1.0625rem; font-weight: 700; line-height: 1.625rem; color: var(--rouge-action); text-wrap: balance; }
+.raisons-photo { margin-top: 2.5rem; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 1rem; background: var(--ligne); }
+.raisons-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 30%; }
+
+.raisons { border-top: 2px solid var(--noir); }
+.raison { border-bottom: 1px solid var(--ligne); }
+.raison summary { display: grid; grid-template-columns: 4rem minmax(0, 1fr) 2.5rem; align-items: center; gap: 1.25rem; padding: 1.75rem 0; cursor: pointer; list-style: none; }
+.raison summary::-webkit-details-marker { display: none; }
+.raison-numero { font-size: 2.25rem; font-weight: 700; line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; color: var(--acier); transition: color .25s; }
+.raison-titre { font-size: 1.375rem; font-weight: 700; line-height: 1.875rem; color: var(--noir); text-wrap: balance; transition: color .2s; }
+/* Signe + qui devient − à l'ouverture */
+.raison-signe { position: relative; width: 2.5rem; height: 2.5rem; border: 1px solid var(--ligne); border-radius: 50%; transition: background-color .25s, border-color .25s; }
+.raison-signe::before, .raison-signe::after {
+  content: ""; position: absolute; top: 50%; left: 50%; width: .875rem; height: 2px; margin: -1px 0 0 -.4375rem;
+  background: var(--noir); border-radius: 1px; transition: rotate .3s var(--doux), background-color .25s;
+}
+.raison-signe::after { rotate: 90deg; }
+.raison[open] .raison-numero { color: var(--rouge-action); }
+.raison[open] .raison-signe { background: var(--rouge-action); border-color: var(--rouge-action); }
+.raison[open] .raison-signe::before, .raison[open] .raison-signe::after { background: var(--blanc); }
+.raison[open] .raison-signe::after { rotate: 0deg; }
+.raison-texte { max-width: 42rem; padding: 0 3.75rem 2rem 5.25rem; font-size: 1.0625rem; line-height: 1.75rem; color: var(--encre-douce); text-wrap: pretty; }
+@media (hover: hover) {
+  .raison summary:hover .raison-titre { color: var(--rouge-action); }
+  .raison summary:hover .raison-signe { border-color: var(--rouge-logo); }
+}
+/* Ouverture en douceur là où la hauteur auto s'anime (ailleurs, ouverture immédiate) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (interpolate-size: allow-keywords) and selector(::details-content) {
+    .raisons { interpolate-size: allow-keywords; }
+    .raison::details-content { height: 0; overflow: clip; transition: height .45s var(--doux), content-visibility .45s allow-discrete; }
+    .raison[open]::details-content { height: auto; }
+  }
+}
+
+/* Bande de candidature : reprend la bande « Cap » de l'accueil, plus basse, voile uniforme sous le texte centré */
+.cap.candidater { height: auto; min-height: 32rem; padding: 6rem 0; }
+.candidater .voile { background: rgba(20, 23, 27, .7); }
+.cap .candidater-accroche { margin-bottom: 1.25rem; font-size: 1.25rem; font-weight: 600; line-height: 1.875rem; color: var(--texte-sombre); text-wrap: balance; }
+.candidater h2 { margin-bottom: 2.5rem; font-size: 3rem; line-height: 3.375rem; text-wrap: balance; }
+.candidater .bouton { gap: .5rem; height: 3.25rem; padding: 0 1.75rem; font-weight: 700; }
+
+/* ═══════════ GO’TALK : ouverture, cartes des talents, fenêtres de lecture (scripts/gotalk.js, app.js) ═══════════ */
+/* Ouverture sombre : la marque en très grand, l'apostrophe rouge en bulle, le propos dans une bulle de dialogue (coin pointu vers la marque) */
+.gotalk-ouverture {
+  position: relative; overflow: hidden; isolation: isolate; padding: 6.5rem 0 6rem; color: var(--blanc);
+  background: radial-gradient(60rem 32rem at 88% -10%, rgba(237, 28, 36, .24), transparent 62%), var(--noir);
+}
+.gotalk-ouverture-grille { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 3rem 5rem; align-items: end; }
+.gotalk-titre { margin-top: 1.75rem; }
+.gotalk-marque { display: block; font-size: clamp(4rem, 9vw, 8.5rem); font-weight: 700; line-height: .9; letter-spacing: -.02em; }
+.gotalk-lettres { display: inline-flex; }
+.gotalk-lettres > span { display: inline-block; }
+.gotalk-apostrophe { color: var(--rouge-logo); transform-origin: 50% 70%; }
+.gotalk-devise { display: block; margin-top: 1.25rem; font-size: clamp(1.5rem, 2.6vw, 2.25rem); font-weight: 600; line-height: 1.2; color: var(--texte-sombre); }
+.gotalk-intro { padding: 2.25rem 2.5rem 2.5rem; border: 1px solid rgba(237, 28, 36, .6); border-radius: 1.75rem 1.75rem 1.75rem .25rem; background: rgba(255, 255, 255, .04); transform-origin: 0 100%; }
+.gotalk-intro p { font-size: 1.0625rem; line-height: 1.75rem; color: var(--texte-sombre); text-wrap: pretty; }
+.gotalk-intro p:first-child { font-size: 1.25rem; font-weight: 500; line-height: 1.875rem; color: var(--blanc); }
+.gotalk-intro p + p { margin-top: 1rem; }
+
+/* Cartes : la photo, le nom et la fonction ; « Lire le portrait » apparaît au survol (toujours visible au doigt) */
+.talents-tete { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 1rem 4rem; margin-bottom: 3rem; }
+.talents { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); gap: 2rem; list-style: none; }
+.talent-carte {
+  position: relative; isolation: isolate; display: block; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; padding: 0; border: 0; border-radius: 1.25rem;
+  text-align: left; color: var(--blanc); background: var(--noir); cursor: pointer;
+  box-shadow: 0 1.25rem 2rem -1.5rem rgba(20, 23, 27, .55); transition: translate .45s var(--doux), box-shadow .45s var(--doux);
+}
+.talent-carte::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(to top, rgba(20, 23, 27, .94) 0%, rgba(20, 23, 27, .55) 34%, transparent 62%); }
+.talent-carte-photo, .talent-carte-photo img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.talent-carte-photo img { object-fit: cover; object-position: 50% 20%; transition: scale .9s var(--doux); }
+.talent-carte-bulle {
+  position: absolute; z-index: 1; top: 1.25rem; left: 1.25rem; display: flex; justify-content: center; width: 3rem; height: 3rem; padding-top: .5rem;
+  border-radius: 50% 50% 50% .375rem; background: var(--rouge-action); font-size: 2.5rem; font-weight: 700; line-height: 1; color: var(--blanc);
+}
+.talent-carte-texte { position: absolute; z-index: 1; right: 0; bottom: 0; left: 0; display: flex; flex-direction: column; gap: .25rem; padding: 1.75rem 1.5rem 1.5rem; }
+.talent-carte-texte::before { content: ""; width: 2.5rem; height: .25rem; margin-bottom: .75rem; background: var(--rouge-logo); transition: width .5s var(--doux); }
+.talent-carte-nom { font-size: 1.375rem; font-weight: 700; line-height: 1.75rem; text-wrap: balance; }
+.talent-carte-fonction { font-size: .9375rem; line-height: 1.375rem; color: var(--texte-sombre); }
+.talent-carte-lire {
+  display: inline-flex; align-items: center; gap: .5rem; margin-top: .875rem;
+  font-size: .8125rem; font-weight: 700; line-height: 1.25rem; letter-spacing: .08em; text-transform: uppercase;
+}
+.talent-carte-lire .icone { width: 1rem; height: 1rem; transition: translate .3s var(--doux); }
+.talent-carte:focus-visible { outline: .1875rem solid var(--rouge-action); outline-offset: .25rem; }
+@media (hover: hover) {
+  .talent-carte-lire { max-height: 0; margin-top: 0; overflow: hidden; opacity: 0; transition: max-height .4s var(--doux), margin-top .4s var(--doux), opacity .3s; }
+  .talent-carte:is(:hover, :focus-visible) .talent-carte-lire { max-height: 1.5rem; margin-top: .875rem; opacity: 1; }
+  .talent-carte:is(:hover, :focus-visible) .talent-carte-texte::before { width: 4.5rem; }
+}
+.talents-suite { margin-top: 2.75rem; }
+
+/* Fenêtre de lecture : photo et identité à gauche, entretien à droite (colonne de 42rem au plus, interlignage ample) */
+html:has(dialog.talent[open]) { overflow: hidden; scrollbar-gutter: stable; }
+.talent {
+  width: min(100% - 2.5rem, 76rem); height: min(100% - 2.5rem, 54rem); max-width: none; max-height: none; margin: auto; padding: 0;
+  overflow: hidden; border: 0; border-radius: 1.25rem; color: var(--noir); background: var(--blanc); box-shadow: 0 2rem 4rem rgba(0, 0, 0, .35);
+}
+.talent::backdrop { background: rgba(20, 23, 27, .75); backdrop-filter: blur(.25rem); }
+.talent-cadre { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); height: 100%; }
+.talent-portrait { position: relative; margin: 0; overflow: hidden; background: var(--noir); }
+.talent-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.talent-identite {
+  position: absolute; right: 0; bottom: 0; left: 0; display: flex; flex-direction: column; gap: .25rem;
+  padding: 5rem 2rem 2rem; color: var(--blanc); background: linear-gradient(to top, rgba(20, 23, 27, .92), transparent);
+}
+.talent-identite::before { content: ""; width: 2.5rem; height: .25rem; margin-bottom: .75rem; background: var(--rouge-logo); }
+.talent-identite-nom { font-size: 1.5rem; font-weight: 700; line-height: 1.875rem; text-wrap: balance; }
+.talent-identite-fonction { font-size: 1rem; font-weight: 600; line-height: 1.5rem; }
+.talent-identite-service { font-size: .875rem; line-height: 1.375rem; color: var(--texte-sombre); }
+.talent-lecture { position: relative; overflow-y: auto; overscroll-behavior: contain; }
+/* Avancement de la lecture : un trait rouge qui suit le défilement, là où l'animation au défilement existe */
+.talent-progression { position: sticky; top: 0; z-index: 2; height: .25rem; background: var(--rouge-logo); scale: 0 1; transform-origin: left; }
+@supports (animation-timeline: scroll()) {
+  .talent-progression { animation: progression linear both; animation-timeline: scroll(nearest block); }
+}
+.talent-article { max-width: 42rem; margin: 0 auto; padding: 3.5rem 3.5rem 2.5rem; }
+.talent-rubrique { display: flex; flex-wrap: wrap; align-items: center; gap: .625rem; font-size: .8125rem; font-weight: 700; line-height: 1.25rem; letter-spacing: .12em; text-transform: uppercase; color: var(--encre-douce); }
+.talent-marque { padding: .25rem .625rem; border-radius: .75rem .75rem .75rem .125rem; background: var(--rouge-action); letter-spacing: .06em; color: var(--blanc); }
+.talent-titre { margin: 1.25rem 0; font-size: 2.25rem; font-weight: 700; line-height: 2.75rem; text-wrap: balance; }
+.talent-chapo { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--ligne); font-size: 1.1875rem; font-weight: 500; line-height: 1.875rem; color: var(--encre); text-wrap: pretty; }
+.talent-echange + .talent-echange { margin-top: 2.25rem; }
+.talent-echange h3 { display: flex; align-items: baseline; gap: .75rem; margin-bottom: .875rem; font-size: 1.1875rem; font-weight: 700; line-height: 1.625rem; }
+.talent-echange h3::before { content: ""; flex-shrink: 0; width: 1.25rem; height: .1875rem; background: var(--rouge-logo); translate: 0 -.3em; }
+.talent-echange p { font-size: 1.0625rem; line-height: 1.85; color: var(--encre); text-wrap: pretty; }
+.talent-echange p + p { margin-top: 1rem; }
+.talent-echange .talent-accroche { margin-bottom: .875rem; padding-left: 1.25rem; border-left: .25rem solid var(--rouge-logo); font-size: 1.5rem; font-weight: 700; line-height: 2rem; color: var(--rouge-action); text-wrap: balance; }
+.talent-mots { margin-top: 3rem; padding: 2rem; border-radius: 1rem; background: var(--surface); }
+.talent-mots h3 { margin-bottom: 1.25rem; font-size: .875rem; font-weight: 700; line-height: 1.25rem; letter-spacing: .12em; text-transform: uppercase; color: var(--rouge-action); }
+.talent-mots dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 2rem; }
+.talent-mots dt { font-size: .8125rem; font-weight: 700; line-height: 1.25rem; }
+.talent-mots dd { margin-top: .25rem; font-size: .9375rem; line-height: 1.5rem; color: var(--encre); }
+.talent-suite { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 42rem; margin: 0 auto; padding: 0 3.5rem 3rem; }
+.talent-voisin {
+  display: flex; flex-direction: column; align-items: flex-start; gap: .25rem; padding: 1rem 1.25rem;
+  border: 1px solid var(--ligne); border-radius: .75rem; text-align: left; transition: border-color .2s, background-color .2s;
+}
+.talent-voisin-suivant { align-items: flex-end; text-align: right; }
+.talent-voisin-sens { font-size: .75rem; font-weight: 700; line-height: 1.125rem; letter-spacing: .08em; text-transform: uppercase; color: var(--rouge-action); }
+.talent-voisin-precedent .talent-voisin-sens::before { content: "← "; }
+.talent-voisin-suivant .talent-voisin-sens::after { content: " →"; }
+.talent-voisin-nom { font-size: .9375rem; font-weight: 600; line-height: 1.375rem; text-wrap: balance; }
+.talent-voisin:hover { border-color: var(--rouge-logo); background: var(--rouge-pale); }
+.talent-fermer {
+  position: absolute; z-index: 3; top: 1rem; right: 1rem; display: flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem;
+  border-radius: 50%; color: var(--noir); background: var(--blanc); box-shadow: 0 .25rem 1rem rgba(0, 0, 0, .18); transition: color .2s, background-color .2s;
+}
+.talent-fermer:hover { color: var(--blanc); background: var(--rouge-action); }
+.talent-fermer .icone { width: 1.25rem; height: 1.25rem; }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .talent-carte:is(:hover, :focus-visible) { translate: 0 -.375rem; box-shadow: 0 1.75rem 2.5rem -1.5rem rgba(20, 23, 27, .6); }
+  .talent-carte:hover .talent-carte-photo img { scale: 1.06; }
+  .talent-carte:hover .talent-carte-lire .icone { translate: .25rem 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Ouverture : les lettres montent l'une après l'autre, l'apostrophe surgit, puis la bulle du propos s'ouvre depuis son coin */
+  .gotalk-lettres > span { animation: gotalk-lettre .9s var(--doux) both; }
+  .gotalk-lettres > :nth-child(2) { animation-delay: .07s; }
+  .gotalk-lettres > :nth-child(4) { animation-delay: .14s; }
+  .gotalk-lettres > :nth-child(5) { animation-delay: .21s; }
+  .gotalk-lettres > :nth-child(6) { animation-delay: .28s; }
+  .gotalk-lettres > :nth-child(7) { animation-delay: .35s; }
+  .gotalk-lettres > .gotalk-apostrophe { animation: gotalk-bulle .7s cubic-bezier(.34, 1.56, .64, 1) .6s both; }
+  .gotalk-devise { animation: entree-fenetre .8s var(--doux) .5s both; }
+  .gotalk-intro p { animation: entree-fenetre .8s var(--doux) .65s both; }
+  .gotalk-intro p:nth-child(2) { animation-delay: .75s; }
+  .gotalk-intro p:nth-child(3) { animation-delay: .85s; }
+  .gotalk-intro { animation: gotalk-bulle .8s cubic-bezier(.34, 1.3, .64, 1) .4s both; }
+
+  /* Fenêtre : elle monte, puis l'identité et le début de l'entretien entrent en cascade */
+  .talent[open] { animation: entree-fenetre .45s var(--doux); }
+  .talent[open]::backdrop { animation: fondu .35s ease; }
+  .talent[open] .talent-identite > *, .talent[open] .talent-tete > *, .talent[open] .talent-echange { animation: entree-fenetre .7s var(--doux) both; }
+  .talent[open] .talent-identite > * { animation-delay: .25s; }
+  .talent[open] .talent-tete > :nth-child(2) { animation-delay: .08s; }
+  .talent[open] .talent-tete > :nth-child(3) { animation-delay: .16s; }
+  .talent[open] .talent-echange { animation-delay: .24s; }
+  /* Photo de la carte qui s'agrandit en photo de la fenêtre (transition de vue, app.js) ; le reste de la page reste en place */
+  ::view-transition-group(talent-photo) { animation-duration: .55s; animation-timing-function: cubic-bezier(.22, 1, .36, 1); }
+  ::view-transition-old(talent-photo), ::view-transition-new(talent-photo) { width: 100%; height: 100%; object-fit: cover; }
+  html.vt-portrait::view-transition-old(root) { animation: .3s ease both gotalk-effacer; }
+  html.vt-portrait::view-transition-new(root) { animation: .3s ease both fondu; }
+}
+@keyframes gotalk-lettre { from { opacity: 0; translate: 0 .5em; rotate: 6deg; } }
+@keyframes gotalk-bulle { from { opacity: 0; scale: 0; } }
+@keyframes gotalk-effacer { to { opacity: 0; } }
+
 /* ═══════════ Responsive ═══════════ */
 
 /* Organigramme : dès qu'une rangée ne tient plus sur une ligne dans son cadre, elle passe en grille
@@ -862,6 +1198,9 @@ mark.a-completer {
 /* Tablette */
 @media (max-width: 1023px) {
   .page-hero { height: clamp(24rem, 52vw, 30rem); }
+  .stations-tete, .stations-grille { grid-template-columns: minmax(0, 1fr); }
+  .stations-tete { margin-bottom: 2rem; }
+  .stations-carte { position: static; }   /* au-dessus de la liste ; choisir une station la ramène en vue (app.js) */
   .page-hero-titre { font-size: 2.5rem; line-height: 3rem; }
 
   .apropos, .apropos.mot-adg, .detail, .contact { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -877,7 +1216,19 @@ mark.a-completer {
 
   .chaine-grille { grid-template-columns: minmax(0, 1fr); }
   .chaine-tete { position: static; max-width: 42.5rem; }
-  .filiales-grille { grid-template-columns: repeat(2, 1fr); }
+  .raisons-grille { grid-template-columns: minmax(0, 1fr); }
+  .raisons-tete { position: static; max-width: 42.5rem; }
+  .raisons-photo { display: none; }   /* une colonne : la photo repousserait l'accordéon loin sous le texte */
+
+  .gotalk-ouverture { padding: 5rem 0 4.5rem; }
+  .gotalk-ouverture-grille, .talents-tete { grid-template-columns: minmax(0, 1fr); }
+  .gotalk-intro { max-width: 40rem; }
+  /* Fenêtre plein écran : la photo en tête, l'entretien dessous ; c'est la fenêtre entière qui défile */
+  .talent { width: 100%; height: 100%; max-height: 100dvh; overflow-y: auto; overscroll-behavior: contain; border-radius: 0; }
+  .talent-cadre { display: block; height: auto; }
+  .talent-portrait { height: min(72vh, 36rem); }
+  .talent-lecture { overflow: visible; }
+  .talent-fermer { position: fixed; }
 
   .org { padding: 2.5rem 1.5rem; }
 
@@ -891,6 +1242,8 @@ mark.a-completer {
 
 /* Smartphone */
 @media (max-width: 767px) {
+  .stations-carte { padding: .5rem; }
+  .station { min-height: 3.25rem; }
   .sous-nav ul {
     gap: 0 1.5rem; padding: .625rem var(--marge) .25rem; margin: 0; width: 100%; scroll-padding-inline: var(--marge);
     mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);   /* la bande se prolonge : on peut la faire défiler */
@@ -938,7 +1291,7 @@ mark.a-completer {
   .maillon { gap: 1.25rem; }
   .maillon h3 { font-size: 1.3125rem; line-height: 1.625rem; }
   .maillon-entites a { padding: .3125rem 0; font-size: .75rem; }
-  .filiales-grille { grid-template-columns: 1fr; gap: 1.25rem; }
+  .filiales-org { --accroche: 4.25rem; }   /* au milieu du bandeau du logo, moins haut */
   .carte-entite-logo { min-height: 8.5rem; padding: 2rem 1.5rem; }
   .carte-entite-lien { min-height: 2.75rem; padding-top: .75rem; }
 
@@ -955,6 +1308,33 @@ mark.a-completer {
 
   .appel h2 { font-size: 1.625rem; line-height: 2rem; }
   .appel-actions .bouton { flex: 1 1 100%; }
+
+  .raisons-chapo { margin-top: 1.25rem; font-size: 1.1875rem; line-height: 1.75rem; }
+  .raison summary { grid-template-columns: 2.5rem minmax(0, 1fr) 2.25rem; gap: .875rem; padding: 1.375rem 0; }
+  .raison-numero { font-size: 1.5rem; }
+  .raison-titre { font-size: 1.125rem; line-height: 1.5rem; }
+  .raison-signe { width: 2.25rem; height: 2.25rem; }
+  .raison-texte { padding: 0 0 1.5rem 3.375rem; font-size: 1rem; line-height: 1.625rem; }
+  .gotalk-ouverture { padding: 4rem 0 3.5rem; }
+  .gotalk-titre { margin-top: 1.25rem; }
+  .gotalk-intro { padding: 1.5rem 1.25rem 1.75rem; border-radius: 1.25rem 1.25rem 1.25rem .25rem; }
+  .gotalk-intro p:first-child { font-size: 1.125rem; line-height: 1.75rem; }
+  .talents { gap: 1.25rem; }
+  .talent-portrait { height: min(68vh, 30rem); }
+  .talent-identite { padding: 4rem var(--marge) 1.5rem; }
+  .talent-article { padding: 2.25rem var(--marge) 2rem; }
+  .talent-titre { font-size: 1.75rem; line-height: 2.25rem; }
+  .talent-chapo { font-size: 1.0625rem; line-height: 1.75rem; }
+  .talent-echange p { font-size: 1rem; }
+  .talent-echange .talent-accroche { font-size: 1.3125rem; line-height: 1.75rem; }
+  .talent-mots { padding: 1.5rem 1.25rem; }
+  .talent-mots dl { grid-template-columns: minmax(0, 1fr); }
+  .talent-suite { grid-template-columns: minmax(0, 1fr); padding: 0 var(--marge) 2.5rem; }
+  .talent-voisin-suivant { align-items: flex-start; text-align: left; }
+  .cap.candidater { min-height: 0; padding: 4.5rem 0; }
+  .cap .candidater-accroche { font-size: 1.0625rem; line-height: 1.625rem; }
+  .candidater h2 { margin-bottom: 2rem; font-size: 2rem; line-height: 2.375rem; }
+  .candidater .bouton { width: 100%; }
 
   .legal-sommaire { padding: 1.5rem 1.25rem; }
   .legal-sommaire a { align-items: center; min-height: 2.75rem; padding-block: .5rem; }
@@ -974,7 +1354,7 @@ mark.a-completer {
     scroll-padding-inline: var(--marge); mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
   }
   .filtres ul::-webkit-scrollbar { display: none; }
-  .filtres a { min-height: 2.75rem; }
+  .filtres :is(a, button) { min-height: 2.75rem; }
   .lettre-champ { flex-direction: column; }
   .lettre-champ input { flex: none; font-size: 1rem; }   /* en colonne, flex: 1 écraserait la hauteur du champ */
   .article-tete { padding: 2.25rem 0 1.75rem; }

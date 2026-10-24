@@ -1,7 +1,7 @@
 {
   "_lisezmoi": [
     "Médiathèque : préfiguration des galeries WordPress (un bloc Galerie par site, ou un album par site dans la médiathèque).",
-    "Une galerie = un site (dossier du reportage « Opérations GOC »), avec un titre, un type de site, une courte présentation et 5 à 7 photos. La première photo est mise en avant.",
+    "Une galerie = un site (dossier du reportage « Opérations GOC »), avec un titre, un type de site, une courte présentation et 3 à 7 photos. La première photo est mise en avant.",
     "« source » : chemin de la photo d'origine dans « Img/Inspiration images/Site web GOC/Photo Autre/Opérations GOC ». Les versions web (800 et 1600 px) sont produites par node scripts/preparer-mediatheque.js dans img/mediatheque/<galerie>/.",
     "« alt » : description de la photo, lue par les lecteurs d'écran et affichée en légende dans la visionneuse.",
     "Régénération des pages : node scripts/assembler-pages.js (ou automatiquement avec --surveiller)."
@@ -66,6 +66,17 @@
         { "source": "Obangué/Obangué - Opérateur salle électrique/DSC01793.jpg", "alt": "Opérateur en casque à visière dans la salle électrique d'Obangué" },
         { "source": "Obangué/Obangué - Portrait opérateur mixte dans les installations/DSC01896.jpg", "alt": "Une opératrice et un opérateur observant les installations d'Obangué depuis une passerelle" },
         { "source": "Obangué/Obangué - Casque sur table/DSC02725.jpg", "alt": "Casque blanc frappé du logo Gabon Oil posé sur une table de réunion" }
+      ]
+    },
+    {
+      "slug": "akondo",
+      "titre": "Akondo",
+      "type": "Champ terrestre",
+      "description": "Au cœur de la forêt gabonaise, le permis terrestre d'Akondo, opéré par la SNHG, réunit sur un même site les bacs de stockage, les unités de traitement et les bâtiments des équipes.",
+      "photos": [
+        { "source": "Akondo/Akondo 111.jpg", "alt": "Vue aérienne du site d'Akondo : bacs de stockage, unités de traitement sous abris et pylône de télécommunication, au milieu de la forêt" },
+        { "source": "Akondo/Akondo 112.jpg", "alt": "Piste de latérite longeant la forêt jusqu'aux installations d'Akondo, vues du ciel" },
+        { "source": "Akondo/Akondo 113.jpg", "alt": "Vue d'ensemble du site d'Akondo, avec ses bâtiments aux toits rouges et ses réservoirs, sous un ciel nuageux" }
       ]
     },
     {

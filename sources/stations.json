@@ -1,0 +1,52 @@
+{
+  "_lisezmoi": [
+    "Réseau de stations-service Gab'Oil : préfiguration d'un type de contenu WordPress « Station » (nom, ville, province, état, latitude, longitude). L'ordre du fichier est celui de la liste, à l'intérieur de chaque état.",
+    "« etat » : service (en service), construction (travaux en cours) ou etudes (démarrage des études).",
+    "« lat » et « lon » : coordonnées en degrés décimaux (WGS 84, celles de Google Maps : latitude positive au nord de l'équateur, longitude positive à l'est). « position » : « provisoire » signale une position approchée (centre de la localité), à remplacer par les coordonnées exactes de la station. Une station sans coordonnées figure dans la liste, mais pas sur la carte.",
+    "« province » : nom affiché sous la station ; null tant qu'elle n'est pas confirmée.",
+    "« photo » (facultative) : photo de la station, montrée dans la bulle de la carte (format paysage, 768 px de large suffisent). Sans photo, la bulle montre le logo Gab'Oil.",
+    "Fond de carte : sources/carte-gabon.json (scripts/creer-carte-gabon.js). Mise en forme : scripts/stations.js. Traduction : sources/en/stations.json. Régénération : node scripts/assembler-pages.js (ou automatiquement avec --surveiller)."
+  ],
+  "etats": {
+    "service": "En service",
+    "construction": "En construction",
+    "etudes": "Études en cours"
+  },
+  "textes": {
+    "toutes": "Toutes",
+    "filtrer": "Filtrer les stations par état"
+  },
+  "carte": {
+    "titre": "Carte des stations-service Gab'Oil au Gabon",
+    "encart": "Grand Libreville",
+    "ocean": "Océan Atlantique",
+    "cameroun": "Cameroun",
+    "guinee-equatoriale": "Guinée équatoriale",
+    "congo": "Congo"
+  },
+  "stations": [
+    { "id": "libreville-voie-express", "nom": "Voie express", "ville": "Libreville", "province": "Estuaire", "etat": "service", "lat": 0.428, "lon": 9.476, "position": "provisoire" },
+    { "id": "libreville-likouala", "nom": "Likouala", "ville": "Libreville", "province": "Estuaire", "etat": "service", "lat": 0.402, "lon": 9.458, "position": "provisoire" },
+    { "id": "libreville-adl", "nom": "ADL", "ville": "Libreville", "province": "Estuaire", "etat": "service", "lat": 0.372, "lon": 9.478, "position": "provisoire" },
+    { "id": "owendo", "nom": "Owendo", "ville": "Owendo", "province": "Estuaire", "etat": "service", "lat": 0.293, "lon": 9.503, "position": "provisoire" },
+    { "id": "akanda-jiji", "nom": "Jiji", "ville": "Akanda", "province": "Estuaire", "etat": "service", "lat": 0.505, "lon": 9.425, "position": "provisoire" },
+    { "id": "akanda-marseille", "nom": "Marseille", "ville": "Akanda", "province": "Estuaire", "etat": "service", "lat": 0.478, "lon": 9.408, "position": "provisoire" },
+    { "id": "nkok", "nom": "Nkok", "ville": "Nkok", "province": "Estuaire", "etat": "service", "lat": 0.395, "lon": 9.612, "position": "provisoire" },
+    { "id": "cocobeach", "nom": "Cocobeach", "ville": "Cocobeach", "province": "Estuaire", "etat": "service", "lat": 1.0, "lon": 9.583, "position": "provisoire" },
+    { "id": "kum-yenguin", "nom": "Kum Yenguin", "ville": "Kum Yenguin", "province": null, "etat": "service" },
+    { "id": "port-gentil", "nom": "Port-Gentil", "ville": "Port-Gentil", "province": "Ogooué-Maritime", "etat": "service", "lat": -0.719, "lon": 8.782, "position": "provisoire" },
+    { "id": "makokou", "nom": "Makokou", "ville": "Makokou", "province": "Ogooué-Ivindo", "etat": "service", "lat": 0.574, "lon": 12.864, "position": "provisoire", "photo": "img/photos/stations-hero-768.jpg" },
+    { "id": "okondja", "nom": "Okondja", "ville": "Okondja", "province": "Haut-Ogooué", "etat": "service", "lat": -0.654, "lon": 13.675, "position": "provisoire" },
+    { "id": "makongogno", "nom": "Makongogno", "ville": "Makongogno", "province": null, "etat": "service" },
+    { "id": "bikele", "nom": "Bikélé", "ville": "Bikélé", "province": "Estuaire", "etat": "construction", "lat": 0.446, "lon": 9.563, "position": "provisoire" },
+    { "id": "oyem", "nom": "Oyem", "ville": "Oyem", "province": "Woleu-Ntem", "etat": "construction", "lat": 1.6, "lon": 11.579, "position": "provisoire" },
+    { "id": "minvoul", "nom": "Minvoul", "ville": "Minvoul", "province": "Woleu-Ntem", "etat": "construction", "lat": 2.15, "lon": 12.133, "position": "provisoire" },
+    { "id": "moanda", "nom": "Moanda", "ville": "Moanda", "province": "Haut-Ogooué", "etat": "construction", "lat": -1.567, "lon": 13.2, "position": "provisoire" },
+    { "id": "mounana", "nom": "Mounana", "ville": "Mounana", "province": "Haut-Ogooué", "etat": "construction", "lat": -1.409, "lon": 13.159, "position": "provisoire" },
+    { "id": "libreville-akebe", "nom": "Akébé", "ville": "Libreville", "province": "Estuaire", "etat": "etudes", "lat": 0.392, "lon": 9.452, "position": "provisoire" },
+    { "id": "kango", "nom": "Kango", "ville": "Kango", "province": "Estuaire", "etat": "etudes", "lat": 0.169, "lon": 10.117, "position": "provisoire" },
+    { "id": "lope", "nom": "Lopé", "ville": "Lopé", "province": "Ogooué-Ivindo", "etat": "etudes", "lat": -0.1, "lon": 11.6, "position": "provisoire" },
+    { "id": "omboue", "nom": "Omboué", "ville": "Omboué", "province": "Ogooué-Maritime", "etat": "etudes", "lat": -1.575, "lon": 9.262, "position": "provisoire" },
+    { "id": "mikouyi", "nom": "Mikouyi", "ville": "Mikouyi", "province": null, "etat": "etudes" }
+  ]
+}

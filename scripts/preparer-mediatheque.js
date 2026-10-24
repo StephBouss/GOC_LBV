@@ -42,7 +42,8 @@ for (const g of donnees.galeries) {
   fs.mkdirSync(dossier);
   g.photos.forEach((p, i) => {
     const n = String(i + 1).padStart(2, '0');
-    ffmpeg(['-i', retrouver(p.source), '-filter_complex', '[0]split=2[a][b];[a]scale=1600:-2:flags=lanczos[g];[b]scale=800:-2:flags=lanczos[v]',
+    // une photo plus petite que 1600 px (Akondo : 960 px) garde sa taille : jamais d'agrandissement
+    ffmpeg(['-i', retrouver(p.source), '-filter_complex', "[0]split=2[a][b];[a]scale='min(1600,iw)':-2:flags=lanczos[g];[b]scale=800:-2:flags=lanczos[v]",
       '-map', '[g]', '-q:v', '5', '-map_metadata', '-1', path.join(dossier, `${n}-1600.jpg`),
       '-map', '[v]', '-q:v', '4', '-map_metadata', '-1', path.join(dossier, `${n}-800.jpg`)]);
     nombre++;

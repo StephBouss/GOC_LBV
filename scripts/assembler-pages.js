@@ -28,6 +28,11 @@
  * Médiathèque : sources/mediatheque.json (et sa traduction dans sources/en/) décrit les galeries (une par site) ;
  * scripts/mediatheque.js remplit les repères <!-- mediatheque:… --> (photos préparées par scripts/preparer-mediatheque.js).
  *
+ * Stations Gab'Oil : sources/stations.json (et sa traduction dans sources/en/) décrit les stations-service ; scripts/stations.js
+ * remplit les repères <!-- stations:… --> (carte du Gabon : sources/carte-gabon.json, produit par scripts/creer-carte-gabon.js).
+ * GO’TALK : sources/gotalk.json (et sa traduction) décrit les portraits des talents ; scripts/gotalk.js remplit les repères
+ * <!-- gotalk:… -->, y compris après <!-- apres --> (fenêtres des portraits).
+ *
  * Rangement : chaque page est écrite à la même place que sa source (l'accueil à la racine du site, les autres dans le dossier
  * de leur rubrique : groupe/, filiales/, activites/…, et en/group/, en/activities/… pour l'anglais).
  * Dans les sources, liens et chemins s'écrivent depuis la racine du site de leur langue (« engagements/rse.html »,
@@ -52,6 +57,8 @@ const path = require('path');
 const actualites = require('./actualites');
 const diaporama = require('./diaporama');
 const mediatheque = require('./mediatheque');
+const stations = require('./stations');
+const gotalk = require('./gotalk');
 const partage = require('./partage');
 
 const RACINE = path.join(__dirname, '..');
@@ -81,6 +88,7 @@ const ICONES = {
   'i-cle': '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
   'i-coche-cercle': '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
   'i-coche': '<path d="M20 6 9 17l-5-5"/>',
+  'i-repere': '<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>',
   'i-carte': '<path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/>',
   'i-bouclier': '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
   'i-horloge': '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
@@ -136,8 +144,14 @@ const PICTOGRAMMES = {
 /* Menus : les liens sont écrits avec l'adresse française de la page (son identité) ; celui de la page courante est signalé.
    Dans une page traduite, traduireLiens() les fait ensuite mener aux traductions. */
 const lien = (identite, texte, href) => `<li><a href="${href}"${href === identite ? ' aria-current="page"' : ''}>${texte}</a></li>`;
+// Onglets sans sous-menu (« directs » de navigation.json, comme Contact) : un simple lien, souligné sur sa page,
+// en rouge s'il est « mise_en_avant » (GO’TALK ; dans WordPress, une classe CSS sur l'élément de menu)
+const directs = ({ identite, langue, navigation }, gabarit) => navigation.directs.map((l) => gabarit(`href="${l.lien}"${l.lien === identite ? ' aria-current="page"' : ''}`, l[langue], l.mise_en_avant ? ' nav-accent' : '')).join('');
 
-const navPrincipale = ({ identite, langue, navigation }, onglet) => navigation.groupes.map((n) => `        <li class="nav-item">
+const navPrincipale = (contexte, onglet) => contexte.navigation.groupes.map((n) => navGroupe(contexte, n, onglet)).join('')
+  + directs(contexte, (attributs, texte, accent) => `        <li class="nav-direct"><a class="nav-onglet${accent}" ${attributs}>${texte}</a></li>\n`);
+
+const navGroupe = ({ identite, langue }, n, onglet) => `        <li class="nav-item">
           <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-${n.id}"${n.id === onglet ? ' aria-current="true"' : ''}>${n.libelle[langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
           <div class="sous-menu" id="sous-menu-${n.id}">
             <ul class="sous-menu-liens">
@@ -145,20 +159,21 @@ ${n.liens.map((l) => `              ${lien(identite, l[langue], l.lien)}`).join(
             </ul>
           </div>
         </li>
-`).join('');
+`;
 
-const navMobile = ({ identite, langue, navigation }) => navigation.groupes.map((n) => `    <details class="accordeon" name="menu-mobile">
-      <summary>${n.libelle[langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+const navMobile = (contexte) => contexte.navigation.groupes.map(({ libelle, liens }) => `    <details class="accordeon" name="menu-mobile">
+      <summary>${libelle[contexte.langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
-${n.liens.map((l) => `        ${lien(identite, l[langue], l.lien)}`).join('\n')}
+${liens.map((l) => `        ${lien(contexte.identite, l[contexte.langue], l.lien)}`).join('\n')}
       </ul>
     </details>
-`).join('');
+`).join('') + directs(contexte, (attributs, texte, accent) => `    <a class="menu-mobile-direct${accent}" ${attributs}>${texte}</a>\n`);
 
-const piedColonnes = ({ identite, langue, navigation }) => navigation.groupes.map((n) => `        <details class="pied-colonne" open>
+// Les onglets directs (GO’TALK, Contact) ferment la dernière colonne, qui n'a plus de lien Contact
+const piedColonnes = ({ identite, langue, navigation }) => navigation.groupes.map((n, i, groupes) => `        <details class="pied-colonne" open>
           <summary>${n.pied[langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
-${n.liens.map((l) => `            ${lien(identite, l[langue], l.lien)}`).join('\n')}
+${[...n.liens, ...(i === groupes.length - 1 ? navigation.directs : [])].map((l) => `            ${lien(identite, l[langue], l.lien)}`).join('\n')}
           </ul>
         </details>
 `).join('');
@@ -314,6 +329,8 @@ function assembler() {
     actus: actualites.charger(SOURCES, l, libelles[l]),
     diapos: diaporama.charger(SOURCES, l, libelles[l]),
     galeries: mediatheque.charger(SOURCES, l, libelles[l]),
+    reseau: stations.charger(SOURCES, l),
+    equipe: gotalk.charger(SOURCES, l),
   }]));
 
   // Versions de chaque page et de chaque article, repérées par l'adresse française : { 'groupe/presentation.html': { fr, en } }
@@ -343,10 +360,10 @@ function assembler() {
   const contexte = (langue, identite) => ({ langue, identite, versions: versions[identite], t: libelles[langue], navigation, toutesVersions: versions, adresses });
 
   for (const p of pages) {
-    const { actus, diapos, galeries } = donnees[p.langue];
+    const { actus, diapos, galeries, reseau, equipe } = donnees[p.langue];
     if (p.meta.precharger === 'diaporama') p.meta.precharger = diaporama.precharger(diapos);
     const [contenu, apres = ''] = p.corps.split('<!-- apres -->\n');
-    construire(gabarit, p.fichier, p.meta, mediatheque.remplir(diaporama.remplir(actualites.remplacer(contenu, actus), diapos), galeries), apres, contexte(p.langue, p.identite));
+    construire(gabarit, p.fichier, p.meta, gotalk.remplir(stations.remplir(mediatheque.remplir(diaporama.remplir(actualites.remplacer(contenu, actus), diapos), galeries), reseau), equipe), gotalk.remplir(apres, equipe), contexte(p.langue, p.identite));
   }
   // Une page par article et par langue (modèle single.html) ; les pages d'articles retirés du fichier de données sont supprimées
   const articles = [];

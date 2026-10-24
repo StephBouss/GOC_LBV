@@ -1,0 +1,58 @@
+<!-- {
+  "fr": "activites/stations-gaboil.html",
+  "titre": "Gab'Oil service stations · Gabon Oil Company",
+  "description": "The Gab'Oil service station network on the map of Gabon: stations in service, under construction and under study, province by province.",
+  "onglet": "activites",
+  "precharger": { "src": "img/photos/stations-hero.jpg", "srcset": "img/photos/stations-hero-768.jpg 768w, img/photos/stations-hero.jpg 1536w" },
+  "css": ["css/pages.css"]
+} -->
+
+  <!-- Navigation de la rubrique -->
+  <nav class="sous-nav" aria-label="Our activities">
+    <ul>
+      <li><a href="activities/exploration-production.html">Exploration &amp; Production</a></li>
+      <li><a href="activities/distribution-processing.html">Distribution &amp; Processing</a></li>
+      <li><a href="activities/gaboil-stations.html" aria-current="page">Gab'Oil stations</a></li>
+      <li><a href="activities/oil-services.html">Oil services</a></li>
+      <li><a href="activities/strategic-projects.html">Strategic projects</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════ 1 · Ouverture ═══════════ -->
+  <section class="page-hero" aria-labelledby="page-titre">
+    <img class="page-hero-image" style="object-position: 50% 40%" src="img/photos/stations-hero.jpg" srcset="img/photos/stations-hero-768.jpg 768w, img/photos/stations-hero.jpg 1536w" sizes="100vw" alt="" width="1536" height="1024" fetchpriority="high">
+    <div class="voile" aria-hidden="true"></div>
+    <div class="conteneur page-hero-contenu">
+      <div class="page-hero-bloc">
+        <p class="sur-titre clair">Distribution · Gab'Oil</p>
+        <h1 class="page-hero-titre" id="page-titre">The Gab'Oil service station network</h1>
+        <p class="page-hero-chapo">{{stations:service}} stations in service, {{stations:construction}} under construction and {{stations:etudes}} under study: Gab'Oil brings energy closer to the people of Gabon, province by province.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 2 · Carte et liste (sources/stations.json, futur type de contenu WordPress « Station ») ═══════════ -->
+  <section class="section" id="carte" aria-labelledby="carte-section-titre">
+    <div class="conteneur">
+      <div class="stations-tete" data-apparition>
+        <div>
+          <p class="sur-titre">Network map</p>
+          <h2 class="titre-section" id="carte-section-titre">Where to find a Gab'Oil station</h2>
+        </div>
+        <p class="texte-doux">Hover over or select a station to light up its location on the map. Stations in the Libreville area are shown in the enlarged inset.</p>
+      </div>
+      <div class="stations-grille">
+        <!-- stations:carte -->
+        <div class="stations-panneau" data-apparition>
+          <!-- stations:filtres -->
+          <div class="stations-liste">
+            <!-- stations:liste -->
+          </div>
+          <div class="stations-liens">
+            <a class="lien-fleche" href="activities/distribution-processing.html#distribution">Our distribution business <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+            <a class="lien-fleche" href="subsidiaries/index.html#gab-oil">Gab'Oil, a Group subsidiary <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

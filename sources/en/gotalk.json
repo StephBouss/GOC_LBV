@@ -1,0 +1,187 @@
+{
+  "_lisezmoi": "Translation of sources/gotalk.json: interface texts and, for each talent (by id), the translated fields. The photo and the order come from the French file.",
+  "textes": {
+    "rubrique": "Career profile",
+    "lire": "Read the profile",
+    "fermer": "Close the profile",
+    "precedent": "Previous profile",
+    "suivant": "Next profile",
+    "mots": "In a few words…",
+    "autres": "Other profiles"
+  },
+  "talents": {
+    "axelle-manguiya-etoughe": {
+      "nom": "Axelle MANGUIYA, married name ETOUGHE",
+      "fonction": "CSR Officer",
+      "service": "Business & Associations Department",
+      "alt": "Axelle MANGUIYA, married name ETOUGHE, at her desk",
+      "titre": "CSR, a commitment serving the company and communities",
+      "chapo": "From mineral prospecting to Corporate Social Responsibility, Axelle MANGUIYA, married name ETOUGHE, has built a career where knowledge of the field meets human commitment. A CSR officer at GOC, she works to reconcile industrial activities, community expectations and the demands of sustainable development.",
+      "entretien": [
+        {
+          "question": "What does your job involve?",
+          "reponse": [
+            "Within the Business & Associations Department, I coordinate activities related to CSR, Local Content and sustainable development.",
+            "My work covers CSR governance, relations with local communities, compliance with regulatory and contractual obligations, and environmental, social and governance (ESG) reporting.",
+            "I also contribute to the social side of the oil depot projects and to internal awareness campaigns, including Pink October and Blue November.",
+            "These tasks call for close collaboration with GOC's departments, government bodies, local authorities and communities. I rely on a committed team, including Larissa IGONDJO (married name MOUANDA), Cyrille MBA, Francine MOULOMBI and Mélisante MPIGA-BOUA."
+          ]
+        },
+        {
+          "question": "What is your background?",
+          "reponse": [
+            "A geological engineer by training, I started out in 2009 in platinum exploration in the Crystal Mountains. I then worked for Core Mining and AREVA Gabon, where my work included supervising drilling campaigns in Haut-Ogooué province.",
+            "I joined GOC in November 2016, before specialising in sustainable development, CSR and non-financial reporting. I am also the author of a personal account, {fr|*Mon chemin vers l'éveil*} (My path to awakening)."
+          ]
+        },
+        {
+          "question": "Why did you join GOC?",
+          "reponse": [
+            "I wanted to put my skills at the service of my country, in a strategic sector. During the 2016 recruitment drive, I was deeply convinced that this opportunity was meant for me.",
+            "Today, my career allows me to connect two worlds I am passionate about: underground resources and the human realities of the areas where we operate."
+          ]
+        },
+        {
+          "question": "What do you particularly enjoy about your job?",
+          "accroche": "The human connection.",
+          "reponse": [
+            "CSR creates a dialogue between the company and communities, between technical imperatives and social expectations.",
+            "I enjoy contributing to decisions that have a tangible impact on people, while supporting GOC's responsible performance."
+          ]
+        },
+        {
+          "question": "What is your proudest achievement at GOC?",
+          "reponse": [
+            "Coordinating GOC's first ESG reporting exercise and helping to prepare its first Sustainability Report. This work is helping to structure our CSR approach.",
+            "As for my best memory, it remains the day I was recruited: a moment that, for me, stands for perseverance and faith."
+          ]
+        },
+        {
+          "question": "Which GOC value best represents you?",
+          "accroche": "Responsibility.",
+          "reponse": [
+            "It sums up my commitment to the company, local communities and future generations. Every decision must take account of its human, social and environmental consequences."
+          ]
+        }
+      ],
+      "mots": [
+        { "libelle": "My favourite acronym", "texte": "LTELM: {fr|*Le Tout est Esprit, l'Univers est Mental*} (The All is Mind, the Universe is Mental)." },
+        { "libelle": "My ideal holiday spot", "texte": "Wherever there is forest, silence and my family." },
+        { "libelle": "The province closest to my heart", "texte": "Estuaire, for the Crystal Mountains where my career began. Ngounié also remains a land I am deeply attached to." },
+        { "libelle": "My favourite quote", "texte": "“What you seek is seeking you.” (attributed to Rumi)" },
+        { "libelle": "The word I reject", "texte": "“Impossible”. It mostly exists until you have found the way." },
+        { "libelle": "My cure for stress", "texte": "Silence, prayer and time spent with my children." }
+      ]
+    },
+    "ingenieur-chimiste-mboumba": {
+      "fonction": "Production Chemical Engineer",
+      "service": "Mboumba field",
+      "alt": "Production chemical engineer in safety overalls and helmet, radio on his shoulder",
+      "titre": "At the heart of production chemistry in Mboumba",
+      "chapo": "On the Mboumba field, chemistry plays a vital role in producing hydrocarbons and preserving the facilities. Meet a production chemical engineer who combines scientific expertise, foresight and team spirit.",
+      "entretien": [
+        {
+          "question": "What does your job involve?",
+          "reponse": [
+            "Reporting to the field's Senior Supervisor, I work closely with the production teams to optimise hydrocarbon recovery and preserve the integrity of equipment and pipelines.",
+            "My role is in particular to anticipate the formation of deposits, such as paraffin, asphaltenes, carbonates or hydrates, and to propose suitable chemical treatments to prevent disruptions to production."
+          ]
+        },
+        {
+          "question": "What is your background?",
+          "reponse": [
+            "I graduated in green chemistry, a discipline based on processes that use less energy and generate less waste.",
+            "I took part in the PARME project, which focused on treating micropollutants in water, and carried out X-ray spectroscopy analysis work at Total in Feyzin, France. These experiences strengthened my skills in analytical chemistry and synthesis."
+          ]
+        },
+        {
+          "question": "Why did you choose GOC?",
+          "reponse": [
+            "Taking part in the development of a Gabonese oil production company is a major motivation for me. It is an opportunity to put my skills at the service of a national industrial project."
+          ]
+        },
+        {
+          "question": "What do you particularly enjoy about your job?",
+          "accroche": "Its variety.",
+          "reponse": [
+            "Every situation calls for understanding the processes, analysing the constraints and finding practical solutions. I also enjoy working with conventional equipment, which demands a solid grasp of the fundamentals of chemistry."
+          ]
+        },
+        {
+          "question": "An achievement you are proud of?",
+          "reponse": [
+            "The study of the origin of inorganic deposits on the field, and drawing up the specifications for production chemistry equipment and facilities."
+          ]
+        },
+        {
+          "question": "Which GOC value best represents you?",
+          "accroche": "Team spirit.",
+          "reponse": [
+            "The performance of an oil field depends on complementary skills and day-to-day collaboration between the different professions."
+          ]
+        }
+      ],
+      "mots": [
+        { "libelle": "My football team", "texte": "Manchester United." },
+        { "libelle": "My favourite verbs", "texte": "To persevere and to adapt." },
+        { "libelle": "The verb I hate", "texte": "To give up." },
+        { "libelle": "My cure for stress", "texte": "Meditation and concentration." }
+      ]
+    },
+    "controleur-couts-senior": {
+      "fonction": "Senior Cost Controller",
+      "service": "Operated Assets Lead Department",
+      "alt": "Senior cost controller in a dark jacket, arms folded, against a black background",
+      "titre": "Cost control serving performance",
+      "chapo": "Behind every oil operation lie investments to plan, expenditure to control and results to analyse. At GOC, the Senior Cost Controller ensures the sound management of the financial resources of the operated assets. Meet a professional driven by a love of figures and an attachment to his country.",
+      "entretien": [
+        {
+          "question": "What does your job involve?",
+          "reponse": [
+            "Within the Operated Assets Lead Department, I work under the supervision of the Head of Department. I coordinate the preparation and monitoring of budgets, analyse operating and capital costs and make sure they are kept under control.",
+            "My role is to provide reliable data to inform decisions and contribute to the profitability of the assets operated by GOC."
+          ]
+        },
+        {
+          "question": "What is your background?",
+          "reponse": [
+            "After passing my baccalauréat (economics track) at Lycée Mbelé in 2004, I was awarded a scholarship to continue my studies in South Africa. I hold a master's degree in purchasing and logistics management from the Vaal University of Technology, and SAPICS named me among the best students of South Africa's universities of technology.",
+            "Before GOC, I worked for OGEC, a Shell Gabon contractor at the Gamba terminal, then for BHP Billiton in Franceville as a Procurement Administrator."
+          ]
+        },
+        {
+          "question": "Why did you join GOC?",
+          "reponse": [
+            "I joined GOC eight years ago, driven by the desire to contribute to my country's development. Helping to build a national hydrocarbons company capable of becoming a benchmark in the oil industry was a challenge I wanted to take on."
+          ]
+        },
+        {
+          "question": "What do you particularly enjoy about your job?",
+          "reponse": [
+            "Figures, of course, but also the exchanges with colleagues from other departments. Cost control calls for as much analytical rigour as collaboration."
+          ]
+        },
+        {
+          "question": "What is your best memory at GOC?",
+          "reponse": [
+            "The time spent at the Obangué site. It remains one of the most memorable experiences of my career with the company."
+          ]
+        },
+        {
+          "question": "Which GOC value best represents you?",
+          "accroche": "All of them: respect, integrity, professionalism, team spirit and responsibility.",
+          "reponse": [
+            "These values complement each other and guide the way I work."
+          ]
+        }
+      ],
+      "mots": [
+        { "libelle": "My favourite acronym", "texte": "JSLFDMP: {fr|*Je suis le fruit de mes pensées*} (I am the fruit of my thoughts)." },
+        { "libelle": "The province closest to my heart", "texte": "Haut-Ogooué, my land and my roots." },
+        { "libelle": "My favourite quote", "texte": "“Powers we have, will never be revealed until we challenge them!”" },
+        { "libelle": "The expressions I refuse to use", "texte": "“It will never work!”, “I can't do it!”, “It's too hard!”" },
+        { "libelle": "My cure for stress", "texte": "Sport." }
+      ]
+    }
+  }
+}

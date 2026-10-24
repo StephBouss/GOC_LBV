@@ -1,8 +1,8 @@
 <!-- {
   "fr": "contact/index.html",
-  "titre": "Contact us · SNHG – Gabon Oil Company",
-  "description": "Contact details for the head office of SNHG – Gabon Oil Company in Libreville, opening hours, contact form and speculative applications.",
-  "onglet": "information",
+  "titre": "Contact us · Gabon Oil Company",
+  "description": "Contact details for the head office of Gabon Oil Company (GOC) in Libreville, opening hours and contact form.",
+  "onglet": "contact",
   "precharger": { "src": "img/photos/contact-hero.jpg", "srcset": "img/photos/contact-hero-768.jpg 768w, img/photos/contact-hero.jpg 1536w" },
   "css": ["css/pages.css"]
 } -->
@@ -12,7 +12,7 @@
     <ul>
       <li><a href="#coordonnees" aria-current="location">Contact details</a></li>
       <li><a href="#formulaire">Form</a></li>
-      <li><a href="#candidature" data-ouvre-candidature>Careers</a></li>
+      <li><a href="careers/index.html">Careers</a></li>
     </ul>
   </nav>
 
@@ -42,6 +42,18 @@
             <h3>Head office – Libreville</h3>
             <address>
               <p lang="fr">1586 avenue Paul Moukambi, BP 635 Libreville</p>
+              <p>Gabon</p>
+            </address>
+          </div>
+        </div>
+
+        <div class="siege" id="siege-port-gentil">
+          <svg class="icone" aria-hidden="true"><use href="#i-lieu"/></svg>
+          <div>
+            <h3>Port-Gentil office</h3>
+            <address>
+              <p>Gabon Oil Company</p>
+              <p lang="fr">Immeuble Paquebot, entrée Nouveau Port, Port-Gentil</p>
               <p>Gabon</p>
             </address>
           </div>
@@ -87,7 +99,7 @@
           </div>
           <div class="consentement">
             <input id="contact-consentement" name="consentement" type="checkbox" value="oui" required>
-            <label for="contact-consentement">I agree that SNHG may use this information to respond to my enquiry, in accordance with its <a href="legal/privacy-policy.html" target="_blank" rel="noopener">privacy policy<span class="visuellement-masque"> (opens in a new tab)</span></a>.</label>
+            <label for="contact-consentement">I agree that GOC may use this information to respond to my enquiry, in accordance with its <a href="legal/privacy-policy.html" target="_blank" rel="noopener">privacy policy<span class="visuellement-masque"> (opens in a new tab)</span></a>.</label>
           </div>
           <button class="bouton bouton-envoyer" type="submit">Send message</button>
           <p class="statut-formulaire" role="status"></p>
@@ -95,84 +107,3 @@
       </div>
     </div>
   </section>
-<!-- apres -->
-<!-- ═══════════ Fenêtre de candidature (MODAL Banani) ═══════════ -->
-<dialog class="candidature" id="candidature" closedby="any" aria-labelledby="candidature-titre">
-  <!-- Envoi : action="…" reçoit l'adresse du service d'envoi, qui doit accepter les pièces jointes (voir INVENTAIRE.md) -->
-  <form method="post" enctype="multipart/form-data" data-envoi data-merci="Thank you, your application has been sent. Our Human Resources team will review it carefully.">
-    <div class="candidature-tete">
-      <h2 id="candidature-titre">Build your career at SNHG</h2>
-      <button class="candidature-fermer" type="button" data-ferme aria-label="Close"><svg class="icone" aria-hidden="true"><use href="#i-fermer"/></svg></button>
-    </div>
-    <p class="candidature-chapo">Looking for a challenge that matches your ambitions? Submit your speculative application here. Fields marked with an asterisk are required.</p>
-
-    <div class="candidature-champs">
-      <div class="duo">
-        <div class="champ">
-          <label for="cand-nom">Full name <span class="obligatoire" aria-hidden="true">*</span></label>
-          <input id="cand-nom" name="nom" type="text" autocomplete="name" placeholder="Your name" required>
-        </div>
-        <div class="champ">
-          <label for="cand-email">Email <span class="obligatoire" aria-hidden="true">*</span></label>
-          <input id="cand-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
-        </div>
-      </div>
-      <div class="duo">
-        <div class="champ">
-          <label for="cand-poste">Position sought</label>
-          <input id="cand-poste" name="poste" type="text" placeholder="e.g. Operations Manager">
-        </div>
-        <div class="champ">
-          <label for="cand-domaine">Field</label>
-          <select id="cand-domaine" name="domaine">
-            <option value="">Select</option>
-            <option>Engineering</option>
-            <option>Geosciences</option>
-            <option>Drilling</option>
-            <option>Maintenance</option>
-            <option>Finance</option>
-            <option>Legal</option>
-            <option>Procurement</option>
-            <option>HR</option>
-            <option>Communications</option>
-            <option>HSE</option>
-          </select>
-        </div>
-      </div>
-      <div class="champ">
-        <label for="cand-experience">Years of experience</label>
-        <select id="cand-experience" name="experience">
-          <option value="">Select</option>
-          <option>Less than 2 years</option>
-          <option>2 to 5 years</option>
-          <option>5 to 10 years</option>
-          <option>More than 10 years</option>
-        </select>
-      </div>
-      <div class="champ">
-        <label for="cand-message">Message</label>
-        <textarea id="cand-message" name="message" placeholder="Tell us about your interest..."></textarea>
-      </div>
-      <div class="champ">
-        <label for="cand-documents">Documents (CV, cover letter) <span class="obligatoire" aria-hidden="true">*</span></label>
-        <div class="depot">
-          <svg class="icone" aria-hidden="true"><use href="#i-televerser"/></svg>
-          <span>Upload your CV &amp; cover letter</span>
-          <span id="cand-documents-regle">PDF or DOCX, up to 3 files and 5 MB per file</span>
-          <span class="depot-nom" aria-live="polite"></span>
-          <input id="cand-documents" name="documents" type="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple required aria-describedby="cand-documents-regle" data-max-fichiers="3" data-max-mo="5">
-        </div>
-      </div>
-      <div class="consentement">
-        <input id="cand-consentement" name="consentement" type="checkbox" value="oui" required>
-        <label for="cand-consentement">I agree to the processing of my data in accordance with SNHG's <a href="legal/privacy-policy.html" target="_blank" rel="noopener">privacy policy<span class="visuellement-masque"> (opens in a new tab)</span></a>.</label>
-      </div>
-      <p class="statut-formulaire" role="status"></p>
-    </div>
-
-    <div class="candidature-actions">
-      <button class="bouton" type="submit" value="envoyer">Submit my application</button>
-      <button class="bouton bouton-neutre" type="button" data-ferme>Cancel</button>
-    </div>
-  </form>
-</dialog>

@@ -325,7 +325,7 @@
     if (piedLarge.matches) e.preventDefault();
   }));
 
-  /* ─── Fenêtre de candidature (page Contact) : <dialog> modal, ouvert par « Carrières » ou l'adresse #candidature ─── */
+  /* ─── Fenêtre de candidature (page Carrières) : <dialog> modal, ouvert par « Déposer ma candidature » ou l'adresse #candidature ─── */
   const candidature = document.getElementById('candidature');
   if (candidature) {
     const ouvrir = () => { if (!candidature.open) candidature.showModal(); };
@@ -339,7 +339,7 @@
         if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) candidature.close();
       });
     }
-    // Liens vers contact.html#candidature (menu « Carrières ») : ouverture à l'arrivée ou sans recharger la page
+    // Liens vers carrieres/index.html#candidature : ouverture à l'arrivée ou sans recharger la page
     const parAdresse = () => { if (location.hash === '#candidature') ouvrir(); };
     parAdresse();
     window.addEventListener('hashchange', parAdresse);
@@ -364,6 +364,60 @@
       });
       fichiers.form.addEventListener('reset', () => { fichiers.setCustomValidity(''); nom.textContent = ''; nom.classList.remove('est-erreur'); });
     }
+  }
+
+  /* ─── Accordéons exclusifs (raisons de la page Carrières, menu mobile) : l'attribut name des <details> n'en laisse
+         qu'un ouvert ; là où il n'est pas pris en charge, ouvrir un élément referme les autres du même groupe ─── */
+  if (!('name' in HTMLDetailsElement.prototype)) {
+    document.querySelectorAll('details[name]').forEach((d) => d.addEventListener('toggle', () => {
+      if (d.open) document.querySelectorAll(`details[name="${d.getAttribute('name')}"]`).forEach((autre) => { if (autre !== d) autre.open = false; });
+    }));
+  }
+
+  /* ─── GO’TALK : la carte d'un talent ouvre son portrait (<dialog>). La photo glisse de la carte à la fenêtre, et d'un
+         portrait au suivant (transition de vue, là où elle existe, sans « mouvement réduit »). Chaque portrait a son
+         adresse #identifiant, qui l'ouvre à l'arrivée. ─── */
+  const portraits = [...document.querySelectorAll('dialog.talent')];
+  if (portraits.length) {
+    const portraitDe = (id) => document.getElementById(`talent-${id}`);
+    const photoDe = (d) => d.querySelector('.talent-portrait img');
+    const ouvert = () => portraits.find((d) => d.open);
+    // La photo de départ, puis celle d'arrivée, portent le nom de la transition ; le reste de la page reste en place
+    const transition = (depart, arrivee, changer) => {
+      if (!document.startViewTransition || reduit.matches || !depart || !arrivee) { changer(); return; }
+      const racine = document.documentElement;
+      racine.classList.add('vt-portrait');
+      depart.style.viewTransitionName = 'talent-photo';
+      const vt = document.startViewTransition(() => { depart.style.viewTransitionName = ''; changer(); arrivee.style.viewTransitionName = 'talent-photo'; });
+      vt.finished.finally(() => { arrivee.style.viewTransitionName = ''; racine.classList.remove('vt-portrait'); });
+    };
+    const ouvrir = (id, depart) => {
+      const d = portraitDe(id);
+      if (!d || d.open) return;
+      const courant = ouvert();
+      transition(depart, photoDe(d), () => {
+        if (courant) courant.close();
+        d.showModal();
+        d.scrollTop = 0;
+        d.querySelector('.talent-lecture').scrollTop = 0;
+      });
+      history.replaceState(null, '', `#${id}`);
+    };
+    const fermer = (d) => transition(photoDe(d), document.querySelector(`.talent-carte[aria-controls="${d.id}"] img`), () => d.close());
+
+    document.querySelectorAll('.talent-carte').forEach((c) => c.addEventListener('click', () => ouvrir(c.dataset.talent, c.querySelector('img'))));
+    portraits.forEach((d) => {
+      d.querySelectorAll('[data-ferme]').forEach((b) => b.addEventListener('click', () => fermer(d)));
+      d.querySelectorAll('[data-talent-voisin]').forEach((b) => b.addEventListener('click', () => ouvrir(b.dataset.talentVoisin, photoDe(d))));
+      // Fermeture au clic sur le fond : native avec closedby="any", à reproduire là où l'attribut n'est pas pris en charge
+      if (!('closedBy' in HTMLDialogElement.prototype)) d.addEventListener('click', (e) => { if (e.target === d) fermer(d); });
+      d.addEventListener('close', () => {
+        if (!ouvert() && location.hash === `#${d.id.replace(/^talent-/, '')}`) history.replaceState(null, '', location.pathname + location.search);
+      });
+    });
+    const parAdresse = () => { const id = decodeURIComponent(location.hash.slice(1)); if (id && portraitDe(id)) ouvrir(id, null); };
+    parAdresse();
+    window.addEventListener('hashchange', parAdresse);
   }
 
   /* ─── Liseuse de documents (rapport de la page Activités) : <dialog> modal, pages du PDF dessinées par PDF.js,
@@ -586,6 +640,106 @@
     });
     const demandee = new URLSearchParams(location.search).get('categorie');
     if (demandee && pastilles.some((a) => a.dataset.filtre === demandee)) appliquer(demandee);
+  }
+
+  /* ─── Stations Gab'Oil : survoler ou choisir une station de la liste fait briller son point sur la carte, et inversement ;
+     la station choisie reste allumée jusqu'au choix suivant (ou Échap). Les pastilles filtrent la liste et la carte par état.
+     La liste est l'interface accessible : les points de la carte la doublent pour la souris et le toucher. ─── */
+  const carte = document.querySelector('.carte-gabon');
+  const listeStations = document.querySelector('.stations-liste');
+  if (carte && listeStations) {
+    const figure = carte.closest('.stations-carte');
+    const bulle = figure.querySelector('.carte-bulle');
+    const { width: largeur, height: hauteur } = carte.viewBox.baseVal;
+    const points = new Map([...carte.querySelectorAll('.point')].map((p) => [p.dataset.station, p]));
+    const boutons = new Map([...listeStations.querySelectorAll('button.station')].map((b) => [b.dataset.station, b]));
+    let survolee = null;
+    let choisie = null;
+
+    const montrer = (id) => {
+      points.forEach((p, k) => p.classList.toggle('est-active', k === id));
+      boutons.forEach((b, k) => b.classList.toggle('est-active', k === id));
+      carte.classList.toggle('a-un-point-actif', Boolean(id));
+      if (!id) { bulle.hidden = true; return; }
+      const point = points.get(id);
+      point.parentNode.append(point);   // dessiné par-dessus les autres
+      const { e: x, f: y } = point.transform.baseVal.consolidate().matrix;
+      const bouton = boutons.get(id);
+      const nom = document.createElement('strong');
+      const ligne = document.createElement('span');
+      nom.textContent = bouton.querySelector('.station-nom').textContent;
+      ligne.textContent = [bouton.querySelector('.station-lieu')?.textContent, bouton.closest('.stations-groupe').dataset.libelle].filter(Boolean).join(' · ');
+      bulle.querySelector('.carte-bulle-texte').replaceChildren(nom, ligne);
+      // Photo de la station, ou le logo Gab'Oil quand elle n'en a pas encore
+      const photos = [...bulle.querySelectorAll('.carte-bulle-photo img')];
+      const photo = photos.find((i) => i.dataset.station === id) || photos.find((i) => !i.dataset.station);
+      photos.forEach((i) => { i.hidden = i !== photo; });
+      bulle.style.setProperty('--x', `${(x / largeur) * 100}%`);
+      bulle.style.setProperty('--y', `${(y / hauteur) * 100}%`);
+      bulle.dataset.cote = x / largeur < .18 ? 'gauche' : x / largeur > .82 ? 'droite' : '';
+      bulle.hidden = false;
+      // Sous le point quand la bulle (avec sa photo) dépasserait du haut de la carte
+      bulle.classList.toggle('en-dessous', (y / hauteur) * carte.getBoundingClientRect().height < bulle.offsetHeight + 24);
+    };
+    const actualiser = () => montrer(survolee || choisie);
+    const choisir = (id) => {
+      choisie = choisie === id ? null : id;
+      boutons.forEach((b, k) => b.setAttribute('aria-pressed', String(k === choisie)));
+      actualiser();
+    };
+    // Carte au-dessus de la liste (tablette, smartphone) : elle revient en vue quand on choisit une station
+    const ramenerCarte = () => {
+      if (getComputedStyle(figure).position === 'sticky') return;
+      const r = figure.getBoundingClientRect();
+      if (r.top < 80 || r.bottom > innerHeight) figure.scrollIntoView({ block: 'center', behavior: reduit.matches ? 'auto' : 'smooth' });
+    };
+
+    listeStations.addEventListener('pointerover', (e) => {
+      const b = e.target.closest('button.station');
+      if (b && e.pointerType !== 'touch') { survolee = b.dataset.station; actualiser(); }
+    });
+    listeStations.addEventListener('pointerout', (e) => {
+      const b = e.target.closest('button.station');
+      if (b && !b.contains(e.relatedTarget)) { survolee = null; actualiser(); }
+    });
+    listeStations.addEventListener('focusin', (e) => { const b = e.target.closest('button.station'); if (b) { survolee = b.dataset.station; actualiser(); } });
+    listeStations.addEventListener('focusout', () => { survolee = null; actualiser(); });
+    listeStations.addEventListener('click', (e) => {
+      const b = e.target.closest('button.station');
+      if (!b) return;
+      choisir(b.dataset.station);
+      if (choisie) ramenerCarte();
+    });
+
+    carte.addEventListener('pointerover', (e) => {
+      const p = e.target.closest('.point');
+      if (p && e.pointerType !== 'touch') { survolee = p.dataset.station; actualiser(); }
+    });
+    carte.addEventListener('pointerout', (e) => {
+      const p = e.target.closest('.point');
+      if (p && !p.contains(e.relatedTarget)) { survolee = null; actualiser(); }
+    });
+    carte.addEventListener('click', (e) => {
+      const p = e.target.closest('.point');
+      if (!p) return;
+      choisir(p.dataset.station);
+      const b = boutons.get(p.dataset.station);
+      const r = b.getBoundingClientRect();
+      if (choisie && (r.top < 80 || r.bottom > innerHeight)) b.scrollIntoView({ block: 'nearest', behavior: reduit.matches ? 'auto' : 'smooth' });
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && choisie) choisir(choisie); });
+
+    // Filtre par état : groupes de la liste et points de la carte
+    const pastillesEtat = [...document.querySelectorAll('.stations-filtres button[data-filtre]')];
+    document.querySelector('.stations-filtres')?.addEventListener('click', (e) => {
+      const bouton = e.target.closest('button[data-filtre]');
+      if (!bouton) return;
+      const etat = bouton.dataset.filtre;
+      pastillesEtat.forEach((p) => p.setAttribute('aria-pressed', String(p === bouton)));
+      listeStations.querySelectorAll('.stations-groupe').forEach((g) => { g.hidden = Boolean(etat) && g.dataset.etat !== etat; });
+      points.forEach((p) => p.classList.toggle('est-masque', Boolean(etat) && p.dataset.etat !== etat));
+      if (choisie && points.get(choisie).classList.contains('est-masque')) choisir(choisie);
+    });
   }
 
   /* ─── Gestion des cookies : refus de la mesure d'audience ───

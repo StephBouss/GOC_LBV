@@ -4,7 +4,8 @@
  * Illustrations vectorielles en aplats, aux couleurs de la charte : rouge GOC, noirs et gris, touches du drapeau gabonais.
  * Format 16:10 (320 × 200), affichées à 17,5rem de large au plus.
  *
- * Sortie : img/frise/<annee>-<sujet>.svg
+ * Sortie : img/frise/<annee>-<sujet>.svg, et img/frise/en/<annee>-<sujet>.svg pour les vignettes qui portent un texte
+ *          à traduire (la version anglaise du site nomme la société GOC, la version française SNHG)
  * Usage  : node scripts/creer-vignettes-frise.js
  * Pour remplacer une vignette par une photo, il suffit de changer le src de l'image dans sources/pages/historique-gouvernance.html.
  */
@@ -53,18 +54,40 @@ const drapeau = (x, sol, hMat, l = 40) => {
 const personne = (cx, cy, c) => `<circle cx="${cx}" cy="${cy - 6}" r="5.5" fill="${c}"/><path d="M${cx - 10} ${cy + 10} C${cx - 10} ${cy + 1} ${cx - 5} ${cy} ${cx} ${cy} C${cx + 5} ${cy} ${cx + 10} ${cy + 1} ${cx + 10} ${cy + 10}Z" fill="${c}"/>`;
 const fleche = (id, c) => `<marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="${c}"/></marker>`;
 
-const VIGNETTES = {
+/* Textes propres à chaque langue (sous-dossier de sortie, nom de la société, mots et titres des vignettes concernées) */
+const LANGUES = {
+  fr: {
+    dossier: '', societe: 'SNHG', creation: ['CRÉATION', 'DE LA SNHG', 'Décret n°1017/PR/MMPH'], jv: 'JOINT-VENTURE', actifs: 'ACTIFS',
+    titres: {
+      creation: 'Création de la SNHG : décret signé',
+      jv: 'Première joint-venture : deux partenaires qui s\'assemblent',
+      consolidations: 'Consolidations : Addax, SMP et Tullow Oil Gabon rejoignent la SNHG',
+      gouvernance: 'Structure et gouvernance renouvelées : organigramme et synergies du groupe',
+    },
+  },
+  en: {
+    dossier: 'en', societe: 'GOC', creation: ['FOUNDING', 'OF GOC', 'Decree No. 1017/PR/MMPH'], jv: 'JOINT VENTURE', actifs: 'ASSETS',
+    titres: {
+      creation: 'Founding of GOC: decree signed',
+      jv: 'First joint venture: two partners coming together',
+      consolidations: 'Consolidations: Addax, SMP and Tullow Oil Gabon join GOC',
+      gouvernance: 'Renewed structure and governance: organisation chart and group synergies',
+    },
+  },
+};
+
+const vignettes = (T) => ({
   /* 2011 · Création de la société : décret signé, sceau et stylo-plume */
-  '2011-creation-goc': ['Création de la SNHG : décret signé', `
+  '2011-creation-goc': [T.titres.creation, `
 ${halo(160, 100, 84, ROSE)}
 ${ombre(166, 186, 70, 5)}
 <g transform="rotate(-4 166 104)">
   <rect x="108" y="22" width="124" height="158" rx="6" fill="${N}" opacity=".07" transform="translate(4 5)"/>
   <rect x="108" y="22" width="124" height="158" rx="6" fill="${B}" stroke="${L}"/>
   <rect x="152" y="32" width="12" height="3" fill="${V}"/><rect x="164" y="32" width="12" height="3" fill="${J}"/><rect x="176" y="32" width="12" height="3" fill="${BL}"/>
-  ${texte(170, 55, 'CRÉATION', { taille: 13 })}
-  ${texte(170, 70, 'DE LA SNHG', { taille: 13, couleur: R })}
-  ${texte(170, 82, 'Décret n°1017/PR/MMPH', { taille: 7, couleur: A, graisse: 600 })}
+  ${texte(170, 55, T.creation[0], { taille: 13 })}
+  ${texte(170, 70, T.creation[1], { taille: 13, couleur: R })}
+  ${texte(170, 82, T.creation[2], { taille: 7, couleur: A, graisse: 600 })}
   <rect x="122" y="92" width="96" height="3" rx="1.5" fill="${L}"/><rect x="122" y="100" width="88" height="3" rx="1.5" fill="${L}"/>
   <rect x="122" y="108" width="96" height="3" rx="1.5" fill="${L}"/><rect x="122" y="116" width="70" height="3" rx="1.5" fill="${L}"/>
   <rect x="122" y="124" width="84" height="3" rx="1.5" fill="${L}"/>
@@ -128,7 +151,7 @@ ${goutte(124, 120, 22, B)}
 ${pastille(20, 20, 'OBANGUE')}`],
 
   /* Octobre 2014 · Première joint-venture : deux pièces qui s'assemblent, partenaire maritime */
-  '2014-joint-venture': ['Première joint-venture : deux partenaires qui s\'assemblent', `
+  '2014-joint-venture': [T.titres.jv, `
 ${halo(162, 92, 78, ROSE)}
 <path d="M0 172 Q20 164 40 172 T80 172 T120 172 T160 172 T200 172 T240 172 T280 172 T320 172 V200 H0Z" fill="${CIEL}"/>
 <path d="M0 182 Q20 175 40 182 T80 182 T120 182 T160 182 T200 182 T240 182 T280 182 T320 182" fill="none" stroke="${BL}" stroke-width="1.5" opacity=".35"/>
@@ -138,9 +161,9 @@ ${ombre(162, 142, 72, 5)}
 <circle cx="168" cy="94" r="15" fill="${ROSE}"/>
 <rect x="84" y="58" width="78" height="72" rx="9" fill="${R}"/>
 <circle cx="168" cy="94" r="12" fill="${R}"/>
-${texte(123, 99, 'SNHG', { taille: 15, couleur: B })}
+${texte(123, 99, T.societe, { taille: 15, couleur: B })}
 ${texte(215, 98, 'BOURBON', { taille: 9, couleur: B, espace: 0.3 })}
-${pastille(20, 20, 'JOINT-VENTURE')}`],
+${pastille(20, 20, T.jv)}`],
 
   /* Septembre 2016 · Expansion sur le CEPP Mboga II : bloc de permis mis en avant sur la carte */
   '2016-cepp-mboga': ['Expansion sur le CEPP Mboga II : nouveau bloc sur la carte des permis', `
@@ -238,7 +261,7 @@ ${drapeau(282, 164, 70, 30)}
 ${pastille(160, 172, 'ASSALA ENERGY', { ancre: 'middle' })}`],
 
   /* 2024–2025 · L'ère des consolidations : trois actifs convergent vers la SNHG */
-  '2024-consolidations': ['Consolidations : Addax, SMP et Tullow Oil Gabon rejoignent la SNHG', `
+  '2024-consolidations': [T.titres.consolidations, `
 ${halo(160, 100, 62, ROSE)}
 <defs>${fleche('f2025', E)}</defs>
 <g stroke="${E}" stroke-width="2" stroke-linecap="round" fill="none" marker-end="url(#f2025)">
@@ -246,22 +269,22 @@ ${halo(160, 100, 62, ROSE)}
 </g>
 ${ombre(160, 150, 30, 4)}
 ${goutte(160, 52, 92, R)}
-${texte(160, 124, 'SNHG', { taille: 11, couleur: B, espace: 0.6 })}
+${texte(160, 124, T.societe, { taille: 11, couleur: B, espace: 0.6 })}
 <g fill="${B}" stroke="${E}" stroke-width="2"><circle cx="66" cy="44" r="27"/><circle cx="66" cy="158" r="27"/><circle cx="260" cy="102" r="27"/></g>
 ${texte(66, 48, 'ADDAX', { taille: 10 })}
 ${texte(66, 162, 'SMP', { taille: 11 })}
 ${texte(260, 106, 'GOP', { taille: 11 })}`],
 
   /* 2025 · Structure, gouvernance et vision renouvelée : organigramme et synergies */
-  '2025-gouvernance': ['Structure et gouvernance renouvelées : organigramme et synergies du groupe', `
+  '2025-gouvernance': [T.titres.gouvernance, `
 ${halo(160, 100, 84, ROSE)}
 <g stroke="${R}" stroke-width="2" fill="none"><path d="M160 72 V88 M82 88 H238 M82 88 V102 M160 88 V102 M238 88 V102"/></g>
 <rect x="124" y="24" width="72" height="48" rx="8" fill="${R}"/>
 ${personne(160, 42, B)}
-${texte(160, 66, 'SNHG', { taille: 10, couleur: B, espace: 0.6 })}
+${texte(160, 66, T.societe, { taille: 10, couleur: B, espace: 0.6 })}
 <g fill="${B}" stroke="${L}" stroke-width="1.5"><rect x="46" y="102" width="72" height="48" rx="8"/><rect x="124" y="102" width="72" height="48" rx="8"/><rect x="202" y="102" width="72" height="48" rx="8"/></g>
 ${personne(82, 120, E)}${personne(160, 120, E)}${personne(238, 120, E)}
-${texte(82, 144, 'GAB\'OIL', { taille: 9.5 })}${texte(160, 144, 'SMP', { taille: 9.5 })}${texte(238, 144, 'ACTIFS', { taille: 9.5 })}
+${texte(82, 144, 'GAB\'OIL', { taille: 9.5 })}${texte(160, 144, 'SMP', { taille: 9.5 })}${texte(238, 144, T.actifs, { taille: 9.5 })}
 <defs>${fleche('fsyn', A)}</defs>
 <line x1="70" y1="170" x2="250" y2="170" stroke="${A}" stroke-width="1.8" stroke-dasharray="5 4" marker-start="url(#fsyn)" marker-end="url(#fsyn)"/>
 ${texte(160, 188, 'SYNERGIES', { taille: 8.5, couleur: ED, espace: 1.2 })}`],
@@ -295,10 +318,18 @@ ${texte(160, 188, 'SYNERGIES', { taille: 8.5, couleur: ED, espace: 1.2 })}`],
 <g stroke="${B}" stroke-width="1.2" opacity=".75"><line x1="251" y1="149" x2="305" y2="149"/><line x1="264" y1="136" x2="259" y2="162"/><line x1="282" y1="136" x2="277" y2="162"/><line x1="300" y1="136" x2="295" y2="162"/></g>
 ${texte(22, 46, '2030', { taille: 30, ancre: 'start' })}
 <rect x="24" y="54" width="22" height="4" fill="${V}"/><rect x="46" y="54" width="22" height="4" fill="${J}"/><rect x="68" y="54" width="22" height="4" fill="${BL}"/>`, '#F3F8F4'],
-};
+});
 
-fs.mkdirSync(SORTIE, { recursive: true });
-for (const [nom, [titre, contenu, fond]] of Object.entries(VIGNETTES)) {
-  fs.writeFileSync(path.join(SORTIE, `${nom}.svg`), svg(titre, contenu, fond));
+/* Le français écrit toutes les vignettes ; une autre langue n'écrit que celles dont le dessin change (texte traduit) */
+const reference = vignettes(LANGUES.fr);
+for (const [langue, T] of Object.entries(LANGUES)) {
+  const dossier = path.join(SORTIE, T.dossier);
+  fs.mkdirSync(dossier, { recursive: true });
+  let n = 0;
+  for (const [nom, [titre, contenu, fond]] of Object.entries(vignettes(T))) {
+    if (langue !== 'fr' && contenu === reference[nom][1]) continue;
+    fs.writeFileSync(path.join(dossier, `${nom}.svg`), svg(titre, contenu, fond));
+    n++;
+  }
+  console.log(`${n} vignettes écrites dans ${path.relative(process.cwd(), dossier)}`);
 }
-console.log(`${Object.keys(VIGNETTES).length} vignettes écrites dans ${path.relative(process.cwd(), SORTIE)}`);

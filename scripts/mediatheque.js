@@ -3,7 +3,7 @@
  * Chaque galerie préfigure un bloc Galerie de WordPress (un album par site) :
  *
  *  sommaire()   pastilles de navigation vers chaque galerie (ancres), avec le nombre de photos
- *  galerie()    une section par site : type de site, titre, présentation, mosaïque de 5 à 7 photos
+ *  galerie()    une section par site : type de site, titre, présentation, mosaïque de 3 à 7 photos
  *               dont la première est mise en avant ; chaque photo ouvre la visionneuse (app.js)
  *
  * Langues : le fichier français décrit tout (photos, ordre) ; sources/<langue>/mediatheque.json ne donne que ce qui se
@@ -68,7 +68,7 @@ ${d.galeries.map((g) => `          <li><a href="#${g.slug}">${g.titre} <span cla
 function photo(g, p, i) {
   const tailles = i === 0 ? '(max-width: 767px) 100vw, 60vw' : '(max-width: 767px) 50vw, 30vw';
   return `          <li><a class="galerie-photo" href="${p.grande}" data-visionneuse="${g.slug}" data-largeur="${p.tailleGrande.largeur}" data-hauteur="${p.tailleGrande.hauteur}">`
-    + `<img src="${p.petite}" srcset="${p.petite} 800w, ${p.grande} 1600w" sizes="${tailles}" alt="${p.alt}" width="${p.taillePetite.largeur}" height="${p.taillePetite.hauteur}" loading="lazy"></a></li>`;
+    + `<img src="${p.petite}" srcset="${p.petite} 800w, ${p.grande} ${p.tailleGrande.largeur}w" sizes="${tailles}" alt="${p.alt}" width="${p.taillePetite.largeur}" height="${p.taillePetite.hauteur}" loading="lazy"></a></li>`;
 }
 
 const galerie = (g, rang, t) => `

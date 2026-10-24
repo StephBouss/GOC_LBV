@@ -2,9 +2,9 @@
 /**
  * Prépare les photos réelles des pages, qui remplacent les visuels générés par IA de la maquette Banani.
  * Elles viennent des reportages fournis par le client (hors du dépôt) : « Photo Autre/Opérations GOC »,
- * « GOC-SNHG - Contenus/Images GOC - SNHG » et « Station ».
+ * « GOC-SNHG - Contenus/Images GOC - SNHG », « Station », « SMP » et « GOTALK » (portraits des talents, copiés sous un nom simple).
  *
- *  img/photos/<nom>.jpg       1536 × 1024 (paysage) ou 1024 × 1536 (portrait)
+ *  img/photos/<nom>.jpg       1536 × 1024 (paysage), 1024 × 1536 (portrait) ou 960 × 1200 (talent, GO’TALK)
  *  img/photos/<nom>-768.jpg   768 px de large, pour les attributs srcset
  *
  * « zone » (facultative) : partie de la photo d'origine à garder, en fractions [x, y, largeur, hauteur].
@@ -53,9 +53,17 @@ const PHOTOS = [
   { nom: 'projets-equipe', source: `${OPERATIONS}/Sardine/Sardine - Opérateurs en discussion/DSC03483.jpg` },                            // plateforme Sardine
   { nom: 'hsei-approche', source: `${OPERATIONS}/Mboumba/Mboumba - Réunion HSSE/DSC09324.jpg` },                                        // tableau HSSE et 10 Règles d'or
   { nom: 'distribution-station', source: 'Station/Inauguration de la station GabOil 1.png', zone: [0.12, 0.08, 0.84, 0.92] },          // pompe et boutique (l'ouverture reprend actu-gaboil-station)
+  { nom: 'stations-hero', source: 'Station/Inauguration de la station GABOIL.png', zone: [0, 0, 1, 0.84] },                         // page des stations : station de Makokou, sans le titre incrusté
   { nom: 'services-hero', source: `${OPERATIONS}/Sardine/Sardine - Local électrique/DSC03872.jpg` },                                    // technicien devant une armoire électrique
-  { nom: 'services-intervention', source: `${OPERATIONS}/Mboumba/Mboumba - Permis de travail/DSC09762.jpg` },                          // deux opérateurs relisent un permis de travail
+  { nom: 'carrieres-hero', source: `${OPERATIONS}/Port-Gentil/POG - Travail d_équipe/DSC04221.jpg` },                              // collaboratrice et collègue au poste de travail, à droite (le texte de l'ouverture reste à gauche)
+  { nom: 'carrieres-fierte', source: `${OPERATIONS}/Tsiengui/Tsiengui - Portraits opérateurs/DSC00998.jpg` },                          // opérateur, écusson aux couleurs du Gabon
+  { nom: 'carrieres-equipe', source: `${OPERATIONS}/Obangué/Obangué - Réunion d_équipe/DSC02637.jpg` },                                // réunion d'équipe (bande de candidature)
+  { nom: 'services-intervention', source: 'SMP/SMP.webp' },                                                                          // technicien SMP sur un appareil de forage, main levée (photo fournie le 24/10/2026)
   // Images à la une et galeries des actualités (sources/actualites.json), au format 16:9 des cartes et des articles
+  // GO’TALK : portraits des talents (sources/gotalk.json), recadrés en 4:5
+  { nom: 'gotalk-axelle-manguiya-etoughe', source: 'GOTALK/axelle-manguiya-etoughe.png', format: 'talent' },
+  { nom: 'gotalk-ingenieur-chimiste-mboumba', source: 'GOTALK/ingenieur-chimiste-mboumba.png', format: 'talent', zone: [0, 0, 1, 0.9] },   // casque gardé en entier
+  { nom: 'gotalk-controleur-couts-senior', source: 'GOTALK/controleur-couts-senior.png', format: 'talent', zone: [0.31, 0, 0.51, 1] },   // photo en largeur : cadrée sur la personne
   { nom: 'actu-addax-tsiengui', source: `${OPERATIONS}/Tsiengui/Tsiengui - Vues aériennes/DJI_0299.jpg`, format: 'actualite' },
   { nom: 'actu-addax-obangue', source: `${OPERATIONS}/Obangué/Obangué - Installations/DSC01687.jpg`, format: 'actualite' },
   { nom: 'actu-smp', source: `${OPERATIONS}/Obangué/Obangué - Opérateur salle électrique/DSC01793.jpg`, format: 'actualite' },
@@ -67,6 +75,7 @@ const FORMATS = {
   paysage: { grande: [1536, 1024], petite: [768, 512] },
   portrait: { grande: [1024, 1536], petite: [768, 1152] },
   actualite: { grande: [1536, 864], petite: [768, 432] },
+  talent: { grande: [960, 1200], petite: [768, 960] },
 };
 
 // Les accents des noms de dossiers peuvent être enregistrés décomposés (copie depuis un Mac) :

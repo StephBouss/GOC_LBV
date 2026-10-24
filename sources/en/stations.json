@@ -1,0 +1,25 @@
+{
+  "_lisezmoi": [
+    "Traduction anglaise du réseau de stations Gab'Oil (sources/stations.json). Seuls les textes se traduisent : les stations, leur état, leur ordre et leurs coordonnées restent ceux du fichier français.",
+    "« stations » ne donne, par identifiant, que les noms qui changent en anglais ; les autres gardent leur nom français (noms de lieux).",
+    "Dans WordPress : la traduction anglaise de la page des stations (Polylang) ; les états et les noms de la carte sont des chaînes traduisibles du thème."
+  ],
+  "etats": {
+    "service": "In service",
+    "construction": "Under construction",
+    "etudes": "Studies under way"
+  },
+  "textes": {
+    "toutes": "All",
+    "filtrer": "Filter stations by status"
+  },
+  "carte": {
+    "titre": "Map of Gab'Oil service stations in Gabon",
+    "encart": "Greater Libreville",
+    "ocean": "Atlantic Ocean",
+    "cameroun": "Cameroon",
+    "guinee-equatoriale": "Equatorial Guinea",
+    "congo": "Congo"
+  },
+  "stations": {}
+}

@@ -23,7 +23,7 @@
     "tsiengui": {
       "type": "Onshore field",
       "titre": "Tsiengui",
-      "description": "Taken over by SNHG in March 2024 together with the Obangué field, Tsiengui marks the State's recovery of its energy sovereignty. Its storage capacity is being expanded.",
+      "description": "Taken over by GOC in March 2024 together with the Obangué field, Tsiengui marks the State's recovery of its energy sovereignty. Its storage capacity is being expanded.",
       "photos": [
         "Aerial view of the Tsiengui site and its storage tanks in the middle of the forest",
         "Operator seen from behind, with the Gabon Oil logo on the coveralls, facing the Tsiengui storage tanks",
@@ -62,10 +62,20 @@
         "White helmet bearing the Gabon Oil logo on a meeting table"
       ]
     },
+    "akondo": {
+      "type": "Onshore field",
+      "titre": "Akondo",
+      "description": "Deep in the Gabonese forest, the onshore Akondo permit, operated by GOC, brings together storage tanks, processing units and the teams' buildings on a single site.",
+      "photos": [
+        "Aerial view of the Akondo site: storage tanks, sheltered processing units and a telecommunications mast surrounded by forest",
+        "Laterite track running alongside the forest to the Akondo facilities, seen from the air",
+        "Overview of the Akondo site, with its red-roofed buildings and storage tanks under a cloudy sky"
+      ]
+    },
     "mandji": {
       "type": "Territory and communities",
       "titre": "Mandji",
-      "description": "In the Mandji area, SNHG works alongside local communities: a hospital under construction, a new playground, and facilities seen from the air.",
+      "description": "In the Mandji area, GOC works alongside local communities: a hospital under construction, a new playground, and facilities seen from the air.",
       "photos": [
         "Two team members in orange coveralls on a riverbank",
         "Aerial view of a fenced facility in the middle of the savannah, Mandji area",

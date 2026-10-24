@@ -9,7 +9,7 @@
  *  pageArticle()  modèle single.html : en-tête, image à la une, contenu, « À lire aussi » (même catégorie d'abord)
  *
  * Langues : le fichier français décrit tout (date, catégorie, images) ; sources/<langue>/actualites.json ne donne que
- * ce qui se traduit (adresse, titre, extrait, contenu, textes alternatifs, noms des catégories), comme une traduction
+ * ce qui se traduit (adresse, titre, extrait, contenu, textes alternatifs, illustrations qui portent du texte, noms des catégories), comme une traduction
  * liée dans Polylang. Une traduction manquante arrête la génération. Les textes de l'interface viennent de libelles.json.
  *
  * Utilisé par scripts/assembler-pages.js : repères <!-- actualites:accueil -->, <!-- actualites:filtres -->,
@@ -48,7 +48,7 @@ function traduire(donnees, sources, langue) {
       titre: t.titre,
       extrait: t.extrait,
       contenu: t.contenu,
-      image: { ...a.image, alt: t.image && t.image.alt },
+      image: { ...a.image, ...(t.image && t.image.src && { src: t.image.src }), alt: t.image && t.image.alt },   // illustration traduite (texte dans l'image)
       galerie: galerie.map((g, i) => ({ ...g, alt: t.galerie[i].alt })),
     };
   });
@@ -142,8 +142,7 @@ function pageArticle(a, d) {
     <ul>
       <li><a href="actualites/index.html" aria-current="true">${t.actualites}</a></li>
       <li><a href="mediatheque/index.html">${t.mediatheque}</a></li>
-      <li><a href="contact/index.html#candidature">${t.carrieres}</a></li>
-      <li><a href="contact/index.html">${t.contact}</a></li>
+      <li><a href="carrieres/index.html">${t.carrieres}</a></li>
     </ul>
   </nav>
 
