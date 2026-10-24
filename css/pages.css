@@ -663,6 +663,7 @@ a.joindre-valeur:hover { color: var(--rouge-survol); text-decoration: underline;
 .legal-texte a { font-weight: 600; color: var(--rouge-action); overflow-wrap: anywhere; transition: color .15s; }
 .legal-texte a strong { color: inherit; }
 .legal-texte a[href^="tel:"] { color: var(--noir); }
+.legal-texte a .icone { display: inline-block; width: .875rem; height: .875rem; margin-left: .3125rem; vertical-align: -.0625rem; }
 .legal-texte a:hover { color: var(--rouge-survol); text-decoration: underline; text-underline-offset: .1875rem; }
 
 /* Fiche d'identité : encadré à filet rouge des horaires (Contact), libellés en étiquettes */

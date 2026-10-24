@@ -25,7 +25,7 @@
   <link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="../img/photos/cookies-hero.jpg?ver=ebc534e13c" imagesrcset="../img/photos/cookies-hero-768.jpg?ver=36225c4f67 768w, ../img/photos/cookies-hero.jpg?ver=ebc534e13c 1536w" imagesizes="100vw" fetchpriority="high">
   <link rel="stylesheet" href="../css/styles.css?ver=dda954654f">
-  <link rel="stylesheet" href="../css/pages.css?ver=201c092442">
+  <link rel="stylesheet" href="../css/pages.css?ver=35d8529a45">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -44,6 +44,7 @@
   <symbol id="i-haut" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
   <symbol id="i-externe" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></symbol>
+  <symbol id="i-lien-externe" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
 </svg>
 
 <a class="evitement" href="#contenu">Aller au contenu</a>
@@ -268,10 +269,10 @@
           <h2 id="navigateur-titre"><span class="legal-num">5.</span>Réglages du navigateur</h2>
           <p>Vous pouvez aussi régler votre navigateur pour accepter ou refuser les cookies, ou pour les effacer. Refuser les cookies n'empêche pas de consulter le site. La marche à suivre dépend de votre navigateur :</p>
           <ul class="legal-liste">
-            <li><a href="https://support.google.com/chrome/answer/95647?hl=fr">Google Chrome</a></li>
-            <li><a href="https://support.mozilla.org/fr/kb/effacer-cookies-donnees-site-firefox">Mozilla Firefox</a></li>
-            <li><a href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac">Safari</a></li>
-            <li><a href="https://support.microsoft.com/fr-fr/edge/manage-cookies-in-microsoft-edge-view-allow-block-delete-and-use">Microsoft Edge</a></li>
+            <li><a href="https://support.google.com/chrome/answer/95647?hl=fr" target="_blank" rel="noopener noreferrer">Google Chrome<svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a></li>
+            <li><a href="https://support.mozilla.org/fr/kb/effacer-cookies-donnees-site-firefox" target="_blank" rel="noopener noreferrer">Mozilla Firefox<svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a></li>
+            <li><a href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">Safari<svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a></li>
+            <li><a href="https://support.microsoft.com/fr-fr/edge/manage-cookies-in-microsoft-edge-view-allow-block-delete-and-use" target="_blank" rel="noopener noreferrer">Microsoft Edge<svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a></li>
           </ul>
         </section>
 
@@ -301,8 +302,8 @@
         <ul class="reseaux" aria-label="Réseaux sociaux">
           <li><a href="https://www.facebook.com/GabOilSA" target="_blank" rel="noopener noreferrer" aria-label="Facebook (nouvel onglet)"><svg class="icone" aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
           <li><a href="https://www.linkedin.com/company/gabon-oil" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (nouvel onglet)"><svg class="icone" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
-          <!-- X : adresse fournie par le client ; au 24/10/2026, X répond « Ce compte n'existe pas » : à vérifier dans l'application X -->
-          <li><a href="https://x.com/gabonoilcomp" target="_blank" rel="noopener noreferrer" aria-label="X (nouvel onglet)"><svg class="icone" aria-hidden="true"><use href="#i-x"/></svg></a></li>
+          <!-- X : lien d'attente (#) à la demande du client, l'adresse du compte est à fournir ; la remettre avec target="_blank" et rel="noopener noreferrer" -->
+          <li><a href="#" aria-label="X"><svg class="icone" aria-hidden="true"><use href="#i-x"/></svg></a></li>
         </ul>
       </div>
       <nav class="pied-liens" aria-label="Plan du site">
