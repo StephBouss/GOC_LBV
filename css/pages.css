@@ -581,6 +581,7 @@ a.joindre-valeur:hover { color: var(--rouge-survol); text-decoration: underline;
 .statut-formulaire[data-etat="erreur"] { color: var(--rouge-action); }
 .statut-formulaire a { font-weight: 600; color: var(--rouge-action); text-decoration: underline; text-underline-offset: .125rem; }
 .obligatoire { color: var(--rouge-action); }
+.champ-facultatif { font-weight: 400; letter-spacing: 0; text-transform: none; }
 /* Consentement dans le formulaire de contact et la lettre d'information : texte à la taille des champs */
 :is(.formulaire, .lettre) .consentement input { margin-top: .125rem; }
 :is(.formulaire, .lettre) .consentement label { font-size: .8125rem; line-height: 1.25rem; }

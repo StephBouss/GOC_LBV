@@ -301,11 +301,28 @@
   }, { passive: true });
   majEntete();
 
-  /* ─── Bouton « haut de page » : visible une fois l'ouverture de page entièrement dépassée ─── */
+  /* ─── Bouton « haut de page » : rien tant que l'ouverture de page (ou, sans ouverture, le premier écran) est visible.
+     Dans la marge des grands écrans, il reste ensuite affiché ; ailleurs, il passerait sur le texte :
+     il n'apparaît qu'en remontant la page, ou tout en bas, et s'efface dès qu'on redescend ─── */
   const hautDePage = document.querySelector('.haut-de-page');
+  const dansLaMarge = matchMedia('(min-width: 87.5rem)');
+  let ouverturePassee = false, remonte = false, dernierY = window.scrollY, majHautPrevue = false;
+  const majHautDePage = () => {
+    const y = window.scrollY;
+    if (Math.abs(y - dernierY) > 12) { remonte = y < dernierY; dernierY = y; }
+    if (!hero) ouverturePassee = y > innerHeight * .8;
+    const enBas = y + innerHeight >= document.documentElement.scrollHeight - 48;
+    hautDePage.classList.toggle('est-visible', ouverturePassee && (dansLaMarge.matches || remonte || enBas));
+    majHautPrevue = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!majHautPrevue) { majHautPrevue = true; requestAnimationFrame(majHautDePage); }
+  }, { passive: true });
+  dansLaMarge.addEventListener('change', majHautDePage);
   if (hero && 'IntersectionObserver' in window) {
-    new IntersectionObserver(([e]) => hautDePage.classList.toggle('est-visible', !e.isIntersecting)).observe(hero);
+    new IntersectionObserver(([e]) => { ouverturePassee = !e.isIntersecting; majHautDePage(); }).observe(hero);
   }
+  majHautDePage();
   hautDePage.addEventListener('click', () => {
     window.scrollTo({ top: 0 });   // défilement doux via scroll-behavior (sauf « réduire les animations »)
     document.querySelector('.entete-logo').focus({ preventScroll: true });

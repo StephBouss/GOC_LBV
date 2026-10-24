@@ -1,6 +1,7 @@
-# Inventaire de la maquette GOC (19/10/2026)
+# Inventaire de la maquette GOC (mis à jour le 24/10/2026)
 
-Les 8 écrans Banani sont reproduits en 7 pages. Les écrans « Contact » et « Contact sans modale » forment une seule page, et la candidature s'ouvre en fenêtre. S'y ajoutent les mentions légales et la politique de confidentialité, composées avec les éléments Banani.
+Les 8 écrans Banani sont reproduits en 7 pages : les écrans « Contact » et « Contact sans modale » ont donné la page Contact et la fenêtre de candidature, aujourd'hui sur la page Carrières. Le site compte désormais 20 pages et 13 articles par langue, soit 66 pages (liste en partie 1).
+
 ## Actualités : fonctionnement (préfiguration de WordPress)
 
 - **Source unique** : `sources/actualites.json`. Chaque article a un titre, un slug, **une catégorie**, une date, un extrait, une image à la une, une galerie facultative et son contenu. Ce sont les champs d'un article WordPress.
@@ -38,7 +39,7 @@ Les 8 écrans Banani sont reproduits en 7 pages. Les écrans « Contact » et «
 
 ## Médiathèque : fonctionnement (préfiguration de WordPress)
 
-- **Emplacement** : menu « Information et contact » (en-tête, menu mobile et plan du pied de page), entre Actualités et Carrières, et dans la sous-navigation de la page Actualités et des articles. La page est `mediatheque/index.html`.
+- **Emplacement** : menu « Informations » (en-tête, menu mobile et plan du pied de page), entre Actualités et Carrières, et dans la sous-navigation de la page Actualités et des articles. La page est `mediatheque/index.html`.
 - **Source unique** : `sources/mediatheque.json`, mis en forme par `scripts/mediatheque.js`. Chaque galerie a un slug, un titre, un type de site, une description et ses photos (fichier d'origine et texte alternatif). L'ordre du fichier est celui de la page.
 - **Galeries** : une par dossier du reportage « Opérations GOC » fourni par le client, 49 photos au total : Sardine (7), Tsiengui (7), Mboumba (7), Obangué (7), Akondo (3), Mandji (6), Port-Gentil (6), Libreville (6). Les photos retenues mettent en avant les installations, les équipes au travail et le savoir-faire technique. Akondo (ajouté le 23/10/2026) vient d'un envoi séparé du client, copié dans le dossier « Opérations GOC/Akondo » : 3 vues aériennes de 960 × 540 px (le client en a envoyé 4, dont 2 fichiers identiques). Ces photos ne sont pas agrandies, et elles restent moins nettes que les autres : des originaux en haute définition seraient bienvenus.
 - **Mise en page** : un sommaire en pastilles mène à chaque galerie. La première photo de chaque galerie est mise en avant (case double), en mosaïque sans trou de 3, 6 ou 7 photos (à 3 : deux photos empilées à droite).
@@ -59,7 +60,7 @@ Les 8 écrans Banani sont reproduits en 7 pages. Les écrans « Contact » et «
 
 ## Carrières : fonctionnement (préfiguration de WordPress)
 
-- **Page** : `carrieres/index.html` (`en/careers/index.html`), créée le 24/10/2026 à la demande du client. Le lien « Carrières » du menu « Information et contact », du plan du pied de page et des sous-navigations (Actualités, Médiathèque, articles, Contact) y mène.
+- **Page** : `carrieres/index.html` (`en/careers/index.html`), créée le 24/10/2026 à la demande du client. Le lien « Carrières » du menu « Informations », du plan du pied de page et des sous-navigations (Actualités, Médiathèque, articles, Contact) y mène.
 - **Contenu** : texte du client, mot pour mot. « Pourquoi nous rejoindre ? » et les 6 bonnes raisons, en accordéon numéroté (une seule raison ouverte à la fois, la première à l'arrivée, ouverture animée là où le navigateur sait animer la hauteur), puis une bande « Construisons ensemble l'avenir énergétique du Gabon. » avec le bouton « Déposer ma candidature ».
 - **Candidature** : la fenêtre de candidature spontanée a quitté la page Contact pour cette page. Le bouton l'ouvre, comme l'adresse `carrieres/index.html#candidature`.
 - **WordPress** : une page composée des blocs Bannière, Détails (un par raison) et Couverture (la bande), et du formulaire de l'extension, ouvert en fenêtre par le script du thème.
@@ -100,7 +101,7 @@ Les 8 écrans Banani sont reproduits en 7 pages. Les écrans « Contact » et «
 - **Balises** : chaque page a une adresse canonique (le dossier pour un `index.html` : `/activites/`, `/` pour l'accueil), les balises Open Graph (titre, description, image, adresse, type `article` pour les actualités) et `twitter:card`. Un lien partagé sur WhatsApp, LinkedIn, Facebook ou X s'affiche avec une image et un résumé.
 - **Images d'aperçu** : 1200 × 630 px, dans `img/partage/`. `scripts/preparer-partage.js` les tire de la photo d'ouverture de chaque page (même point focal), ou de la photo à la une des articles. L'accueil et les pages sans photo propre prennent les opérateurs entre les réservoirs d'Obangué. Après l'ajout d'une page ou d'un article, il faut relancer ce script, puis régénérer les pages.
 - **Plan du site et robots** : `sitemap.xml` (toutes les pages) et `robots.txt` (exploration ouverte, adresse du plan) sont écrits à la racine à chaque génération. Il reste à déclarer le plan du site dans Google Search Console.
-- **Adresse du site** : `https://snhg-vert.vercel.app`, dans `scripts/partage.js` (`ADRESSE_SITE`). Au passage sur le nom de domaine définitif, il faut la changer puis régénérer les pages. Si la préproduction ne doit pas être indexée, il faut remplacer `Allow: /` par `Disallow: /` dans `robots()`.
+- **Adresse du site** : `https://snhg-vert.vercel.app` (préproduction sur Vercel), dans `scripts/partage.js` (`ADRESSE_SITE`). Le nom de domaine définitif est `www.gaboil.com` (choix du client, 24/10/2026) : à la mise en ligne, mettre `https://www.gaboil.com` dans `ADRESSE_SITE`, puis régénérer les pages. Si la préproduction ne doit pas être indexée, il faut remplacer `Allow: /` par `Disallow: /` dans `robots()`.
 - **WordPress** : une extension SEO (Yoast, Rank Math…) produit ces balises, le plan du site et `robots.txt`.
 
 ## Version anglaise : fonctionnement (préfiguration de WordPress)
@@ -128,11 +129,14 @@ Les 8 écrans Banani sont reproduits en 7 pages. Les écrans « Contact » et «
   | `informations-legales/cookies.html` | `en/legal/cookies.html` |
   | `activites/distribution-transformation.html` | `en/activities/distribution-processing.html` |
   | `activites/services-petroliers.html` | `en/activities/oil-services.html` |
+  | `activites/stations-gaboil.html` | `en/activities/gaboil-stations.html` |
+  | `carrieres/index.html` | `en/careers/index.html` |
+  | `gotalk/index.html` | `en/gotalk/index.html` |
 
 - **Adresses des articles** (`actualites/<slug>.html` devient `en/news/<slug anglais>.html`, champ `slug` de `sources/en/actualites.json`) : `nomination-dg-gaboil` → `gaboil-new-managing-director`, `deploiement-gaboil` → `gaboil-network-expansion`, `modernisation-outils` → `management-tools-modernisation`, `pizolub-renaissance` → `pizolub-industrial-revival`, `tullow-oil-gop` → `tullow-oil-gabon-becomes-gop`, `smp-maintenance` → `smp-maintenance-expertise`, `assala-energy` → `assala-energy-milestone`, `dinonga-irondu` → `dinonga-irondu-operator`, `retrocession-addax` → `addax-assets-transfer`, `dussafu-ezanga` → `dussafu-ezanga-stakes`, `perenco-participations-etat` → `perenco-state-interests`, `cepp-mboga-ii` → `mboga-ii-expansion`, `joint-venture-bourbon` → `bourbon-gabon-joint-venture`.
 - **Données traduites** : `sources/en/actualites.json` (catégories, titres, extraits, contenus, textes alternatifs), `sources/en/diaporama-accueil.json` (sur-titres, titres, chapôs, boutons, repérés par l'`id` de chaque diapositive) et `sources/en/mediatheque.json` (types, titres, descriptions, légendes des photos, dans l'ordre du fichier français). Dates, images, durées et liens ne sont écrits qu'une fois, dans le fichier français.
 - **Menus et libellés** : `sources/navigation.json` (un libellé par langue pour chaque entrée de menu) et `sources/libelles.json` (textes d'interface du gabarit et des pages générées). Les messages de `js/app.js` suivent la langue de la page (`<html lang>`).
-- **Référencement** : chaque page a son adresse canonique dans sa langue, des liens `hreflang` vers les deux versions et `x-default` vers la version française, `og:locale` (`fr_FR` ou `en_GB`) et `og:locale:alternate`. Le plan du site liste les 60 adresses, les françaises d'abord.
+- **Référencement** : chaque page a son adresse canonique dans sa langue, des liens `hreflang` vers les deux versions et `x-default` vers la version française, `og:locale` (`fr_FR` ou `en_GB`) et `og:locale:alternate`. Le plan du site liste les 66 adresses, les françaises d'abord.
 - **Conventions de traduction** : anglais britannique (« programme », « organisation »), traduction faite d'après le texte français, sans reprendre de version existante. Les noms propres français (raison sociale de la SNHG, sociétés et organismes, adresses postales) restent en français et sont marqués `lang="fr"` pour être bien prononcés. Les PDF, en français, sont signalés « in French ». Les nombres suivent l'usage anglais (90,000, 5 MB). « ADG » devient « Managing Director ».
 - **Pages juridiques** : une mention sous le sommaire précise que la version française fait foi en cas de divergence. La traduction des mentions légales, de la politique de confidentialité et de la page cookies est à faire valider par le service juridique.
 - **Contrôles** : la génération s'arrête si une page, un article, un lien ou un champ n'a pas sa version anglaise. Les pages anglaises ont été passées au crible (textes visibles, textes alternatifs, `aria-label`, `title`, `placeholder`, métadonnées) : il n'y reste du français que dans les noms propres.
@@ -158,7 +162,9 @@ Points critiques et hauts, traités le 20/10/2026 :
 | En-têtes de sécurité | Moyenne | En place le 21/10/2026 (voir « En-têtes de sécurité » ci-dessous). |
 | Textes alternatifs | Haute | Les 8 photos d'actualités sont décrites. Restent vides, à dessein (règle RGAA des images décoratives et des liens composites) : les fonds de bandeau, les logos et photos placés dans un lien qui affiche déjà le nom ou le titre (les décrire ferait lire le nom deux fois), les copies masquées du bandeau des filiales, les vignettes de la frise et les portraits à côté du nom. |
 
-Points moyens, à traiter ensuite : contrastes des gris et des étiquettes sur photo, bouton « retour en haut » sur le texte, zones cliquables de moins de 44 px, données structurées `Organization`, titre de l'accueil (70 caractères), description de l'article « nomination DG Gab'Oil », règle de dénomination SNHG et GOC à arbitrer avec le client.
+Points moyens encore ouverts : contrastes des gris et des étiquettes sur photo, zones cliquables de moins de 44 px, données structurées `Organization`, titre de l'onglet de l'accueil (76 caractères en français), description de l'article « nomination DG Gab'Oil ». Sont réglés : la règle de dénomination SNHG et GOC (arbitrée par le client le 23/10/2026, voir « Nom de la société ») et le bouton « haut de page » qui passait sur le texte (ci-dessous).
+
+Bouton « haut de page » (24/10/2026, demande client) : une pastille blanche à flèche rouge de 44 px, qui passe au rouge au survol, au lieu du rond rouge de 48 px. À partir de 1 400 px de large, il est centré dans la marge de droite, hors du texte, et reste affiché une fois l'ouverture de page dépassée. En dessous, il n'apparaît qu'en remontant la page ou tout en bas, et s'efface dès qu'on redescend ; le pied de page lui réserve sa place pour qu'il ne couvre pas les derniers liens. Les articles, qui n'ont pas d'ouverture, l'ont aussi, passé le premier écran. Dans WordPress : même CSS et même script dans le thème.
 
 Les mentions « Source : SNHG – Gabon Oil Company » sous les chiffres clés de l'accueil et de la page Distribution et transformation ont été retirées le 21/10/2026, à la demande du client, dans les deux langues.
 
@@ -176,7 +182,7 @@ Déclarés dans `vercel.json` pour toutes les adresses du site, et appliqués au
 - **Cache du navigateur** (21/10/2026) : par défaut, Vercel fait redemander chaque image au serveur à chaque page vue, et chaque mise en ligne vide son cache. Après un envoi, chaque photo mettait environ une demi-seconde à s'afficher. Désormais, chaque fichier appelé par une page porte l'empreinte de son contenu (`?ver=…`, ajoutée par `scripts/assembler-pages.js`), et ces adresses restent un an dans le navigateur (`Cache-Control: public, max-age=31536000, immutable`). Une page déjà vue s'affiche sans rien redemander, et un fichier modifié change d'adresse. En WordPress : passer l'empreinte ou la date du fichier comme version à `wp_enqueue_style` et `wp_enqueue_script`, et poser le même cache longue durée sur `/wp-content/uploads/` et le dossier du thème chez l'hébergeur.
 - **WordPress** : poser les mêmes en-têtes chez l'hébergeur (configuration du serveur) ou par une extension. Réserver la politique de contenu aux pages publiques : l'administration et l'éditeur de blocs ont besoin de scripts en ligne et d'`eval`. Les scripts que WordPress ajoute dans les pages (`wp_add_inline_script`, emojis) sont à retirer ou à autoriser par empreinte ou par nonce.
 
-Ce document liste ce qui reste à faire : les pages liées mais pas encore créées, les photos à remplacer et les textes à revoir.
+Les parties suivantes font le point sur les pages, les photos, les textes à relire, les informations légales à fournir et ce qu'il faudra brancher dans WordPress.
 
 ## 1. Pages créées
 
@@ -193,7 +199,7 @@ Ce document liste ce qui reste à faire : les pages liées mais pas encore cré�
 | Politique de confidentialité | `informations-legales/confidentialite.html` | idem |
 | Gestion des cookies | `informations-legales/cookies.html` | idem, avec un tableau des cookies et un interrupteur de refus de la mesure d'audience |
 | Actualités (liste filtrable) | `actualites/index.html` | aucun : cartes d'actualité de l'accueil, sous-navigation, ouverture |
-| Médiathèque (7 galeries, 46 photos) | `mediatheque/index.html` | aucun : sous-navigation, ouverture, pastilles des actualités, fenêtres des autres pages |
+| Médiathèque (8 galeries, 49 photos) | `mediatheque/index.html` | aucun : sous-navigation, ouverture, pastilles des actualités, fenêtres des autres pages |
 | Engagements HSEI | `engagements/hsei.html` | aucun : composants des pages Activités, Présentation et Exploration (ouverture, cartes, appel, carte du rapport) |
 | Engagements RSE | `engagements/rse.html` | idem |
 | Projets stratégiques | `activites/projets-strategiques.html` | aucun : composants des pages Exploration (ouverture, texte et photo, appel) et Engagements RSE (cartes numérotées) |
@@ -204,7 +210,7 @@ Ce document liste ce qui reste à faire : les pages liées mais pas encore cré�
 | GO’TALK (portraits des talents) | `gotalk/index.html` | aucun : ouverture et fenêtre dessinées pour la page, cartes et pastilles du site |
 | Articles (13 pages) | `actualites/<slug>.html` | aucun : en-tête éditorial, colonne de lecture, « À lire aussi » |
 
-Rangement (20/10/2026, demande client) : l'accueil est à la racine du site, chaque autre page dans le dossier de sa rubrique (`groupe/`, `filiales/`, `activites/`, `engagements/`, `actualites/`, `mediatheque/`, `contact/`, `informations-legales/`), à côté de `css/`, `js/`, `img/`, `video/`, `documents/` et `fonts/`. Les anciennes adresses (`engagements-rse.html`, `actualite-<slug>.html`…) sont redirigées vers les nouvelles par `vercel.json`.
+Rangement (20/10/2026, demande client) : l'accueil est à la racine du site, chaque autre page dans le dossier de sa rubrique (`groupe/`, `filiales/`, `activites/`, `engagements/`, `actualites/`, `mediatheque/`, `carrieres/`, `gotalk/`, `contact/`, `informations-legales/`), à côté de `css/`, `js/`, `img/`, `video/`, `documents/` et `fonts/`. Les anciennes adresses (`engagements-rse.html`, `actualite-<slug>.html`…) sont redirigées vers les nouvelles par `vercel.json`.
 
 Chaque page et chaque article a sa traduction anglaise sous `en/` (voir « Version anglaise »), soit 66 pages en tout.
 
@@ -228,7 +234,7 @@ Pour l'instant, elles sont traitées comme des sections ou des ancres des pages 
 
 ## 4. Photos
 
-**Toutes les photos du site sont réelles depuis le 20/10/2026.** Les visuels générés par IA ont été retirés : ceux de la maquette Banani, et ceux du site de référence SNHG, qui portent la marque Gemini (étoile à quatre branches dans le coin). Les remplaçantes viennent des reportages du client (« Opérations GOC », « Bureaux et staffs », « Station »). Elles sont choisies pour coller à l'idée de chaque section, puis recadrées par `scripts/preparer-photos.js` dans `img/photos/`, en 1536 et 768 px. Le cadrage fin des ouvertures se règle par un point focal sur l'image (`style="object-position: …"`), comme le point focal du bloc Bannière de WordPress.
+**Toutes les photos du site sont réelles depuis le 20/10/2026**, sous une réserve : les 3 portraits GO’TALK, à faire confirmer par le client (voir « GO’TALK »). Les visuels générés par IA ont été retirés : ceux de la maquette Banani, et ceux du site de référence SNHG, qui portent la marque Gemini (étoile à quatre branches dans le coin). Les remplaçantes viennent des reportages du client (« Opérations GOC », « Bureaux et staffs », « Station »). Elles sont choisies pour coller à l'idée de chaque section, puis recadrées par `scripts/preparer-photos.js` dans `img/photos/`, en 1536 et 768 px. Le cadrage fin des ouvertures se règle par un point focal sur l'image (`style="object-position: …"`), comme le point focal du bloc Bannière de WordPress.
 
 | Page et section | Fichier (`img/photos/`) | Photo du client |
 |---|---|---|
@@ -257,7 +263,6 @@ Pour l'instant, elles sont traitées comme des sections ou des ancres des pages 
 Les autres photos d'actualité (nominations, Assala, Pizolub, modernisation) viennent du site SNHG et ne portent pas de marque d'IA. La photo de « La SNHG en chiffres » est celle de la cérémonie de signature du rachat d'Assala (`img/accueil/assala-signature.jpg`, recadrée sur les quatre personnes). Les portraits du conseil d'administration et du comité de direction (`img/gouvernance/`) sont les vraies photos SNHG, recadrées en 160 px.
 
 **Frise des dates clés (Historique)** : 13 vignettes illustrées en SVG dans `img/frise/`, générées par `scripts/creer-vignettes-frise.js`. Ce sont des dessins, pas des photos. Ils sont à garder tels quels ou à remplacer par des photos d'archives : il suffit de changer le `src` dans `sources/pages/historique-gouvernance.html`.
-Le logo Gab'Oil est à confirmer dans une meilleure définition.
 
 ## 5. Textes recomposés à relire
 
@@ -288,7 +293,7 @@ Les textes viennent de snhg.vercel.app, mot pour mot quand c'était possible. L�
   - **Fiches des entités** : une seule par entité, dans l'ordre de la chaîne. Une étiquette donne le ou les secteurs de chacune (GOC : Amont · Intermédiaire ; Gab'Oil : Intermédiaire · Aval). Chaque nom de la chaîne mène à sa fiche. La carte GOP renvoie vers l'historique, faute de site officiel. Depuis le 24/10/2026 (demande client), les fiches forment un organigramme : la carte de Gabon Oil Company, entité mère, est en tête, et les 5 filiales sont dessous, reliées par des traits rouges comme l'organigramme de la gouvernance. Le design des cartes ne change pas. La disposition suit la largeur du cadre (requêtes de conteneur) : une rangée de 5 sous un trait commun (cadre de 75rem et plus), deux colonnes autour d'un tronc central, ou une colonne le long d'un tronc à gauche (moins de 40rem). Dans WordPress : un groupe pour la carte mère, puis une liste de cartes.
   - **WordPress** : la chaîne devient un bloc à liste répétable (pictogramme, secteur, entités liées), et les fiches un bloc de cartes (logo, secteurs, texte, lien).
   - **Logo Gab'Oil** (23/10/2026) : remplacé par le logo vectoriel remis par le client (`img/filiales/gab-oil.svg`), dans la fiche et dans la bande « Nos filiales » de l'accueil. L'ancien, tiré du site SNHG, était en réalité le logo de Gabon Oil Company.
-- **Contact** : la section « Bureaux régionaux » de Banani est retirée, à ta demande. Le champ « Sujet » est une saisie libre. Depuis le 24/10/2026, la page donne aussi le siège de Port-Gentil (« Gabon Oil Company, Immeuble Paquebot, entrée Nouveau Port, Port-Gentil », texte du client), sans téléphone tant que le numéro n'est pas fourni.
+- **Contact** : la section « Bureaux régionaux » de Banani est retirée, à la demande du client. Le champ « Sujet » est une saisie libre. Depuis le 24/10/2026, un champ « Téléphone » facultatif suit l'adresse e-mail : la politique de confidentialité le mentionnait déjà. Depuis le 24/10/2026, la page donne aussi le siège de Port-Gentil (« Gabon Oil Company, Immeuble Paquebot, entrée Nouveau Port, Port-Gentil », texte du client), sans téléphone tant que le numéro n'est pas fourni.
 - **Menu principal** (24/10/2026, demandes client) : le menu « Information et contact » devient « Informations » (« Information » en anglais) et perd son lien Contact, aussi retiré des sous-navigations de ses pages. « GO’TALK », en rouge, puis « Contact » sont des onglets de l'en-tête, à côté des trois menus, et des lignes du menu mobile ; ils ferment la colonne « Informations » du pied de page. Les liens FR | EN sont en rouge. Ce sont des liens directs, sans sous-menu (`directs` dans `sources/navigation.json`, `mise_en_avant` pour le rouge ; dans WordPress, des éléments de menu sans enfant, avec une classe CSS). Le bouton rouge « Contact » de l'en-tête et du menu mobile est retiré. Sur la page Contact, c'est cet onglet qui est souligné.
 - **Gouvernance** : Marcellin SIMBA NGABI figure aussi parmi les administrateurs du conseil (en premier, comme sur le site de référence), en plus de son rôle d'ADG au comité de direction.
 - **Pages légales** : textes du site de référence mot pour mot. Seuls les chapeaux d'ouverture et la date de mise à jour sont nouveaux.
@@ -300,11 +305,10 @@ Les textes viennent de snhg.vercel.app, mot pour mot quand c'était possible. L�
 
 Ces informations sont surlignées en jaune dans la maquette.
 
-- **Adresse du site** : le site de référence indiquait `snhg-web.vercel.app`.
-- **Hébergeur** : nom, adresse et site web. Le site WordPress ne sera pas hébergé chez Vercel, qui hébergeait le site de référence.
+- **Adresse du site** : `www.gaboil.com` (choix du client, 24/10/2026), inscrite dans les mentions légales en français et en anglais. **À vérifier avant la mise en ligne** : ce domaine a été enregistré le 21/10/2026 chez Namecheap et affichait, le 24/10/2026, un site indonésien sans rapport avec la SNHG. Le client doit confirmer qu'il en a la maîtrise (accès au compte Namecheap et à ses réglages DNS). La messagerie reste sur `gabonoil.com` (domaine de 2000, Microsoft 365) : au changement d'hébergeur, ne pas toucher à ses réglages.
+- **Hébergeur** : nom, adresse et site web. Le site WordPress ne sera pas hébergé chez Vercel, qui hébergeait le site de référence. Conseil du 24/10/2026 : OVHcloud, en hébergement web à ressources garanties (gamme Performance), avec Cloudflare gratuit devant le site (son cookie technique sera à ajouter à la page Cookies).
 - **À valider par le service juridique** : faut-il ajouter le numéro RCCM, le NIF et le capital social de la SNHG ? Faut-il citer la loi gabonaise sur la protection des données personnelles et le recours auprès de l'autorité de contrôle (CNPDCP) ?
 - **Siège de Port-Gentil** : numéro de téléphone (à ajouter dans les deux pages Contact, en lien `tel:`).
-- **Formulaire de contact** : la politique mentionne le téléphone, mais le formulaire ne le demande pas. Il faut aligner l'un sur l'autre.
 - **Cookies** : le tableau de `informations-legales/cookies.html` décrit la configuration conseillée (langue par Polylang, Matomo installé avec le site). Il faut l'ajuster aux extensions réellement installées : noms et durées des cookies, et tout cookie ajouté par l'hébergeur ou un pare-feu (Cloudflare, par exemple). La page cite déjà la CNPDCP.
 
 ## 6. À brancher lors de la phase 4 (thème WordPress)
