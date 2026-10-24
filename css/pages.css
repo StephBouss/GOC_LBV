@@ -1036,7 +1036,7 @@ button.station[aria-pressed="true"] { background: var(--rouge-pale); box-shadow:
 .candidater .bouton { gap: .5rem; height: 3.25rem; padding: 0 1.75rem; font-weight: 700; }
 
 /* ═══════════ GO’TALK : ouverture, cartes des talents, fenêtres de lecture (scripts/gotalk.js, app.js) ═══════════ */
-/* Ouverture sombre : la marque en très grand, l'apostrophe rouge en bulle, le propos dans une bulle de dialogue (coin pointu vers la marque) */
+/* Ouverture sombre : la marque en très grand, l'apostrophe rouge en bulle, le propos dans une bulle de dialogue (pointe vers la marque) */
 .gotalk-ouverture {
   position: relative; overflow: hidden; isolation: isolate; padding: 6.5rem 0 6rem; color: var(--blanc);
   background: radial-gradient(60rem 32rem at 88% -10%, rgba(237, 28, 36, .24), transparent 62%), var(--noir);
@@ -1048,10 +1048,19 @@ button.station[aria-pressed="true"] { background: var(--rouge-pale); box-shadow:
 .gotalk-lettres > span { display: inline-block; }
 .gotalk-apostrophe { color: var(--rouge-logo); transform-origin: 50% 70%; }
 .gotalk-devise { display: block; margin-top: 1.25rem; font-size: clamp(1.5rem, 2.6vw, 2.25rem); font-weight: 600; line-height: 1.2; color: var(--texte-sombre); }
-.gotalk-intro { padding: 2.25rem 2.5rem 2.5rem; border: 1px solid rgba(237, 28, 36, .6); border-radius: 1.75rem 1.75rem 1.75rem .25rem; background: rgba(255, 255, 255, .04); transform-origin: 0 100%; }
-.gotalk-intro p { font-size: 1.0625rem; line-height: 1.75rem; color: var(--texte-sombre); text-wrap: pretty; }
-.gotalk-intro p:first-child { font-size: 1.25rem; font-weight: 500; line-height: 1.875rem; color: var(--blanc); }
-.gotalk-intro p + p { margin-top: 1rem; }
+/* Bulle : trait rouge fin et continu, fond plein (la pointe le recouvre pour se raccorder au contour), texte tout à l'intérieur */
+.gotalk-intro {
+  position: relative; padding: 2rem 2.25rem 2.25rem; border: 1.5px solid var(--rouge-logo); border-radius: 1.5rem;
+  background: #1C1F24; transform-origin: 0 calc(100% - 3.5rem);
+}
+/* Pointe : carré tourné, à cheval sur le bord gauche, dont seuls les deux côtés extérieurs sont tracés */
+.gotalk-intro::before {
+  content: ""; position: absolute; bottom: 2.75rem; left: 0; width: 1.75rem; height: 1.75rem;
+  border-bottom: inherit; border-left: inherit; background: inherit; translate: -50% 0; rotate: 45deg;
+}
+.gotalk-intro p { font-size: .9375rem; line-height: 1.5rem; color: var(--texte-sombre); text-wrap: pretty; }
+.gotalk-intro p:first-child { font-size: 1.125rem; font-weight: 500; line-height: 1.6875rem; color: var(--blanc); }
+.gotalk-intro p + p { margin-top: .875rem; }
 
 /* Cartes : la photo, le nom et la fonction ; « Lire le portrait » apparaît au survol (toujours visible au doigt) */
 .talents-tete { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 1rem 4rem; margin-bottom: 3rem; }
@@ -1222,7 +1231,9 @@ html:has(dialog.talent[open]) { overflow: hidden; scrollbar-gutter: stable; }
 
   .gotalk-ouverture { padding: 5rem 0 4.5rem; }
   .gotalk-ouverture-grille, .talents-tete { grid-template-columns: minmax(0, 1fr); }
-  .gotalk-intro { max-width: 40rem; }
+  .gotalk-intro { max-width: 40rem; margin-top: .75rem; transform-origin: 2.75rem 0; }
+  /* Une colonne : la bulle est sous la marque, sa pointe monte vers elle */
+  .gotalk-intro::before { top: 0; bottom: auto; left: 2.75rem; border-top: inherit; border-bottom: 0; translate: 0 -50%; }
   /* Fenêtre plein écran : la photo en tête, l'entretien dessous ; c'est la fenêtre entière qui défile */
   .talent { width: 100%; height: 100%; max-height: 100dvh; overflow-y: auto; overscroll-behavior: contain; border-radius: 0; }
   .talent-cadre { display: block; height: auto; }
@@ -1317,8 +1328,8 @@ html:has(dialog.talent[open]) { overflow: hidden; scrollbar-gutter: stable; }
   .raison-texte { padding: 0 0 1.5rem 3.375rem; font-size: 1rem; line-height: 1.625rem; }
   .gotalk-ouverture { padding: 4rem 0 3.5rem; }
   .gotalk-titre { margin-top: 1.25rem; }
-  .gotalk-intro { padding: 1.5rem 1.25rem 1.75rem; border-radius: 1.25rem 1.25rem 1.25rem .25rem; }
-  .gotalk-intro p:first-child { font-size: 1.125rem; line-height: 1.75rem; }
+  .gotalk-intro { padding: 1.5rem 1.25rem 1.625rem; border-radius: 1.25rem; }
+  .gotalk-intro p:first-child { font-size: 1.0625rem; line-height: 1.625rem; }
   .talents { gap: 1.25rem; }
   .talent-portrait { height: min(68vh, 30rem); }
   .talent-identite { padding: 4rem var(--marge) 1.5rem; }
