@@ -42,7 +42,7 @@
           <li><a href="#navigateur"><span class="legal-num">5.</span>Browser settings</a></li>
           <li><a href="#contact"><span class="legal-num">6.</span>Questions and complaints</a></li>
         </ol>
-        <p class="legal-maj">Last updated: <time datetime="2026-10-20">20 October 2026</time></p>
+        <p class="legal-maj">Last updated: <time datetime="2026-10-26">26 October 2026</time></p>
         <p class="legal-note">This English translation is provided for information purposes. In the event of any discrepancy, the French version prevails.</p>
       </nav>
 
@@ -112,7 +112,16 @@
         <section class="legal-article" id="contenus-tiers" aria-labelledby="contenus-tiers-titre" data-apparition>
           <h2 id="contenus-tiers-titre"><span class="legal-num">4.</span>Social networks and third-party content</h2>
           <p>The Facebook, LinkedIn, YouTube and X icons in the footer are simple links to GOC's pages: none of these networks sets a cookie unless you click. Once you are on their website, their own rules apply.</p>
-          <p>The website does not embed any content hosted by a third party, such as a video or an interactive map. Should this change, such content would only be loaded with your consent, and this page would be updated.</p>
+          <p>Only one piece of content on the website is hosted by a third party: the <strong>Google Maps</strong> map on the Contact page, which shows where the Group's entities are. It only loads if you click “Show the map”. Google then receives your IP address and may set its own cookies, under its <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener noreferrer">privacy policy<svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (new tab)</span></a>.</p>
+          <p>Your consent is remembered in your browser (local storage, no cookie from this website), so that the map shows directly on your next visits. You can withdraw or give it here:</p>
+          <!-- Interrupteur de l'accord aux cartes Google Maps : piloté par js/app.js -->
+          <div class="choix-mesure" data-cartes-google>
+            <label>
+              <input type="checkbox" switch role="switch">
+              Google Maps maps
+            </label>
+            <p class="choix-mesure-etat" aria-live="polite">Not allowed: the map is only shown once you agree.</p>
+          </div>
         </section>
 
         <section class="legal-article" id="navigateur" aria-labelledby="navigateur-titre" data-apparition>

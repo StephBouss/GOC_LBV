@@ -1006,6 +1006,26 @@ button.station[aria-pressed="true"] { background: var(--rouge-pale); box-shadow:
 .cadastre-cle[aria-pressed="true"] { background: var(--rouge-pale); box-shadow: inset 3px 0 0 var(--rouge-logo); }
 .cadastre-source { margin-top: 1rem; font-size: .8125rem; line-height: 1.25rem; color: var(--encre-douce); }
 
+/* ═══════════ Contact : implantations du groupe sur une carte Google Maps (app.js) ═══════════ */
+/* Mise en page, liste et carte collante : celles des stations Gab'Oil. La carte, contenu tiers, attend l'accord du visiteur */
+/* Grille : l'écran d'accord remplit le cadre 4:3, et l'agrandit sur petit écran plutôt que d'être rogné */
+.implantations-cadre { display: grid; aspect-ratio: 4 / 3; border-radius: .5rem; background: var(--surface); }
+.implantations-google { width: 100%; height: 100%; border: 0; border-radius: .5rem; }
+.implantations-accord {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .75rem; padding: 2rem;
+  font-size: .875rem; line-height: 1.375rem; text-align: center; color: var(--encre-douce);
+}
+.implantations-accord p { max-width: 26rem; margin: 0; }
+.implantations-accord > .icone { width: 2.5rem; height: 2.5rem; color: var(--rouge-action); stroke-width: 1.5; }
+.implantations-accord-titre { font-size: 1.0625rem; font-weight: 700; color: var(--noir); }
+.implantations-accord .bouton { margin-top: .25rem; }
+.implantations-accord-note { font-size: .8125rem; }
+.implantations-accord-note a { color: var(--rouge-action); text-decoration: underline; text-underline-offset: .1875rem; }
+/* Sous la carte : l'entité choisie et son lien vers Google Maps */
+.implantations-legende { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; padding: 1rem .25rem 0; font-size: .875rem; line-height: 1.25rem; }
+.implantations-choisie { font-weight: 700; color: var(--noir); }
+.implantation-logo { flex: none; width: 3.25rem; height: 2.25rem; object-fit: contain; }
+
 /* ═══════════ Carrières : six raisons de nous rejoindre (accordéon <details>), puis la bande de candidature ═══════════ */
 .raisons-grille { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 3rem 6rem; align-items: start; }
 .raisons-tete { position: sticky; top: calc(var(--entete) + 3rem); }
@@ -1277,6 +1297,7 @@ html:has(dialog.talent[open]) { overflow: hidden; scrollbar-gutter: stable; }
 /* Smartphone */
 @media (max-width: 767px) {
   .stations-carte { padding: .5rem; }
+  .implantations-accord { gap: .5rem; padding: 1.5rem 1.25rem; }
   .station { min-height: 3.25rem; }
   .sous-nav ul {
     gap: 0 1.5rem; padding: .625rem var(--marge) .25rem; margin: 0; width: 100%; scroll-padding-inline: var(--marge);

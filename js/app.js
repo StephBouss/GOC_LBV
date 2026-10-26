@@ -738,6 +738,55 @@
     });
   }
 
+  /* ─── Cartes Google Maps (page Contact) : contenu tiers, chargé seulement avec l'accord du visiteur. L'accord est retenu
+     dans le navigateur (stockage local, aucun cookie du site) et se retire dans la page Gestion des cookies. ─── */
+  const ACCORD_CARTES = 'snhg-cartes-google';
+  const accordCartes = {
+    lire: () => { try { return localStorage.getItem(ACCORD_CARTES) === 'oui'; } catch { return false; } },
+    ecrire: (oui) => { try { if (oui) localStorage.setItem(ACCORD_CARTES, 'oui'); else localStorage.removeItem(ACCORD_CARTES); } catch { /* stockage indisponible : l'accord vaut pour la page */ } },
+  };
+
+  /* ─── Implantations (page Contact) : choisir une entité centre la carte Google Maps sur sa fiche ; sans accord, le lien
+     « Ouvrir dans Google Maps » suit l'entité choisie et le premier « Afficher la carte » charge la carte. ─── */
+  const zoneCarte = document.querySelector('[data-carte-google]');
+  if (zoneCarte) {
+    const figure = zoneCarte.closest('.implantations-carte');
+    const lieux = [...document.querySelectorAll('.implantation')];
+    const choisieTexte = figure.querySelector('.implantations-choisie');
+    const lienMaps = figure.querySelector('.implantations-ouvrir');
+    let choisi = lieux.find((b) => b.getAttribute('aria-pressed') === 'true') || lieux[0];
+    let cadre = null;
+    const nomDe = (b) => `${b.querySelector('.station-nom').textContent} · ${b.querySelector('.station-lieu').textContent}`;
+    const montrer = () => {
+      if (!cadre) {
+        cadre = document.createElement('iframe');
+        cadre.className = 'implantations-google';
+        cadre.referrerPolicy = 'no-referrer-when-downgrade';
+        zoneCarte.replaceChildren(cadre);
+      }
+      cadre.title = `Google Maps : ${nomDe(choisi)}`;
+      cadre.src = `https://www.google.com/maps?q=${encodeURIComponent(choisi.dataset.lieu)}&ll=${choisi.dataset.coord}&z=16&hl=${anglais ? 'en' : 'fr'}&output=embed`;
+    };
+    const choisir = (b) => {
+      choisi = b;
+      lieux.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      choisieTexte.textContent = nomDe(b);
+      lienMaps.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(b.dataset.lieu)}`;
+      if (cadre) montrer();
+    };
+    document.querySelector('.implantations-liste').addEventListener('click', (e) => {
+      const b = e.target.closest('.implantation');
+      if (!b) return;
+      choisir(b);
+      // Carte au-dessus de la liste (tablette, smartphone) : elle revient en vue
+      if (getComputedStyle(figure).position === 'sticky') return;
+      const r = figure.getBoundingClientRect();
+      if (r.top < 80 || r.bottom > innerHeight) figure.scrollIntoView({ block: 'center', behavior: reduit.matches ? 'auto' : 'smooth' });
+    });
+    zoneCarte.querySelector('[data-carte-accord]').addEventListener('click', () => { accordCartes.ecrire(true); montrer(); });
+    if (accordCartes.lire()) montrer();
+  }
+
   /* ─── Cadastre pétrolier : le poster de la DGAPG est montré tel quel. Une carte d'étiquettes au même cadrage (un gris par
      entrée de la légende, identifiant × 10) dit à quelle entrée appartient chaque point, lignes de la légende du poster
      comprises. Survoler ou choisir une entrée de la liste, ou une zone du poster, voile le reste et cerne la zone de rouge ;
@@ -913,6 +962,20 @@
         : `mtm_consent_removed=${Date.now()}; max-age=${60 * 60 * 24 * 395}; path=/; SameSite=Lax`;
       afficher(accepte);
     });
+  }
+  // Même page : l'accord donné aux cartes Google Maps de la page Contact, que l'on peut retirer ou donner ici
+  const choixCartes = document.querySelector('[data-cartes-google]');
+  if (choixCartes) {
+    const interrupteur = choixCartes.querySelector('input');
+    const etat = choixCartes.querySelector('.choix-mesure-etat');
+    const afficher = (accepte) => {
+      interrupteur.checked = accepte;
+      etat.textContent = accepte
+        ? t('Autorisées : la carte de la page Contact s’affiche directement.', 'Allowed: the map on the Contact page is shown directly.')
+        : t('Non autorisées : la carte ne s’affiche qu’après votre accord.', 'Not allowed: the map is only shown once you agree.');
+    };
+    afficher(accordCartes.lire());
+    interrupteur.addEventListener('change', () => { accordCartes.ecrire(interrupteur.checked); afficher(interrupteur.checked); });
   }
 
   /* ─── Formulaires (contact, lettre d'information, candidature) : contrôlés par le navigateur, puis envoyés sans quitter

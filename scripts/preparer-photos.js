@@ -59,6 +59,7 @@ const PHOTOS = [
   { nom: 'carrieres-hero', source: `${OPERATIONS}/Port-Gentil/POG - Travail d_équipe/DSC04221.jpg` },                              // collaboratrice et collègue au poste de travail, à droite (le texte de l'ouverture reste à gauche)
   { nom: 'carrieres-fierte', source: `${OPERATIONS}/Port-Gentil/POG - Travail d_équipe/DSC04499.jpg`, zone: [0.1, 0.04, 0.82, 0.82] },   // deux collègues relisent un document (« Rejoindre la SNHG »)
   { nom: 'carrieres-equipe', source: `${OPERATIONS}/Obangué/Obangué - Réunion d_équipe/DSC02637.jpg` },                                // réunion d'équipe (bande de candidature)
+  { nom: 'candidature-hero', source: `${OPERATIONS}/Libreville/Libreville - Travail d_équipe/DSC04764.jpg` },                       // présentation au tableau, équipe administrative (Formulaire de souscription)
   { nom: 'services-intervention', source: 'SMP/SMP.webp' },                                                                          // technicien SMP sur un appareil de forage, main levée (photo fournie le 24/10/2026)
   // Images à la une et galeries des actualités (sources/actualites.json), au format 16:9 des cartes et des articles
   // GO’TALK : portraits des talents (sources/gotalk.json), recadrés en 4:5

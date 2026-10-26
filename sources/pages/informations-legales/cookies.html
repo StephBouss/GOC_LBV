@@ -41,7 +41,7 @@
           <li><a href="#navigateur"><span class="legal-num">5.</span>Réglages du navigateur</a></li>
           <li><a href="#contact"><span class="legal-num">6.</span>Questions et réclamations</a></li>
         </ol>
-        <p class="legal-maj">Dernière mise à jour : <time datetime="2026-10-20">20 octobre 2026</time></p>
+        <p class="legal-maj">Dernière mise à jour : <time datetime="2026-10-26">26 octobre 2026</time></p>
       </nav>
 
       <div class="legal-texte">
@@ -110,7 +110,16 @@
         <section class="legal-article" id="contenus-tiers" aria-labelledby="contenus-tiers-titre" data-apparition>
           <h2 id="contenus-tiers-titre"><span class="legal-num">4.</span>Réseaux sociaux et contenus tiers</h2>
           <p>Les icônes Facebook, LinkedIn, YouTube et X du pied de page sont de simples liens vers les pages de la SNHG : aucun de ces réseaux ne dépose de cookie tant que vous ne cliquez pas. Une fois sur leur site, ce sont leurs propres règles qui s'appliquent.</p>
-          <p>Le site n'intègre aucun contenu hébergé par un tiers, comme une vidéo ou une carte interactive. Si cela devait changer, ces contenus ne seraient chargés qu'avec votre accord, et cette page serait mise à jour.</p>
+          <p>Un seul contenu du site est hébergé par un tiers : la carte <strong>Google Maps</strong> de la page Contact, qui situe les entités du groupe. Elle ne se charge que si vous cliquez sur « Afficher la carte ». Google reçoit alors votre adresse IP et peut déposer ses propres cookies, selon sa <a href="https://policies.google.com/privacy?hl=fr" target="_blank" rel="noopener noreferrer">politique de confidentialité<svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a>.</p>
+          <p>Votre accord est retenu dans votre navigateur (stockage local, sans cookie du site), pour que la carte s'affiche directement à vos prochaines visites. Vous pouvez le retirer ou le donner ici :</p>
+          <!-- Interrupteur de l'accord aux cartes Google Maps : piloté par js/app.js -->
+          <div class="choix-mesure" data-cartes-google>
+            <label>
+              <input type="checkbox" switch role="switch">
+              Cartes Google Maps
+            </label>
+            <p class="choix-mesure-etat" aria-live="polite">Non autorisées : la carte ne s’affiche qu’après votre accord.</p>
+          </div>
         </section>
 
         <section class="legal-article" id="navigateur" aria-labelledby="navigateur-titre" data-apparition>
