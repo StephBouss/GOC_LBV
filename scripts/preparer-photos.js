@@ -57,7 +57,7 @@ const PHOTOS = [
   { nom: 'stations-hero', source: 'Station/Inauguration de la station GABOIL.png', zone: [0, 0, 1, 0.84] },                         // page des stations : station de Makokou, sans le titre incrusté
   { nom: 'services-hero', source: `${OPERATIONS}/Sardine/Sardine - Local électrique/DSC03872.jpg` },                                    // technicien devant une armoire électrique
   { nom: 'carrieres-hero', source: `${OPERATIONS}/Port-Gentil/POG - Travail d_équipe/DSC04221.jpg` },                              // collaboratrice et collègue au poste de travail, à droite (le texte de l'ouverture reste à gauche)
-  { nom: 'carrieres-fierte', source: `${OPERATIONS}/Port-Gentil/POG - Travail d_équipe/DSC04499.jpg`, zone: [0.1, 0.04, 0.82, 0.82] },   // deux collègues relisent un document (« Rejoindre la SNHG »)
+  { nom: 'carrieres-fierte', source: 'Photo Autre/carrieres-operateurs-souriants.jpg' },                                             // deux opérateurs souriants, bras croisés (« Rejoindre la SNHG », photo fournie le 26/10/2026)
   { nom: 'carrieres-equipe', source: `${OPERATIONS}/Obangué/Obangué - Réunion d_équipe/DSC02637.jpg` },                                // réunion d'équipe (bande de candidature)
   { nom: 'candidature-hero', source: `${OPERATIONS}/Libreville/Libreville - Travail d_équipe/DSC04764.jpg` },                       // présentation au tableau, équipe administrative (Formulaire de souscription)
   { nom: 'services-intervention', source: 'SMP/SMP.webp' },                                                                          // technicien SMP sur un appareil de forage, main levée (photo fournie le 24/10/2026)
