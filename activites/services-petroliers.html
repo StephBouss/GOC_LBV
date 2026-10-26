@@ -24,8 +24,8 @@
   <link rel="icon" href="../img/favicon.png?ver=ec0afc973b" type="image/png">
   <link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="../img/photos/services-hero.jpg?ver=eff7da60ec" imagesrcset="../img/photos/services-hero-768.jpg?ver=8b6690de63 768w, ../img/photos/services-hero.jpg?ver=eff7da60ec 1536w" imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="../css/styles.css?ver=edca427b19">
-  <link rel="stylesheet" href="../css/pages.css?ver=01af48b576">
+  <link rel="stylesheet" href="../css/styles.css?ver=d3cf9fdd68">
+  <link rel="stylesheet" href="../css/pages.css?ver=c32f83c9e3">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -100,11 +100,19 @@
             <ul class="sous-menu-liens">
               <li><a href="../actualites/index.html">Actualités</a></li>
               <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-              <li><a href="../carrieres/index.html">Carrières</a></li>
             </ul>
           </div>
         </li>
-        <li class="nav-direct"><a class="nav-onglet nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
+        <li class="nav-item">
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-carrieres">Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="sous-menu" id="sous-menu-carrieres">
+            <ul class="sous-menu-liens">
+              <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
+              <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+              <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
+            </ul>
+          </div>
+        </li>
         <li class="nav-direct"><a class="nav-onglet" href="../contact/index.html">Contact</a></li>
       </ul>
     </nav>
@@ -153,10 +161,16 @@
       <ul>
         <li><a href="../actualites/index.html">Actualités</a></li>
         <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-        <li><a href="../carrieres/index.html">Carrières</a></li>
       </ul>
     </details>
-    <a class="menu-mobile-direct nav-accent" href="../gotalk/index.html">GO’TALK</a>
+    <details class="accordeon" name="menu-mobile">
+      <summary>Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <ul>
+        <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
+        <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+        <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
+      </ul>
+    </details>
     <a class="menu-mobile-direct" href="../contact/index.html">Contact</a>
   </nav>
   <div class="menu-mobile-pied">
@@ -346,9 +360,15 @@
           <ul>
             <li><a href="../actualites/index.html">Actualités</a></li>
             <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-            <li><a href="../carrieres/index.html">Carrières</a></li>
-            <li><a href="../gotalk/index.html">GO’TALK</a></li>
             <li><a href="../contact/index.html">Contact</a></li>
+          </ul>
+        </details>
+        <details class="pied-colonne" open>
+          <summary>Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <ul>
+            <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
+            <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+            <li><a href="../gotalk/index.html">GO’TALK</a></li>
           </ul>
         </details>
       </nav>
@@ -367,6 +387,6 @@
 
 <button class="haut-de-page" type="button" aria-label="Revenir en haut de la page"><svg class="icone" aria-hidden="true"><use href="#i-haut"/></svg></button>
 
-<script src="../js/app.js?ver=ff7b5dfcbb" defer></script>
+<script src="../js/app.js?ver=86b7649f55" defer></script>
 </body>
 </html>

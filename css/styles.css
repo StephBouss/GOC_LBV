@@ -191,7 +191,8 @@ body.menu-ouvert { overflow: hidden; }
 }
 .nav-item.est-ouvert .nav-onglet::after, .nav-onglet[aria-current]::after, .nav-direct .nav-onglet:is(:hover, :focus-visible)::after { transform: scaleX(1); }
 .nav-item.est-ouvert .chevron { transform: rotate(180deg); }
-.nav-onglet.nav-accent, .menu-mobile-direct.nav-accent { color: var(--rouge-action); }   /* onglet mis en avant (GO’TALK) */
+/* Onglet ou lien de sous-menu mis en avant (GO’TALK dans Carrières) */
+.nav-onglet.nav-accent, .menu-mobile-direct.nav-accent, .sous-menu-liens a.nav-accent, .accordeon a.nav-accent { color: var(--rouge-action); }
 
 /* Sous-menu : bande Banani (fond surface, liens en ligne), ouverte au survol de l'onglet */
 .sous-menu {

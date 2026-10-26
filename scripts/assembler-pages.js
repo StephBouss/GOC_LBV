@@ -97,6 +97,7 @@ const ICONES = {
   'i-telecharger': '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>',
   'i-chevron-gauche': '<path d="m15 18-6-6 6-6"/>',
   'i-chevron-droite': '<path d="m9 18 6-6-6-6"/>',
+  'i-agrandir': '<path d="M15 3h6v6"/><path d="m21 3-7 7"/><path d="m3 21 7-7"/><path d="M9 21H3v-6"/>',
   'i-livre':'<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
   // Engagements RSE : une icône par politique (poignée de main, balance, personnes, toque) ; l'environnement reprend i-feuille
   'i-mains': '<path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/>',
@@ -143,9 +144,10 @@ const PICTOGRAMMES = {
 
 /* Menus : les liens sont écrits avec l'adresse française de la page (son identité) ; celui de la page courante est signalé.
    Dans une page traduite, traduireLiens() les fait ensuite mener aux traductions. */
-const lien = (identite, texte, href) => `<li><a href="${href}"${href === identite ? ' aria-current="page"' : ''}>${texte}</a></li>`;
+// « accent » : lien de sous-menu en rouge (« mise_en_avant », comme GO’TALK dans Carrières ; dans WordPress, une classe CSS)
+const lien = (identite, texte, href, accent) => `<li><a ${accent ? 'class="nav-accent" ' : ''}href="${href}"${href === identite ? ' aria-current="page"' : ''}>${texte}</a></li>`;
 // Onglets sans sous-menu (« directs » de navigation.json, comme Contact) : un simple lien, souligné sur sa page,
-// en rouge s'il est « mise_en_avant » (GO’TALK ; dans WordPress, une classe CSS sur l'élément de menu)
+// en rouge s'il est « mise_en_avant »
 const directs = ({ identite, langue, navigation }, gabarit) => navigation.directs.map((l) => gabarit(`href="${l.lien}"${l.lien === identite ? ' aria-current="page"' : ''}`, l[langue], l.mise_en_avant ? ' nav-accent' : '')).join('');
 
 const navPrincipale = (contexte, onglet) => contexte.navigation.groupes.map((n) => navGroupe(contexte, n, onglet)).join('')
@@ -155,7 +157,7 @@ const navGroupe = ({ identite, langue }, n, onglet) => `        <li class="nav-i
           <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-${n.id}"${n.id === onglet ? ' aria-current="true"' : ''}>${n.libelle[langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
           <div class="sous-menu" id="sous-menu-${n.id}">
             <ul class="sous-menu-liens">
-${n.liens.map((l) => `              ${lien(identite, l[langue], l.lien)}`).join('\n')}
+${n.liens.map((l) => `              ${lien(identite, l[langue], l.lien, l.mise_en_avant)}`).join('\n')}
             </ul>
           </div>
         </li>
@@ -164,16 +166,16 @@ ${n.liens.map((l) => `              ${lien(identite, l[langue], l.lien)}`).join(
 const navMobile = (contexte) => contexte.navigation.groupes.map(({ libelle, liens }) => `    <details class="accordeon" name="menu-mobile">
       <summary>${libelle[contexte.langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
-${liens.map((l) => `        ${lien(contexte.identite, l[contexte.langue], l.lien)}`).join('\n')}
+${liens.map((l) => `        ${lien(contexte.identite, l[contexte.langue], l.lien, l.mise_en_avant)}`).join('\n')}
       </ul>
     </details>
 `).join('') + directs(contexte, (attributs, texte, accent) => `    <a class="menu-mobile-direct${accent}" ${attributs}>${texte}</a>\n`);
 
-// Les onglets directs (GO’TALK, Contact) ferment la dernière colonne, qui n'a plus de lien Contact
-const piedColonnes = ({ identite, langue, navigation }) => navigation.groupes.map((n, i, groupes) => `        <details class="pied-colonne" open>
+// Les onglets directs (Contact) ferment la colonne du groupe marqué « directs_au_pied » (Informations)
+const piedColonnes = ({ identite, langue, navigation }) => navigation.groupes.map((n) => `        <details class="pied-colonne" open>
           <summary>${n.pied[langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
-${[...n.liens, ...(i === groupes.length - 1 ? navigation.directs : [])].map((l) => `            ${lien(identite, l[langue], l.lien)}`).join('\n')}
+${[...n.liens, ...(n.directs_au_pied ? navigation.directs : [])].map((l) => `            ${lien(identite, l[langue], l.lien)}`).join('\n')}
           </ul>
         </details>
 `).join('');
@@ -203,7 +205,7 @@ function traduireLiens(html, fichier, { langue, toutesVersions, adresses }) {
 
 /* Chemins écrits depuis la racine du site → chemins relatifs à la page générée. Seuls les attributs qui portent une adresse
    sont concernés (pas type="video/mp4") ; ancres, adresses absolues (https:, mailto:, tel:, /…) et requêtes restent telles quelles. */
-const ATTRIBUTS_URL = /\b(href|src|srcset|imagesrcset|poster|data-pdf)="([^"]*)"/g;
+const ATTRIBUTS_URL = /\b(href|src|srcset|imagesrcset|poster|data-pdf|data-etiquettes)="([^"]*)"/g;
 const relative = (u) => u && !/^(?:[a-z][a-z0-9+.-]*:|[#/?])/i.test(u);
 // applique f à chaque adresse de ces attributs (à chacune des adresses d'un srcset)
 const remplacerAdresses = (html, f) => html.replace(ATTRIBUTS_URL, (tout, attr, valeur) => `${attr}="${attr.endsWith('srcset')

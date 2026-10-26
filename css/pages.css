@@ -588,27 +588,15 @@ a.joindre-valeur:hover { color: var(--rouge-survol); text-decoration: underline;
 .lettre-formulaire .consentement { margin-top: .75rem; }
 .consentement input:user-invalid { outline: 2px solid var(--rouge-action); outline-offset: 2px; }
 
-/* Fenêtre de candidature (MODAL Banani) : <dialog> natif ouvert avec showModal() */
-.candidature {
-  width: calc(100% - 2.5rem); max-width: 45rem; max-height: 95vh; margin: auto; padding: 2.5rem;
-  color: var(--noir); background: var(--blanc); border-radius: 1rem;
-  box-shadow: 0 1.5rem 3rem rgba(20, 23, 27, .25);
-}
-.candidature:modal { display: flex; flex-direction: column; overscroll-behavior: contain; }
-.candidature::backdrop { background: rgba(0, 0, 0, .5); overflow: hidden; overscroll-behavior: contain; }
-.candidature form { display: flex; flex-direction: column; min-height: 0; flex: 1; }
-.candidature-tete { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 2.5rem; margin-bottom: 1.5rem; }
-.candidature h2 { font-size: 1.625rem; font-weight: 700; line-height: 2rem; }
-.candidature-fermer { display: flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; margin-right: -.5rem; border-radius: .5rem; color: var(--gris-champ); transition: color .15s, background-color .15s; }
-.candidature-fermer:hover { color: var(--noir); background: var(--surface); }
-.candidature-fermer .icone { width: 1.25rem; height: 1.25rem; }
-.candidature-chapo { margin-bottom: 1.5rem; font-size: .8125rem; line-height: 1.25rem; color: var(--encre-douce); }
-.candidature-champs { display: flex; flex: 1; flex-direction: column; gap: 1rem; min-height: 0; margin-bottom: 1.25rem; padding-right: .25rem; overflow-y: auto; }
-.candidature .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.candidature .champ label { margin-bottom: .375rem; font-size: .6875rem; line-height: 1rem; }
-.candidature .champ input, .candidature .champ select, .candidature .champ textarea { padding: .625rem .75rem; font-size: .8125rem; line-height: 1.25rem; }
-.candidature .champ select { padding-right: 2.25rem; }
-.candidature .champ textarea { min-height: 4.375rem; }
+/* Formulaire de souscription (rubrique Carrières) : mise en page du Contact, le dossier à préparer à gauche, le formulaire
+   de candidature à droite (champs et zone de dépôt des pièces jointes) */
+.souscription-chapo { margin-bottom: 1rem; font-size: 1.125rem; font-weight: 500; line-height: 1.75rem; color: var(--noir); }
+.souscription-dossier { margin: 2rem 0; }
+.souscription-dossier ul { display: flex; flex-direction: column; gap: .375rem; margin-top: .75rem; }
+.souscription-dossier li { position: relative; padding-left: 1rem; font-size: .875rem; font-weight: 600; line-height: 1.375rem; color: var(--noir); }
+.souscription-dossier li::before { content: ""; position: absolute; top: .5rem; left: 0; width: .375rem; height: .375rem; border-radius: 50%; background: var(--rouge-logo); }
+.formulaire-note { margin: -1rem 0 1.5rem; font-size: .8125rem; line-height: 1.25rem; color: var(--encre-douce); }
+.formulaire .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
 .depot {
   position: relative; display: flex; flex-direction: column; align-items: center; gap: .25rem;
   padding: 1rem .75rem; text-align: center; cursor: pointer;
@@ -626,10 +614,6 @@ a.joindre-valeur:hover { color: var(--rouge-survol); text-decoration: underline;
 .consentement label { font-size: .6875rem; line-height: 1rem; color: var(--encre-douce); cursor: pointer; }
 .consentement a { font-weight: 600; color: var(--rouge-action); text-decoration: underline; text-underline-offset: .125rem; }
 .consentement a:hover { color: var(--rouge-survol); }
-.candidature-actions { display: flex; gap: .75rem; padding-top: 1rem; border-top: 1px solid var(--ligne); }
-.candidature-actions .bouton { flex: 1; height: auto; padding: .75rem 1.5rem; border-radius: .375rem; font-size: .8125rem; font-weight: 700; }
-.bouton-neutre { background: var(--surface); color: var(--noir); }
-.bouton-neutre:hover { background: var(--ligne); box-shadow: none; }
 
 /* ═══════════ Pages légales (Mentions légales, Politique de confidentialité) ═══════════ */
 /* Pas d'écran Banani : composées avec ses éléments (étiquettes et encadré à filet rouge du Contact,
@@ -854,10 +838,6 @@ mark.a-completer {
   .js .liste-actus[data-cascade] > * { transition-delay: calc(min(var(--rang, 0), 5) * 80ms), calc(min(var(--rang, 0), 5) * 80ms), 0s, 0s; }
   /* Filtre : les cartes glissent vers leur nouvelle place (transition de vue limitée à la grille, voir app.js) */
   ::view-transition-group(.carte-actu) { animation-duration: .45s; animation-timing-function: cubic-bezier(.2, .7, .2, 1); }
-
-  /* Fenêtre de candidature : fondu et légère montée */
-  .candidature:modal { animation: entree-fenetre .35s var(--doux); }
-  .candidature::backdrop { animation: fondu .35s var(--doux); }
 }
 
 /* Parallaxe de la photo d'ouverture (navigateurs compatibles uniquement : décoratif, sans substitut) */
@@ -897,8 +877,8 @@ mark.a-completer {
 [data-etat="construction"] { --etat: #E39B00; }
 [data-etat="etudes"] { --etat: #8B8E94; }
 
-.stations-tete { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem 4rem; align-items: end; margin-bottom: 3rem; }
-.stations-tete .texte-doux { max-width: 34rem; }
+.stations-tete, .cadastre-tete { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem 4rem; align-items: end; margin-bottom: 3rem; }
+.stations-tete .texte-doux, .cadastre-tete .texte-doux { max-width: 34rem; }
 .stations-grille { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2.5rem; align-items: start; }
 
 /* Carte : reste en vue pendant que l'on parcourt la liste */
@@ -974,11 +954,11 @@ mark.a-completer {
 /* Liste : stations groupées par état ; la station survolée ou choisie est surlignée et son repère apparaît */
 .stations-filtres { margin-bottom: 1.75rem; }
 .stations-groupe + .stations-groupe { margin-top: 2.25rem; }
-.stations-etat {
+.stations-etat, .cadastre-groupe-titre {
   display: flex; align-items: center; gap: .625rem; padding-bottom: .75rem; border-bottom: 2px solid var(--noir);
   font-size: .8125rem; font-weight: 700; line-height: 1.25rem; letter-spacing: .08em; text-transform: uppercase; color: var(--noir);
 }
-.stations-nombre { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--encre-douce); }
+.stations-nombre, .cadastre-total { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--encre-douce); }
 .stations-groupe li + li { border-top: 1px solid var(--ligne); }
 .station { display: flex; align-items: center; gap: .875rem; width: 100%; padding: .8125rem .75rem; border: 0; border-radius: .5rem; text-align: left; }
 button.station { transition: background-color .15s, box-shadow .15s; }
@@ -989,7 +969,42 @@ button.station { transition: background-color .15s, box-shadow .15s; }
 button.station:is(:hover, :focus-visible, .est-active) { background: var(--rouge-pale); }
 button.station:is(:hover, :focus-visible, .est-active) .station-repere, button.station[aria-pressed="true"] .station-repere { opacity: 1; }
 button.station[aria-pressed="true"] { background: var(--rouge-pale); box-shadow: inset 3px 0 0 var(--rouge-logo); }
-.stations-liens { display: flex; flex-wrap: wrap; gap: .75rem 2rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--ligne); }
+.stations-liens, .cadastre-liens { display: flex; flex-wrap: wrap; gap: .75rem 2rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--ligne); }
+
+/* ═══════════ Exploration et production : cadastre pétrolier de la DGAPG (poster tel quel) et sa légende en liste (app.js) ═══════════ */
+/* Le poster tient dans la hauteur de l'écran et reste en vue pendant que l'on parcourt la légende */
+.cadastre-grille {
+  --cadastre-hauteur: max(26rem, calc(100svh - var(--entete) - 7.5rem));
+  display: grid; grid-template-columns: min(56%, calc(var(--cadastre-hauteur) * 1800 / 2545 + 1.625rem)) minmax(0, 1fr);
+  gap: 2.5rem 3.5rem; align-items: start;
+}
+.cadastre-carte { position: sticky; top: calc(var(--entete) + 1.5rem); margin: 0; padding: .75rem; background: var(--blanc); border: 1px solid var(--ligne); border-radius: .75rem; }
+.cadastre-cadre { position: relative; aspect-ratio: 1800 / 2545; }
+.cadastre-poster, .cadastre-calque { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cadastre-poster { background: var(--surface); }
+/* Calque : voile sur le reste du poster, zone détourée et cernée de rouge ; il s'efface quand rien n'est choisi */
+.cadastre-calque { opacity: 0; transition: opacity .2s; pointer-events: none; }
+.cadastre-cadre.a-une-zone .cadastre-calque { opacity: 1; }
+.cadastre-cadre.sur-une-zone { cursor: pointer; }
+/* Sous le poster : l'entrée affichée (pastille, nom, groupe, surface), sinon le titre du poster */
+.cadastre-etat { display: flex; align-items: center; gap: .625rem; min-height: 2.75rem; padding: .75rem .25rem 0; font-size: .8125rem; line-height: 1.25rem; color: var(--encre-douce); }
+.cadastre-etat strong { font-weight: 700; color: var(--noir); }
+.cadastre-etat .cadastre-km { margin-left: auto; }
+
+/* Légende : entrées groupées comme sur le poster ; l'entrée survolée ou choisie est surlignée */
+.cadastre-groupe + .cadastre-groupe { margin-top: 2rem; }
+.cadastre-total { letter-spacing: .02em; text-transform: none; }   /* « km² » reste en minuscules dans le titre en capitales */
+.cadastre-cles { display: grid; grid-template-columns: repeat(auto-fill, minmax(max(15rem, 30%), 1fr)); column-gap: 1rem; padding-top: .375rem; }   /* 3 colonnes au plus */
+.cadastre-cle { display: flex; align-items: center; gap: .75rem; width: 100%; padding: .5rem .625rem; border: 0; border-radius: .5rem; text-align: left; transition: background-color .15s, box-shadow .15s; }
+.cadastre-pastille { flex: none; width: 1.5rem; height: 1rem; border-radius: .1875rem; background: var(--pastille); box-shadow: inset 0 0 0 1px rgba(20, 23, 27, .22); }
+/* Zones AET : hachures du poster, descendantes, ou montantes pour British Petroleum */
+.cadastre-pastille.hachures { background: repeating-linear-gradient(45deg, var(--pastille) 0 1.5px, var(--blanc) 1.5px 5px); }
+.cadastre-pastille.hachures.montantes { background: repeating-linear-gradient(-45deg, var(--pastille) 0 1.5px, var(--blanc) 1.5px 5px); }
+.cadastre-nom { flex: 1; min-width: 0; font-size: .875rem; font-weight: 600; line-height: 1.25rem; color: var(--noir); }
+.cadastre-km { flex: none; font-size: .8125rem; line-height: 1.25rem; font-variant-numeric: tabular-nums; color: var(--encre-douce); }
+.cadastre-cle:is(:hover, :focus-visible, .est-active) { background: var(--rouge-pale); }
+.cadastre-cle[aria-pressed="true"] { background: var(--rouge-pale); box-shadow: inset 3px 0 0 var(--rouge-logo); }
+.cadastre-source { margin-top: 1rem; font-size: .8125rem; line-height: 1.25rem; color: var(--encre-douce); }
 
 /* ═══════════ Carrières : six raisons de nous rejoindre (accordéon <details>), puis la bande de candidature ═══════════ */
 .raisons-grille { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 3rem 6rem; align-items: start; }
@@ -1209,9 +1224,15 @@ html:has(dialog.talent[open]) { overflow: hidden; scrollbar-gutter: stable; }
 /* Tablette */
 @media (max-width: 1023px) {
   .page-hero { height: clamp(24rem, 52vw, 30rem); }
-  .stations-tete, .stations-grille { grid-template-columns: minmax(0, 1fr); }
-  .stations-tete { margin-bottom: 2rem; }
+  .stations-tete, .stations-grille, .cadastre-tete, .cadastre-grille { grid-template-columns: minmax(0, 1fr); }
+  .stations-tete, .cadastre-tete { margin-bottom: 2rem; }
   .stations-carte { position: static; }   /* au-dessus de la liste ; choisir une station la ramène en vue (app.js) */
+  /* Poster collé sous l'en-tête, sur un peu plus de la moitié de l'écran, pendant que l'on parcourt la légende dessous */
+  .cadastre-carte { top: var(--entete); z-index: 3; margin-inline: calc(-1 * var(--marge)); padding: .5rem var(--marge) 0; border-width: 0 0 1px; border-radius: 0; }
+  .cadastre-cadre { width: min(100%, calc(55svh * 1800 / 2545)); margin-inline: auto; }
+  .cadastre-etat { justify-content: center; min-height: 2.5rem; padding-block: .375rem; }
+  .cadastre-etat .cadastre-km { margin-left: 0; }
+  .cadastre-cle { min-height: 2.75rem; }
   .page-hero-titre { font-size: 2.5rem; line-height: 3rem; }
 
   .apropos, .apropos.mot-adg, .detail, .contact { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -1312,12 +1333,8 @@ html:has(dialog.talent[open]) { overflow: hidden; scrollbar-gutter: stable; }
   .siege { margin-bottom: 2rem; }
   .joindre { gap: 1.5rem; }
 
-  .candidature { width: 100%; max-width: none; max-height: 100%; height: 100%; margin: 0; padding: 1.5rem var(--marge); border-radius: 0; }
-  .candidature .duo { grid-template-columns: 1fr; }
-  .candidature h2 { font-size: 1.375rem; line-height: 1.75rem; }
-  .candidature-actions .bouton { min-height: 2.75rem; }
+  .formulaire .duo { grid-template-columns: 1fr; }
   .champ input, .champ select, .champ textarea { font-size: 1rem; }   /* évite le zoom automatique d'iOS */
-  .candidature .champ input, .candidature .champ select, .candidature .champ textarea { font-size: 1rem; }
 
   .appel h2 { font-size: 1.625rem; line-height: 2rem; }
   .appel-actions .bouton { flex: 1 1 100%; }

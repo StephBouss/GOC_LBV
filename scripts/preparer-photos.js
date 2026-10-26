@@ -2,9 +2,10 @@
 /**
  * Prépare les photos réelles des pages, qui remplacent les visuels générés par IA de la maquette Banani.
  * Elles viennent des reportages fournis par le client (hors du dépôt) : « Photo Autre/Opérations GOC »,
- * « GOC-SNHG - Contenus/Images GOC - SNHG », « Station », « SMP » et « GOTALK » (portraits des talents, copiés sous un nom simple).
+ * « GOC-SNHG - Contenus/Images GOC - SNHG », « Station », « SMP », « GOTALK » (portraits des talents, copiés sous un nom simple)
+ * et « Bannières » (visuels composés pour une ouverture de page).
  *
- *  img/photos/<nom>.jpg       1536 × 1024 (paysage), 1024 × 1536 (portrait) ou 960 × 1200 (talent, GO’TALK)
+ *  img/photos/<nom>.jpg       1536 × 1024 (paysage), 1024 × 1536 (portrait), 960 × 1200 (talent, GO’TALK) ou 2400 × 1030 (bandeau)
  *  img/photos/<nom>-768.jpg   768 px de large, pour les attributs srcset
  *
  * « zone » (facultative) : partie de la photo d'origine à garder, en fractions [x, y, largeur, hauteur].
@@ -45,7 +46,7 @@ const PHOTOS = [
   { nom: 'confidentialite-hero', source: `${OPERATIONS}/Port-Gentil/POG - Portraits dans les bureaux/DSC04330.jpg` },
   { nom: 'cookies-hero', source: `${OPERATIONS}/Libreville/Libreville - Portrait hommes bureaux/DSC04958.jpg` },                        // poste informatique
   { nom: 'presentation-vision', source: `${OPERATIONS}/Obangué/Obangué - Portrait opérateur mixte dans les installations/DSC01896.jpg` }, // regard tourné vers l'horizon
-  { nom: 'actualites-hero', source: `${BUREAUX}/20231108_084030.jpg` },                                                                  // visite officielle
+  { nom: 'actualites-hero', source: 'Bannières/actualites-perroquet-gris.png', format: 'bandeau' },                                    // perroquet gris en vol (visuel fourni le 26/10/2026)
   { nom: 'rse-hero', source: `${OPERATIONS}/Mandji/Mandji - Vues aériennes/DJI_0353.jpg` },                                             // communautés riveraines
   { nom: 'rse-approche', source: `${OPERATIONS}/Mandji/Mandji - Equipe & nature/DSC02843.jpg` },
   { nom: 'hsei-hero', source: `${OPERATIONS}/Tsiengui/Tsiengui - Prélèvement/DSC01488.jpg` },                                             // opérateur sous masque respiratoire
@@ -56,7 +57,7 @@ const PHOTOS = [
   { nom: 'stations-hero', source: 'Station/Inauguration de la station GABOIL.png', zone: [0, 0, 1, 0.84] },                         // page des stations : station de Makokou, sans le titre incrusté
   { nom: 'services-hero', source: `${OPERATIONS}/Sardine/Sardine - Local électrique/DSC03872.jpg` },                                    // technicien devant une armoire électrique
   { nom: 'carrieres-hero', source: `${OPERATIONS}/Port-Gentil/POG - Travail d_équipe/DSC04221.jpg` },                              // collaboratrice et collègue au poste de travail, à droite (le texte de l'ouverture reste à gauche)
-  { nom: 'carrieres-fierte', source: `${OPERATIONS}/Tsiengui/Tsiengui - Portraits opérateurs/DSC00998.jpg` },                          // opérateur, écusson aux couleurs du Gabon
+  { nom: 'carrieres-fierte', source: `${OPERATIONS}/Port-Gentil/POG - Travail d_équipe/DSC04499.jpg`, zone: [0.1, 0.04, 0.82, 0.82] },   // deux collègues relisent un document (« Rejoindre la SNHG »)
   { nom: 'carrieres-equipe', source: `${OPERATIONS}/Obangué/Obangué - Réunion d_équipe/DSC02637.jpg` },                                // réunion d'équipe (bande de candidature)
   { nom: 'services-intervention', source: 'SMP/SMP.webp' },                                                                          // technicien SMP sur un appareil de forage, main levée (photo fournie le 24/10/2026)
   // Images à la une et galeries des actualités (sources/actualites.json), au format 16:9 des cartes et des articles
@@ -76,6 +77,7 @@ const FORMATS = {
   portrait: { grande: [1024, 1536], petite: [768, 1152] },
   actualite: { grande: [1536, 864], petite: [768, 432] },
   talent: { grande: [960, 1200], petite: [768, 960] },
+  bandeau: { grande: [2400, 1030], petite: [768, 330] },   // visuel déjà composé en bannière (2,33:1), gardé entier
 };
 
 // Les accents des noms de dossiers peuvent être enregistrés décomposés (copie depuis un Mac) :

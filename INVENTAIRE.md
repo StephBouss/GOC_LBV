@@ -1,6 +1,6 @@
 # Inventaire de la maquette GOC (mis à jour le 24/10/2026)
 
-Les 8 écrans Banani sont reproduits en 7 pages : les écrans « Contact » et « Contact sans modale » ont donné la page Contact et la fenêtre de candidature, aujourd'hui sur la page Carrières. Le site compte désormais 20 pages et 13 articles par langue, soit 66 pages (liste en partie 1).
+Les 8 écrans Banani sont reproduits en 7 pages : les écrans « Contact » et « Contact sans modale » ont donné la page Contact et le formulaire de candidature, aujourd'hui sur la page « Formulaire de souscription » de la rubrique Carrières. Le site compte désormais 21 pages et 13 articles par langue, soit 68 pages (liste en partie 1).
 
 ## Actualités : fonctionnement (préfiguration de WordPress)
 
@@ -58,21 +58,47 @@ Les 8 écrans Banani sont reproduits en 7 pages : les écrans « Contact » et �
 - **Orthographe normalisée** : Akébé, Lopé, Omboué, Bikélé ; « POG » devient Port-Gentil.
 - **WordPress** : un type de contenu « Station » (champs ACF : nom, ville, province, état en liste de choix, latitude, longitude), traduit par Polylang. Le thème reprend la projection, le fond de carte, le CSS et le script : le client ajoute une station ou corrige sa position sans toucher au code.
 
+## Cadastre pétrolier : fonctionnement (préfiguration de WordPress)
+
+- **Place** : section `#cadastre` de `activites/exploration-production.html` (`en/activities/exploration-production.html`), entre les trois aspects et l'appel à l'action. Ajoutée le 26/10/2026 à la demande du client.
+- **Poster tel quel** : le PDF « CADASTRE PETROLIER GABON SEPTEMBRE 2026 » de la DGAPG (service Cadastre pétrolier) n'est pas redessiné. Il est affiché en WebP de 900, 1350 et 1800 px (`img/cadastre/`). La version de 3600 px s'ouvre par « Agrandir la carte » (nouvel onglet). Le PDF se télécharge : `documents/cadastre-petrolier-gabon-septembre-2026.pdf`, 4,2 Mo.
+- **Interaction** :
+  - La légende du poster est reprise en liste (25 entrées) : Exploration (dont les 4 zones AET hachurées), Exploitation et Blocs libres, avec les couleurs et les surfaces du poster.
+  - Survoler, toucher ou atteindre au clavier une entrée voile le reste du poster et détoure ses zones d'un liseré rouge. Sa ligne s'allume aussi dans la légende du poster.
+  - Survoler le poster, y compris sa propre légende, désigne l'entrée sous le pointeur. Un clic ou un toucher fixe le choix ; Échap ou un clic hors zone le lève.
+  - Sous le poster s'affichent le nom, le groupe et la surface de l'entrée choisie.
+  - Sur ordinateur, le poster tient dans la hauteur de l'écran et reste en vue à côté de la liste. Sur tablette et mobile, il reste collé sous l'en-tête (55 % de la hauteur) au-dessus de la liste.
+- **Carte d'étiquettes** :
+  - `img/cadastre/cadastre-etiquettes.png` (1200 × 1697, 20 Ko) donne pour chaque point du poster l'entrée de la légende (niveau de gris = numéro × 10). Elle est lue par app.js à l'approche de la section.
+  - Le PDF ne contenant que des images, elle vient d'une analyse des pixels : aplats de couleur, densité des traits de hachure diagonaux, blocs blancs fermés par des contours sombres. La chaîne est rangée dans `scripts/cadastre/` ; la marche à suivre pour une nouvelle édition est en tête de `outils.js`.
+  - Contrôle : chaque entrée couvre de 9 à 10 pixels par km² de sa surface officielle. Les plus petits permis d'exploitation perdent une partie de leur bord : leur détourage reste approximatif à quelques pixels près.
+- **Choix à valider avec le client** :
+  - Le SVG schématique fourni avec le PDF n'a pas servi : sa géométrie est approximative et ses couleurs diffèrent du poster.
+  - Dans la liste, « SNHG GOC » devient « SNHG » en français et « GOC » en anglais (règle de nommage), et « TOTAL ENERGY » devient « TotalEnergies ». Les autres noms suivent le poster.
+  - Le sigle AET n'est pas développé : sa signification exacte est à confirmer.
+  - Certaines pastilles de la légende du poster n'ont pas la teinte de la carte (Assala, KOREG et Petronas en exploration) : la liste reprend la légende telle quelle.
+- **Nouvelle édition** : remplacer le PDF et les images, refaire la carte d'étiquettes (`scripts/cadastre/`), mettre à jour les surfaces de la liste.
+- **WordPress** :
+  - Le poster est un média (images et PDF).
+  - La légende est un répéteur ACF (nom, groupe, couleur, hachure, surface, numéro dans la carte d'étiquettes), traduit par Polylang.
+  - Le thème reprend le CSS et le script de la section.
+
 ## Carrières : fonctionnement (préfiguration de WordPress)
 
-- **Page** : `carrieres/index.html` (`en/careers/index.html`), créée le 24/10/2026 à la demande du client. Le lien « Carrières » du menu « Informations », du plan du pied de page et des sous-navigations (Actualités, Médiathèque, articles, Contact) y mène.
+- **Rubrique** (26/10/2026, demande client) : « Carrières » est un menu de l'en-tête, à côté d'« Informations », avec trois liens : « Pourquoi rejoindre la SNHG » (`carrieres/index.html`), « Formulaire de souscription » (`carrieres/candidature.html`) et « GO’TALK » (`gotalk/index.html`, toujours en rouge). En anglais : « Careers », avec « Why join GOC », « Application form » et « GO’TALK ». Le pied de page a une colonne « Carrières ». Les pages de la rubrique ont une sous-navigation à ces trois liens, sauf GO’TALK, laissée telle quelle. Carrières ne figure plus dans le menu « Informations » ni dans les sous-navigations d'Actualités, de la Médiathèque et des articles ; la sous-navigation de Contact garde son lien vers Carrières.
+- **Page « Pourquoi rejoindre la SNHG »** : `carrieres/index.html` (`en/careers/index.html`), créée le 24/10/2026 à la demande du client.
 - **Contenu** : texte du client, mot pour mot. « Pourquoi nous rejoindre ? » et les 6 bonnes raisons, en accordéon numéroté (une seule raison ouverte à la fois, la première à l'arrivée, ouverture animée là où le navigateur sait animer la hauteur), puis une bande « Construisons ensemble l'avenir énergétique du Gabon. » avec le bouton « Déposer ma candidature ».
-- **Candidature** : la fenêtre de candidature spontanée a quitté la page Contact pour cette page. Le bouton l'ouvre, comme l'adresse `carrieres/index.html#candidature`.
-- **WordPress** : une page composée des blocs Bannière, Détails (un par raison) et Couverture (la bande), et du formulaire de l'extension, ouvert en fenêtre par le script du thème.
+- **Page « Formulaire de souscription »** (26/10/2026) : `carrieres/candidature.html` (`en/careers/application.html`). Le formulaire de candidature spontanée, auparavant dans une fenêtre de la page Carrières, y est affiché en clair, dans la mise en page du Contact : à gauche, le dossier à préparer (CV et lettre, PDF ou DOCX, 3 fichiers et 5 Mo au maximum) ; à droite, le formulaire, avec les mêmes champs et les mêmes contrôles des pièces jointes. Le bouton « Déposer ma candidature » de la page Carrières y mène. Ouverture : la réunion d'équipe d'Obangué (`carrieres-equipe`), aussi utilisée dans la bande de candidature.
+- **WordPress** : la page « Pourquoi rejoindre la SNHG » est composée des blocs Bannière, Détails (un par raison) et Couverture (la bande) ; la page « Formulaire de souscription » des blocs Bannière, Colonnes (texte et liste à gauche) et du formulaire de l'extension à droite.
 
 ## GO’TALK : fonctionnement (préfiguration de WordPress)
 
-- **Page** : `gotalk/index.html` (`en/gotalk/index.html`), créée le 24/10/2026 à la demande du client. Onglet « GO’TALK » du menu principal, en rouge, avant Contact.
+- **Page** : `gotalk/index.html` (`en/gotalk/index.html`), créée le 24/10/2026 à la demande du client. Depuis le 26/10/2026, troisième lien du menu « Carrières », toujours en rouge ; la page elle-même n'a pas changé.
 - **Source unique** : `sources/gotalk.json` (traduction : `sources/en/gotalk.json`, par identifiant), mis en forme par `scripts/gotalk.js`. Chaque talent : nom, fonction, service, photo, titre, chapeau, entretien (question, accroche en gras facultative, réponse) et « En quelques mots » (libellé, texte). Textes : document « PORTRAIT MÉTIER » du client, mot pour mot ; les tirets cadratins y deviennent deux-points ou parenthèses, l'italique est gardée.
 - **Mise en page** : une ouverture sombre (la marque en très grand, lettres qui montent, apostrophe rouge en bulle ; le propos dans une bulle de dialogue), puis une carte par talent : la photo, le nom et la fonction seulement. « Lire le portrait » apparaît au survol.
 - **Portrait** : un clic ouvre une fenêtre de lecture. La photo de la carte s'agrandit jusqu'à la fenêtre (transition de vue, là où le navigateur la connaît). La photo et l'identité restent à gauche ; l'entretien défile à droite, en colonne de 42rem, avec un trait rouge d'avancement de la lecture. Les réponses fortes (« La responsabilité. ») sont mises en exergue, « En quelques mots » est en encadré. On passe au portrait précédent ou suivant sans fermer. Sur mobile, la fenêtre occupe l'écran, photo en tête. Chaque portrait a son adresse (`gotalk/index.html#axelle-manguiya-etoughe`), à partager.
 - **Photos** : les 3 portraits fournis (dossier « our » du client, copiés dans « GOTALK »), recadrés en 4:5 (`gotalk-<id>`, 960 × 1200). Les noms des fichiers d'origine (« Portrait professionnel en bureau moderne », « … sur fond noir ») évoquent des images retouchées ou générées : à confirmer avec le client que ce sont bien les portraits validés des collaborateurs.
-- **À fournir** : les noms de l'ingénieur chimiste de production (Mboumba) et du contrôleur de coûts senior, absents du document. En attendant, leur carte affiche la fonction à la place du nom.
+- **Noms** : Yannick ISSOUKOU BELEMLOUGRI (ingénieur chimiste de production, Mboumba) et Shandy NGOUNGOULOU (contrôleur de coûts senior), fournis par le client le 26/10/2026. Si un nom manque un jour, la carte affiche la fonction à sa place.
 - **WordPress** : un type de contenu « Talent » (ACF : nom, fonction, service, photo, titre, chapeau, entretien en répéteur, « En quelques mots » en répéteur), traduit par Polylang ; la page liste les talents, le script du thème ouvre les portraits.
 
 ## Engagements HSEI et RSE : fonctionnement (préfiguration de WordPress)
@@ -86,10 +112,10 @@ Les 8 écrans Banani sont reproduits en 7 pages : les écrans « Contact » et �
 
 ## Formulaires : fonctionnement (préfiguration de WordPress)
 
-- **Trois formulaires** : contact (`contact/index.html#formulaire`), candidature spontanée (fenêtre de la page Carrières, avec pièces jointes) et lettre d'information (page Actualités). Chacun a une case de consentement obligatoire qui renvoie à la politique de confidentialité.
+- **Trois formulaires** : contact (`contact/index.html#formulaire`), candidature spontanée (page « Formulaire de souscription », `carrieres/candidature.html`, avec pièces jointes) et lettre d'information (page Actualités). Chacun a une case de consentement obligatoire qui renvoie à la politique de confidentialité.
 - **Contrôles** : champs obligatoires vérifiés par le navigateur, état annoncé aux lecteurs d'écran. Pour la candidature : nom, e-mail, documents et consentement obligatoires (astérisque), PDF ou DOCX, 3 fichiers et 5 Mo par fichier au maximum. Le service d'envoi doit refaire ces contrôles de son côté.
 - **Envoi** : `js/app.js` envoie le formulaire sans quitter la page vers l'adresse de son attribut `action`, puis affiche un message de confirmation ou d'erreur. Le bouton est bloqué pendant l'envoi.
-- **À brancher** : aucun `action` n'est renseigné pour l'instant. Le formulaire le dit alors au visiteur (« rien n'a été transmis ») et donne l'adresse contact@gabonoil.com. Pour le relier, il faut renseigner `action="…"` dans `sources/pages/contact/index.html`, `sources/pages/carrieres/index.html` et `sources/pages/actualites/index.html` avec l'adresse fournie par le service retenu :
+- **À brancher** : aucun `action` n'est renseigné pour l'instant. Le formulaire le dit alors au visiteur (« rien n'a été transmis ») et donne l'adresse contact@gabonoil.com. Pour le relier, il faut renseigner `action="…"` dans `sources/pages/contact/index.html`, `sources/pages/carrieres/candidature.html` et `sources/pages/actualites/index.html` (et leurs pages anglaises) avec l'adresse fournie par le service retenu :
   - **contact** : Formspree, Web3Forms ou une fonction Vercel ;
   - **candidature** : un service qui accepte les pièces jointes (offres payantes chez Formspree et Web3Forms) ;
   - **lettre d'information** : l'adresse d'inscription de l'outil d'envoi (Brevo, Mailchimp…).
@@ -131,12 +157,13 @@ Les 8 écrans Banani sont reproduits en 7 pages : les écrans « Contact » et �
   | `activites/services-petroliers.html` | `en/activities/oil-services.html` |
   | `activites/stations-gaboil.html` | `en/activities/gaboil-stations.html` |
   | `carrieres/index.html` | `en/careers/index.html` |
+  | `carrieres/candidature.html` | `en/careers/application.html` |
   | `gotalk/index.html` | `en/gotalk/index.html` |
 
 - **Adresses des articles** (`actualites/<slug>.html` devient `en/news/<slug anglais>.html`, champ `slug` de `sources/en/actualites.json`) : `nomination-dg-gaboil` → `gaboil-new-managing-director`, `deploiement-gaboil` → `gaboil-network-expansion`, `modernisation-outils` → `management-tools-modernisation`, `pizolub-renaissance` → `pizolub-industrial-revival`, `tullow-oil-gop` → `tullow-oil-gabon-becomes-gop`, `smp-maintenance` → `smp-maintenance-expertise`, `assala-energy` → `assala-energy-milestone`, `dinonga-irondu` → `dinonga-irondu-operator`, `retrocession-addax` → `addax-assets-transfer`, `dussafu-ezanga` → `dussafu-ezanga-stakes`, `perenco-participations-etat` → `perenco-state-interests`, `cepp-mboga-ii` → `mboga-ii-expansion`, `joint-venture-bourbon` → `bourbon-gabon-joint-venture`.
 - **Données traduites** : `sources/en/actualites.json` (catégories, titres, extraits, contenus, textes alternatifs), `sources/en/diaporama-accueil.json` (sur-titres, titres, chapôs, boutons, repérés par l'`id` de chaque diapositive) et `sources/en/mediatheque.json` (types, titres, descriptions, légendes des photos, dans l'ordre du fichier français). Dates, images, durées et liens ne sont écrits qu'une fois, dans le fichier français.
 - **Menus et libellés** : `sources/navigation.json` (un libellé par langue pour chaque entrée de menu) et `sources/libelles.json` (textes d'interface du gabarit et des pages générées). Les messages de `js/app.js` suivent la langue de la page (`<html lang>`).
-- **Référencement** : chaque page a son adresse canonique dans sa langue, des liens `hreflang` vers les deux versions et `x-default` vers la version française, `og:locale` (`fr_FR` ou `en_GB`) et `og:locale:alternate`. Le plan du site liste les 66 adresses, les françaises d'abord.
+- **Référencement** : chaque page a son adresse canonique dans sa langue, des liens `hreflang` vers les deux versions et `x-default` vers la version française, `og:locale` (`fr_FR` ou `en_GB`) et `og:locale:alternate`. Le plan du site liste les 68 adresses, les françaises d'abord.
 - **Conventions de traduction** : anglais britannique (« programme », « organisation »), traduction faite d'après le texte français, sans reprendre de version existante. Les noms propres français (raison sociale de la SNHG, sociétés et organismes, adresses postales) restent en français et sont marqués `lang="fr"` pour être bien prononcés. Les PDF, en français, sont signalés « in French ». Les nombres suivent l'usage anglais (90,000, 5 MB). « ADG » devient « Managing Director ».
 - **Pages juridiques** : une mention sous le sommaire précise que la version française fait foi en cas de divergence. La traduction des mentions légales, de la politique de confidentialité et de la page cookies est à faire valider par le service juridique.
 - **Contrôles** : la génération s'arrête si une page, un article, un lien ou un champ n'a pas sa version anglaise. Les pages anglaises ont été passées au crible (textes visibles, textes alternatifs, `aria-label`, `title`, `placeholder`, métadonnées) : il n'y reste du français que dans les noms propres.
@@ -206,13 +233,14 @@ Les parties suivantes font le point sur les pages, les photos, les textes à rel
 | Distribution et transformation | `activites/distribution-transformation.html` | aucun : composants des pages Exploration (ouverture, texte et photo, cartes, appel) et chiffres clés de l'accueil |
 | Services pétroliers | `activites/services-petroliers.html` | aucun : composants des pages Exploration (ouverture, texte et photo, cartes, appel) et Engagements HSEI (cartes numérotées) |
 | Stations Gab'Oil (carte et liste) | `activites/stations-gaboil.html` | aucun : ouverture, pastilles des actualités, cartes de la page |
-| Carrières (et fenêtre de candidature) | `carrieres/index.html` | ContactNoModal pour la fenêtre ; le reste reprend l'ouverture, la bande « Cap vers 2030 » de l'accueil et un accordéon numéroté |
+| Pourquoi rejoindre la SNHG (Carrières) | `carrieres/index.html` | aucun : ouverture, bande « Cap vers 2030 » de l'accueil et accordéon numéroté |
+| Formulaire de souscription (Carrières) | `carrieres/candidature.html` | ContactNoModal pour les champs du formulaire, mis en page comme le Contact |
 | GO’TALK (portraits des talents) | `gotalk/index.html` | aucun : ouverture et fenêtre dessinées pour la page, cartes et pastilles du site |
 | Articles (13 pages) | `actualites/<slug>.html` | aucun : en-tête éditorial, colonne de lecture, « À lire aussi » |
 
 Rangement (20/10/2026, demande client) : l'accueil est à la racine du site, chaque autre page dans le dossier de sa rubrique (`groupe/`, `filiales/`, `activites/`, `engagements/`, `actualites/`, `mediatheque/`, `carrieres/`, `gotalk/`, `contact/`, `informations-legales/`), à côté de `css/`, `js/`, `img/`, `video/`, `documents/` et `fonts/`. Les anciennes adresses (`engagements-rse.html`, `actualite-<slug>.html`…) sont redirigées vers les nouvelles par `vercel.json`.
 
-Chaque page et chaque article a sa traduction anglaise sous `en/` (voir « Version anglaise »), soit 66 pages en tout.
+Chaque page et chaque article a sa traduction anglaise sous `en/` (voir « Version anglaise »), soit 68 pages en tout.
 
 On modifie les sources dans `sources/pages/` (rangées comme le site) et `sources/en/pages/` pour l'anglais, ainsi que l'en-tête et le pied communs dans `sources/gabarit.html`, les menus dans `sources/navigation.json` et les textes d'interface dans `sources/libelles.json`. Les liens s'y écrivent depuis la racine du site ; la génération les rend relatifs à chaque page.
 La commande `node scripts/assembler-pages.js` régénère toutes les pages. Avec `--surveiller`, la régénération se fait à chaque enregistrement.
@@ -249,14 +277,14 @@ Pour l'instant, elles sont traitées comme des sections ou des ancres des pages 
 | Activités et engagements | `activites-hero` | Opérateur devant les réservoirs, Tsiengui |
 | Exploration et production : ouverture, section amont | `exploration-hero`, `exploration-salle-controle` | Opérateur aux têtes de puits (Sardine), salle de contrôle de Tsiengui |
 | Contact | `contact-hero` | Collaborateur au service d'une collègue, bureaux de Port-Gentil |
-| Actualités | `actualites-hero` | Visite officielle dans les bureaux |
+| Actualités | `actualites-hero` (bandeau 2400 × 1030) | Perroquet gris du Gabon en vol, visuel fourni par le client le 26/10/2026 (dossier « Bannières »), gardé entier ; point focal à 85 % pour le mobile |
 | Mentions légales, Confidentialité | `mentions-legales-hero`, `confidentialite-hero` | Bureaux de Port-Gentil |
 | Projets stratégiques : ouverture, actions prioritaires | `projets-hero`, `projets-equipe` | Champ de Tsiengui et ses réservoirs en forêt, vue aérienne ; opérateurs en discussion sur la plateforme Sardine |
 | Gestion des cookies | `cookies-hero` | Collaborateur à son poste informatique, bureaux de Libreville |
 | Distribution et transformation : ouverture, section distribution | `actu-gaboil-station` (repris de l'article), `distribution-station` | Les deux photos d'inauguration de stations Gab'Oil du dossier « Station », les seules fournies : la première illustre aussi l'article sur le déploiement de Gab'Oil, la seconde l'ouverture de la page Filiales (ici recadrée sur la pompe et la boutique). La section Pizolub reprend la photo de l'usine du site SNHG (`img/actu-pizolub.jpg`, 758 px de large seulement). Des photos des stations, des dépôts et de l'usine Pizolub sont à demander au client. |
 | Services pétroliers : ouverture, section SMP | `services-hero`, `services-intervention` | Technicien devant une armoire électrique (plateforme Sardine), technicien SMP sur un appareil de forage, main levée (photo fournie par le client le 24/10/2026, « SMP/SMP.webp »). Ce sont des photos des sites de la GOC, pas des équipes SMP : des photos de SMP au travail sont à demander au client. |
 | Stations Gab'Oil | `stations-hero` | Station Gab'Oil de Makokou le jour de l'inauguration (titre incrusté retiré) |
-| Carrières : ouverture, « Rejoindre la SNHG », bande de candidature | `carrieres-hero`, `carrieres-fierte`, `carrieres-equipe` | Une collaboratrice et un collègue à leur poste, bureaux de Port-Gentil ; opérateur portant l'écusson aux couleurs du Gabon, Tsiengui ; réunion d'équipe en tenue, Obangué |
+| Carrières : ouverture, « Rejoindre la SNHG », bande de candidature (aussi ouverture du Formulaire de souscription) | `carrieres-hero`, `carrieres-fierte`, `carrieres-equipe` | Une collaboratrice et un collègue à leur poste, bureaux de Port-Gentil ; deux collègues en chemise SNHG relisent un document, bureaux de Port-Gentil (choisie par le client le 26/10/2026, à la place de l'opérateur casqué de Tsiengui) ; réunion d'équipe en tenue, Obangué |
 | GO’TALK | `gotalk-axelle-manguiya-etoughe`, `gotalk-ingenieur-chimiste-mboumba`, `gotalk-controleur-couts-senior` (960 × 1200) | Portraits fournis avec le document « PORTRAIT MÉTIER » (24/10/2026) |
 | Articles Addax, SMP, GOP, Gab'Oil | `actu-addax-tsiengui`, `actu-addax-obangue`, `actu-smp`, `actu-gop`, `actu-gaboil-station` | Champs repris de Tsiengui et d'Obangué, opérateur en salle électrique, réunion à Libreville, inauguration d'une station Gab'Oil (titre incrusté retiré) |
 
@@ -294,7 +322,7 @@ Les textes viennent de snhg.vercel.app, mot pour mot quand c'était possible. L�
   - **WordPress** : la chaîne devient un bloc à liste répétable (pictogramme, secteur, entités liées), et les fiches un bloc de cartes (logo, secteurs, texte, lien).
   - **Logo Gab'Oil** (23/10/2026) : remplacé par le logo vectoriel remis par le client (`img/filiales/gab-oil.svg`), dans la fiche et dans la bande « Nos filiales » de l'accueil. L'ancien, tiré du site SNHG, était en réalité le logo de Gabon Oil Company.
 - **Contact** : la section « Bureaux régionaux » de Banani est retirée, à la demande du client. Le champ « Sujet » est une saisie libre. Depuis le 24/10/2026, un champ « Téléphone » facultatif suit l'adresse e-mail : la politique de confidentialité le mentionnait déjà. Depuis le 24/10/2026, la page donne aussi le siège de Port-Gentil (« Gabon Oil Company, Immeuble Paquebot, entrée Nouveau Port, Port-Gentil », texte du client), sans téléphone tant que le numéro n'est pas fourni.
-- **Menu principal** (24/10/2026, demandes client) : le menu « Information et contact » devient « Informations » (« Information » en anglais) et perd son lien Contact, aussi retiré des sous-navigations de ses pages. « GO’TALK », en rouge, puis « Contact » sont des onglets de l'en-tête, à côté des trois menus, et des lignes du menu mobile ; ils ferment la colonne « Informations » du pied de page. Les liens FR | EN sont en rouge. Ce sont des liens directs, sans sous-menu (`directs` dans `sources/navigation.json`, `mise_en_avant` pour le rouge ; dans WordPress, des éléments de menu sans enfant, avec une classe CSS). Le bouton rouge « Contact » de l'en-tête et du menu mobile est retiré. Sur la page Contact, c'est cet onglet qui est souligné.
+- **Menu principal** (24/10/2026, demandes client) : le menu « Information et contact » devient « Informations » (« Information » en anglais) et perd son lien Contact, aussi retiré des sous-navigations de ses pages. « Contact » est un onglet de l'en-tête, à côté des quatre menus (dont « Carrières » depuis le 26/10/2026, où GO’TALK est passé en rouge), et une ligne du menu mobile ; il ferme la colonne « Informations » du pied de page (`directs_au_pied`). Les liens FR | EN sont en rouge. C'est un lien direct, sans sous-menu (`directs` dans `sources/navigation.json` ; `mise_en_avant` met un onglet ou un lien de sous-menu en rouge ; dans WordPress, un élément de menu sans enfant, et une classe CSS pour le rouge). Le bouton rouge « Contact » de l'en-tête et du menu mobile est retiré. Sur la page Contact, c'est cet onglet qui est souligné.
 - **Gouvernance** : Marcellin SIMBA NGABI figure aussi parmi les administrateurs du conseil (en premier, comme sur le site de référence), en plus de son rôle d'ADG au comité de direction.
 - **Pages légales** : textes du site de référence mot pour mot. Seuls les chapeaux d'ouverture et la date de mise à jour sont nouveaux.
 - **Politique de confidentialité, lettre d'information** (20/10/2026, audit) : ajout de la lettre aux données collectées, aux usages (avec lien de désinscription) et à la conservation (jusqu'à la désinscription), et d'une phrase sur le prestataire technique d'envoi. À valider par le service juridique.

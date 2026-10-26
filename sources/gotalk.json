@@ -4,7 +4,7 @@
     "Chaque talent préfigure un contenu WordPress « Talent » : nom, fonction, service, photo, titre, chapeau, entretien (question, accroche en gras facultative, paragraphes de réponse) et « En quelques mots » (libellé, texte).",
     "Photo : img/photos/gotalk-<id>.jpg (960 × 1200) et -768.jpg, produites par scripts/preparer-photos.js depuis le dossier « GOTALK » des photos du client.",
     "Mise en forme dans les textes : *italique* et {en|texte en anglais} (attribut lang). Le reste est du texte simple.",
-    "Nom vide : la carte affiche la fonction à la place du nom (noms de l'ingénieur chimiste et du contrôleur de coûts à fournir par le client).",
+    "Nom vide : la carte affiche la fonction à la place du nom, tant que le client ne l'a pas fourni.",
     "L'ordre du fichier est celui de la page. Traductions : sources/en/gotalk.json, par identifiant."
   ],
   "textes": {
@@ -83,12 +83,12 @@
     },
     {
       "id": "ingenieur-chimiste-mboumba",
-      "nom": "",
+      "nom": "Yannick ISSOUKOU BELEMLOUGRI",
       "fonction": "Ingénieur chimiste de production",
       "service": "Champ de Mboumba",
-      "alt": "Ingénieur chimiste de production en tenue et casque de sécurité, talkie-walkie à l'épaule",
+      "alt": "Yannick ISSOUKOU BELEMLOUGRI en tenue et casque de sécurité, talkie-walkie à l'épaule",
       "titre": "Au cœur de la chimie de production à Mboumba",
-      "chapo": "Sur le champ de Mboumba, la chimie joue un rôle essentiel dans la production des hydrocarbures et la préservation des installations. Rencontre avec un ingénieur chimiste de production qui conjugue expertise scientifique, sens de l'anticipation et esprit d'équipe.",
+      "chapo": "Sur le champ de Mboumba, la chimie joue un rôle essentiel dans la production des hydrocarbures et la préservation des installations. Rencontre avec Yannick ISSOUKOU BELEMLOUGRI, ingénieur chimiste de production qui conjugue expertise scientifique, sens de l'anticipation et esprit d'équipe.",
       "entretien": [
         {
           "question": "En quoi consiste votre métier ?",
@@ -140,12 +140,12 @@
     },
     {
       "id": "controleur-couts-senior",
-      "nom": "",
+      "nom": "Shandy NGOUNGOULOU",
       "fonction": "Contrôleur de coûts senior",
       "service": "Département Assets Lead Opérés",
-      "alt": "Contrôleur de coûts senior en veste sombre, bras croisés, sur fond noir",
+      "alt": "Shandy NGOUNGOULOU en veste sombre, bras croisés, sur fond noir",
       "titre": "La maîtrise des coûts au service de la performance",
-      "chapo": "Derrière chaque opération pétrolière se trouvent des investissements à planifier, des dépenses à maîtriser et des résultats à analyser. Au sein de la GOC, le Contrôleur de coûts senior veille à la bonne gestion des ressources financières des actifs opérés. Rencontre avec un professionnel animé par le goût des chiffres et l'attachement à son pays.",
+      "chapo": "Derrière chaque opération pétrolière se trouvent des investissements à planifier, des dépenses à maîtriser et des résultats à analyser. Au sein de la GOC, le Contrôleur de coûts senior veille à la bonne gestion des ressources financières des actifs opérés. Rencontre avec Shandy NGOUNGOULOU, un professionnel animé par le goût des chiffres et l'attachement à son pays.",
       "entretien": [
         {
           "question": "En quoi consiste votre métier ?",

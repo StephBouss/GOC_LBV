@@ -20,3 +20,9 @@ node_modules/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Fichiers de travail de la carte d'étiquettes du cadastre, si les scripts sont lancés sur place (scripts/cadastre/outils.js)
+scripts/cadastre/*.bin
+scripts/cadastre/*.rgb
+scripts/cadastre/*.gray
+scripts/cadastre/*.png

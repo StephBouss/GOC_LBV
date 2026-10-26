@@ -71,7 +71,77 @@
     </div>
   </section>
 
-  <!-- ═══════════ 4 · Appel à l'action ═══════════ -->
+  <!-- ═══════════ 4 · Cadastre pétrolier : le poster de la DGAPG, tel quel ; sa légende, reprise en liste, détoure chaque entrée
+       sur la carte (app.js, carte d'étiquettes img/cadastre/cadastre-etiquettes.png) ═══════════ -->
+  <section class="section" id="cadastre" aria-labelledby="cadastre-titre">
+    <div class="conteneur">
+      <div class="cadastre-tete" data-apparition>
+        <div>
+          <p class="sur-titre">Cadastre pétrolier</p>
+          <h2 class="titre-section" id="cadastre-titre">Le domaine pétrolier du Gabon</h2>
+        </div>
+        <p class="texte-doux">Permis d'exploration, permis d'exploitation et blocs libres couvrent 255&nbsp;104&nbsp;km², à terre et en mer. Survolez ou touchez une entrée de la légende, ou une zone de la carte, pour faire ressortir ses permis.</p>
+      </div>
+      <div class="cadastre-grille">
+        <figure class="cadastre-carte" data-apparition>
+          <div class="cadastre-cadre">
+            <img class="cadastre-poster" src="img/cadastre/cadastre-petrolier-1350.webp" srcset="img/cadastre/cadastre-petrolier-900.webp 900w, img/cadastre/cadastre-petrolier-1350.webp 1350w, img/cadastre/cadastre-petrolier-1800.webp 1800w" sizes="(max-width: 1023px) 92vw, 45vw" alt="Cadastre pétrolier de la République gabonaise, septembre 2026 : permis d'exploration, zones AET, permis d'exploitation et blocs libres, avec leur légende" width="1800" height="2545" loading="lazy" decoding="async">
+            <canvas class="cadastre-calque" width="1200" height="1697" aria-hidden="true" data-etiquettes="img/cadastre/cadastre-etiquettes.png"></canvas>
+          </div>
+          <figcaption class="cadastre-etat"><span class="cadastre-etat-repos">Cadastre pétrolier, septembre 2026</span></figcaption>
+        </figure>
+        <div class="cadastre-panneau" data-apparition>
+          <div class="cadastre-groupe" data-libelle="Exploration">
+            <p class="cadastre-groupe-titre">Exploration <span class="cadastre-total">183&nbsp;385&nbsp;km²</span></p>
+            <ul class="cadastre-cles">
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="1" style="--pastille: #FFA8EB"><span class="cadastre-pastille"></span><span class="cadastre-nom">Anadarko</span><span class="cadastre-km">4&nbsp;048&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="2" style="--pastille: #A3D4FF"><span class="cadastre-pastille"></span><span class="cadastre-nom">Assala Energy</span><span class="cadastre-km">3&nbsp;672&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="3" style="--pastille: #B09AE6"><span class="cadastre-pastille"></span><span class="cadastre-nom">BW Energy Ltd</span><span class="cadastre-km">4&nbsp;917&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="4" style="--pastille: #E6C200"><span class="cadastre-pastille"></span><span class="cadastre-nom">CNOOC Offshore Gabon</span><span class="cadastre-km">7&nbsp;580&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="5" style="--pastille: #458B74"><span class="cadastre-pastille"></span><span class="cadastre-nom">KOREG</span><span class="cadastre-km">10&nbsp;389&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="6" style="--pastille: #FE8000"><span class="cadastre-pastille"></span><span class="cadastre-nom">Maurel &amp; Prom</span><span class="cadastre-km">10&nbsp;557&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="7" style="--pastille: #D8D8D8"><span class="cadastre-pastille"></span><span class="cadastre-nom">Perenco Gabon</span><span class="cadastre-km">9&nbsp;652&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="8" style="--pastille: #FFB09E"><span class="cadastre-pastille"></span><span class="cadastre-nom">Petronas</span><span class="cadastre-km">2&nbsp;485&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="9" style="--pastille: #37F9FF"><span class="cadastre-pastille"></span><span class="cadastre-nom">REG &amp; RRG</span><span class="cadastre-km">1&nbsp;213&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="10" style="--pastille: #B09877"><span class="cadastre-pastille"></span><span class="cadastre-nom">Pilgrim</span><span class="cadastre-km">5&nbsp;328&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="11" style="--pastille: #1F1FE0"><span class="cadastre-pastille hachures"></span><span class="cadastre-nom">AET Oilserv</span><span class="cadastre-km">4&nbsp;554&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="12" style="--pastille: #2E9A2E"><span class="cadastre-pastille hachures montantes"></span><span class="cadastre-nom">AET British Petroleum</span><span class="cadastre-km">27&nbsp;086&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="13" style="--pastille: #FF0000"><span class="cadastre-pastille hachures"></span><span class="cadastre-nom">AET Exxon Mobil</span><span class="cadastre-km">53&nbsp;317&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="14" style="--pastille: #14171B"><span class="cadastre-pastille hachures"></span><span class="cadastre-nom">AET Shell Explo. Int</span><span class="cadastre-km">38&nbsp;587&nbsp;km²</span></button></li>
+            </ul>
+          </div>
+          <div class="cadastre-groupe" data-libelle="Exploitation">
+            <p class="cadastre-groupe-titre">Exploitation <span class="cadastre-total">9&nbsp;632,52&nbsp;km²</span></p>
+            <ul class="cadastre-cles">
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="15" style="--pastille: #A3D4FF"><span class="cadastre-pastille"></span><span class="cadastre-nom">Assala Energy</span><span class="cadastre-km">691,53&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="16" style="--pastille: #3976BA"><span class="cadastre-pastille"></span><span class="cadastre-nom">BW Energy Ltd</span><span class="cadastre-km">851&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="17" style="--pastille: #CE65F2"><span class="cadastre-pastille"></span><span class="cadastre-nom">Eniva Petroleum SA</span><span class="cadastre-km">1&nbsp;821&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="18" style="--pastille: #FF0000"><span class="cadastre-pastille"></span><span class="cadastre-nom">SNHG</span><span class="cadastre-km">1&nbsp;188,85&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="19" style="--pastille: #458B74"><span class="cadastre-pastille"></span><span class="cadastre-nom">KOREG</span><span class="cadastre-km">80,94&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="20" style="--pastille: #FE8000"><span class="cadastre-pastille"></span><span class="cadastre-nom">Maurel &amp; Prom</span><span class="cadastre-km">221,40&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="21" style="--pastille: #D8D8D8"><span class="cadastre-pastille"></span><span class="cadastre-nom">Perenco Gabon Oil Ltd</span><span class="cadastre-km">3&nbsp;406,31&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="22" style="--pastille: #416CEF"><span class="cadastre-pastille"></span><span class="cadastre-nom">Stream Oil Owali</span><span class="cadastre-km">132,26&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="23" style="--pastille: #73FF00"><span class="cadastre-pastille"></span><span class="cadastre-nom">TotalEnergies</span><span class="cadastre-km">1&nbsp;052,09&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="24" style="--pastille: #FFFF00"><span class="cadastre-pastille"></span><span class="cadastre-nom">Vaalco</span><span class="cadastre-km">187,14&nbsp;km²</span></button></li>
+            </ul>
+          </div>
+          <div class="cadastre-groupe" data-libelle="Blocs libres">
+            <p class="cadastre-groupe-titre">Blocs libres <span class="cadastre-total">62&nbsp;087&nbsp;km²</span></p>
+            <ul class="cadastre-cles">
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="25" style="--pastille: #FFFFFF"><span class="cadastre-pastille"></span><span class="cadastre-nom">Blocs non attribués</span><span class="cadastre-km">62&nbsp;087&nbsp;km²</span></button></li>
+            </ul>
+          </div>
+          <div class="cadastre-liens">
+            <a class="lien-fleche" href="img/cadastre/cadastre-petrolier-3600.webp" target="_blank" rel="noopener">Agrandir la carte <svg aria-hidden="true"><use href="#i-agrandir"/></svg><span class="visuellement-masque"> (nouvel onglet)</span></a>
+            <a class="lien-fleche" href="documents/cadastre-petrolier-gabon-septembre-2026.pdf" download="Cadastre-petrolier-Gabon-septembre-2026.pdf">Télécharger le PDF (4,2&nbsp;Mo) <svg aria-hidden="true"><use href="#i-telecharger"/></svg></a>
+          </div>
+          <p class="cadastre-source">Source : Direction générale de l'Amont pétrolier et gazier (DGAPG), service Cadastre pétrolier, septembre 2026.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 5 · Appel à l'action ═══════════ -->
   <section class="section appel" aria-labelledby="appel-titre">
     <div class="conteneur" data-apparition>
       <h2 id="appel-titre">Explorez nos autres secteurs d'activité</h2>

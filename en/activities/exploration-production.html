@@ -24,8 +24,8 @@
   <link rel="icon" href="../../img/favicon.png?ver=ec0afc973b" type="image/png">
   <link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="../../img/photos/exploration-hero.jpg?ver=4a2b8db2c9" imagesrcset="../../img/photos/exploration-hero-768.jpg?ver=2795ad797b 768w, ../../img/photos/exploration-hero.jpg?ver=4a2b8db2c9 1536w" imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="../../css/styles.css?ver=edca427b19">
-  <link rel="stylesheet" href="../../css/pages.css?ver=01af48b576">
+  <link rel="stylesheet" href="../../css/styles.css?ver=d3cf9fdd68">
+  <link rel="stylesheet" href="../../css/pages.css?ver=c32f83c9e3">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -49,6 +49,8 @@
   <symbol id="i-carte" viewBox="0 0 24 24"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></symbol>
   <symbol id="i-bouclier" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
   <symbol id="i-fleche-droite" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-telecharger" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
+  <symbol id="i-agrandir" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="m21 3-7 7"/><path d="m3 21 7-7"/><path d="M9 21H3v-6"/></symbol>
 </svg>
 
 <a class="evitement" href="#contenu">Skip to content</a>
@@ -96,11 +98,19 @@
             <ul class="sous-menu-liens">
               <li><a href="../../en/news/index.html">News</a></li>
               <li><a href="../../en/media-library/index.html">Media library</a></li>
-              <li><a href="../../en/careers/index.html">Careers</a></li>
             </ul>
           </div>
         </li>
-        <li class="nav-direct"><a class="nav-onglet nav-accent" href="../../en/gotalk/index.html">GO’TALK</a></li>
+        <li class="nav-item">
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-carrieres">Careers <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="sous-menu" id="sous-menu-carrieres">
+            <ul class="sous-menu-liens">
+              <li><a href="../../en/careers/index.html">Why join GOC</a></li>
+              <li><a href="../../en/careers/application.html">Application form</a></li>
+              <li><a class="nav-accent" href="../../en/gotalk/index.html">GO’TALK</a></li>
+            </ul>
+          </div>
+        </li>
         <li class="nav-direct"><a class="nav-onglet" href="../../en/contact/index.html">Contact</a></li>
       </ul>
     </nav>
@@ -149,10 +159,16 @@
       <ul>
         <li><a href="../../en/news/index.html">News</a></li>
         <li><a href="../../en/media-library/index.html">Media library</a></li>
-        <li><a href="../../en/careers/index.html">Careers</a></li>
       </ul>
     </details>
-    <a class="menu-mobile-direct nav-accent" href="../../en/gotalk/index.html">GO’TALK</a>
+    <details class="accordeon" name="menu-mobile">
+      <summary>Careers <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <ul>
+        <li><a href="../../en/careers/index.html">Why join GOC</a></li>
+        <li><a href="../../en/careers/application.html">Application form</a></li>
+        <li><a class="nav-accent" href="../../en/gotalk/index.html">GO’TALK</a></li>
+      </ul>
+    </details>
     <a class="menu-mobile-direct" href="../../en/contact/index.html">Contact</a>
   </nav>
   <div class="menu-mobile-pied">
@@ -227,7 +243,77 @@
     </div>
   </section>
 
-  <!-- ═══════════ 4 · Appel à l'action ═══════════ -->
+  <!-- ═══════════ 4 · Cadastre pétrolier : le poster de la DGAPG, tel quel ; sa légende, reprise en liste, détoure chaque entrée
+       sur la carte (app.js, carte d'étiquettes img/cadastre/cadastre-etiquettes.png) ═══════════ -->
+  <section class="section" id="cadastre" aria-labelledby="cadastre-titre">
+    <div class="conteneur">
+      <div class="cadastre-tete" data-apparition>
+        <div>
+          <p class="sur-titre">Petroleum cadastre</p>
+          <h2 class="titre-section" id="cadastre-titre">Gabon's petroleum acreage</h2>
+        </div>
+        <p class="texte-doux">Exploration licences, production licences and open blocks cover 255,104&nbsp;km², onshore and offshore. Hover over or tap a legend entry, or an area of the map, to highlight its licences.</p>
+      </div>
+      <div class="cadastre-grille">
+        <figure class="cadastre-carte" data-apparition>
+          <div class="cadastre-cadre">
+            <img class="cadastre-poster" src="../../img/cadastre/cadastre-petrolier-1350.webp?ver=29a330bd6a" srcset="../../img/cadastre/cadastre-petrolier-900.webp?ver=648c78b2a0 900w, ../../img/cadastre/cadastre-petrolier-1350.webp?ver=29a330bd6a 1350w, ../../img/cadastre/cadastre-petrolier-1800.webp?ver=82afa6f044 1800w" sizes="(max-width: 1023px) 92vw, 45vw" alt="Petroleum cadastre of the Gabonese Republic, September 2026: exploration licences, AET areas, production licences and open blocks, with their legend" width="1800" height="2545" loading="lazy" decoding="async">
+            <canvas class="cadastre-calque" width="1200" height="1697" aria-hidden="true" data-etiquettes="../../img/cadastre/cadastre-etiquettes.png?ver=3fe31514d6"></canvas>
+          </div>
+          <figcaption class="cadastre-etat"><span class="cadastre-etat-repos">Petroleum cadastre, September 2026</span></figcaption>
+        </figure>
+        <div class="cadastre-panneau" data-apparition>
+          <div class="cadastre-groupe" data-libelle="Exploration">
+            <p class="cadastre-groupe-titre">Exploration <span class="cadastre-total">183,385&nbsp;km²</span></p>
+            <ul class="cadastre-cles">
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="1" style="--pastille: #FFA8EB"><span class="cadastre-pastille"></span><span class="cadastre-nom">Anadarko</span><span class="cadastre-km">4,048&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="2" style="--pastille: #A3D4FF"><span class="cadastre-pastille"></span><span class="cadastre-nom">Assala Energy</span><span class="cadastre-km">3,672&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="3" style="--pastille: #B09AE6"><span class="cadastre-pastille"></span><span class="cadastre-nom">BW Energy Ltd</span><span class="cadastre-km">4,917&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="4" style="--pastille: #E6C200"><span class="cadastre-pastille"></span><span class="cadastre-nom">CNOOC Offshore Gabon</span><span class="cadastre-km">7,580&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="5" style="--pastille: #458B74"><span class="cadastre-pastille"></span><span class="cadastre-nom">KOREG</span><span class="cadastre-km">10,389&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="6" style="--pastille: #FE8000"><span class="cadastre-pastille"></span><span class="cadastre-nom">Maurel &amp; Prom</span><span class="cadastre-km">10,557&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="7" style="--pastille: #D8D8D8"><span class="cadastre-pastille"></span><span class="cadastre-nom">Perenco Gabon</span><span class="cadastre-km">9,652&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="8" style="--pastille: #FFB09E"><span class="cadastre-pastille"></span><span class="cadastre-nom">Petronas</span><span class="cadastre-km">2,485&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="9" style="--pastille: #37F9FF"><span class="cadastre-pastille"></span><span class="cadastre-nom">REG &amp; RRG</span><span class="cadastre-km">1,213&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="10" style="--pastille: #B09877"><span class="cadastre-pastille"></span><span class="cadastre-nom">Pilgrim</span><span class="cadastre-km">5,328&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="11" style="--pastille: #1F1FE0"><span class="cadastre-pastille hachures"></span><span class="cadastre-nom">AET Oilserv</span><span class="cadastre-km">4,554&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="12" style="--pastille: #2E9A2E"><span class="cadastre-pastille hachures montantes"></span><span class="cadastre-nom">AET British Petroleum</span><span class="cadastre-km">27,086&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="13" style="--pastille: #FF0000"><span class="cadastre-pastille hachures"></span><span class="cadastre-nom">AET Exxon Mobil</span><span class="cadastre-km">53,317&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="14" style="--pastille: #14171B"><span class="cadastre-pastille hachures"></span><span class="cadastre-nom">AET Shell Explo. Int</span><span class="cadastre-km">38,587&nbsp;km²</span></button></li>
+            </ul>
+          </div>
+          <div class="cadastre-groupe" data-libelle="Production">
+            <p class="cadastre-groupe-titre">Production <span class="cadastre-total">9,632.52&nbsp;km²</span></p>
+            <ul class="cadastre-cles">
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="15" style="--pastille: #A3D4FF"><span class="cadastre-pastille"></span><span class="cadastre-nom">Assala Energy</span><span class="cadastre-km">691.53&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="16" style="--pastille: #3976BA"><span class="cadastre-pastille"></span><span class="cadastre-nom">BW Energy Ltd</span><span class="cadastre-km">851&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="17" style="--pastille: #CE65F2"><span class="cadastre-pastille"></span><span class="cadastre-nom">Eniva Petroleum SA</span><span class="cadastre-km">1,821&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="18" style="--pastille: #FF0000"><span class="cadastre-pastille"></span><span class="cadastre-nom">GOC</span><span class="cadastre-km">1,188.85&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="19" style="--pastille: #458B74"><span class="cadastre-pastille"></span><span class="cadastre-nom">KOREG</span><span class="cadastre-km">80.94&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="20" style="--pastille: #FE8000"><span class="cadastre-pastille"></span><span class="cadastre-nom">Maurel &amp; Prom</span><span class="cadastre-km">221.40&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="21" style="--pastille: #D8D8D8"><span class="cadastre-pastille"></span><span class="cadastre-nom">Perenco Gabon Oil Ltd</span><span class="cadastre-km">3,406.31&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="22" style="--pastille: #416CEF"><span class="cadastre-pastille"></span><span class="cadastre-nom">Stream Oil Owali</span><span class="cadastre-km">132.26&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="23" style="--pastille: #73FF00"><span class="cadastre-pastille"></span><span class="cadastre-nom">TotalEnergies</span><span class="cadastre-km">1,052.09&nbsp;km²</span></button></li>
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="24" style="--pastille: #FFFF00"><span class="cadastre-pastille"></span><span class="cadastre-nom">Vaalco</span><span class="cadastre-km">187.14&nbsp;km²</span></button></li>
+            </ul>
+          </div>
+          <div class="cadastre-groupe" data-libelle="Open blocks">
+            <p class="cadastre-groupe-titre">Open blocks <span class="cadastre-total">62,087&nbsp;km²</span></p>
+            <ul class="cadastre-cles">
+              <li><button class="cadastre-cle" type="button" aria-pressed="false" data-zone="25" style="--pastille: #FFFFFF"><span class="cadastre-pastille"></span><span class="cadastre-nom">Unallocated blocks</span><span class="cadastre-km">62,087&nbsp;km²</span></button></li>
+            </ul>
+          </div>
+          <div class="cadastre-liens">
+            <a class="lien-fleche" href="../../img/cadastre/cadastre-petrolier-3600.webp?ver=dca09e23ea" target="_blank" rel="noopener">Enlarge the map <svg aria-hidden="true"><use href="#i-agrandir"/></svg><span class="visuellement-masque"> (new tab)</span></a>
+            <a class="lien-fleche" href="../../documents/cadastre-petrolier-gabon-septembre-2026.pdf?ver=a09719e3c0" download="Petroleum-cadastre-Gabon-September-2026.pdf">Download the PDF (4.2&nbsp;MB) <svg aria-hidden="true"><use href="#i-telecharger"/></svg></a>
+          </div>
+          <p class="cadastre-source">Source: Directorate General for Upstream Oil and Gas (DGAPG), Petroleum Cadastre department, September 2026.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 5 · Appel à l'action ═══════════ -->
   <section class="section appel" aria-labelledby="appel-titre">
     <div class="conteneur" data-apparition>
       <h2 id="appel-titre">Explore our other business areas</h2>
@@ -289,9 +375,15 @@
           <ul>
             <li><a href="../../en/news/index.html">News</a></li>
             <li><a href="../../en/media-library/index.html">Media library</a></li>
-            <li><a href="../../en/careers/index.html">Careers</a></li>
-            <li><a href="../../en/gotalk/index.html">GO’TALK</a></li>
             <li><a href="../../en/contact/index.html">Contact</a></li>
+          </ul>
+        </details>
+        <details class="pied-colonne" open>
+          <summary>Careers <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <ul>
+            <li><a href="../../en/careers/index.html">Why join GOC</a></li>
+            <li><a href="../../en/careers/application.html">Application form</a></li>
+            <li><a href="../../en/gotalk/index.html">GO’TALK</a></li>
           </ul>
         </details>
       </nav>
@@ -310,6 +402,6 @@
 
 <button class="haut-de-page" type="button" aria-label="Back to the top of the page"><svg class="icone" aria-hidden="true"><use href="#i-haut"/></svg></button>
 
-<script src="../../js/app.js?ver=ff7b5dfcbb" defer></script>
+<script src="../../js/app.js?ver=86b7649f55" defer></script>
 </body>
 </html>

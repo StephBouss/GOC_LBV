@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Carrières · SNHG – Gabon Oil Company</title>
-  <meta name="description" content="Pourquoi rejoindre la SNHG : six bonnes raisons de construire votre avenir professionnel au service de l'ambition énergétique du Gabon, et la candidature spontanée en ligne.">
+  <meta name="description" content="Pourquoi rejoindre la SNHG : six bonnes raisons de construire votre avenir professionnel au service de l'ambition énergétique du Gabon, et le formulaire de candidature spontanée.">
   <link rel="canonical" href="https://snhg-vert.vercel.app/carrieres/">
   <link rel="alternate" hreflang="fr" href="https://snhg-vert.vercel.app/carrieres/">
   <link rel="alternate" hreflang="en" href="https://snhg-vert.vercel.app/en/careers/">
@@ -15,7 +15,7 @@
   <meta property="og:locale:alternate" content="en_GB">
   <meta property="og:url" content="https://snhg-vert.vercel.app/carrieres/">
   <meta property="og:title" content="Carrières">
-  <meta property="og:description" content="Pourquoi rejoindre la SNHG : six bonnes raisons de construire votre avenir professionnel au service de l'ambition énergétique du Gabon, et la candidature spontanée en ligne.">
+  <meta property="og:description" content="Pourquoi rejoindre la SNHG : six bonnes raisons de construire votre avenir professionnel au service de l'ambition énergétique du Gabon, et le formulaire de candidature spontanée.">
   <meta property="og:image" content="https://snhg-vert.vercel.app/img/partage/carrieres-hero.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -24,8 +24,8 @@
   <link rel="icon" href="../img/favicon.png?ver=ec0afc973b" type="image/png">
   <link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="../img/photos/carrieres-hero.jpg?ver=a54abbccf8" imagesrcset="../img/photos/carrieres-hero-768.jpg?ver=faec6464fb 768w, ../img/photos/carrieres-hero.jpg?ver=a54abbccf8 1536w" imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="../css/styles.css?ver=edca427b19">
-  <link rel="stylesheet" href="../css/pages.css?ver=01af48b576">
+  <link rel="stylesheet" href="../css/styles.css?ver=d3cf9fdd68">
+  <link rel="stylesheet" href="../css/pages.css?ver=c32f83c9e3">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -44,7 +44,6 @@
   <symbol id="i-haut" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
   <symbol id="i-externe" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></symbol>
-  <symbol id="i-televerser" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></symbol>
 </svg>
 
 <a class="evitement" href="#contenu">Aller au contenu</a>
@@ -87,16 +86,24 @@
           </div>
         </li>
         <li class="nav-item">
-          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-information" aria-current="true">Informations <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-information">Informations <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
           <div class="sous-menu" id="sous-menu-information">
             <ul class="sous-menu-liens">
               <li><a href="../actualites/index.html">Actualités</a></li>
               <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-              <li><a href="../carrieres/index.html" aria-current="page">Carrières</a></li>
             </ul>
           </div>
         </li>
-        <li class="nav-direct"><a class="nav-onglet nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
+        <li class="nav-item">
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-carrieres" aria-current="true">Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="sous-menu" id="sous-menu-carrieres">
+            <ul class="sous-menu-liens">
+              <li><a href="../carrieres/index.html" aria-current="page">Pourquoi rejoindre la SNHG</a></li>
+              <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+              <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
+            </ul>
+          </div>
+        </li>
         <li class="nav-direct"><a class="nav-onglet" href="../contact/index.html">Contact</a></li>
       </ul>
     </nav>
@@ -145,10 +152,16 @@
       <ul>
         <li><a href="../actualites/index.html">Actualités</a></li>
         <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-        <li><a href="../carrieres/index.html" aria-current="page">Carrières</a></li>
       </ul>
     </details>
-    <a class="menu-mobile-direct nav-accent" href="../gotalk/index.html">GO’TALK</a>
+    <details class="accordeon" name="menu-mobile">
+      <summary>Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <ul>
+        <li><a href="../carrieres/index.html" aria-current="page">Pourquoi rejoindre la SNHG</a></li>
+        <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+        <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
+      </ul>
+    </details>
     <a class="menu-mobile-direct" href="../contact/index.html">Contact</a>
   </nav>
   <div class="menu-mobile-pied">
@@ -159,11 +172,11 @@
 <main id="contenu">
 
   <!-- Navigation de la rubrique -->
-  <nav class="sous-nav" aria-label="Informations">
+  <nav class="sous-nav" aria-label="Carrières">
     <ul>
-      <li><a href="../actualites/index.html">Actualités</a></li>
-      <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-      <li><a href="../carrieres/index.html" aria-current="page">Carrières</a></li>
+      <li><a href="../carrieres/index.html" aria-current="page">Pourquoi rejoindre la SNHG</a></li>
+      <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+      <li><a href="../gotalk/index.html">GO’TALK</a></li>
     </ul>
   </nav>
 
@@ -189,7 +202,7 @@
         <p class="texte-doux">C'est aussi choisir un environnement professionnel exigeant, où les savoir-faire se développent, les responsabilités se partagent et chaque métier participe à une ambition commune.</p>
         <p class="raisons-invite">Découvrez six raisons de construire votre parcours avec nous.</p>
         <div class="raisons-photo">
-          <img src="../img/photos/carrieres-fierte.jpg?ver=f5e11c7f4a" srcset="../img/photos/carrieres-fierte-768.jpg?ver=788c15f321 768w, ../img/photos/carrieres-fierte.jpg?ver=f5e11c7f4a 1536w" sizes="(max-width: 1023px) 100vw, 34rem" alt="Opérateur de la SNHG en tenue de sécurité sur le site de Tsiengui" width="1536" height="1024" loading="lazy">
+          <img src="../img/photos/carrieres-fierte.jpg?ver=c5883ccb86" srcset="../img/photos/carrieres-fierte-768.jpg?ver=a9a12f190a 768w, ../img/photos/carrieres-fierte.jpg?ver=c5883ccb86 1536w" sizes="(max-width: 1023px) 100vw, 34rem" alt="Deux collaborateurs de la SNHG relisent un document ensemble, dans les bureaux de Port-Gentil" width="1536" height="1024" loading="lazy">
         </div>
       </div>
 
@@ -222,14 +235,14 @@
     </div>
   </section>
 
-  <!-- ═══════════ 3 · Candidature : le bouton ouvre la fenêtre de candidature (formulaire ci-dessous) ═══════════ -->
+  <!-- ═══════════ 3 · Candidature : le bouton mène au formulaire de souscription ═══════════ -->
   <section class="cap candidater" id="candidater" aria-labelledby="candidater-titre">
     <img class="cap-image" src="../img/photos/carrieres-equipe.jpg?ver=89b462e4d8" srcset="../img/photos/carrieres-equipe-768.jpg?ver=c8a7bc5846 768w, ../img/photos/carrieres-equipe.jpg?ver=89b462e4d8 1536w" sizes="100vw" alt="" width="1536" height="1024" loading="lazy">
     <div class="voile" aria-hidden="true"></div>
     <div class="cap-contenu" data-apparition>
       <p class="candidater-accroche">À la SNHG, votre expertise trouve sa place. Votre engagement contribue à une ambition nationale.</p>
       <h2 id="candidater-titre">Construisons ensemble l'avenir énergétique du Gabon.</h2>
-      <button class="bouton" type="button" data-ouvre-candidature aria-haspopup="dialog">Déposer ma candidature <svg class="icone" aria-hidden="true"><use href="#i-fleche"/></svg></button>
+      <a class="bouton" href="../carrieres/candidature.html">Déposer ma candidature <svg class="icone" aria-hidden="true"><use href="#i-fleche"/></svg></a>
     </div>
   </section>
 </main>
@@ -283,9 +296,15 @@
           <ul>
             <li><a href="../actualites/index.html">Actualités</a></li>
             <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-            <li><a href="../carrieres/index.html" aria-current="page">Carrières</a></li>
-            <li><a href="../gotalk/index.html">GO’TALK</a></li>
             <li><a href="../contact/index.html">Contact</a></li>
+          </ul>
+        </details>
+        <details class="pied-colonne" open>
+          <summary>Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <ul>
+            <li><a href="../carrieres/index.html" aria-current="page">Pourquoi rejoindre la SNHG</a></li>
+            <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+            <li><a href="../gotalk/index.html">GO’TALK</a></li>
           </ul>
         </details>
       </nav>
@@ -302,89 +321,8 @@
   </div>
 </footer>
 
-<!-- ═══════════ Fenêtre de candidature (MODAL Banani) ═══════════ -->
-<dialog class="candidature" id="candidature" closedby="any" aria-labelledby="candidature-titre">
-  <!-- Envoi : action="…" reçoit l'adresse du service d'envoi, qui doit accepter les pièces jointes (voir INVENTAIRE.md) -->
-  <form method="post" enctype="multipart/form-data" data-envoi data-merci="Merci, votre candidature a bien été envoyée. Notre équipe Ressources humaines l'étudiera avec attention.">
-    <div class="candidature-tete">
-      <h2 id="candidature-titre">Construisez votre carrière à la SNHG</h2>
-      <button class="candidature-fermer" type="button" data-ferme aria-label="Fermer"><svg class="icone" aria-hidden="true"><use href="#i-fermer"/></svg></button>
-    </div>
-    <p class="candidature-chapo">Vous cherchez un défi à la hauteur de vos ambitions ? Déposez ici votre candidature spontanée. Les champs marqués d'un astérisque sont obligatoires.</p>
-
-    <div class="candidature-champs">
-      <div class="duo">
-        <div class="champ">
-          <label for="cand-nom">Nom complet <span class="obligatoire" aria-hidden="true">*</span></label>
-          <input id="cand-nom" name="nom" type="text" autocomplete="name" placeholder="Votre nom" required>
-        </div>
-        <div class="champ">
-          <label for="cand-email">Email <span class="obligatoire" aria-hidden="true">*</span></label>
-          <input id="cand-email" name="email" type="email" autocomplete="email" placeholder="vous@exemple.com" required>
-        </div>
-      </div>
-      <div class="duo">
-        <div class="champ">
-          <label for="cand-poste">Poste visé</label>
-          <input id="cand-poste" name="poste" type="text" placeholder="ex : Responsable des Opérations">
-        </div>
-        <div class="champ">
-          <label for="cand-domaine">Domaine</label>
-          <select id="cand-domaine" name="domaine">
-            <option value="">Sélectionner</option>
-            <option>Ingénierie</option>
-            <option>Géosciences</option>
-            <option>Forage</option>
-            <option>Maintenance</option>
-            <option>Finance</option>
-            <option>Juridique</option>
-            <option>Achats</option>
-            <option>RH</option>
-            <option>Communication</option>
-            <option>HSE</option>
-          </select>
-        </div>
-      </div>
-      <div class="champ">
-        <label for="cand-experience">Années d'expérience</label>
-        <select id="cand-experience" name="experience">
-          <option value="">Sélectionner</option>
-          <option>Moins de 2 ans</option>
-          <option>2 à 5 ans</option>
-          <option>5 à 10 ans</option>
-          <option>Plus de 10 ans</option>
-        </select>
-      </div>
-      <div class="champ">
-        <label for="cand-message">Message</label>
-        <textarea id="cand-message" name="message" placeholder="Parlez de votre intérêt..."></textarea>
-      </div>
-      <div class="champ">
-        <label for="cand-documents">Documents (CV, lettre) <span class="obligatoire" aria-hidden="true">*</span></label>
-        <div class="depot">
-          <svg class="icone" aria-hidden="true"><use href="#i-televerser"/></svg>
-          <span>Déposer CV &amp; lettre de motivation</span>
-          <span id="cand-documents-regle">PDF ou DOCX, 3 fichiers et 5 Mo par fichier au maximum</span>
-          <span class="depot-nom" aria-live="polite"></span>
-          <input id="cand-documents" name="documents" type="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple required aria-describedby="cand-documents-regle" data-max-fichiers="3" data-max-mo="5">
-        </div>
-      </div>
-      <div class="consentement">
-        <input id="cand-consentement" name="consentement" type="checkbox" value="oui" required>
-        <label for="cand-consentement">J'accepte le traitement de mes données selon la <a href="../informations-legales/confidentialite.html" target="_blank" rel="noopener">politique de confidentialité<span class="visuellement-masque"> (nouvel onglet)</span></a> de la SNHG.</label>
-      </div>
-      <p class="statut-formulaire" role="status"></p>
-    </div>
-
-    <div class="candidature-actions">
-      <button class="bouton" type="submit" value="envoyer">Envoyer ma candidature</button>
-      <button class="bouton bouton-neutre" type="button" data-ferme>Annuler</button>
-    </div>
-  </form>
-</dialog>
-
 <button class="haut-de-page" type="button" aria-label="Revenir en haut de la page"><svg class="icone" aria-hidden="true"><use href="#i-haut"/></svg></button>
 
-<script src="../js/app.js?ver=ff7b5dfcbb" defer></script>
+<script src="../js/app.js?ver=86b7649f55" defer></script>
 </body>
 </html>

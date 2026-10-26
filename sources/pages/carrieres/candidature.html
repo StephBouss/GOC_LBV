@@ -1,0 +1,122 @@
+<!-- {
+  "titre": "Formulaire de souscription · SNHG – Gabon Oil Company",
+  "description": "Déposez votre candidature spontanée à la SNHG : votre profil, le poste visé, votre CV et votre lettre de motivation, en ligne.",
+  "onglet": "carrieres",
+  "precharger": { "src": "img/photos/carrieres-equipe.jpg", "srcset": "img/photos/carrieres-equipe-768.jpg 768w, img/photos/carrieres-equipe.jpg 1536w" },
+  "css": ["css/pages.css"]
+} -->
+
+  <!-- Navigation de la rubrique -->
+  <nav class="sous-nav" aria-label="Carrières">
+    <ul>
+      <li><a href="carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
+      <li><a href="carrieres/candidature.html" aria-current="page">Formulaire de souscription</a></li>
+      <li><a href="gotalk/index.html">GO’TALK</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════ 1 · Ouverture ═══════════ -->
+  <section class="page-hero" aria-labelledby="page-titre">
+    <img class="page-hero-image" style="object-position: 50% 70%" src="img/photos/carrieres-equipe.jpg" srcset="img/photos/carrieres-equipe-768.jpg 768w, img/photos/carrieres-equipe.jpg 1536w" sizes="100vw" alt="" width="1536" height="1024" fetchpriority="high">
+    <div class="voile" aria-hidden="true"></div>
+    <div class="conteneur page-hero-contenu">
+      <div class="page-hero-bloc">
+        <p class="sur-titre clair">Carrières</p>
+        <h1 class="page-hero-titre" id="page-titre">Formulaire de souscription</h1>
+        <p class="page-hero-chapo">Déposez votre candidature spontanée à la SNHG.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 2 · Candidature spontanée : le dossier à préparer, puis le formulaire (WordPress : extension de formulaires) ═══════════ -->
+  <section class="section" id="candidature" aria-labelledby="candidature-titre">
+    <div class="conteneur contact">
+      <div data-apparition>
+        <p class="sur-titre">Candidature spontanée</p>
+        <h2 class="titre-section marge-40" id="candidature-titre">Construisez votre carrière à la SNHG</h2>
+        <p class="souscription-chapo">Vous cherchez un défi à la hauteur de vos ambitions ? Déposez ici votre candidature spontanée.</p>
+        <p class="texte-doux">À la SNHG, votre expertise trouve sa place. Votre engagement contribue à une ambition nationale.</p>
+
+        <div class="horaires souscription-dossier">
+          <p class="etiquette"><svg class="icone" aria-hidden="true"><use href="#i-televerser"/></svg>Votre dossier</p>
+          <ul>
+            <li>CV et lettre de motivation</li>
+            <li>Au format PDF ou DOCX</li>
+            <li>3 fichiers et 5 Mo par fichier au maximum</li>
+          </ul>
+        </div>
+
+        <p><a class="lien-fleche" href="carrieres/index.html">Pourquoi rejoindre la SNHG ? <svg aria-hidden="true"><use href="#i-fleche"/></svg></a></p>
+      </div>
+
+      <div class="formulaire" id="formulaire" data-apparition>
+        <h3 id="formulaire-titre">Votre candidature</h3>
+        <p class="formulaire-note">Les champs marqués d'un astérisque sont obligatoires.</p>
+        <!-- Envoi : action="…" reçoit l'adresse du service d'envoi, qui doit accepter les pièces jointes (voir INVENTAIRE.md). Sans adresse, le formulaire le dit et rien n'est transmis. -->
+        <form class="champs" method="post" enctype="multipart/form-data" aria-labelledby="formulaire-titre" data-envoi data-merci="Merci, votre candidature a bien été envoyée. Notre équipe Ressources humaines l'étudiera avec attention.">
+          <div class="duo">
+            <div class="champ">
+              <label for="cand-nom">Nom complet <span class="obligatoire" aria-hidden="true">*</span></label>
+              <input id="cand-nom" name="nom" type="text" autocomplete="name" placeholder="Votre nom" required>
+            </div>
+            <div class="champ">
+              <label for="cand-email">Email <span class="obligatoire" aria-hidden="true">*</span></label>
+              <input id="cand-email" name="email" type="email" autocomplete="email" placeholder="vous@exemple.com" required>
+            </div>
+          </div>
+          <div class="duo">
+            <div class="champ">
+              <label for="cand-poste">Poste visé</label>
+              <input id="cand-poste" name="poste" type="text" placeholder="ex : Responsable des Opérations">
+            </div>
+            <div class="champ">
+              <label for="cand-domaine">Domaine</label>
+              <select id="cand-domaine" name="domaine">
+                <option value="">Sélectionner</option>
+                <option>Ingénierie</option>
+                <option>Géosciences</option>
+                <option>Forage</option>
+                <option>Maintenance</option>
+                <option>Finance</option>
+                <option>Juridique</option>
+                <option>Achats</option>
+                <option>RH</option>
+                <option>Communication</option>
+                <option>HSE</option>
+              </select>
+            </div>
+          </div>
+          <div class="champ">
+            <label for="cand-experience">Années d'expérience</label>
+            <select id="cand-experience" name="experience">
+              <option value="">Sélectionner</option>
+              <option>Moins de 2 ans</option>
+              <option>2 à 5 ans</option>
+              <option>5 à 10 ans</option>
+              <option>Plus de 10 ans</option>
+            </select>
+          </div>
+          <div class="champ">
+            <label for="cand-message">Message</label>
+            <textarea id="cand-message" name="message" placeholder="Parlez de votre intérêt..."></textarea>
+          </div>
+          <div class="champ">
+            <label for="cand-documents">Documents (CV, lettre) <span class="obligatoire" aria-hidden="true">*</span></label>
+            <div class="depot">
+              <svg class="icone" aria-hidden="true"><use href="#i-televerser"/></svg>
+              <span>Déposer CV &amp; lettre de motivation</span>
+              <span id="cand-documents-regle">PDF ou DOCX, 3 fichiers et 5 Mo par fichier au maximum</span>
+              <span class="depot-nom" aria-live="polite"></span>
+              <input id="cand-documents" name="documents" type="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple required aria-describedby="cand-documents-regle" data-max-fichiers="3" data-max-mo="5">
+            </div>
+          </div>
+          <div class="consentement">
+            <input id="cand-consentement" name="consentement" type="checkbox" value="oui" required>
+            <label for="cand-consentement">J'accepte le traitement de mes données selon la <a href="informations-legales/confidentialite.html" target="_blank" rel="noopener">politique de confidentialité<span class="visuellement-masque"> (nouvel onglet)</span></a> de la SNHG.</label>
+          </div>
+          <button class="bouton bouton-envoyer" type="submit">Envoyer ma candidature</button>
+          <p class="statut-formulaire" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>

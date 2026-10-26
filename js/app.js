@@ -342,45 +342,24 @@
     if (piedLarge.matches) e.preventDefault();
   }));
 
-  /* ─── Fenêtre de candidature (page Carrières) : <dialog> modal, ouvert par « Déposer ma candidature » ou l'adresse #candidature ─── */
-  const candidature = document.getElementById('candidature');
-  if (candidature) {
-    const ouvrir = () => { if (!candidature.open) candidature.showModal(); };
-    document.querySelectorAll('[data-ouvre-candidature]').forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); ouvrir(); }));
-    candidature.querySelectorAll('[data-ferme]').forEach((b) => b.addEventListener('click', () => candidature.close()));
-    // Fermeture au clic sur le fond : native avec closedby="any", à reproduire là où l'attribut n'est pas pris en charge (Safari)
-    if (!('closedBy' in HTMLDialogElement.prototype)) {
-      candidature.addEventListener('click', (e) => {
-        if (e.target !== candidature) return;
-        const r = candidature.getBoundingClientRect();
-        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) candidature.close();
-      });
-    }
-    // Liens vers carrieres/index.html#candidature : ouverture à l'arrivée ou sans recharger la page
-    const parAdresse = () => { if (location.hash === '#candidature') ouvrir(); };
-    parAdresse();
-    window.addEventListener('hashchange', parAdresse);
-    candidature.addEventListener('close', () => {
-      if (location.hash === '#candidature') history.replaceState(null, '', location.pathname + location.search);
+  /* ─── Formulaire de souscription (rubrique Carrières) : pièces jointes. La zone de dépôt affiche le nom des fichiers
+         choisis, ou la règle non respectée (format, nombre, taille), qui bloque aussi l'envoi. Le serveur d'envoi doit
+         refaire ces contrôles. ─── */
+  const fichiers = document.querySelector('.depot input');
+  const nomFichiers = document.querySelector('.depot-nom');
+  if (fichiers && nomFichiers) {
+    fichiers.addEventListener('change', () => {
+      const liste = [...fichiers.files];
+      const { maxFichiers, maxMo } = fichiers.dataset;
+      let erreur = '';
+      if (liste.length > Number(maxFichiers)) erreur = t(`${maxFichiers} fichiers au maximum.`, `${maxFichiers} files at most.`);
+      else if (liste.some((x) => !/\.(pdf|docx)$/i.test(x.name))) erreur = t('Formats acceptés : PDF ou DOCX.', 'Accepted formats: PDF or DOCX.');
+      else if (liste.some((x) => x.size > Number(maxMo) * 1024 * 1024)) erreur = t(`Chaque fichier doit peser ${maxMo} Mo au maximum.`, `Each file must be ${maxMo} MB or smaller.`);
+      fichiers.setCustomValidity(erreur);
+      nomFichiers.textContent = erreur || liste.map((x) => x.name).join(', ');
+      nomFichiers.classList.toggle('est-erreur', Boolean(erreur));
     });
-    // Pièces jointes : nom des fichiers choisis dans la zone de dépôt, ou la règle non respectée (format, nombre, taille),
-    // qui bloque aussi l'envoi. Le serveur d'envoi doit refaire ces contrôles.
-    const fichiers = candidature.querySelector('.depot input');
-    const nom = candidature.querySelector('.depot-nom');
-    if (fichiers && nom) {
-      fichiers.addEventListener('change', () => {
-        const liste = [...fichiers.files];
-        const { maxFichiers, maxMo } = fichiers.dataset;
-        let erreur = '';
-        if (liste.length > Number(maxFichiers)) erreur = t(`${maxFichiers} fichiers au maximum.`, `${maxFichiers} files at most.`);
-        else if (liste.some((x) => !/\.(pdf|docx)$/i.test(x.name))) erreur = t('Formats acceptés : PDF ou DOCX.', 'Accepted formats: PDF or DOCX.');
-        else if (liste.some((x) => x.size > Number(maxMo) * 1024 * 1024)) erreur = t(`Chaque fichier doit peser ${maxMo} Mo au maximum.`, `Each file must be ${maxMo} MB or smaller.`);
-        fichiers.setCustomValidity(erreur);
-        nom.textContent = erreur || liste.map((x) => x.name).join(', ');
-        nom.classList.toggle('est-erreur', Boolean(erreur));
-      });
-      fichiers.form.addEventListener('reset', () => { fichiers.setCustomValidity(''); nom.textContent = ''; nom.classList.remove('est-erreur'); });
-    }
+    fichiers.form.addEventListener('reset', () => { fichiers.setCustomValidity(''); nomFichiers.textContent = ''; nomFichiers.classList.remove('est-erreur'); });
   }
 
   /* ─── Accordéons exclusifs (raisons de la page Carrières, menu mobile) : l'attribut name des <details> n'en laisse
@@ -757,6 +736,157 @@
       points.forEach((p) => p.classList.toggle('est-masque', Boolean(etat) && p.dataset.etat !== etat));
       if (choisie && points.get(choisie).classList.contains('est-masque')) choisir(choisie);
     });
+  }
+
+  /* ─── Cadastre pétrolier : le poster de la DGAPG est montré tel quel. Une carte d'étiquettes au même cadrage (un gris par
+     entrée de la légende, identifiant × 10) dit à quelle entrée appartient chaque point, lignes de la légende du poster
+     comprises. Survoler ou choisir une entrée de la liste, ou une zone du poster, voile le reste et cerne la zone de rouge ;
+     l'entrée choisie le reste jusqu'au choix suivant (ou Échap). La liste est l'interface accessible. ─── */
+  const calque = document.querySelector('.cadastre-calque');
+  if (calque) {
+    const figure = calque.closest('.cadastre-carte');
+    const cadre = calque.parentElement;
+    const etat = figure.querySelector('.cadastre-etat');
+    const repos = [...etat.childNodes];
+    const boutons = new Map([...document.querySelectorAll('.cadastre-cle')].map((b) => [Number(b.dataset.zone), b]));
+    const { width: L, height: H } = calque;
+    const ctx = calque.getContext('2d');
+    const tampon = document.createElement('canvas');
+    const tctx = tampon.getContext('2d');
+    let etiquettes = null;          // entrée de chaque point du calque (0 : aucune), une fois la carte d'étiquettes lue
+    const emprises = new Map();     // entrée → [x0, y0, x1, y1]
+    let survolee = 0;
+    let choisie = 0;
+    let dessinee = 0;
+
+    // Voile sur tout le poster, zone découpée dedans, liseré rouge de 3 px à cheval sur son bord
+    const dessiner = (id) => {
+      const [ex0, ey0, ex1, ey1] = emprises.get(id);
+      const x0 = Math.max(0, ex0 - 2), y0 = Math.max(0, ey0 - 2), x1 = Math.min(L - 1, ex1 + 2), y1 = Math.min(H - 1, ey1 + 2);
+      const l = x1 - x0 + 1, h = y1 - y0 + 1;
+      const dans = (x, y) => x >= 0 && y >= 0 && x < L && y < H && etiquettes[y * L + x] === id;
+      const bord = new Uint8Array(l * h);
+      const trou = new ImageData(l, h);
+      for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
+        const d = dans(x, y), k = (y - y0) * l + x - x0;
+        if (d) trou.data[k * 4 + 3] = 255;
+        if (d !== dans(x + 1, y) || d !== dans(x, y + 1)) bord[k] = 1;
+      }
+      const trait = new ImageData(l, h);
+      for (let y = 1; y < h - 1; y++) for (let x = 1; x < l - 1; x++) {
+        const k = y * l + x;
+        if (!(bord[k] || bord[k - 1] || bord[k + 1] || bord[k - l] || bord[k + l])) continue;
+        trait.data[k * 4] = 237;
+        trait.data[k * 4 + 1] = 28;
+        trait.data[k * 4 + 2] = 36;
+        trait.data[k * 4 + 3] = 255;
+      }
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.clearRect(0, 0, L, H);
+      ctx.fillStyle = 'rgba(20, 23, 27, .62)';
+      ctx.fillRect(0, 0, L, H);
+      tampon.width = l;
+      tampon.height = h;
+      tctx.putImageData(trou, 0, 0);
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.drawImage(tampon, x0, y0);
+      tctx.putImageData(trait, 0, 0);
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.drawImage(tampon, x0, y0);
+      dessinee = id;
+    };
+    // Sous le poster : pastille, nom, groupe et surface de l'entrée affichée, sinon le titre du poster
+    const legender = (id) => {
+      if (!id) { etat.replaceChildren(...repos); return; }
+      const b = boutons.get(id);
+      const pastille = b.querySelector('.cadastre-pastille').cloneNode();
+      pastille.style.setProperty('--pastille', b.style.getPropertyValue('--pastille'));
+      const nom = document.createElement('strong');
+      nom.textContent = b.querySelector('.cadastre-nom').textContent;
+      const ligne = document.createElement('span');
+      ligne.append(nom, ` · ${b.closest('.cadastre-groupe').dataset.libelle}`);
+      etat.replaceChildren(pastille, ligne, b.querySelector('.cadastre-km').cloneNode(true));
+    };
+    const montrer = (id) => {
+      boutons.forEach((b, k) => b.classList.toggle('est-active', k === id));
+      legender(id);
+      const visible = Boolean(id && etiquettes && emprises.has(id));
+      if (visible && id !== dessinee) dessiner(id);
+      cadre.classList.toggle('a-une-zone', visible);   // sans zone, le calque s'efface sur son dernier dessin
+    };
+    const actualiser = () => montrer(survolee || choisie);
+    const choisir = (id) => {
+      choisie = choisie === id ? 0 : id;
+      boutons.forEach((b, k) => b.setAttribute('aria-pressed', String(k === choisie)));
+      actualiser();
+    };
+    const zoneSous = (e) => {
+      if (!etiquettes) return 0;
+      const r = cadre.getBoundingClientRect();
+      const x = Math.floor(((e.clientX - r.left) / r.width) * L), y = Math.floor(((e.clientY - r.top) / r.height) * H);
+      return x >= 0 && y >= 0 && x < L && y < H ? etiquettes[y * L + x] : 0;
+    };
+
+    const liste = figure.closest('.cadastre-grille').querySelector('.cadastre-panneau');
+    liste.addEventListener('pointerover', (e) => {
+      const b = e.target.closest('.cadastre-cle');
+      if (b && e.pointerType !== 'touch') { survolee = Number(b.dataset.zone); actualiser(); }
+    });
+    liste.addEventListener('pointerout', (e) => {
+      const b = e.target.closest('.cadastre-cle');
+      if (b && !b.contains(e.relatedTarget)) { survolee = 0; actualiser(); }
+    });
+    liste.addEventListener('focusin', (e) => { const b = e.target.closest('.cadastre-cle'); if (b) { survolee = Number(b.dataset.zone); actualiser(); } });
+    liste.addEventListener('focusout', () => { survolee = 0; actualiser(); });
+    liste.addEventListener('click', (e) => { const b = e.target.closest('.cadastre-cle'); if (b) choisir(Number(b.dataset.zone)); });
+
+    cadre.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+      const id = zoneSous(e);
+      cadre.classList.toggle('sur-une-zone', Boolean(id));
+      if (id !== survolee) { survolee = id; actualiser(); }
+    });
+    cadre.addEventListener('pointerleave', () => {
+      cadre.classList.remove('sur-une-zone');
+      if (survolee) { survolee = 0; actualiser(); }
+    });
+    // Toucher ou cliquer une zone la choisit ; ailleurs sur le poster, le choix est levé
+    cadre.addEventListener('click', (e) => {
+      const id = zoneSous(e);
+      if (id) choisir(id); else if (choisie) choisir(choisie);
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && choisie) choisir(choisie); });
+
+    // Carte d'étiquettes lue à l'approche de la section : niveaux de gris → entrées, et emprise de chacune
+    const charger = () => {
+      const image = new Image();
+      image.src = calque.dataset.etiquettes;
+      image.decode().then(() => {
+        const toile = document.createElement('canvas');
+        toile.width = L;
+        toile.height = H;
+        const c = toile.getContext('2d', { willReadFrequently: true });
+        c.drawImage(image, 0, 0, L, H);
+        const gris = c.getImageData(0, 0, L, H).data;
+        etiquettes = new Uint8Array(L * H);
+        for (let i = 0; i < L * H; i++) {
+          const id = Math.round(gris[i * 4] / 10);
+          if (!id) continue;
+          etiquettes[i] = id;
+          const x = i % L, y = (i - x) / L, e = emprises.get(id);
+          if (!e) { emprises.set(id, [x, y, x, y]); continue; }
+          if (x < e[0]) e[0] = x;
+          if (x > e[2]) e[2] = x;
+          e[3] = y;
+        }
+        actualiser();
+      }).catch(() => {});   // sans carte d'étiquettes, le poster et la liste restent lisibles
+    };
+    new IntersectionObserver((entrees, guetteur) => {
+      if (!entrees.some((e) => e.isIntersecting)) return;
+      guetteur.disconnect();
+      charger();
+    }, { rootMargin: '600px 0px' }).observe(figure);
   }
 
   /* ─── Gestion des cookies : refus de la mesure d'audience ───

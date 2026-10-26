@@ -23,9 +23,9 @@
   <meta name="theme-color" content="#14171B">
   <link rel="icon" href="../img/favicon.png?ver=ec0afc973b" type="image/png">
   <link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" href="../img/photos/actualites-hero.jpg?ver=5476a3fd2c" imagesrcset="../img/photos/actualites-hero-768.jpg?ver=7b06a1d2bc 768w, ../img/photos/actualites-hero.jpg?ver=5476a3fd2c 1536w" imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="../css/styles.css?ver=edca427b19">
-  <link rel="stylesheet" href="../css/pages.css?ver=01af48b576">
+  <link rel="preload" as="image" href="../img/photos/actualites-hero.jpg?ver=8fe1e63304" imagesrcset="../img/photos/actualites-hero-768.jpg?ver=9bdcc809e2 768w, ../img/photos/actualites-hero.jpg?ver=8fe1e63304 2400w" imagesizes="100vw" fetchpriority="high">
+  <link rel="stylesheet" href="../css/styles.css?ver=d3cf9fdd68">
+  <link rel="stylesheet" href="../css/pages.css?ver=c32f83c9e3">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -91,11 +91,19 @@
             <ul class="sous-menu-liens">
               <li><a href="../actualites/index.html" aria-current="page">Actualités</a></li>
               <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-              <li><a href="../carrieres/index.html">Carrières</a></li>
             </ul>
           </div>
         </li>
-        <li class="nav-direct"><a class="nav-onglet nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
+        <li class="nav-item">
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-carrieres">Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="sous-menu" id="sous-menu-carrieres">
+            <ul class="sous-menu-liens">
+              <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
+              <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+              <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
+            </ul>
+          </div>
+        </li>
         <li class="nav-direct"><a class="nav-onglet" href="../contact/index.html">Contact</a></li>
       </ul>
     </nav>
@@ -144,10 +152,16 @@
       <ul>
         <li><a href="../actualites/index.html" aria-current="page">Actualités</a></li>
         <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-        <li><a href="../carrieres/index.html">Carrières</a></li>
       </ul>
     </details>
-    <a class="menu-mobile-direct nav-accent" href="../gotalk/index.html">GO’TALK</a>
+    <details class="accordeon" name="menu-mobile">
+      <summary>Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <ul>
+        <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
+        <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+        <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
+      </ul>
+    </details>
     <a class="menu-mobile-direct" href="../contact/index.html">Contact</a>
   </nav>
   <div class="menu-mobile-pied">
@@ -162,13 +176,12 @@
     <ul>
       <li><a href="../actualites/index.html" aria-current="page">Actualités</a></li>
       <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-      <li><a href="../carrieres/index.html">Carrières</a></li>
     </ul>
   </nav>
 
   <!-- ═══════════ 1 · Ouverture ═══════════ -->
   <section class="page-hero" aria-labelledby="page-titre">
-    <img class="page-hero-image" style="object-position: 60% 35%" src="../img/photos/actualites-hero.jpg?ver=5476a3fd2c" srcset="../img/photos/actualites-hero-768.jpg?ver=7b06a1d2bc 768w, ../img/photos/actualites-hero.jpg?ver=5476a3fd2c 1536w" sizes="100vw" alt="" width="1536" height="1024" fetchpriority="high">
+    <img class="page-hero-image" style="object-position: 85% 40%" src="../img/photos/actualites-hero.jpg?ver=8fe1e63304" srcset="../img/photos/actualites-hero-768.jpg?ver=9bdcc809e2 768w, ../img/photos/actualites-hero.jpg?ver=8fe1e63304 2400w" sizes="100vw" alt="" width="2400" height="1030" fetchpriority="high">
     <div class="voile" aria-hidden="true"></div>
     <div class="conteneur page-hero-contenu">
       <div class="page-hero-bloc">
@@ -398,9 +411,15 @@
           <ul>
             <li><a href="../actualites/index.html" aria-current="page">Actualités</a></li>
             <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-            <li><a href="../carrieres/index.html">Carrières</a></li>
-            <li><a href="../gotalk/index.html">GO’TALK</a></li>
             <li><a href="../contact/index.html">Contact</a></li>
+          </ul>
+        </details>
+        <details class="pied-colonne" open>
+          <summary>Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <ul>
+            <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
+            <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+            <li><a href="../gotalk/index.html">GO’TALK</a></li>
           </ul>
         </details>
       </nav>
@@ -419,6 +438,6 @@
 
 <button class="haut-de-page" type="button" aria-label="Revenir en haut de la page"><svg class="icone" aria-hidden="true"><use href="#i-haut"/></svg></button>
 
-<script src="../js/app.js?ver=ff7b5dfcbb" defer></script>
+<script src="../js/app.js?ver=86b7649f55" defer></script>
 </body>
 </html>

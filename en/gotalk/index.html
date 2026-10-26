@@ -23,8 +23,8 @@
   <meta name="theme-color" content="#14171B">
   <link rel="icon" href="../../img/favicon.png?ver=ec0afc973b" type="image/png">
   <link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../../css/styles.css?ver=edca427b19">
-  <link rel="stylesheet" href="../../css/pages.css?ver=01af48b576">
+  <link rel="stylesheet" href="../../css/styles.css?ver=d3cf9fdd68">
+  <link rel="stylesheet" href="../../css/pages.css?ver=c32f83c9e3">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -90,11 +90,19 @@
             <ul class="sous-menu-liens">
               <li><a href="../../en/news/index.html">News</a></li>
               <li><a href="../../en/media-library/index.html">Media library</a></li>
-              <li><a href="../../en/careers/index.html">Careers</a></li>
             </ul>
           </div>
         </li>
-        <li class="nav-direct"><a class="nav-onglet nav-accent" href="../../en/gotalk/index.html" aria-current="page">GO’TALK</a></li>
+        <li class="nav-item">
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-carrieres" aria-current="true">Careers <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="sous-menu" id="sous-menu-carrieres">
+            <ul class="sous-menu-liens">
+              <li><a href="../../en/careers/index.html">Why join GOC</a></li>
+              <li><a href="../../en/careers/application.html">Application form</a></li>
+              <li><a class="nav-accent" href="../../en/gotalk/index.html" aria-current="page">GO’TALK</a></li>
+            </ul>
+          </div>
+        </li>
         <li class="nav-direct"><a class="nav-onglet" href="../../en/contact/index.html">Contact</a></li>
       </ul>
     </nav>
@@ -143,10 +151,16 @@
       <ul>
         <li><a href="../../en/news/index.html">News</a></li>
         <li><a href="../../en/media-library/index.html">Media library</a></li>
-        <li><a href="../../en/careers/index.html">Careers</a></li>
       </ul>
     </details>
-    <a class="menu-mobile-direct nav-accent" href="../../en/gotalk/index.html" aria-current="page">GO’TALK</a>
+    <details class="accordeon" name="menu-mobile">
+      <summary>Careers <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <ul>
+        <li><a href="../../en/careers/index.html">Why join GOC</a></li>
+        <li><a href="../../en/careers/application.html">Application form</a></li>
+        <li><a class="nav-accent" href="../../en/gotalk/index.html" aria-current="page">GO’TALK</a></li>
+      </ul>
+    </details>
     <a class="menu-mobile-direct" href="../../en/contact/index.html">Contact</a>
   </nav>
   <div class="menu-mobile-pied">
@@ -201,8 +215,8 @@
               <span class="talent-carte-photo"><img src="../../img/photos/gotalk-ingenieur-chimiste-mboumba.jpg?ver=64569ed1b5" srcset="../../img/photos/gotalk-ingenieur-chimiste-mboumba-768.jpg?ver=be6d324868 768w, ../../img/photos/gotalk-ingenieur-chimiste-mboumba.jpg?ver=64569ed1b5 960w" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 24rem" alt="" width="960" height="1200" loading="lazy"></span>
               <span class="talent-carte-bulle" aria-hidden="true">”</span>
               <span class="talent-carte-texte">
-                <span class="talent-carte-nom">Production Chemical Engineer</span>
-                <span class="talent-carte-fonction">Mboumba field</span>
+                <span class="talent-carte-nom">Yannick ISSOUKOU BELEMLOUGRI</span>
+                <span class="talent-carte-fonction">Production Chemical Engineer</span>
                 <span class="talent-carte-lire">Read the profile <svg class="icone" aria-hidden="true"><use href="#i-fleche"/></svg></span>
               </span>
             </button>
@@ -212,8 +226,8 @@
               <span class="talent-carte-photo"><img src="../../img/photos/gotalk-controleur-couts-senior.jpg?ver=47692022eb" srcset="../../img/photos/gotalk-controleur-couts-senior-768.jpg?ver=be9d2d1e4d 768w, ../../img/photos/gotalk-controleur-couts-senior.jpg?ver=47692022eb 960w" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 24rem" alt="" width="960" height="1200" loading="lazy"></span>
               <span class="talent-carte-bulle" aria-hidden="true">”</span>
               <span class="talent-carte-texte">
-                <span class="talent-carte-nom">Senior Cost Controller</span>
-                <span class="talent-carte-fonction">Operated Assets Lead Department</span>
+                <span class="talent-carte-nom">Shandy NGOUNGOULOU</span>
+                <span class="talent-carte-fonction">Senior Cost Controller</span>
                 <span class="talent-carte-lire">Read the profile <svg class="icone" aria-hidden="true"><use href="#i-fleche"/></svg></span>
               </span>
             </button>
@@ -273,9 +287,15 @@
           <ul>
             <li><a href="../../en/news/index.html">News</a></li>
             <li><a href="../../en/media-library/index.html">Media library</a></li>
-            <li><a href="../../en/careers/index.html">Careers</a></li>
-            <li><a href="../../en/gotalk/index.html" aria-current="page">GO’TALK</a></li>
             <li><a href="../../en/contact/index.html">Contact</a></li>
+          </ul>
+        </details>
+        <details class="pied-colonne" open>
+          <summary>Careers <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <ul>
+            <li><a href="../../en/careers/index.html">Why join GOC</a></li>
+            <li><a href="../../en/careers/application.html">Application form</a></li>
+            <li><a href="../../en/gotalk/index.html" aria-current="page">GO’TALK</a></li>
           </ul>
         </details>
       </nav>
@@ -358,8 +378,8 @@
         </section>
       </article>
       <nav class="talent-suite" aria-label="Other profiles">
-        <button class="talent-voisin talent-voisin-precedent" type="button" data-talent-voisin="controleur-couts-senior"><span class="talent-voisin-sens">Previous profile</span><span class="talent-voisin-nom">Senior Cost Controller</span></button>
-        <button class="talent-voisin talent-voisin-suivant" type="button" data-talent-voisin="ingenieur-chimiste-mboumba"><span class="talent-voisin-sens">Next profile</span><span class="talent-voisin-nom">Production Chemical Engineer</span></button>
+        <button class="talent-voisin talent-voisin-precedent" type="button" data-talent-voisin="controleur-couts-senior"><span class="talent-voisin-sens">Previous profile</span><span class="talent-voisin-nom">Shandy NGOUNGOULOU</span></button>
+        <button class="talent-voisin talent-voisin-suivant" type="button" data-talent-voisin="ingenieur-chimiste-mboumba"><span class="talent-voisin-sens">Next profile</span><span class="talent-voisin-nom">Yannick ISSOUKOU BELEMLOUGRI</span></button>
       </nav>
     </div>
   </div>
@@ -368,9 +388,10 @@
   <div class="talent-cadre">
     <button class="talent-fermer" type="button" data-ferme aria-label="Close the profile"><svg class="icone" aria-hidden="true"><use href="#i-fermer"/></svg></button>
     <figure class="talent-portrait">
-      <img src="../../img/photos/gotalk-ingenieur-chimiste-mboumba.jpg?ver=64569ed1b5" srcset="../../img/photos/gotalk-ingenieur-chimiste-mboumba-768.jpg?ver=be6d324868 768w, ../../img/photos/gotalk-ingenieur-chimiste-mboumba.jpg?ver=64569ed1b5 960w" sizes="(max-width: 1023px) 100vw, 26rem" alt="Production chemical engineer in safety overalls and helmet, radio on his shoulder" width="960" height="1200" loading="lazy">
+      <img src="../../img/photos/gotalk-ingenieur-chimiste-mboumba.jpg?ver=64569ed1b5" srcset="../../img/photos/gotalk-ingenieur-chimiste-mboumba-768.jpg?ver=be6d324868 768w, ../../img/photos/gotalk-ingenieur-chimiste-mboumba.jpg?ver=64569ed1b5 960w" sizes="(max-width: 1023px) 100vw, 26rem" alt="Yannick ISSOUKOU BELEMLOUGRI in safety overalls and helmet, radio on his shoulder" width="960" height="1200" loading="lazy">
       <figcaption class="talent-identite">
-        <span class="talent-identite-nom">Production Chemical Engineer</span>
+        <span class="talent-identite-nom">Yannick ISSOUKOU BELEMLOUGRI</span>
+        <span class="talent-identite-fonction">Production Chemical Engineer</span>
         <span class="talent-identite-service">Mboumba field</span>
       </figcaption>
     </figure>
@@ -380,7 +401,7 @@
         <header class="talent-tete">
           <p class="talent-rubrique"><span class="talent-marque">GO’TALK</span> Career profile</p>
           <h2 class="talent-titre" id="talent-ingenieur-chimiste-mboumba-titre">At the heart of production chemistry in Mboumba</h2>
-          <p class="talent-chapo">On the Mboumba field, chemistry plays a vital role in producing hydrocarbons and preserving the facilities. Meet a production chemical engineer who combines scientific expertise, foresight and team spirit.</p>
+          <p class="talent-chapo">On the Mboumba field, chemistry plays a vital role in producing hydrocarbons and preserving the facilities. Meet Yannick ISSOUKOU BELEMLOUGRI, a production chemical engineer who combines scientific expertise, foresight and team spirit.</p>
         </header>
         <section class="talent-echange">
           <h3>What does your job involve?</h3>
@@ -422,7 +443,7 @@
       </article>
       <nav class="talent-suite" aria-label="Other profiles">
         <button class="talent-voisin talent-voisin-precedent" type="button" data-talent-voisin="axelle-manguiya-etoughe"><span class="talent-voisin-sens">Previous profile</span><span class="talent-voisin-nom">Axelle MANGUIYA, married name ETOUGHE</span></button>
-        <button class="talent-voisin talent-voisin-suivant" type="button" data-talent-voisin="controleur-couts-senior"><span class="talent-voisin-sens">Next profile</span><span class="talent-voisin-nom">Senior Cost Controller</span></button>
+        <button class="talent-voisin talent-voisin-suivant" type="button" data-talent-voisin="controleur-couts-senior"><span class="talent-voisin-sens">Next profile</span><span class="talent-voisin-nom">Shandy NGOUNGOULOU</span></button>
       </nav>
     </div>
   </div>
@@ -431,9 +452,10 @@
   <div class="talent-cadre">
     <button class="talent-fermer" type="button" data-ferme aria-label="Close the profile"><svg class="icone" aria-hidden="true"><use href="#i-fermer"/></svg></button>
     <figure class="talent-portrait">
-      <img src="../../img/photos/gotalk-controleur-couts-senior.jpg?ver=47692022eb" srcset="../../img/photos/gotalk-controleur-couts-senior-768.jpg?ver=be9d2d1e4d 768w, ../../img/photos/gotalk-controleur-couts-senior.jpg?ver=47692022eb 960w" sizes="(max-width: 1023px) 100vw, 26rem" alt="Senior cost controller in a dark jacket, arms folded, against a black background" width="960" height="1200" loading="lazy">
+      <img src="../../img/photos/gotalk-controleur-couts-senior.jpg?ver=47692022eb" srcset="../../img/photos/gotalk-controleur-couts-senior-768.jpg?ver=be9d2d1e4d 768w, ../../img/photos/gotalk-controleur-couts-senior.jpg?ver=47692022eb 960w" sizes="(max-width: 1023px) 100vw, 26rem" alt="Shandy NGOUNGOULOU in a dark jacket, arms folded, against a black background" width="960" height="1200" loading="lazy">
       <figcaption class="talent-identite">
-        <span class="talent-identite-nom">Senior Cost Controller</span>
+        <span class="talent-identite-nom">Shandy NGOUNGOULOU</span>
+        <span class="talent-identite-fonction">Senior Cost Controller</span>
         <span class="talent-identite-service">Operated Assets Lead Department</span>
       </figcaption>
     </figure>
@@ -443,7 +465,7 @@
         <header class="talent-tete">
           <p class="talent-rubrique"><span class="talent-marque">GO’TALK</span> Career profile</p>
           <h2 class="talent-titre" id="talent-controleur-couts-senior-titre">Cost control serving performance</h2>
-          <p class="talent-chapo">Behind every oil operation lie investments to plan, expenditure to control and results to analyse. At GOC, the Senior Cost Controller ensures the sound management of the financial resources of the operated assets. Meet a professional driven by a love of figures and an attachment to his country.</p>
+          <p class="talent-chapo">Behind every oil operation lie investments to plan, expenditure to control and results to analyse. At GOC, the Senior Cost Controller ensures the sound management of the financial resources of the operated assets. Meet Shandy NGOUNGOULOU, a professional driven by a love of figures and an attachment to his country.</p>
         </header>
         <section class="talent-echange">
           <h3>What does your job involve?</h3>
@@ -484,7 +506,7 @@
         </section>
       </article>
       <nav class="talent-suite" aria-label="Other profiles">
-        <button class="talent-voisin talent-voisin-precedent" type="button" data-talent-voisin="ingenieur-chimiste-mboumba"><span class="talent-voisin-sens">Previous profile</span><span class="talent-voisin-nom">Production Chemical Engineer</span></button>
+        <button class="talent-voisin talent-voisin-precedent" type="button" data-talent-voisin="ingenieur-chimiste-mboumba"><span class="talent-voisin-sens">Previous profile</span><span class="talent-voisin-nom">Yannick ISSOUKOU BELEMLOUGRI</span></button>
         <button class="talent-voisin talent-voisin-suivant" type="button" data-talent-voisin="axelle-manguiya-etoughe"><span class="talent-voisin-sens">Next profile</span><span class="talent-voisin-nom">Axelle MANGUIYA, married name ETOUGHE</span></button>
       </nav>
     </div>
@@ -493,6 +515,6 @@
 
 <button class="haut-de-page" type="button" aria-label="Back to the top of the page"><svg class="icone" aria-hidden="true"><use href="#i-haut"/></svg></button>
 
-<script src="../../js/app.js?ver=ff7b5dfcbb" defer></script>
+<script src="../../js/app.js?ver=86b7649f55" defer></script>
 </body>
 </html>

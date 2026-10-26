@@ -1,6 +1,6 @@
 {
   "_lisezmoi": [
-    "Menus du site, dans chaque langue : menu principal et menu mobile (« groupes » à sous-menu, puis « directs », onglets sans sous-menu, repris à la fin de la dernière colonne du pied de page ; « mise_en_avant » l'affiche en rouge), plan du pied de page (titre « pied » de chaque groupe), liens légaux du bas de page.",
+    "Menus du site, dans chaque langue : menu principal et menu mobile (« groupes » à sous-menu, puis « directs », onglets sans sous-menu, repris à la fin de la colonne du pied de page du groupe marqué « directs_au_pied » ; « mise_en_avant » affiche un onglet ou un lien de sous-menu en rouge), plan du pied de page (titre « pied » de chaque groupe), liens légaux du bas de page.",
     "Les liens s'écrivent avec l'adresse de la page française, depuis la racine du site : la version anglaise mène automatiquement à la traduction de cette page (sources/en/pages/, clé « fr » de l'en-tête).",
     "Dans WordPress : un menu par langue (Polylang, « Apparence > Menus », un emplacement par langue).",
     "Les pages encore à créer sont listées dans INVENTAIRE.md."
@@ -37,15 +37,24 @@
       "id": "information",
       "libelle": { "fr": "Informations", "en": "Information" },
       "pied": { "fr": "Informations", "en": "Information" },
+      "directs_au_pied": true,
       "liens": [
         { "fr": "Actualités", "en": "News", "lien": "actualites/index.html" },
-        { "fr": "Médiathèque", "en": "Media library", "lien": "mediatheque/index.html" },
-        { "fr": "Carrières", "en": "Careers", "lien": "carrieres/index.html" }
+        { "fr": "Médiathèque", "en": "Media library", "lien": "mediatheque/index.html" }
+      ]
+    },
+    {
+      "id": "carrieres",
+      "libelle": { "fr": "Carrières", "en": "Careers" },
+      "pied": { "fr": "Carrières", "en": "Careers" },
+      "liens": [
+        { "fr": "Pourquoi rejoindre la SNHG", "en": "Why join GOC", "lien": "carrieres/index.html" },
+        { "fr": "Formulaire de souscription", "en": "Application form", "lien": "carrieres/candidature.html" },
+        { "fr": "GO’TALK", "en": "GO’TALK", "lien": "gotalk/index.html", "mise_en_avant": true }
       ]
     }
   ],
   "directs": [
-    { "fr": "GO’TALK", "en": "GO’TALK", "lien": "gotalk/index.html", "mise_en_avant": true },
     { "fr": "Contact", "en": "Contact", "lien": "contact/index.html" }
   ],
   "legal": [
