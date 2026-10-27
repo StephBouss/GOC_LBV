@@ -23,7 +23,7 @@
   <meta name="theme-color" content="#14171B">
   <link rel="icon" href="img/favicon.png?ver=ec0afc973b" type="image/png">
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" href="img/hero-video-affiche.jpg?ver=8d317af416" fetchpriority="high">
+  <link rel="preload" as="image" href="video/hero-snhg-affiche.jpg?ver=9ad73132d8" fetchpriority="high">
   <link rel="stylesheet" href="css/styles.css?ver=d3cf9fdd68">
   <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -173,9 +173,11 @@
   <!-- ═══════════ 1 · Hero ═══════════ -->
   <section class="hero" data-diaporama aria-roledescription="carrousel" aria-label="À la une">
     <div class="hero-fonds" aria-hidden="true">
-      <video class="hero-fond est-actif" muted playsinline preload="none" poster="img/hero-video-affiche.jpg?ver=8d317af416" width="1280" height="720">
-        <source src="video/hero-goc-720p.webm?ver=792aa9fb95" type="video/webm; codecs=vp9">
-        <source src="video/hero-goc-720p.mp4?ver=1d34f5162e" type="video/mp4">
+      <video class="hero-fond est-actif" muted playsinline preload="none" poster="video/hero-snhg-affiche.jpg?ver=9ad73132d8" width="1920" height="1080">
+        <source src="video/hero-snhg-1080p.webm?ver=32f21355a7" type="video/webm; codecs=vp9" media="(min-width: 768px)">
+        <source src="video/hero-snhg-1080p.mp4?ver=095d86ab2d" type="video/mp4" media="(min-width: 768px)">
+        <source src="video/hero-snhg-mobile.webm?ver=b526ff102a" type="video/webm; codecs=vp9">
+        <source src="video/hero-snhg-mobile.mp4?ver=4f5c0cfafb" type="video/mp4">
       </video>
       <img class="hero-fond hero-image" src="img/photos/accueil-expertise.jpg?ver=572648a31b" srcset="img/photos/accueil-expertise-768.jpg?ver=4872cc162e 768w, img/photos/accueil-expertise.jpg?ver=572648a31b 1536w" sizes="100vw" alt="" width="1536" height="1024" fetchpriority="low" decoding="async">
       <video class="hero-fond" muted playsinline preload="none" poster="img/hero-video-sardine-affiche.jpg?ver=0c362866a8" width="1280" height="720">
@@ -517,6 +519,6 @@
 
 <button class="haut-de-page" type="button" aria-label="Revenir en haut de la page"><svg class="icone" aria-hidden="true"><use href="#i-haut"/></svg></button>
 
-<script src="js/app.js?ver=ceefb63918" defer></script>
+<script src="js/app.js?ver=c4db6cf0df" defer></script>
 </body>
 </html>

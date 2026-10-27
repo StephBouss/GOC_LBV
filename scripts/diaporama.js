@@ -36,15 +36,21 @@ function charger(sources, langue, t) {
 const srcset = (f) => `${f.src}-768.jpg 768w, ${f.src}.jpg 1536w`;
 
 /* Fond : ni autoplay ni loading="lazy" sur la vidéo, visible dès l'ouverture. preload="none" : rien n'est téléchargé
-   avant qu'app.js ne la lance, ce qu'il ne fait ni sur téléphone, ni en mode économie de données, ni si la personne
-   limite les animations ; l'affiche reste alors à sa place. WebM d'abord (plus léger), MP4 pour les autres navigateurs.
+   avant qu'app.js ne la lance, ce qu'il ne fait ni en mode économie de données, ni si la personne limite les animations,
+   ni sur téléphone pour une vidéo sans version verticale ; l'affiche reste alors à sa place. WebM d'abord (plus léger),
+   MP4 pour les autres navigateurs. Version verticale (« mobile ») : les sources larges sont réservées aux écrans d'au
+   moins 768 px ; un navigateur qui ignore media prend la version large partout.
    Les photos suivantes se chargent derrière, en priorité basse. */
+const sources = (v, media = '') => [
+  v.webm && `<source src="${v.webm}" type="video/webm; codecs=vp9"${media}>`,
+  `<source src="${v.src}" type="video/mp4"${media}>`,
+].filter(Boolean);
 function fond(f, i, seule) {
   const actif = i === 0 ? ' est-actif' : '';
   if (f.type === 'video') {
-    const webm = f.webm ? `\n        <source src="${f.webm}" type="video/webm; codecs=vp9">` : '';
-    return `      <video class="hero-fond${actif}" muted playsinline${seule ? ' loop' : ''} preload="none" poster="${f.affiche}" width="${f.largeur}" height="${f.hauteur}">${webm}
-        <source src="${f.src}" type="video/mp4">
+    const liste = f.mobile ? [...sources(f, ' media="(min-width: 768px)"'), ...sources(f.mobile)] : sources(f);
+    return `      <video class="hero-fond${actif}" muted playsinline${seule ? ' loop' : ''} preload="none" poster="${f.affiche}" width="${f.largeur}" height="${f.hauteur}">
+${liste.map((s) => `        ${s}`).join('\n')}
       </video>`;
   }
   const priorite = i === 0 ? ' fetchpriority="high"' : ' fetchpriority="low" decoding="async"';

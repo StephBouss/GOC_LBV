@@ -228,11 +228,13 @@
     }
     document.addEventListener('visibilitychange', synchroniser);
 
-    // Téléphone ou mode économie de données : la vidéo n'est pas chargée, l'affiche reste et la diapositive dure data-duree
-    const sansVideo = matchMedia('(max-width: 767px)').matches || Boolean(navigator.connection?.saveData);
+    // Mode économie de données, ou téléphone pour une vidéo sans version verticale (sources larges sans media) :
+    // la vidéo n'est pas chargée, l'affiche reste et la diapositive dure data-duree
+    const economie = Boolean(navigator.connection?.saveData);
+    const telephone = matchMedia('(max-width: 767px)').matches;
     fonds.forEach((f) => {
       if (f.tagName !== 'VIDEO') return;
-      if (sansVideo) { f.dataset.bloquee = ''; return; }
+      if (economie || (telephone && !f.querySelector('source[media]'))) { f.dataset.bloquee = ''; return; }
       const echec = () => { f.dataset.bloquee = ''; };   // fichier introuvable ou illisible : la diapositive passe en minuterie
       f.addEventListener('error', echec);
       // erreur sur la dernière source seulement : avant elle, le navigateur essaie la suivante (MP4 après WebM)

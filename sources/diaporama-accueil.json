@@ -2,7 +2,7 @@
   "_lisezmoi": [
     "Diaporama d'ouverture de l'accueil : préfiguration du bloc WordPress « Diaporama d'accueil » (une liste répétable de diapositives, modifiable depuis l'administration).",
     "Une diapositive = un identifiant (« id », qui relie ses traductions dans sources/en/), un fond (vidéo ou photo), une durée, un sur-titre, un titre, un chapô et un ou deux boutons (texte, lien, style « principal » ou « contour »).",
-    "Fond vidéo : fichier MP4 sans son, sa version WebM (plus légère, facultative), image d'affiche, largeur et hauteur en pixels. L'affiche s'affiche pendant le chargement, sur téléphone (la vidéo n'y est pas chargée) et pour les visiteurs qui limitent les animations. La vidéo passe à la diapositive suivante quand elle se termine ; sinon la diapositive dure « duree » secondes.",
+    "Fond vidéo : fichier MP4 sans son, sa version WebM (plus légère, facultative), image d'affiche, largeur et hauteur en pixels, et sa version verticale pour les téléphones (« mobile », facultative : MP4 et WebM). L'affiche s'affiche pendant le chargement, sur téléphone si la vidéo n'a pas de version verticale (elle n'y est alors pas chargée) et pour les visiteurs qui limitent les animations. La vidéo passe à la diapositive suivante quand elle se termine ; sinon la diapositive dure « duree » secondes.",
     "Fond photo : fichier en 1536 px, variante en 768 px pour les téléphones. La photo reste affichée « duree » secondes.",
     "La première diapositive porte le titre principal de la page (h1) : son titre doit rester une phrase qui présente la SNHG.",
     "Régénération : node scripts/assembler-pages.js (ou automatiquement avec --surveiller)."
@@ -13,11 +13,15 @@
       "id": "foret",
       "fond": {
         "type": "video",
-        "src": "video/hero-goc-720p.mp4",
-        "webm": "video/hero-goc-720p.webm",
-        "affiche": "img/hero-video-affiche.jpg",
-        "largeur": 1280,
-        "hauteur": 720
+        "src": "video/hero-snhg-1080p.mp4",
+        "webm": "video/hero-snhg-1080p.webm",
+        "affiche": "video/hero-snhg-affiche.jpg",
+        "largeur": 1920,
+        "hauteur": 1080,
+        "mobile": {
+          "src": "video/hero-snhg-mobile.mp4",
+          "webm": "video/hero-snhg-mobile.webm"
+        }
       },
       "duree": 15,
       "surTitre": "Société nationale des hydrocarbures du Gabon",

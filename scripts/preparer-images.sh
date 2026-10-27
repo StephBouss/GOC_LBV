@@ -27,7 +27,8 @@ actu "actu6-pizolub.webp"             actu-pizolub             "scale=758:-2"   
 actu "../about/activity (9).jpg"      actu-modernisation       "scale=1536:-2"
 actu "new dg gaboil2.png"             actu-nomination-gaboil-2 "scale=1057:-2"     # portrait, dans le corps de l'article
 
-# Vidéos du diaporama de l'accueil (fournies par le client, 15 s, sans son) et leurs affiches.
+# Vidéo Sardine du diaporama de l'accueil (fournie par le client, 15 s, sans son) et son affiche. La vidéo de la
+# première diapositive (montage du client, versions large et verticale) est préparée par scripts/preparer-videos.js.
 # Réencodées depuis le 1080p en 1280 × 720, légères pour les réseaux mobiles (audit du 20/10/2026 : moins de 1,5 Mo) :
 # WebM (VP9), proposé d'abord aux navigateurs qui le lisent, et MP4 (H.264) pour les autres, index en tête (+faststart).
 VIDEOS="$(cd "$RACINE/../Img/Inspiration images/Site web GOC/GOC Vidéos/Hero" && pwd)"
@@ -41,7 +42,6 @@ video() { # nom (hero-<nom>-1080p.mp4 et hero-<nom>-poster.jpg)  affiche
   ffmpeg -v error -y -i "$VIDEOS/hero-$1-poster.jpg" -vf "scale=1536:-2,format=yuvj420p" -map_metadata -1 -q:v 4 "$DST/$2.jpg"
   printf '%-30s <- %s\n' "video/hero-$1-720p.webm/.mp4" "GOC Vidéos/Hero/hero-$1-1080p.mp4"
 }
-video goc     hero-video-affiche           # diapositive 1 : site en forêt
 video sardine hero-video-sardine-affiche   # diapositive 3 : champ offshore Sardine
 
 # Gouvernance : portraits officiels remis par le client le 23/10/2026, recadrés sur le visage (avatars ronds,
