@@ -7,23 +7,23 @@
   ],
   "libelle": "Featured",
   "diapositives": {
-    "foret": {
+    "champs": {
       "surTitre": "Gabon's national hydrocarbons company",
       "titre": "The leading player in Gabon's oil sector",
-      "chapo": "GOC plays a key role in the strategic management of the State's oil assets.",
-      "boutons": ["Discover the Group", "Our activities"]
+      "chapo": "On its onshore and offshore fields, GOC operates hydrocarbon deposits on behalf of the Nation and manages the State's strategic oil assets.",
+      "boutons": ["Discover the Group", "Exploration and production"]
     },
-    "expertise": {
-      "surTitre": "Since 2011",
-      "titre": "15 years of expertise",
-      "chapo": "Celebrating 15 years at the heart of Gabon's energy sector.",
-      "boutons": ["Our history", "Our subsidiaries"]
+    "personnel": {
+      "surTitre": "Technical and administrative staff",
+      "titre": "Excellence driven by our people",
+      "chapo": "Technicians, engineers and administrative staff: rigorous, committed teams are building a dynamic and strong GOC every day.",
+      "boutons": ["Join GOC", "Our values"]
     },
-    "sardine": {
-      "surTitre": "Strategic projects",
-      "titre": "Developing the offshore Sardine field",
-      "chapo": "Improving hydrocarbon recovery through water injection, workover operations and the drilling of new wells.",
-      "boutons": ["Exploration and production", "Strategic projects"]
+    "faune": {
+      "surTitre": "Environment and biodiversity",
+      "titre": "Protecting Gabon's natural wealth",
+      "chapo": "Forests, coastline and iconic wildlife: GOC protects the environments where it operates and is driving a responsible energy transition for future generations.",
+      "boutons": ["Our CSR commitments", "Our HSEI approach"]
     }
   }
 }

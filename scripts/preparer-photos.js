@@ -26,7 +26,7 @@ const BUREAUX = 'GOC-SNHG - Contenus/Images GOC - SNHG/Bureaux et staffs bureau_
 
 const PHOTOS = [
   // Accueil
-  { nom: 'accueil-expertise', source: `${OPERATIONS}/Obangué/Obangué - Portrait opérateur mixte dans les installations/DSC01951.jpg` },   // diapositive 2 « 15 ans d'expertise »
+  { nom: 'accueil-expertise', source: `${OPERATIONS}/Obangué/Obangué - Portrait opérateur mixte dans les installations/DSC01951.jpg` },   // image de partage par défaut (scripts/partage.js)
   { nom: 'accueil-qui-sommes-nous', source: `${BUREAUX}/3J3A6082.jpg`, format: 'portrait', zone: [0.06, 0.04, 0.88, 0.88] },
   { nom: 'accueil-exploration', source: `${OPERATIONS}/Sardine/Sardine - Installations détails/DSC03132.jpg` },                         // tour de forage
   { nom: 'accueil-production', source: `${BUREAUX}/3J3A6056.jpg` },                                                                      // opérateur à la vanne

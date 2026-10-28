@@ -2,7 +2,7 @@
   "_lisezmoi": [
     "Diaporama d'ouverture de l'accueil : préfiguration du bloc WordPress « Diaporama d'accueil » (une liste répétable de diapositives, modifiable depuis l'administration).",
     "Une diapositive = un identifiant (« id », qui relie ses traductions dans sources/en/), un fond (vidéo ou photo), une durée, un sur-titre, un titre, un chapô et un ou deux boutons (texte, lien, style « principal » ou « contour »).",
-    "Fond vidéo : fichier MP4 sans son, sa version WebM (plus légère, facultative), image d'affiche, largeur et hauteur en pixels, et sa version verticale pour les téléphones (« mobile », facultative : MP4 et WebM). L'affiche s'affiche pendant le chargement, sur téléphone si la vidéo n'a pas de version verticale (elle n'y est alors pas chargée) et pour les visiteurs qui limitent les animations. La vidéo passe à la diapositive suivante quand elle se termine ; sinon la diapositive dure « duree » secondes.",
+    "Fond vidéo : fichier MP4 sans son, sa version WebM (plus légère, facultative), image d'affiche, largeur et hauteur en pixels, et sa version verticale pour les téléphones (« mobile », facultative : MP4 et WebM). Ces fichiers sont préparés par scripts/preparer-videos.js depuis les vidéos du client ; « _video » décrit ce que montre la vidéo. L'affiche s'affiche pendant le chargement, sur téléphone si la vidéo n'a pas de version verticale (elle n'y est alors pas chargée) et pour les visiteurs qui limitent les animations. La vidéo passe à la diapositive suivante quand elle se termine ; sinon la diapositive dure « duree » secondes.",
     "Fond photo : fichier en 1536 px, variante en 768 px pour les téléphones. La photo reste affichée « duree » secondes.",
     "La première diapositive porte le titre principal de la page (h1) : son titre doit rester une phrase qui présente la SNHG.",
     "Régénération : node scripts/assembler-pages.js (ou automatiquement avec --surveiller)."
@@ -10,23 +10,24 @@
   "libelle": "À la une",
   "diapositives": [
     {
-      "id": "foret",
+      "id": "champs",
+      "_video": "Champs terrestres et offshore : base vie en forêt, site terrestre, village, plateforme de forage en mer (« Chantier », 16 s, fournie le 28/10/2026).",
       "fond": {
         "type": "video",
-        "src": "video/hero-snhg-1080p.mp4",
-        "webm": "video/hero-snhg-1080p.webm",
-        "affiche": "video/hero-snhg-affiche.jpg",
+        "src": "video/hero-champs-1080p.mp4",
+        "webm": "video/hero-champs-1080p.webm",
+        "affiche": "video/hero-champs-affiche.jpg",
         "largeur": 1920,
         "hauteur": 1080,
         "mobile": {
-          "src": "video/hero-snhg-mobile.mp4",
-          "webm": "video/hero-snhg-mobile.webm"
+          "src": "video/hero-champs-mobile.mp4",
+          "webm": "video/hero-champs-mobile.webm"
         }
       },
-      "duree": 15,
+      "duree": 16,
       "surTitre": "Société nationale des hydrocarbures du Gabon",
       "titre": "Leader du secteur pétrolier au Gabon",
-      "chapo": "La SNHG, acteur clé de la gestion stratégique des actifs pétroliers de l'État.",
+      "chapo": "Sur ses champs terrestres et offshore, la SNHG exploite les gisements d'hydrocarbures au nom de la Nation et gère les actifs pétroliers stratégiques de l'État.",
       "boutons": [
         {
           "texte": "Découvrir le groupe",
@@ -34,60 +35,72 @@
           "style": "principal"
         },
         {
-          "texte": "Nos activités",
-          "lien": "activites/index.html",
-          "style": "contour"
-        }
-      ]
-    },
-    {
-      "id": "expertise",
-      "fond": {
-        "type": "image",
-        "src": "img/photos/accueil-expertise",
-        "largeur": 1536,
-        "hauteur": 1024
-      },
-      "duree": 8,
-      "surTitre": "Depuis 2011",
-      "titre": "15 ans d'expertise",
-      "chapo": "Célébrons 15 ans au cœur de l'énergie gabonaise.",
-      "boutons": [
-        {
-          "texte": "Notre histoire",
-          "lien": "groupe/historique-gouvernance.html#historique",
-          "style": "principal"
-        },
-        {
-          "texte": "Nos filiales",
-          "lien": "filiales/index.html",
-          "style": "contour"
-        }
-      ]
-    },
-    {
-      "id": "sardine",
-      "fond": {
-        "type": "video",
-        "src": "video/hero-sardine-720p.mp4",
-        "webm": "video/hero-sardine-720p.webm",
-        "affiche": "img/hero-video-sardine-affiche.jpg",
-        "largeur": 1280,
-        "hauteur": 720
-      },
-      "duree": 15,
-      "surTitre": "Projets stratégiques",
-      "titre": "Développement du champ offshore Sardine",
-      "chapo": "Optimisation de la récupération des hydrocarbures grâce à l'injection d'eau, à des opérations de work-over et au forage de nouveaux puits.",
-      "boutons": [
-        {
           "texte": "Exploration et production",
           "lien": "activites/exploration-production.html",
+          "style": "contour"
+        }
+      ]
+    },
+    {
+      "id": "personnel",
+      "_video": "Personnel technique et administratif : laborantine en combinaison, deux cadres de la SNHG et leurs documents (8 s, fournie le 28/10/2026).",
+      "fond": {
+        "type": "video",
+        "src": "video/hero-personnel-1080p.mp4",
+        "webm": "video/hero-personnel-1080p.webm",
+        "affiche": "video/hero-personnel-affiche.jpg",
+        "largeur": 1920,
+        "hauteur": 1080,
+        "mobile": {
+          "src": "video/hero-personnel-mobile.mp4",
+          "webm": "video/hero-personnel-mobile.webm"
+        }
+      },
+      "duree": 9,
+      "surTitre": "Personnel technique et administratif",
+      "titre": "L'excellence portée par nos équipes",
+      "chapo": "Techniciens, ingénieurs et personnel administratif : des équipes rigoureuses et engagées bâtissent chaque jour une SNHG dynamique et forte.",
+      "boutons": [
+        {
+          "texte": "Rejoindre la SNHG",
+          "lien": "carrieres/index.html",
           "style": "principal"
         },
         {
-          "texte": "Projets stratégiques",
-          "lien": "activites/projets-strategiques.html",
+          "texte": "Nos valeurs",
+          "lien": "groupe/presentation.html#vision-valeurs",
+          "style": "contour"
+        }
+      ]
+    },
+    {
+      "id": "faune",
+      "_video": "Faune et flore : perroquet gris en vol, plage bordée de forêt (10 s, fournie le 28/10/2026).",
+      "fond": {
+        "type": "video",
+        "src": "video/hero-faune-1080p.mp4",
+        "webm": "video/hero-faune-1080p.webm",
+        "affiche": "video/hero-faune-affiche.jpg",
+        "largeur": 1920,
+        "hauteur": 1080,
+        "mobile": {
+          "src": "video/hero-faune-mobile.mp4",
+          "webm": "video/hero-faune-mobile.webm"
+        }
+      },
+      "duree": 10,
+      "surTitre": "Environnement et biodiversité",
+      "titre": "Préserver la richesse naturelle du Gabon",
+      "chapo": "Forêts, littoral et faune emblématique : la SNHG protège les milieux où elle opère et engage une transition énergétique responsable pour les générations futures.",
+      "boutons": [
+        {
+          "texte": "Nos engagements RSE",
+          "lien": "engagements/rse.html",
+          "style": "principal"
+        },
+        {
+          "texte": "Notre démarche HSEI",
+          "lien": "engagements/hsei.html",
           "style": "contour"
         }
       ]

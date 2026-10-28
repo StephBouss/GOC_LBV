@@ -1,73 +1,77 @@
 #!/usr/bin/env node
 /**
- * Prépare la vidéo de la première diapositive de l'accueil (sources/diaporama-accueil.json) depuis le montage du client
- * (hors du dépôt : « GOC Vidéos/Hero »). Sans son ; WebM (VP9) proposé d'abord aux navigateurs qui le lisent, MP4 (H.264,
- * index en tête) pour les autres.
+ * Prépare les vidéos des diapositives de l'accueil (sources/diaporama-accueil.json) depuis les vidéos du client (hors du
+ * dépôt : « GOC Vidéos/Hero »). Sans son ; WebM (VP9) proposé d'abord aux navigateurs qui le lisent, MP4 (H.264, index
+ * en tête) pour les autres. Pour chaque vidéo <nom> :
  *
- *  video/hero-snhg-1080p.webm|.mp4   ordinateur et tablette, 1920 × 1080
- *  video/hero-snhg-mobile.webm|.mp4  téléphone, 720 × 1280 : la bande verticale que le hero montre sur un téléphone,
- *                                    cadrée plan par plan sur le sujet (« centre »)
- *  video/hero-snhg-affiche.jpg       affiche : première image de la version large, préchargée, affichée tant que la vidéo
- *                                    n'a pas démarré (et à sa place en mode économie de données)
+ *  video/<nom>-1080p.webm|.mp4   ordinateur et tablette, 1920 × 1080
+ *  video/<nom>-mobile.webm|.mp4  téléphone, 608 × 1080 (9:16) : la bande verticale que le hero montre sur un téléphone,
+ *                                cadrée sur le sujet (« bande »), sans agrandir l'image d'origine
+ *  video/<nom>-affiche.jpg       affiche : première image de la version large, affichée tant que la vidéo n'a pas démarré
+ *                                (préchargée pour la première diapositive ; à la place de la vidéo en mode économie de données)
  *
- * Le montage a des bandes noires (format cinéma) dont la hauteur change d'un plan à l'autre : chaque plan est recadré dans
- * son image utile (« cadre », en pixels du montage), puis remis au format. Pour un nouveau montage, relever le début de
- * chaque plan (coupe franche ou fondu) et la hauteur des bandes : ffmpeg -i <montage> -vf fps=2,cropdetect -f null -
- * Usage : node scripts/preparer-videos.js [large|mobile]   (toutes les versions par défaut ; montage modifiable par
- * VIDEO_SOURCE ; ffmpeg requis)
+ * « cadres » : image utile au format 16:9, en pixels de la source [x, y, largeur, hauteur], à partir de l'instant « debut »
+ * (secondes) ; retire les bandes noires d'un plan au format cinéma. Relevé : ffmpeg -i <vidéo> -vf fps=4,cropdetect -f null -
+ * « bande » : centre de la bande verticale (fraction de la largeur de la source) à des instants donnés. Entre deux instants,
+ * la bande glisse (fondu enchaîné, sujet qui se déplace) ; deux instants pris entre deux images font une coupe franche.
+ * Relevé des plans : ffmpeg -i <vidéo> -vf scdet=threshold=4 -f null -  (les fondus n'y apparaissent pas : regarder les images)
+ * Usage : node scripts/preparer-videos.js [champs|personnel|faune…] [large|mobile]   (tout par défaut ; dossier des vidéos
+ * modifiable par VIDEOS_SOURCE ; ffmpeg requis)
  */
 const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
 
 const RACINE = path.join(__dirname, '..');
-const SOURCE = process.env.VIDEO_SOURCE
-  || path.join(RACINE, '..', 'Img', 'Inspiration images', 'Site web GOC', 'GOC Vidéos', 'Hero', 'snhg-hero-2560x1440-premier-montage.mp4');
+const SOURCE = process.env.VIDEOS_SOURCE || path.join(RACINE, '..', 'Img', 'Inspiration images', 'Site web GOC', 'GOC Vidéos', 'Hero');
 const DST = path.join(RACINE, 'video');
-const NOM = 'hero-snhg';
 
-const LARGEUR = 2560;                    // largeur du montage
-const CADRE = [89, 50, 2382, 1340];      // image utile sous les bandes de 46 px, au format 16:9 : [x, y, largeur, hauteur]
-// Plans : début (s), centre de la version verticale (fraction de la largeur du montage), coupe franche (sinon fondu
-// d'une seconde, pendant lequel la version verticale glisse d'un centre à l'autre), cadre propre au plan
-const PLANS = [
-  { debut: 0, centre: 0.5 },             // forêt et base vie, vue aérienne
-  { debut: 2.9, centre: 0.5 },           // base vie
-  { debut: 5.9, centre: 0.45 },          // village et piste
-  { debut: 8.9, centre: 0.45 },          // plateforme en mer
-  { debut: 11.9, centre: 0.53 },         // laboratoire : flacon, main et masque
-  { debut: 14.9, centre: 0.53 },         // bureau
-  { debut: 17.4, centre: 0.45 },         // opérateurs au bord de la rivière
-  { debut: 20, centre: 0.79, coupe: true, cadre: [622, 174, 1938, 1090] },  // perroquet gris (bandes de 170 px) : tête et corps
-  { debut: 24, centre: 0.55, coupe: true },   // plage
-  { debut: 26.9, centre: 0.5 },          // forêt et base vie
+// Vidéos fournies le 28/10/2026, en 1920 × 1080 à 24 images/s
+const VIDEOS = [
+  {
+    nom: 'hero-champs', source: 'Chantier.mp4',   // champs terrestres et offshore, 16 s
+    cadres: [
+      { debut: 0, cadre: [62, 34, 1796, 1010] },   // bandes noires de 33 px jusqu'à la coupe
+      { debut: 11.75, cadre: [0, 0, 1920, 1080] },
+    ],
+    bande: [
+      [0, 0.48], [2.8, 0.48],         // forêt et base vie, vue aérienne
+      [3.2, 0.55], [5.8, 0.55],       // site terrestre dégagé
+      [6.2, 0.42], [8.8, 0.42],       // village et piste
+      [9.2, 0.47], [11.72, 0.47],     // plateforme de forage en mer
+      [11.73, 0.42], [13.65, 0.42],   // pied de la plateforme, en contre-plongée (coupe franche)
+      [14.1, 0.32],                   // pont de la plateforme et pied gauche
+    ],
+  },
+  {
+    nom: 'hero-personnel', source: 'Personnel technique et administratif.mp4',   // personnel technique et administratif, 8 s
+    cadres: [{ debut: 0, cadre: [0, 0, 1920, 1080] }],
+    bande: [
+      [0, 0.52], [3.1, 0.52],         // laborantine en combinaison : flacon et visage
+      [3.11, 0.49],                   // deux cadres et leurs documents (coupe franche)
+    ],
+  },
+  {
+    nom: 'hero-faune', source: 'Faune et Flore.mp4',   // faune et flore, 10 s
+    cadres: [{ debut: 0, cadre: [0, 0, 1920, 1080] }],
+    bande: [
+      // Perroquet gris en vol vers la droite : la bande suit sa tête (la queue peut sortir du cadre)
+      [0, 0.84], [1, 0.84], [1.5, 0.79], [2, 0.75], [2.5, 0.7], [3, 0.67], [3.5, 0.65], [4, 0.64], [4.5, 0.68], [5.02, 0.76],
+      [5.03, 0.62],                   // plage bordée de forêt (coupe franche)
+    ],
+  },
 ];
 const SORTIES = {
-  large: { taille: [1920, 1080], webm: 38, mp4: 27, fichier: `${NOM}-1080p` },
-  mobile: { taille: [720, 1280], webm: 40, mp4: 28, fichier: `${NOM}-mobile` },
+  large: { taille: [1920, 1080], webm: 38, mp4: 27, suffixe: '1080p' },
+  mobile: { taille: [608, 1080], webm: 40, mp4: 28, suffixe: 'mobile' },
 };
 
 const pair = (n) => 2 * Math.round(n / 2);
 const nombre = (n) => String(Number(n.toFixed(3)));
 
-// Segments : plans consécutifs qui partagent le même cadre (la taille d'un recadrage ne peut pas changer en cours de route)
-const segments = [];
-PLANS.forEach((p) => {
-  const cadre = p.cadre || CADRE;
-  const dernier = segments[segments.length - 1];
-  if (dernier && String(dernier.cadre) === String(cadre)) dernier.plans.push(p);
-  else segments.push({ cadre, plans: [p] });
-});
-segments.forEach((s, i) => { s.fin = segments[i + 1]?.plans[0].debut; });
-
-// Position de la bande verticale dans un segment : constante pendant un plan, glissée pendant un fondu
-function positionVerticale(s, l) {
-  const x = (p) => Math.min(Math.max(pair(p.centre * LARGEUR - l / 2), 0), LARGEUR - l);
-  const points = [{ t: s.plans[0].debut, x: x(s.plans[0]) }];
-  s.plans.slice(1).forEach((p, i) => {
-    const marge = p.coupe ? 0.001 : 0.5;
-    points.push({ t: p.debut - marge, x: x(s.plans[i]) }, { t: p.debut + (p.coupe ? 0 : marge), x: x(p) });
-  });
+// Position de la bande verticale (largeur l) dans une source de largeur L : interpolée entre les instants de « bande »
+function positionVerticale(bande, l, L) {
+  const points = bande.map(([t, centre]) => ({ t, x: Math.min(Math.max(pair(centre * L - l / 2), 0), L - l) }));
   return points.slice(1).reduceRight((suite, b, i) => {
     const a = points[i];
     const valeur = a.x === b.x ? `${a.x}` : `${a.x}${b.x > a.x ? '+' : '-'}${Math.abs(b.x - a.x)}*(t-${nombre(a.t)})/${nombre(b.t - a.t)}`;
@@ -75,39 +79,49 @@ function positionVerticale(s, l) {
   }, `${points[points.length - 1].x}`);
 }
 
-// Versions à préparer : toutes, ou celles nommées sur la ligne de commande (l'encodage complet prend une demi-heure)
-const voulues = process.argv.length > 2 ? process.argv.slice(2) : Object.keys(SORTIES);
-voulues.forEach((v) => { if (!SORTIES[v]) throw new Error(`version inconnue : ${v} (${Object.keys(SORTIES).join(', ')})`); });
-const recadrages = {
-  large: ([x, y, l, h]) => `crop=${l}:${h}:${x}:${y}`,
-  mobile: ([, y, , h], s) => { const l = pair((h * 9) / 16); return `crop=w=${l}:h=${h}:x='${positionVerticale(s, l)}':y=${y}`; },
-};
-const decoupe = (s) => `trim=start=${s.plans[0].debut}${s.fin === undefined ? '' : `:end=${s.fin}`}`;
-
-const morceaux = [`[0]split=${segments.length * voulues.length}${segments.flatMap((s, i) => voulues.map((v) => `[${v}${i}]`)).join('')}`];
-for (const v of voulues) {
-  const [L, H] = SORTIES[v].taille;
-  segments.forEach((s, i) => morceaux.push(
-    `[${v}${i}]${decoupe(s)},${recadrages[v](s.cadre, s)},setpts=PTS-STARTPTS,scale=${L}:${H}:flags=lanczos,setsar=1[${v}-${i}]`));
-  morceaux.push(`${segments.map((s, i) => `[${v}-${i}]`).join('')}concat=n=${segments.length}:v=1:a=0,format=yuv420p,split=2[${v}-webm][${v}-mp4]`);
-}
-
-const sorties = voulues.map((v) => [v, SORTIES[v]]).flatMap(([cle, o]) => [
-  '-map', `[${cle}-webm]`, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', String(o.webm), '-row-mt', '1', '-deadline', 'good', '-cpu-used', '2',
-  '-an', '-map_metadata', '-1', path.join(DST, `${o.fichier}.webm`),
-  '-map', `[${cle}-mp4]`, '-c:v', 'libx264', '-preset', 'veryslow', '-crf', String(o.mp4), '-profile:v', 'high',
-  '-an', '-movflags', '+faststart', '-map_metadata', '-1', path.join(DST, `${o.fichier}.mp4`),
-]);
+// Vidéos et versions à préparer : toutes, ou celles nommées sur la ligne de commande (l'encodage complet est long)
+const args = process.argv.slice(2);
+const choisies = VIDEOS.filter((v) => !args.some((a) => !SORTIES[a]) || args.includes(v.nom.replace('hero-', '')));
+const voulues = args.some((a) => SORTIES[a]) ? args.filter((a) => SORTIES[a]) : Object.keys(SORTIES);
+args.forEach((a) => { if (!SORTIES[a] && !VIDEOS.some((v) => v.nom === `hero-${a}`)) throw new Error(`inconnu : ${a}`); });
 
 fs.mkdirSync(DST, { recursive: true });
-execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', SOURCE, '-filter_complex', morceaux.join(';'), ...sorties], { stdio: 'inherit' });
+for (const video of choisies) {
+  const source = path.join(SOURCE, video.source);
+  const [largeurSource] = execFileSync('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width', '-of', 'csv=p=0', source]).toString().trim().split(',').map(Number);
+  const segments = video.cadres.map((c, i) => ({ ...c, fin: video.cadres[i + 1]?.debut }));
+  const recadrages = {
+    large: ([x, y, l, h]) => `crop=${l}:${h}:${x}:${y}`,
+    mobile: ([, y, , h]) => { const l = pair((h * 9) / 16); return `crop=w=${l}:h=${h}:x='${positionVerticale(video.bande, l, largeurSource)}':y=${y}`; },
+  };
+  // Chaque partie est découpée puis recadrée (le temps t du recadrage reste celui de la source), puis toutes sont recollées
+  const decoupe = (s) => `trim=start=${s.debut}${s.fin === undefined ? '' : `:end=${s.fin}`}`;
+  const morceaux = [`[0]split=${segments.length * voulues.length}${segments.flatMap((s, i) => voulues.map((v) => `[${v}${i}]`)).join('')}`];
+  for (const v of voulues) {
+    const [L, H] = SORTIES[v].taille;
+    segments.forEach((s, i) => morceaux.push(
+      `[${v}${i}]${decoupe(s)},${recadrages[v](s.cadre)},setpts=PTS-STARTPTS,scale=${L}:${H}:flags=lanczos,setsar=1[${v}-${i}]`));
+    morceaux.push(`${segments.map((s, i) => `[${v}-${i}]`).join('')}concat=n=${segments.length}:v=1:a=0,format=yuv420p,split=2[${v}-webm][${v}-mp4]`);
+  }
+  const sorties = voulues.flatMap((v) => {
+    const o = SORTIES[v];
+    const fichier = path.join(DST, `${video.nom}-${o.suffixe}`);
+    return [
+      '-map', `[${v}-webm]`, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', String(o.webm), '-row-mt', '1', '-deadline', 'good', '-cpu-used', '2',
+      '-an', '-map_metadata', '-1', `${fichier}.webm`,
+      '-map', `[${v}-mp4]`, '-c:v', 'libx264', '-preset', 'veryslow', '-crf', String(o.mp4), '-profile:v', 'high',
+      '-an', '-movflags', '+faststart', '-map_metadata', '-1', `${fichier}.mp4`,
+    ];
+  });
+  execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', source, '-filter_complex', morceaux.join(';'), ...sorties], { stdio: 'inherit' });
 
-// Affiche : première image de la version large
-const [x, y, l, h] = segments[0].cadre;
-execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', SOURCE, '-frames:v', '1',
-  '-vf', `crop=${l}:${h}:${x}:${y},scale=${SORTIES.large.taille.join(':')}:flags=lanczos,format=yuvj420p`,
-  '-q:v', '5', '-map_metadata', '-1', path.join(DST, `${NOM}-affiche.jpg`)]);
+  // Affiche : première image de la version large
+  const [x, y, l, h] = segments[0].cadre;
+  execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', source, '-frames:v', '1',
+    '-vf', `crop=${l}:${h}:${x}:${y},scale=${SORTIES.large.taille.join(':')}:flags=lanczos,format=yuvj420p`,
+    '-q:v', '5', '-map_metadata', '-1', path.join(DST, `${video.nom}-affiche.jpg`)]);
 
-for (const f of fs.readdirSync(DST).filter((n) => n.startsWith(NOM))) {
-  console.log(`${f.padEnd(28)} ${(fs.statSync(path.join(DST, f)).size / 1e6).toFixed(2)} Mo`);
+  for (const f of fs.readdirSync(DST).filter((n) => n.startsWith(`${video.nom}-`))) {
+    console.log(`${f.padEnd(30)} ${(fs.statSync(path.join(DST, f)).size / 1e6).toFixed(2)} Mo`);
+  }
 }
