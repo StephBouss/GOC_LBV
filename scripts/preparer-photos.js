@@ -55,6 +55,7 @@ const PHOTOS = [
   { nom: 'hsei-approche', source: `${OPERATIONS}/Mboumba/Mboumba - Réunion HSSE/DSC09324.jpg` },                                        // tableau HSSE et 10 Règles d'or
   { nom: 'distribution-station', source: 'Station/Inauguration de la station GabOil 1.png', zone: [0.12, 0.08, 0.84, 0.92] },          // pompe et boutique (l'ouverture reprend actu-gaboil-station)
   { nom: 'stations-hero', source: 'Station/Inauguration de la station GABOIL.png', zone: [0, 0, 1, 0.84] },                         // page des stations : station de Makokou, sans le titre incrusté
+  { nom: 'station-adl', source: 'Station/station-adl.jpeg', format: 'actualite' },                                                  // vignette de la station ADL dans la bulle de la carte, 16:9 (image fournie le 28/10/2026)
   { nom: 'services-hero', source: `${OPERATIONS}/Sardine/Sardine - Local électrique/DSC03872.jpg` },                                    // technicien devant une armoire électrique
   { nom: 'carrieres-hero', source: `${OPERATIONS}/Port-Gentil/POG - Travail d_équipe/DSC04221.jpg` },                              // collaboratrice et collègue au poste de travail, à droite (le texte de l'ouverture reste à gauche)
   { nom: 'carrieres-fierte', source: 'Photo Autre/carrieres-operateurs-souriants.jpg' },                                             // deux opérateurs souriants, bras croisés (« Rejoindre la SNHG », photo fournie le 26/10/2026)

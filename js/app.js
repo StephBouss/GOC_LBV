@@ -642,15 +642,18 @@
 
   /* ─── Stations Gab'Oil : survoler ou choisir une station de la liste fait briller son point sur la carte, et inversement ;
      la station choisie reste allumée jusqu'au choix suivant (ou Échap). Les pastilles filtrent la liste et la carte par état.
-     La liste est l'interface accessible : les points de la carte la doublent pour la souris et le toucher. ─── */
+     La liste est l'interface accessible : les points de la carte la doublent pour la souris et le toucher. Sur l'accueil,
+     la carte vient sans liste, avec la recherche de la station la plus proche (plus bas). ─── */
   const carte = document.querySelector('.carte-gabon');
   const listeStations = document.querySelector('.stations-liste');
-  if (carte && listeStations) {
+  if (carte) {
     const figure = carte.closest('.stations-carte');
     const bulle = figure.querySelector('.carte-bulle');
     const { width: largeur, height: hauteur } = carte.viewBox.baseVal;
     const points = new Map([...carte.querySelectorAll('.point')].map((p) => [p.dataset.station, p]));
-    const boutons = new Map([...listeStations.querySelectorAll('button.station')].map((b) => [b.dataset.station, b]));
+    const boutons = new Map([...(listeStations?.querySelectorAll('button.station') || [])].map((b) => [b.dataset.station, b]));
+    // Libellé de chaque état, repris de la légende de la carte
+    const libelles = Object.fromEntries([...figure.querySelectorAll('.carte-legende .pastille-etat')].map((p) => [p.dataset.etat, p.parentNode.textContent.trim()]));
     let survolee = null;
     let choisie = null;
 
@@ -660,14 +663,27 @@
       carte.classList.toggle('a-un-point-actif', Boolean(id));
       if (!id) { bulle.hidden = true; return; }
       const point = points.get(id);
-      point.parentNode.append(point);   // dessiné par-dessus les autres
+      // Dessiné par-dessus les autres. Déplacé une seule fois : le navigateur renvoie le survol au moment du clic, et un
+      // second déplacement entre l'appui et le relâchement du bouton annulerait le clic
+      if (point.nextElementSibling) point.parentNode.append(point);
       const { e: x, f: y } = point.transform.baseVal.consolidate().matrix;
-      const bouton = boutons.get(id);
       const nom = document.createElement('strong');
-      const ligne = document.createElement('span');
-      nom.textContent = bouton.querySelector('.station-nom').textContent;
-      ligne.textContent = [bouton.querySelector('.station-lieu')?.textContent, bouton.closest('.stations-groupe').dataset.libelle].filter(Boolean).join(' · ');
-      bulle.querySelector('.carte-bulle-texte').replaceChildren(nom, ligne);
+      const lieu = document.createElement('span');
+      const etat = document.createElement('span');
+      const pastille = document.createElement('span');
+      nom.textContent = point.dataset.nom;
+      lieu.textContent = point.dataset.lieu || '';
+      pastille.className = 'pastille-etat';
+      pastille.dataset.etat = point.dataset.etat;
+      etat.className = 'carte-bulle-etat';
+      etat.append(pastille, libelles[point.dataset.etat]);
+      bulle.querySelector('.carte-bulle-texte').replaceChildren(...[nom, lieu.textContent && lieu, etat].filter(Boolean));
+      // Lien Google Maps (position exacte), cliquable dans la bulle de la station choisie seulement :
+      // une bulle de survol disparaît dès que le pointeur quitte le point
+      const lien = bulle.querySelector('.carte-bulle-lien');
+      lien.hidden = !(point.dataset.maps && id === choisie);
+      if (point.dataset.maps) lien.href = point.dataset.maps;
+      bulle.classList.toggle('a-un-lien', !lien.hidden);
       // Photo de la station, ou le logo Gab'Oil quand elle n'en a pas encore
       const photos = [...bulle.querySelectorAll('.carte-bulle-photo img')];
       const photo = photos.find((i) => i.dataset.station === id) || photos.find((i) => !i.dataset.station);
@@ -680,8 +696,9 @@
       bulle.classList.toggle('en-dessous', (y / hauteur) * carte.getBoundingClientRect().height < bulle.offsetHeight + 24);
     };
     const actualiser = () => montrer(survolee || choisie);
-    const choisir = (id) => {
-      choisie = choisie === id ? null : id;
+    // Choisir la station déjà choisie la relâche, sauf quand la recherche de la plus proche la désigne (garder)
+    const choisir = (id, garder) => {
+      choisie = choisie === id && !garder ? null : id;
       boutons.forEach((b, k) => b.setAttribute('aria-pressed', String(k === choisie)));
       actualiser();
     };
@@ -692,17 +709,17 @@
       if (r.top < 80 || r.bottom > innerHeight) figure.scrollIntoView({ block: 'center', behavior: reduit.matches ? 'auto' : 'smooth' });
     };
 
-    listeStations.addEventListener('pointerover', (e) => {
+    listeStations?.addEventListener('pointerover', (e) => {
       const b = e.target.closest('button.station');
       if (b && e.pointerType !== 'touch') { survolee = b.dataset.station; actualiser(); }
     });
-    listeStations.addEventListener('pointerout', (e) => {
+    listeStations?.addEventListener('pointerout', (e) => {
       const b = e.target.closest('button.station');
       if (b && !b.contains(e.relatedTarget)) { survolee = null; actualiser(); }
     });
-    listeStations.addEventListener('focusin', (e) => { const b = e.target.closest('button.station'); if (b) { survolee = b.dataset.station; actualiser(); } });
-    listeStations.addEventListener('focusout', () => { survolee = null; actualiser(); });
-    listeStations.addEventListener('click', (e) => {
+    listeStations?.addEventListener('focusin', (e) => { const b = e.target.closest('button.station'); if (b) { survolee = b.dataset.station; actualiser(); } });
+    listeStations?.addEventListener('focusout', () => { survolee = null; actualiser(); });
+    listeStations?.addEventListener('click', (e) => {
       const b = e.target.closest('button.station');
       if (!b) return;
       choisir(b.dataset.station);
@@ -722,8 +739,8 @@
       if (!p) return;
       choisir(p.dataset.station);
       const b = boutons.get(p.dataset.station);
-      const r = b.getBoundingClientRect();
-      if (choisie && (r.top < 80 || r.bottom > innerHeight)) b.scrollIntoView({ block: 'nearest', behavior: reduit.matches ? 'auto' : 'smooth' });
+      const r = b?.getBoundingClientRect();
+      if (b && choisie && (r.top < 80 || r.bottom > innerHeight)) b.scrollIntoView({ block: 'nearest', behavior: reduit.matches ? 'auto' : 'smooth' });
     });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && choisie) choisir(choisie); });
 
@@ -738,6 +755,90 @@
       points.forEach((p) => p.classList.toggle('est-masque', Boolean(etat) && p.dataset.etat !== etat));
       if (choisie && points.get(choisie).classList.contains('est-masque')) choisir(choisie);
     });
+
+    /* Station la plus proche (accueil) : la position du visiteur, demandée au clic, reste dans le navigateur et ne sert
+       qu'au calcul. Seules les stations en service comptent. La station trouvée est choisie sur la carte (bulle et lien
+       Google Maps), la position du visiteur y est marquée quand elle tombe dans le cadre, et l'itinéraire s'ouvre dans
+       Google Maps (destination seule : Google demande lui-même la position de départ). */
+    const proche = document.querySelector('.reseau-proche');
+    if (proche && 'geolocation' in navigator && isSecureContext) {
+      proche.hidden = false;
+      const declencheur = proche.querySelector('[data-station-proche]');
+      const resultat = proche.querySelector('.reseau-resultat');
+      const itineraire = proche.querySelector('.reseau-itineraire');
+      const nombre = (v, chiffres) => new Intl.NumberFormat(document.documentElement.lang, { maximumFractionDigits: chiffres }).format(v);
+      const distance = (d) => (d < 1 ? `${nombre(Math.max(10, Math.round(d * 100) * 10), 0)} m` : `${nombre(d, d < 10 ? 1 : 0)} km`);
+      // Distance à vol d'oiseau (formule de haversine), en kilomètres
+      const ecart = (lat1, lon1, lat2, lon2) => {
+        const rad = Math.PI / 180;
+        const a = Math.sin(((lat2 - lat1) * rad) / 2) ** 2 + Math.cos(lat1 * rad) * Math.cos(lat2 * rad) * Math.sin(((lon2 - lon1) * rad) / 2) ** 2;
+        return 12742 * Math.asin(Math.sqrt(a));
+      };
+      // Même projection que scripts/stations.js ; rien hors de la carte, ni sous l'encart du Grand Libreville
+      const [lonMin, latMax, echelle] = carte.dataset.projection.split(' ').map(Number);
+      const [zx, zy, zl, zh, cx, cy, cl, ch, ce] = carte.dataset.encart.split(' ').map(Number);
+      const placer = (lat, lon) => {
+        const x = (lon - lonMin) * echelle, y = (latMax - lat) * echelle;
+        if (x >= zx && x <= zx + zl && y >= zy && y <= zy + zh) return [cx + (x - zx) * ce, cy + (y - zy) * ce];
+        if (x < 0 || y < 0 || x > largeur || y > hauteur || (x >= cx && x <= cx + cl && y >= cy && y <= cy + ch)) return null;
+        return [x, y];
+      };
+      const vous = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      vous.setAttribute('class', 'point-vous');
+      vous.innerHTML = '<g class="point-forme"><circle class="point-vous-halo" r="7"/><circle class="point-vous-coeur" r="5"/></g>';
+      const legendeVous = document.createElement('li');
+      legendeVous.innerHTML = '<span class="pastille-vous" aria-hidden="true"></span>';
+      legendeVous.append(t('Votre position', 'Your location'));
+      const ligne = (classe, texte) => Object.assign(document.createElement('span'), { className: classe, textContent: texte });
+      let enCours = false;
+
+      declencheur.addEventListener('click', () => {
+        if (enCours) return;
+        enCours = true;
+        declencheur.setAttribute('aria-busy', 'true');
+        resultat.classList.remove('est-erreur');
+        resultat.replaceChildren(t('Recherche de votre position…', 'Finding your location…'));
+        itineraire.hidden = true;
+        const fin = () => { enCours = false; declencheur.removeAttribute('aria-busy'); };
+        navigator.geolocation.getCurrentPosition((position) => {
+          fin();
+          const { latitude: lat, longitude: lon } = position.coords;
+          const [point, km] = [...points.values()].filter((p) => p.dataset.etat === 'service')
+            .map((p) => [p, ecart(lat, lon, Number(p.dataset.lat), Number(p.dataset.lon))]).sort((a, b) => a[1] - b[1])[0];
+          const approchee = 'provisoire' in point.dataset;
+          resultat.replaceChildren(
+            ligne('reseau-resultat-titre', t('Station la plus proche', 'Nearest station')),
+            ligne('reseau-resultat-nom', point.dataset.nom),
+            ligne('reseau-resultat-detail', [point.dataset.lieu, approchee ? t(`à environ ${distance(km)}`, `about ${distance(km)} away`) : t(`à ${distance(km)}`, `${distance(km)} away`)].filter(Boolean).join(' · ')),
+            ...(approchee ? [ligne('reseau-resultat-note', t("Position approchée (centre de la localité) : l'emplacement exact de la station sera bientôt indiqué.", 'Approximate position (centre of the town): the exact location of the station will be added soon.'))] : []),
+          );
+          itineraire.hidden = approchee;
+          if (!approchee) itineraire.href = `https://www.google.com/maps/dir/?api=1&destination=${point.dataset.lat},${point.dataset.lon}`;
+          // « Vous êtes ici », sous les stations
+          const xy = placer(lat, lon);
+          if (xy) {
+            vous.setAttribute('transform', `translate(${xy[0].toFixed(1)} ${xy[1].toFixed(1)})`);
+            carte.querySelector('.carte-points').prepend(vous);
+            figure.querySelector('.carte-legende ul').append(legendeVous);
+          } else { vous.remove(); legendeVous.remove(); }
+          choisir(point.dataset.station, true);
+          // Carte à côté (ordinateur) : le résultat reste en vue. Carte sous le bouton (tablette, smartphone) : elle revient
+          // en vue, avec la bulle de la station
+          const cote = figure.getBoundingClientRect().left >= proche.getBoundingClientRect().right;
+          const cible = !cote ? figure : itineraire.hidden ? resultat : itineraire;
+          const r = cible.getBoundingClientRect();
+          const entete = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+          if (r.top < entete || r.bottom > innerHeight) cible.scrollIntoView({ block: 'nearest', behavior: reduit.matches ? 'auto' : 'smooth' });
+        }, (erreur) => {
+          fin();
+          resultat.classList.add('est-erreur');
+          resultat.replaceChildren({
+            1: t("La localisation n'est pas autorisée. Autorisez ce site à connaître votre position dans les réglages du navigateur, ou parcourez la liste de toutes les stations.", 'Location access is not allowed. Allow this site to use your location in your browser settings, or browse the list of all stations.'),
+            3: t('La localisation a pris trop de temps. Réessayez dans un instant.', 'Finding your location took too long. Please try again in a moment.'),
+          }[erreur.code] || t("Votre position n'a pas pu être déterminée. Vérifiez que la localisation de votre appareil est activée, puis réessayez.", 'Your location could not be determined. Check that location services are turned on for your device, then try again.'));
+        }, { timeout: 15000, maximumAge: 300000 });
+      });
+    }
   }
 
   /* ─── Cartes Google Maps (page Contact) : contenu tiers, chargé seulement avec l'accord du visiteur. L'accord est retenu

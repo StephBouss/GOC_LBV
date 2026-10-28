@@ -185,7 +185,32 @@
     </div>
   </section>
 
-  <!-- ═══════════ 8 · Cap sur 2030 ═══════════ -->
+  <!-- ═══════════ 8 · Carte du réseau Gab'Oil : version allégée de la page des stations (sources/stations.json) ═══════════ -->
+  <section class="section fond-surface" id="reseau" aria-labelledby="reseau-titre">
+    <div class="conteneur reseau">
+      <div class="reseau-texte" data-apparition>
+        <p class="sur-titre">Carte du réseau</p>
+        <h2 class="titre-section" id="reseau-titre">Une station Gab'Oil près de chez vous</h2>
+        <p class="texte-encre">Gab'Oil, la filiale de distribution de la SNHG, rapproche l'énergie des Gabonais, province par province. Choisissez un point de la carte pour découvrir une station, ou laissez-nous trouver la plus proche de vous.</p>
+        <ul class="reseau-chiffres">
+          <li><strong>{{stations:service}}</strong><span><span class="pastille-etat" data-etat="service" aria-hidden="true"></span>En service</span></li>
+          <li><strong>{{stations:construction}}</strong><span><span class="pastille-etat" data-etat="construction" aria-hidden="true"></span>En construction</span></li>
+          <li><strong>{{stations:etudes}}</strong><span><span class="pastille-etat" data-etat="etudes" aria-hidden="true"></span>En études</span></li>
+        </ul>
+      </div>
+      <!-- Sans géolocalisation dans le navigateur, ce bloc reste masqué (app.js) -->
+      <div class="reseau-proche" data-apparition hidden>
+        <button class="bouton" type="button" data-station-proche><svg class="icone" aria-hidden="true"><use href="#i-viseur"/></svg>Trouver la station la plus proche</button>
+        <div class="reseau-resultat" role="status"></div>
+        <a class="lien-fleche reseau-itineraire" target="_blank" rel="noopener noreferrer" hidden>Itinéraire dans Google Maps<span class="visuellement-masque"> (nouvel onglet)</span> <svg aria-hidden="true"><use href="#i-lien-externe"/></svg></a>
+        <p class="reseau-note">Votre position reste dans votre navigateur : elle ne sert qu'à ce calcul et n'est ni envoyée ni enregistrée.</p>
+      </div>
+      <!-- stations:carte -->
+      <p class="reseau-lien" data-apparition><a class="lien-fleche" href="activites/stations-gaboil.html">Toutes les stations Gab'Oil <svg aria-hidden="true"><use href="#i-fleche"/></svg></a></p>
+    </div>
+  </section>
+
+  <!-- ═══════════ 9 · Cap sur 2030 ═══════════ -->
   <section class="cap" aria-labelledby="cap-titre">
     <img class="cap-image" src="img/photos/accueil-cap-2030.jpg" srcset="img/photos/accueil-cap-2030-768.jpg 768w, img/photos/accueil-cap-2030.jpg 1536w" sizes="100vw" alt="" width="1536" height="1024" loading="lazy">
     <div class="voile" aria-hidden="true"></div>

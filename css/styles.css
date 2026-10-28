@@ -435,7 +435,140 @@ body.menu-ouvert { overflow: hidden; }
 .lire svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .carte-actu:focus-within h3 { color: var(--rouge-action); }
 
-/* ═══════════ 8 · Cap sur 2030 ═══════════ */
+/* ═══════════ Carte des stations Gab'Oil (scripts/stations.js, app.js) : accueil et page des stations ═══════════ */
+/* Couleur de chaque état, partagée par les points de la carte, la légende et la liste */
+[data-etat="service"] { --etat: var(--rouge-logo); }
+[data-etat="construction"] { --etat: #E39B00; }
+[data-etat="etudes"] { --etat: #8B8E94; }
+
+.stations-carte { margin: 0; padding: 1rem; background: var(--blanc); border: 1px solid var(--ligne); border-radius: .75rem; }
+.carte-cadre { position: relative; container: carte / inline-size; }
+.carte-gabon { width: 100%; height: auto; border-radius: .5rem; }
+.carte-ocean, .carte-encart-fond { fill: #EDF3F9; }
+.carte-voisins path { fill: #F8F8F9; }
+.carte-frontiere { fill: none; stroke: #B5B8BD; stroke-width: 2.4; stroke-linejoin: round; }
+.carte-provinces, .carte-encart-terre { fill: #E4E6E9; stroke: var(--blanc); stroke-width: 1; stroke-linejoin: round; }
+.carte-noms text { text-anchor: middle; text-transform: uppercase; pointer-events: none; }
+.carte-province-nom { font-size: 10.5px; font-weight: 600; letter-spacing: .08em; fill: #7A7D83; }
+.carte-voisin-nom, .carte-ocean-nom { font-size: 11px; font-weight: 500; letter-spacing: .18em; fill: #A3A6AB; }
+.carte-ocean-nom { fill: #8FA9C4; }
+.carte-zone, .carte-encart-cadre { fill: none; stroke: var(--rouge-logo); stroke-width: 1.2; }
+.carte-zone { transition: stroke-width .2s; }
+.carte-renvoi { fill: none; stroke: var(--rouge-logo); stroke-width: 1; stroke-dasharray: 3 3; }
+.carte-encart-nom { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; fill: var(--noir); }
+.carte-gabon:has(.point.est-active[data-encart]) .carte-zone { stroke-width: 2.6; }
+
+/* Points : plein pour une station en service ou en construction, cerclé pour une station en études ;
+   le point choisi grossit et pulse (halo fixe si les animations sont réduites), les autres s'estompent */
+.point { cursor: pointer; transition: opacity .2s; }
+.point-forme { transform-box: fill-box; transform-origin: center; }
+.point-coeur { fill: var(--etat); stroke: var(--blanc); stroke-width: 2; transform-box: fill-box; transform-origin: center; transition: transform .25s var(--doux); }
+.point[data-etat="etudes"] .point-coeur { fill: var(--blanc); stroke: var(--etat); stroke-width: 2.5; }
+.point-halo { fill: var(--etat); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.point.est-active .point-coeur { transform: scale(1.5); }
+.point.est-active .point-halo { opacity: .3; transform: scale(2.6); }
+.carte-gabon.a-un-point-actif .point:not(.est-active) { opacity: .35; }
+.point.est-masque { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .point.est-active .point-halo { animation: point-pulsation 1.3s ease-out infinite; }
+}
+@keyframes point-pulsation { from { opacity: .65; transform: scale(1); } to { opacity: 0; transform: scale(3.6); } }
+
+/* Bulle du point choisi : au-dessus du point, ou dessous près du haut de la carte, recalée près des bords */
+.carte-bulle {
+  position: absolute; z-index: 2; left: var(--x); top: var(--y); translate: -50% calc(-100% - .875rem);
+  width: 13.5rem; padding: .25rem; background: var(--noir); border-radius: .5rem; box-shadow: 0 .75rem 1.5rem -.75rem rgba(20, 23, 27, .6);
+  font-size: .8125rem; line-height: 1.25rem; color: var(--blanc); pointer-events: none;
+}
+/* Photo de la station (ou logo Gab'Oil en attendant), puis nom, lieu et état */
+.carte-bulle-photo { display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: .3125rem; background: var(--surface); }
+.carte-bulle-photo img { width: 100%; height: 100%; object-fit: cover; }
+.carte-bulle-photo img[hidden] { display: none; }   /* la remise à zéro des images passe avant l'attribut hidden */
+.carte-bulle-photo .carte-bulle-logo { padding: 1.5rem 2.5rem; object-fit: contain; }
+.carte-bulle-texte { display: block; padding: .4375rem .5rem .3125rem; }
+.carte-bulle-texte strong { display: block; font-weight: 700; }
+.carte-bulle-texte span { display: block; font-size: .75rem; font-weight: 500; line-height: 1.125rem; color: rgba(255, 255, 255, .78); }
+.carte-bulle-texte .carte-bulle-etat { display: flex; align-items: center; gap: .375rem; margin-top: .125rem; color: var(--blanc); }
+.carte-bulle-etat .pastille-etat { width: .5625rem; height: .5625rem; }
+/* Lien Google Maps de la station choisie : la bulle devient cliquable */
+.carte-bulle.a-un-lien { pointer-events: auto; }
+.carte-bulle-lien {
+  display: flex; align-items: center; justify-content: center; gap: .375rem; min-height: 2.75rem; margin-top: .25rem; padding: 0 .75rem;
+  border-radius: .3125rem; background: var(--rouge-action); font-size: .8125rem; font-weight: 700; color: var(--blanc); text-decoration: none;
+  transition: background-color .15s;
+}
+.carte-bulle-lien:hover { background: var(--rouge-logo); }
+.carte-bulle-lien[hidden] { display: none; }
+.carte-bulle-lien .icone { width: .875rem; height: .875rem; }
+.carte-bulle::after { content: ""; position: absolute; left: 50%; bottom: -.3125rem; width: .625rem; height: .625rem; margin-left: -.3125rem; background: inherit; rotate: 45deg; }
+.carte-bulle.en-dessous { translate: -50% .875rem; }
+.carte-bulle.en-dessous::after { top: -.3125rem; bottom: auto; }
+.carte-bulle[data-cote="gauche"] { translate: -1.25rem calc(-100% - .875rem); }
+.carte-bulle[data-cote="droite"] { translate: calc(-100% + 1.25rem) calc(-100% - .875rem); }
+.carte-bulle[data-cote="gauche"]::after { left: 1.25rem; }
+.carte-bulle[data-cote="droite"]::after { left: calc(100% - 1.25rem); }
+.carte-bulle.en-dessous[data-cote="gauche"] { translate: -1.25rem .875rem; }
+.carte-bulle.en-dessous[data-cote="droite"] { translate: calc(-100% + 1.25rem) .875rem; }
+
+.carte-legende ul { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; padding: 1rem .25rem 0; font-size: .8125rem; font-weight: 600; line-height: 1.25rem; color: var(--encre-douce); }
+.carte-legende li { display: inline-flex; align-items: center; gap: .5rem; }
+.pastille-etat { flex: none; width: .75rem; height: .75rem; border-radius: 50%; background: var(--etat); }
+.pastille-etat[data-etat="etudes"] { background: var(--blanc); box-shadow: inset 0 0 0 2px var(--etat); }
+
+/* Petite carte (smartphone) : points agrandis, noms des provinces et des pays retirés (illisibles), nom de l'encart agrandi */
+@container carte (width < 32rem) {
+  .point-forme { scale: 1.7; }
+  .carte-province-nom, .carte-voisin-nom, .carte-ocean-nom { display: none; }
+  .carte-encart-nom { font-size: 17px; }
+}
+
+/* Position du visiteur (recherche de la station la plus proche) : point bleu sous les stations */
+.point-vous { pointer-events: none; }
+.point-vous-coeur { fill: var(--bleu); stroke: var(--blanc); stroke-width: 2; }
+.point-vous-halo { fill: var(--bleu); opacity: .25; transform-box: fill-box; transform-origin: center; transform: scale(1.9); }
+@media (prefers-reduced-motion: no-preference) {
+  .point-vous-halo { animation: point-pulsation 1.8s ease-out infinite; }
+}
+.pastille-vous { flex: none; width: .75rem; height: .75rem; border-radius: 50%; background: var(--bleu); box-shadow: 0 0 0 .1875rem rgba(58, 117, 196, .25); }
+
+/* ═══════════ 8 · Carte du réseau : version allégée de la page des stations (chiffres, carte, station la plus proche) ═══════════ */
+.reseau {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: auto auto 1fr;
+  grid-template-areas: "texte carte" "proche carte" "lien carte"; column-gap: 4rem; align-items: start;
+}
+.reseau-texte { grid-area: texte; }
+.reseau-texte .texte-encre { margin: 1.25rem 0 2rem; }
+.reseau .stations-carte { grid-area: carte; }
+.reseau-proche { grid-area: proche; padding-top: 2rem; }
+.reseau-proche[hidden] { display: none; }
+.reseau-lien { grid-area: lien; margin-top: 1.75rem; }
+
+.reseau-chiffres { display: grid; grid-template-columns: repeat(3, minmax(0, max-content)); gap: 1.5rem 2.75rem; padding: 1.5rem 0; border-block: 1px solid var(--ligne); }
+.reseau-chiffres li { display: flex; flex-direction: column; gap: .5rem; }
+.reseau-chiffres strong { font-size: 2.5rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; color: var(--noir); }
+.reseau-chiffres span:not(.pastille-etat) { display: flex; align-items: center; gap: .5rem; font-size: .875rem; line-height: 1.375rem; color: var(--encre-douce); }
+
+.reseau-proche .bouton { gap: .5rem; }
+.reseau-proche .bouton .icone { width: 1.125rem; height: 1.125rem; }
+.reseau-proche .bouton[aria-busy="true"] { cursor: progress; }
+@media (prefers-reduced-motion: no-preference) {
+  .reseau-proche .bouton[aria-busy="true"] .icone { animation: viseur 1.2s linear infinite; }
+}
+@keyframes viseur { to { rotate: 1turn; } }
+/* Résultat : annoncé aux lecteurs d'écran (role="status"), vide tant que rien n'est demandé */
+.reseau-resultat { margin-top: 1.25rem; padding: 1rem 1.25rem; background: var(--blanc); border: 1px solid var(--ligne); border-left: .1875rem solid var(--rouge-logo); border-radius: .5rem; font-size: .9375rem; line-height: 1.5rem; color: var(--encre); }
+.reseau-resultat:empty { display: none; }
+.reseau-resultat.est-erreur { border-left-color: var(--acier); }
+.reseau-resultat > span { display: block; }
+.reseau-resultat-titre { font-size: .6875rem; font-weight: 700; line-height: 1.25rem; letter-spacing: .12em; text-transform: uppercase; color: var(--rouge-action); }
+.reseau-resultat-nom { margin-top: .125rem; font-size: 1.125rem; font-weight: 700; line-height: 1.625rem; color: var(--noir); }
+.reseau-resultat-detail { color: var(--encre-douce); }
+.reseau-resultat-note { margin-top: .5rem; font-size: .8125rem; line-height: 1.25rem; color: var(--encre-douce); }
+.reseau-itineraire { margin-top: .875rem; }
+.reseau-itineraire[hidden] { display: none; }
+.reseau-note { margin-top: 1rem; font-size: .8125rem; line-height: 1.25rem; color: var(--encre-douce); }
+
+/* ═══════════ 9 · Cap sur 2030 ═══════════ */
 .cap {
   position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
   height: min(max(37.5rem, 41.67vw), 90svh); text-align: center; color: var(--blanc); background: var(--noir);
@@ -717,6 +850,11 @@ body.menu-ouvert { overflow: hidden; }
   .engagements { grid-template-columns: 1fr; gap: 2.5rem; }
   .engagements-texte { max-width: 40rem; }
 
+  /* Carte du réseau : texte et bouton, puis la carte (la recherche la ramène en vue, app.js), puis le lien */
+  .reseau { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "texte" "proche" "carte" "lien"; }
+  .reseau-texte, .reseau-proche { max-width: 40rem; }
+  .reseau .stations-carte { margin-top: 2.5rem; }
+
   .actualites {
     grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(18.75rem, 44%);
     overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
@@ -784,6 +922,14 @@ body.menu-ouvert { overflow: hidden; }
 
   .engagements { gap: 2rem; }
   .engagements-photo img { aspect-ratio: 3 / 2; object-fit: cover; }
+
+  .stations-carte { padding: .5rem; }
+  .reseau-chiffres { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; padding: 1.25rem 0; }
+  .reseau-chiffres strong { font-size: 2rem; }
+  .reseau-chiffres span:not(.pastille-etat) { align-items: flex-start; font-size: .8125rem; line-height: 1.25rem; }
+  .reseau-chiffres .pastille-etat { margin-top: .25rem; }
+  .reseau-proche .bouton { width: 100%; }
+  .reseau .stations-carte { margin-top: 2rem; }
 
   .actualites { grid-auto-columns: 85%; gap: 1rem; }
 

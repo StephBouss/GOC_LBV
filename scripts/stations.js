@@ -4,9 +4,14 @@
  *
  *  carte()     fond de carte (sources/carte-gabon.json : provinces, pays voisins, encart du Grand Libreville) et un point
  *              par station placée, coloré selon son état ; les stations de la zone agrandie sont dessinées dans l'encart.
- *              La bulle du point actif montre la photo de la station (« photo », facultative), sinon le logo Gab'Oil
+ *              La bulle du point actif montre la photo de la station (« photo », facultative), sinon le logo Gab'Oil,
+ *              puis son nom, son lieu et son état ; pour la station choisie, son lien Google Maps (app.js). Chaque point
+ *              porte ses données (nom, lieu, coordonnées, lien) : la carte fonctionne aussi sans la liste (accueil, avec
+ *              la recherche de la station la plus proche)
  *  filtres()   pastilles par état (toutes, en service, en construction, études), avec le nombre de stations
- *  liste()     stations groupées par état ; survoler ou choisir une station fait briller son point (app.js)
+ *  liste()     stations groupées par état ; survoler ou choisir une station fait briller son point (app.js). Une station
+ *              aux coordonnées exactes (sans « position » : « provisoire ») a un lien qui ouvre sa position dans Google Maps,
+ *              dans un nouvel onglet
  *
  * Position d'un point : x = (longitude − 7,2) × 100, y = (2,55 − latitude) × 100, en unités de la carte (même formule dans
  * le thème WordPress). Une station sans coordonnées figure dans la liste, sans point sur la carte.
@@ -53,14 +58,22 @@ function charger(sources, langue) {
 
 const nombre = (d, etat) => d.stations.filter((s) => !etat || s.etat === etat).length;
 const lieu = (s) => [s.ville !== s.nom ? s.ville : '', s.province || ''].filter(Boolean).join(' · ');
+// Position exacte seulement : une position provisoire mènerait au centre de la localité, pas à la station
+const lienMaps = (s) => (s.x !== undefined && s.position !== 'provisoire' ? `https://www.google.com/maps/search/?api=1&amp;query=${s.lat},${s.lon}` : '');
 
 function carte(d) {
   const f = d.fond;
   const [zx, zy, zl, zh] = f.encart.zone, [cx, cy, cl, ch] = f.encart.cadre;
-  const points = d.stations.filter((s) => s.x !== undefined).map((s) => `          <g class="point" data-station="${s.id}" data-etat="${s.etat}"${s.encart ? ' data-encart' : ''} transform="translate(${s.x} ${s.y})"><g class="point-forme"><circle class="point-halo" r="7"/><circle class="point-coeur" r="5.5"/></g></g>`);
+  // Chaque point porte ce que montre sa bulle et ce qu'utilise la recherche de la station la plus proche (app.js)
+  const donnees = (s) => [`data-nom="${echapper(s.nom)}"`, lieu(s) && `data-lieu="${echapper(lieu(s))}"`, `data-lat="${s.lat}" data-lon="${s.lon}"`,
+    lienMaps(s) ? `data-maps="${lienMaps(s)}"` : 'data-provisoire'].filter(Boolean).join(' ');
+  const points = d.stations.filter((s) => s.x !== undefined).map((s) => `          <g class="point" data-station="${s.id}" data-etat="${s.etat}"${s.encart ? ' data-encart' : ''} ${donnees(s)} transform="translate(${s.x} ${s.y})"><g class="point-forme"><circle class="point-halo" r="7"/><circle class="point-coeur" r="5.5"/></g></g>`);
+  // Projection et encart, pour placer la position du visiteur sur la carte (app.js)
+  const projection = `${f.projection.lonMin} ${f.projection.latMax} ${f.projection.echelle}`;
+  const encart = `${f.encart.zone.join(' ')} ${cx} ${cy} ${cl} ${ch} ${f.encart.echelle}`;
   return `<figure class="stations-carte" data-apparition>
         <div class="carte-cadre">
-          <svg class="carte-gabon" viewBox="0 0 ${f.largeur} ${f.hauteur}" role="img" aria-labelledby="carte-titre">
+          <svg class="carte-gabon" viewBox="0 0 ${f.largeur} ${f.hauteur}" role="img" aria-labelledby="carte-titre" data-projection="${projection}" data-encart="${encart}">
           <title id="carte-titre">${echapper(d.carte.titre)}</title>
           <defs>
             <g id="carte-provinces">${f.provinces.map((p) => `<path d="${p.d}"/>`).join('')}</g>
@@ -89,10 +102,11 @@ ${points.join('\n')}
           </svg>
           <div class="carte-bulle" aria-hidden="true" hidden>
             <span class="carte-bulle-photo">
-${d.stations.filter((s) => s.photo && s.x !== undefined).map((s) => `              <img src="${s.photo}" alt="" data-station="${s.id}" width="768" height="512" loading="lazy" hidden>`).join('\n')}
+${d.stations.filter((s) => s.photo && s.x !== undefined).map((s) => `              <img src="${s.photo}" alt="" data-station="${s.id}" width="768" height="432" loading="lazy" hidden>`).join('\n')}
               <img class="carte-bulle-logo" src="img/filiales/gab-oil.svg" alt="" data-station="" loading="lazy" hidden>
             </span>
             <span class="carte-bulle-texte"></span>
+            <a class="carte-bulle-lien" target="_blank" rel="noopener noreferrer" tabindex="-1" hidden>${echapper(d.textes.maps)}<svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg></a>
           </div>
         </div>
         <figcaption class="carte-legende">
@@ -110,17 +124,18 @@ ${ETATS.map((e) => `            <li><button type="button" data-filtre="${e}" ari
           </ul>
         </div>`;
 
-function station(s) {
+function station(s, d) {
   const texte = `<span class="pastille-etat" data-etat="${s.etat}" aria-hidden="true"></span><span class="station-texte"><span class="station-nom">${echapper(s.nom)}</span>${lieu(s) ? `<span class="station-lieu">${echapper(lieu(s))}</span>` : ''}</span>`;
   // Sans coordonnées, rien à montrer sur la carte : simple ligne de liste
   if (s.x === undefined) return `<li><span class="station sans-point" data-station="${s.id}">${texte}</span></li>`;
-  return `<li><button class="station" type="button" data-station="${s.id}" aria-pressed="false">${texte}<svg class="icone station-repere" aria-hidden="true"><use href="#i-repere"/></svg></button></li>`;
+  const maps = lienMaps(s) && `<a class="station-maps" href="${lienMaps(s)}" target="_blank" rel="noopener noreferrer"><svg class="icone" aria-hidden="true"><use href="#i-lien-externe"/></svg><span class="station-maps-texte">Google Maps</span><span class="visuellement-masque"> (${echapper(s.nom)}, ${echapper(d.textes.onglet)})</span></a>`;
+  return `<li><button class="station" type="button" data-station="${s.id}" aria-pressed="false">${texte}<svg class="icone station-repere" aria-hidden="true"><use href="#i-repere"/></svg></button>${maps}</li>`;
 }
 
 const liste = (d) => ETATS.map((e) => `<section class="stations-groupe" data-etat="${e}" data-libelle="${echapper(d.etats[e])}" aria-labelledby="etat-${e}">
           <h3 class="stations-etat" id="etat-${e}"><span class="pastille-etat" data-etat="${e}" aria-hidden="true"></span>${echapper(d.etats[e])} <span class="stations-nombre">${nombre(d, e)}</span></h3>
           <ul>
-${d.stations.filter((s) => s.etat === e).map((s) => `            ${station(s)}`).join('\n')}
+${d.stations.filter((s) => s.etat === e).map((s) => `            ${station(s, d)}`).join('\n')}
           </ul>
         </section>`).join('\n        ');
 

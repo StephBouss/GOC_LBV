@@ -11,7 +11,9 @@
   },
   "textes": {
     "toutes": "All",
-    "filtrer": "Filter stations by status"
+    "filtrer": "Filter stations by status",
+    "maps": "View on Google Maps",
+    "onglet": "new tab"
   },
   "carte": {
     "titre": "Map of Gab'Oil service stations in Gabon",
