@@ -183,6 +183,30 @@ ${[...n.liens, ...(n.directs_au_pied ? navigation.directs : [])].map((l) => `   
 
 const piedLegal = ({ identite, langue, navigation }) => navigation.legal.map((l) => `        ${lien(identite, l[langue], l.lien)}\n`).join('');
 
+/* Bande de navigation de la rubrique, sous l'en-tête (repère <!-- sous-nav --> dans la source de la page) : les liens du
+   sous-menu de l'onglet de la page, avec les mêmes textes et dans le même ordre que le menu principal, la page courante
+   signalée. Un lien vers une partie de la page elle-même devient une simple ancre (défilement sans rechargement), et la
+   première de ces parties est signalée comme l'endroit où l'on se trouve.
+   Dans WordPress : le même menu, affiché par le gabarit des pages de la rubrique. */
+function sousNav({ identite, langue, navigation }, onglet) {
+  const n = navigation.groupes.find((g) => g.id === onglet);
+  if (!n) throw new Error(`<!-- sous-nav --> : la page n'a pas d'onglet à sous-menu (« ${onglet} »)`);
+  let signalee = false;
+  const element = (l) => {
+    const [chemin, ancre] = l.lien.split('#');
+    if (chemin !== identite) return `<li><a href="${l.lien}">${l[langue]}</a></li>`;
+    if (!ancre) return `<li><a href="${l.lien}" aria-current="page">${l[langue]}</a></li>`;
+    const courant = signalee ? '' : ' aria-current="location"';
+    signalee = true;
+    return `<li><a href="#${ancre}"${courant}>${l[langue]}</a></li>`;
+  };
+  return `  <nav class="sous-nav" aria-label="${n.libelle[langue]}">
+    <ul>
+${n.liens.map((l) => `      ${element(l)}`).join('\n')}
+    </ul>
+  </nav>`;
+}
+
 /* Sélecteur de langue (en-tête et menu mobile) : chaque langue mène à la version de la page courante dans cette langue.
    Le nom de la langue est lu dans cette langue (« FR (français) », « EN (English) »). */
 function selecteurLangues({ langue, versions }, retrait) {
@@ -271,8 +295,9 @@ const imagePartage = (meta, contenu) => {
 
 /* contexte : langue de la page, identité (adresse de la page française), versions de la page dans chaque langue,
    textes de l'interface (t), menus, et toutes les versions du site (pour traduire les liens) */
-function construire(gabarit, fichier, meta, contenu, apres, contexte) {
+function construire(gabarit, fichier, meta, source, apres, contexte) {
   const { langue, t } = contexte;
+  const contenu = source.replace(/^[ \t]*<!-- sous-nav -->/m, () => sousNav(contexte, meta.onglet));
   const corps = contenu + apres;
   const symboles = (dessins, vue) => Object.keys(dessins).filter((id) => corps.includes(`#${id}"`))
     .map((id) => `  <symbol id="${id}" viewBox="${vue}">${dessins[id]}</symbol>\n`).join('');
