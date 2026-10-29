@@ -30,9 +30,132 @@
     {
       "slug": "transformation",
       "nom": "Transformation"
+    },
+    {
+      "slug": "evenements",
+      "nom": "Événements"
+    },
+    {
+      "slug": "securite",
+      "nom": "Sécurité"
     }
   ],
   "articles": [
+    {
+      "slug": "gaboil-nouvelle-gouvernance",
+      "titre": "GAB’OIL : une nouvelle gouvernance face aux exigences de performance",
+      "categorie": "filiales",
+      "date": "2026-10-26",
+      "extrait": "La filiale de distribution du Groupe Gabon Oil aborde une nouvelle étape de son développement. Entre évaluation financière, exigences de rentabilité et consolidation de sa gouvernance, Gab’Oil entend poser les bases d’un modèle économique plus solide et durable.",
+      "image": {
+        "src": "img/actu-gaboil-gouvernance",
+        "largeur": 1536,
+        "hauteur": 1154,
+        "alt": "Un homme remet un document à une femme devant le portrait officiel du Chef de l’État, en présence d’un troisième homme",
+        "position": "50% 25%"
+      },
+      "contenu": [
+        "Nommé le 18 septembre 2026 à la présidence du Conseil d’administration de Gab’Oil S.A., <strong>Yves-Fernand Manfoumbi</strong> a officiellement pris ses fonctions le 26 octobre, à l’occasion d’une cérémonie de passation des charges avec son prédécesseur, <strong>Martial Rufin Moussavou</strong>.",
+        "Cette transition intervient à un moment déterminant pour l’entreprise, dont les activités de distribution de produits pétroliers occupent une place importante dans la chaîne de valeur du Groupe Gabon Oil et dans l’approvisionnement du marché national.",
+        "Dès sa prise de fonctions, le nouveau Président du Conseil d’administration a annoncé une <strong>mission d’évaluation approfondie de 60 jours</strong>, portant sur la situation financière, la rentabilité et les mécanismes de gouvernance de Gab’Oil.",
+        "Cette démarche doit permettre d’établir un diagnostic précis, d’identifier les marges d’amélioration et de définir un plan de redressement chiffré. L’objectif affiché est de <strong>restaurer durablement la rentabilité de l’entreprise</strong>, tout en réduisant sa dépendance aux interventions financières de l’État.",
+        "L’enjeu dépasse cependant les seuls résultats comptables. Il concerne également la capacité de Gab’Oil à consolider son modèle opérationnel, à maîtriser ses charges et à poursuivre ses missions de distribution dans des conditions économiquement soutenables.",
+        "Pour les collaborateurs, cette nouvelle étape appelle une mobilisation collective autour de priorités communes : rigueur, responsabilité, efficacité et qualité de service.",
+        "<strong>Les soixante prochains jours seront ceux du diagnostic. Les décisions qui suivront devront transformer ses conclusions en résultats mesurables.</strong>"
+      ]
+    },
+    {
+      "slug": "naufrage-prospector-5",
+      "titre": "Gabon – Naufrage du Prospector 5 : une vie perdue, quatre disparus et une nation dans l’épreuve",
+      "categorie": "securite",
+      "date": "2026-10-25",
+      "extrait": "Le samedi 24 octobre 2026, à 20 h 37, la plateforme de forage Prospector 5, appartenant à Borr Drilling et mobilisée par BW Energy Gabon sur le permis Dussafu Marin, au large de Mayumba, a sombré dans l’océan Atlantique lors d’une opération de pré-chargement.",
+      "image": {
+        "src": "img/actu-prospector-5",
+        "largeur": 1536,
+        "hauteur": 972,
+        "alt": "Plateforme de forage autoélévatrice inclinée qui sombre en mer au crépuscule, entourée de navires"
+      },
+      "contenu": [
+        "Sur les 115 personnes présentes à bord, 110 ont été secourues. Le dernier bilan fait état d’un décès, de quatre personnes toujours portées disparues et de six blessés pris en charge.",
+        "<strong>Derrière ce bilan douloureux, il y a des familles endeuillées, des proches suspendus à l’espoir et toute une communauté professionnelle profondément éprouvée.</strong>",
+        "Au lendemain du drame, le président de la République, Brice Clotaire Oligui Nguema, s’est rendu à Port-Gentil auprès des rescapés. Il a exprimé la solidarité de la Nation et fixé trois exigences : poursuivre les recherches, établir les responsabilités à travers une enquête technique et garantir la sécurité des installations ainsi que la protection de l’environnement avant toute reprise des activités.",
+        "Ses paroles résonnent particulièrement dans une industrie où les risques font partie du quotidien :",
+        "<strong>« Le pétrole ne vaudra jamais plus qu’une vie gabonaise. »</strong>",
+        "Cette tragédie rappelle une réalité que les impératifs de production ne doivent jamais faire oublier : derrière chaque casque, chaque combinaison et chaque poste de travail se trouve une vie humaine, avec ses projets, ses proches et l’espoir de rentrer chez soi.",
+        "La sécurité industrielle ne saurait se limiter à des procédures affichées ou à des indicateurs de performance. Elle se construit dans la prévention, la rigueur des contrôles, la qualité des équipements et la capacité de chacun à interrompre une opération lorsque les conditions de sécurité ne sont pas réunies.",
+        "Alors que les recherches se poursuivent, nos pensées vont à la personne décédée, aux quatre disparus, à leurs familles et aux équipes de secours mobilisées.",
+        "<strong>Que cette épreuve renforce, dans toute l’industrie pétrolière gabonaise, une conviction commune : aucune ressource extraite, aucun baril produit ne justifie qu’une vie soit sacrifiée.</strong>",
+        "#Gabon #Prospector5 #Mayumba #BWEnergy #BorrDrilling #SécuritéIndustrielle #HSE #IndustriePétrolière"
+      ]
+    },
+    {
+      "slug": "african-energy-week-2026",
+      "titre": "African Energy Week 2026 : le Groupe GOC met en lumière ses activités et ses perspectives de développement à Cape Town",
+      "categorie": "evenements",
+      "date": "2026-10-16",
+      "extrait": "Un groupe, des métiers complémentaires et une même volonté : créer davantage de valeur à partir des ressources énergétiques du Gabon.",
+      "image": {
+        "src": "img/actu-aew-2026",
+        "largeur": 1174,
+        "hauteur": 1340,
+        "alt": "Stand de Gabon Oil Company à l’African Energy Week, sous une enseigne suspendue aux logos du Groupe et de ses filiales",
+        "position": "50% 70%"
+      },
+      "contenu": [
+        "Du 12 au 16 octobre 2026, à Cape Town, en Afrique du Sud, le Groupe Gabon Oil Company (GOC) a pris part à l’African Energy Week (AEW), rendez-vous international réunissant les acteurs de l’industrie énergétique africaine.",
+        "À travers un <strong>stand institutionnel de 64 m²</strong>, aménagé conjointement avec sa filiale Assala Energy, le Groupe a présenté ses activités, ses installations et ses projets, illustrant son intégration progressive sur l’ensemble de la chaîne de valeur des hydrocarbures, de l’amont à l’aval.",
+        "Cet espace a également favorisé les rencontres professionnelles et les échanges autour des perspectives de coopération technique et commerciale.",
+        "<strong>Production pétrolière, valorisation du gaz, services industriels, stockage et distribution :</strong> la diversité des métiers représentés témoigne de l’évolution d’une compagnie nationale devenue un groupe pétrolier intégré.",
+        "À Cape Town, <strong>la GOC a donné à voir le chemin parcouru et les perspectives qu’elle entend construire</strong>, en s’appuyant sur ses filiales, ses compétences et ses actifs pour contribuer davantage à l’économie gabonaise."
+      ]
+    },
+    {
+      "slug": "caps-avenir-energetique-afrique-centrale",
+      "titre": "CAPS : la GOC au cœur des réflexions sur l’avenir énergétique de l’Afrique centrale",
+      "categorie": "partenariat",
+      "date": "2026-09-29",
+      "extrait": "Relier les ressources, rapprocher les économies et donner une nouvelle dimension à la coopération énergétique africaine.",
+      "image": {
+        "src": "img/actu-caps",
+        "largeur": 1385,
+        "hauteur": 1044,
+        "alt": "Délégation réunie devant l’enseigne de l’Organisation des producteurs de pétrole africains",
+        "position": "50% 25%"
+      },
+      "contenu": [
+        "Telle est la perspective portée par le Central Africa Pipeline System (CAPS), dont les protocoles d’accord ont été signés le 29 septembre 2026 à Brazzaville, en présence d’une délégation de la Gabon Oil Company (GOC), conduite par son Directeur Général Adjoint, Hervé Bertrand NNANG ENGUE.",
+        "Ce projet, estimé à 14 milliards de dollars, prévoit un réseau d’oléoducs et de gazoducs reliant les six pays de la CEMAC, avec <strong>le corridor Gabon–Congo identifié comme axe prioritaire</strong>.",
+        "Pour la GOC, groupe pétrolier national intégré, cette perspective ouvre des pistes de réflexion sur la valorisation de ses ressources gazières, notamment à Mboumba, et leur accès éventuel aux marchés régionaux.",
+        "Après Dongying, en Chine, puis Brazzaville, la GOC poursuit son suivi des discussions autour de ce projet, dont la réalisation reste conditionnée aux études techniques, aux décisions institutionnelles et aux financements.",
+        "<strong>Car l’enjeu est concret : permettre aux ressources énergétiques africaines de contribuer davantage à l’approvisionnement des industries, des entreprises et des populations du continent.</strong>",
+        "Les prochains échanges sont annoncés à Abidjan, du 18 au 22 novembre 2026, lors du SIREXE."
+      ]
+    },
+    {
+      "slug": "cabef-2026-performance-industrielle",
+      "titre": "CABEF 2026 : la GOC explore de nouvelles solutions pour renforcer sa performance industrielle",
+      "categorie": "evenements",
+      "date": "2026-08-31",
+      "extrait": "Du 28 au 31 août 2026, Gabon Oil Company (GOC) a participé au Central Africa Business and Energy Forum (CABEF), organisé à Dongying, en Chine, en marge de la 18ᵉ édition de l’Oil Trade Fair in the Yellow River Delta. Une mission consacrée à la recherche de solutions technologiques, de financements et de coopérations industrielles adaptées aux besoins opérationnels du Groupe.",
+      "image": {
+        "src": "img/actu-cabef-2026",
+        "largeur": 1332,
+        "hauteur": 1182,
+        "alt": "Participants attentifs autour d’une table de réunion, lors des rencontres de Dongying",
+        "position": "50% 30%"
+      },
+      "contenu": [
+        "Conduite par le Directeur Général Adjoint, <strong>Hervé Bertrand NNANG ENGUE</strong>, la délégation réunissait des représentants des directions des Opérations, Technique, HSEI, Gaz et Communication.",
+        "Lors d’un panel consacré à l’expertise, aux technologies et à l’innovation, le DGA a précisé les attentes de l’entreprise : <strong>« Nous voulons des solutions adaptées et des financements adéquats afin d’implémenter ces technologies. »</strong>",
+        "Cette orientation a guidé les rencontres avec plusieurs industriels chinois, notamment <strong>Shengji Petroleum Equipment, Deshi Group, KERUI et WLHI</strong>. Les échanges ont porté sur les équipements de forage, le pompage, la cimentation, l’optimisation de la production et les installations sécurisées de stockage de carburants.",
+        "Les visites industrielles ont également permis d’examiner des solutions susceptibles de répondre à des besoins précis : remplacement de la base-vie de Mboumba, gestion des réservoirs, traitement des dépôts affectant la production et <strong>captation du gaz associé pour sa valorisation énergétique</strong>.",
+        "Sur le plan régional, les discussions relatives au <strong>Central African Pipeline System (CAPS)</strong> ont souligné l’importance du portage politique, de la maîtrise des risques et de la mobilisation des financements.",
+        "La mission a également favorisé les échanges entre les filiales <strong>ASSALA Energy et PIZOLUB</strong>. Cette dernière a notamment exploré des possibilités d’approvisionnement en huiles de base et en additifs.",
+        "Au terme des travaux, plusieurs pistes de coopération ont été identifiées. Elles devront faire l’objet d’évaluations techniques, économiques et réglementaires avant toute décision.",
+        "<strong>Pour la GOC, l’enjeu est désormais de transformer les contacts établis à Dongying en solutions concrètes, fiables et adaptées aux réalités de ses installations.</strong> Une démarche qui place la maîtrise technologique, la performance opérationnelle et la coopération industrielle au service de ses ambitions."
+      ]
+    },
     {
       "slug": "nomination-dg-gaboil",
       "titre": "GAB’OIL : Éric Alain Sounda prend les rênes de la filiale de distribution de la SNHG",

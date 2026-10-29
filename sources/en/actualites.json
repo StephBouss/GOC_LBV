@@ -12,9 +12,87 @@
     "sites-operations": "Sites and operations",
     "filiales": "Subsidiaries",
     "nomination": "Appointment",
-    "transformation": "Transformation"
+    "transformation": "Transformation",
+    "evenements": "Events",
+    "securite": "Safety"
   },
   "articles": {
+    "gaboil-nouvelle-gouvernance": {
+      "slug": "gaboil-new-governance",
+      "titre": "GAB’OIL: new governance to meet performance requirements",
+      "extrait": "The distribution subsidiary of the Gabon Oil Group is entering a new stage in its development. Between financial assessment, profitability requirements and the consolidation of its governance, Gab’Oil intends to lay the foundations of a more solid and sustainable business model.",
+      "image": { "alt": "A man hands a document to a woman in front of the official portrait of the Head of State, with a third man looking on" },
+      "contenu": [
+        "Appointed Chairman of the Board of Directors of Gab’Oil S.A. on 18 September 2026, <strong>Yves-Fernand Manfoumbi</strong> officially took office on 26 October, at a handover ceremony with his predecessor, <strong>Martial Rufin Moussavou</strong>.",
+        "This transition comes at a decisive moment for the company, whose petroleum product distribution activities hold an important place in the Gabon Oil Group's value chain and in supplying the national market.",
+        "On taking office, the new Chairman of the Board announced an <strong>in-depth 60-day assessment mission</strong> covering Gab’Oil's financial situation, profitability and governance mechanisms.",
+        "This approach is intended to establish a precise diagnosis, identify room for improvement and define a costed recovery plan. The stated objective is to <strong>restore the company's profitability on a lasting basis</strong>, while reducing its dependence on financial support from the State.",
+        "What is at stake, however, goes beyond the accounts alone. It also concerns Gab’Oil's ability to consolidate its operating model, control its costs and pursue its distribution missions under economically sustainable conditions.",
+        "For employees, this new stage calls for a collective effort around shared priorities: rigour, responsibility, efficiency and quality of service.",
+        "<strong>The next sixty days will be those of the diagnosis. The decisions that follow will have to turn its conclusions into measurable results.</strong>"
+      ]
+    },
+    "naufrage-prospector-5": {
+      "slug": "prospector-5-sinking",
+      "titre": "Gabon – Sinking of the Prospector 5: one life lost, four missing and a nation put to the test",
+      "extrait": "On Saturday 24 October 2026, at 8:37 pm, the Prospector 5 drilling rig, owned by Borr Drilling and deployed by BW Energy Gabon on the Dussafu Marin permit, off Mayumba, sank in the Atlantic Ocean during a preloading operation.",
+      "image": { "alt": "A tilted jack-up drilling rig sinking at sea at dusk, surrounded by vessels" },
+      "contenu": [
+        "Of the 115 people on board, 110 were rescued. The latest toll reports one death, four people still missing and six injured receiving care.",
+        "<strong>Behind this painful toll are bereaved families, loved ones holding on to hope and an entire professional community deeply affected.</strong>",
+        "The day after the tragedy, the President of the Republic, Brice Clotaire Oligui Nguema, travelled to Port-Gentil to meet the survivors. He expressed the solidarity of the Nation and set three requirements: continue the search, establish responsibilities through a technical investigation, and guarantee the safety of the installations and the protection of the environment before any resumption of activities.",
+        "His words resonate particularly in an industry where risk is part of daily life:",
+        "<strong>“Oil will never be worth more than a Gabonese life.”</strong>",
+        "This tragedy is a reminder of a reality that production imperatives must never obscure: behind every helmet, every coverall and every workstation there is a human life, with its plans, its loved ones and the hope of returning home.",
+        "Industrial safety cannot be limited to posted procedures or performance indicators. It is built through prevention, rigorous inspections, quality equipment and the ability of each person to stop an operation when safety conditions are not met.",
+        "As the search continues, our thoughts are with the person who died, the four missing, their families and the rescue teams deployed.",
+        "<strong>May this ordeal strengthen, throughout Gabon's oil industry, a shared conviction: no resource extracted, no barrel produced justifies the sacrifice of a life.</strong>",
+        "#Gabon #Prospector5 #Mayumba #BWEnergy #BorrDrilling #SécuritéIndustrielle #HSE #IndustriePétrolière"
+      ]
+    },
+    "african-energy-week-2026": {
+      "slug": "african-energy-week-2026-cape-town",
+      "titre": "African Energy Week 2026: the GOC Group showcases its activities and development prospects in Cape Town",
+      "extrait": "One group, complementary businesses and a shared determination: to create more value from Gabon's energy resources.",
+      "image": { "alt": "The Gabon Oil Company stand at African Energy Week, beneath a hanging sign bearing the logos of the Group and its subsidiaries" },
+      "contenu": [
+        "From 12 to 16 October 2026, in Cape Town, South Africa, the Gabon Oil Company (GOC) Group took part in African Energy Week (AEW), an international event bringing together players in the African energy industry.",
+        "With a <strong>64 m² institutional stand</strong>, set up jointly with its subsidiary Assala Energy, the Group presented its activities, facilities and projects, illustrating its progressive integration across the entire hydrocarbon value chain, from upstream to downstream.",
+        "The stand also fostered business meetings and discussions on prospects for technical and commercial cooperation.",
+        "<strong>Oil production, gas value creation, industrial services, storage and distribution:</strong> the diversity of the businesses represented reflects the evolution of a national company that has become an integrated oil group.",
+        "In Cape Town, <strong>GOC showed the ground it has covered and the future it intends to build</strong>, drawing on its subsidiaries, skills and assets to contribute more to the Gabonese economy."
+      ]
+    },
+    "caps-avenir-energetique-afrique-centrale": {
+      "slug": "caps-central-africa-energy-future",
+      "titre": "CAPS: GOC at the heart of discussions on the energy future of Central Africa",
+      "extrait": "Linking resources, bringing economies closer together and giving African energy cooperation a new dimension.",
+      "image": { "alt": "A delegation gathered in front of the sign of the African Petroleum Producers' Organization" },
+      "contenu": [
+        "This is the vision behind the Central Africa Pipeline System (CAPS), whose memoranda of understanding were signed on 29 September 2026 in Brazzaville, in the presence of a Gabon Oil Company (GOC) delegation led by its Deputy Managing Director, Hervé Bertrand NNANG ENGUE.",
+        "This project, estimated at 14 billion dollars, provides for a network of oil and gas pipelines linking the six CEMAC countries, with <strong>the Gabon–Congo corridor identified as the priority route</strong>.",
+        "For GOC, an integrated national oil group, this prospect opens avenues for reflection on adding value to its gas resources, notably at Mboumba, and on their possible access to regional markets.",
+        "After Dongying, in China, then Brazzaville, GOC continues to follow the discussions on this project, whose completion remains subject to technical studies, institutional decisions and financing.",
+        "<strong>Because the stakes are concrete: enabling Africa's energy resources to contribute more to supplying the continent's industries, businesses and people.</strong>",
+        "The next discussions are scheduled in Abidjan, from 18 to 22 November 2026, at SIREXE."
+      ]
+    },
+    "cabef-2026-performance-industrielle": {
+      "slug": "cabef-2026-industrial-performance",
+      "titre": "CABEF 2026: GOC explores new solutions to strengthen its industrial performance",
+      "extrait": "From 28 to 31 August 2026, Gabon Oil Company (GOC) took part in the Central Africa Business and Energy Forum (CABEF), held in Dongying, China, alongside the 18th Oil Trade Fair in the Yellow River Delta. A mission devoted to finding technological solutions, financing and industrial cooperation suited to the Group's operational needs.",
+      "image": { "alt": "Participants listening around a meeting table, during the meetings in Dongying" },
+      "contenu": [
+        "Led by the Deputy Managing Director, <strong>Hervé Bertrand NNANG ENGUE</strong>, the delegation brought together representatives of the Operations, Technical, HSEI, Gas and Communication departments.",
+        "During a panel on expertise, technology and innovation, the Deputy Managing Director set out the company's expectations: <strong>“We want suitable solutions and adequate financing in order to implement these technologies.”</strong>",
+        "This approach guided the meetings with several Chinese manufacturers, notably <strong>Shengji Petroleum Equipment, Deshi Group, KERUI and WLHI</strong>. Discussions covered drilling equipment, pumping, cementing, production optimisation and secure fuel storage facilities.",
+        "The industrial visits also made it possible to examine solutions that could meet specific needs: replacing the Mboumba living quarters, tank management, treating deposits that affect production and <strong>capturing associated gas for energy use</strong>.",
+        "At regional level, the discussions on the <strong>Central African Pipeline System (CAPS)</strong> underlined the importance of political backing, risk management and mobilising financing.",
+        "The mission also fostered exchanges between the subsidiaries <strong>ASSALA Energy and PIZOLUB</strong>. PIZOLUB notably explored options for sourcing base oils and additives.",
+        "At the end of the meetings, several avenues for cooperation were identified. They will have to undergo technical, economic and regulatory assessments before any decision is taken.",
+        "<strong>For GOC, the challenge now is to turn the contacts made in Dongying into concrete, reliable solutions suited to the realities of its facilities.</strong> An approach that places technological mastery, operational performance and industrial cooperation at the service of its ambitions."
+      ]
+    },
     "nomination-dg-gaboil": {
       "slug": "gaboil-new-managing-director",
       "titre": "GAB’OIL: Éric Alain Sounda takes the helm of GOC's distribution subsidiary",
