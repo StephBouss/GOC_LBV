@@ -8,7 +8,7 @@
  *   etape « theme »     active le thème snhg et crée les langues de Polylang (à faire une fois, avant le reste)
  *   etape « contenus »  (par défaut) médias, pages, articles, diapositives, stations, menus et réglages
  *   etape « pages » <clés>  contenu et réglages de quelques pages seulement, sans toucher au reste (une page nouvelle est créée)
- *                       (clés séparées par des virgules : fr:activites/index.html,en:activites/index.html)
+ *                       (clés séparées par des virgules : fr:groupe/presentation.html,en:groupe/presentation.html)
  *   etape « menus »     menus de chaque langue seulement, recréés depuis sources/navigation.json
  *
  * Le travail est fait par wordpress/snhg/inc/importer.php, au nom du premier administrateur du site.

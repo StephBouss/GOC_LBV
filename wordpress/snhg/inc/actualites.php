@@ -140,8 +140,8 @@ function snhg_article(WP_Post $a, string $corps): string {
   <nav class="sous-nav" aria-label="' . esc_attr(snhg_t('rubrique-information')) . '">
     <ul>
       <li><a href="' . $actualites . '" aria-current="true">' . esc_html(snhg_t('actualites')) . '</a></li>
-      <li><a href="' . esc_url(snhg_lien_page('mediatheque/index.html')) . '">' . esc_html(snhg_t('mediatheque')) . '</a></li>
       <li><a href="' . esc_url(snhg_lien_page('rapports-publications/index.html')) . '">' . esc_html(snhg_t('rapports-publications')) . '</a></li>
+      <li><a href="' . esc_url(snhg_lien_page('mediatheque/index.html')) . '">' . esc_html(snhg_t('mediatheque')) . '</a></li>
     </ul>
   </nav>
 

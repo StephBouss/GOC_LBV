@@ -177,8 +177,8 @@ function chemin(p) {
 }
 // Rubriques sans page d'accueil propre : une page parente, qui renvoie vers sa première page
 const RUBRIQUES = {
-  fr: { groupe: 'Le groupe', engagements: 'Engagements', 'informations-legales': 'Informations légales' },
-  en: { group: 'The Group', commitments: 'Commitments', legal: 'Legal information' },
+  fr: { groupe: 'Le Groupe', activites: 'Nos activités', engagements: 'Nos engagements', 'informations-legales': 'Informations légales' },
+  en: { group: 'The Group', activities: 'Our activities', commitments: 'Our commitments', legal: 'Legal information' },
 };
 
 const texteBrut = (html) => html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
@@ -194,7 +194,7 @@ function exporterPages() {
       identite: p.identite,
       chemin: chemin(p),
       titre: p.identite === 'index.html' ? { fr: 'Accueil', en: 'Home' }[p.langue] : texteBrut(h1 ? h1[1] : p.meta.titre),
-      meta: { titre: p.meta.titre, description: p.meta.description, onglet: p.meta.onglet || '', precharger: p.meta.precharger || null, css: p.meta.css || [], partage: p.meta.partage || null },
+      meta: { titre: p.meta.titre, description: p.meta.description, onglet: p.meta.onglet || '', parent: p.meta.parent || '', precharger: p.meta.precharger || null, css: p.meta.css || [], partage: p.meta.partage || null },
       contenu: blocs(p.corps, p.langue, p.fichier),
     };
   });
@@ -208,10 +208,10 @@ function exporterPages() {
       const rang = (p) => { const i = ordreMenus.findIndex((l) => l.startsWith(p.identite)); return i < 0 ? Infinity : i; };
       const premiere = [...enfants].sort((a, b) => rang(a) - rang(b))[0];
       const identite = `${premiere.identite.split('/')[0]}/`;
-      parents.push({ cle: `${langue}:${identite}`, langue, identite, chemin: [segment], titre, redirection: premiere.cle, meta: { titre, description: '', onglet: '', precharger: null, css: [], partage: null }, contenu: '' });
+      parents.push({ cle: `${langue}:${identite}`, langue, identite, chemin: [segment], titre, redirection: premiere.cle, meta: { titre, description: '', onglet: '', parent: '', precharger: null, css: [], partage: null }, contenu: '' });
     }
   }
-  // Parentes d'abord : une page se crée sous sa rubrique (« activites/index.html » avant « activites/distribution… »)
+  // Parentes d'abord : une page se crée sous sa rubrique (« activites/ » avant « activites/distribution-lubrifiants… »)
   const tout = [...parents, ...liste].sort((x, y) => x.chemin.length - y.chemin.length);
   for (const p of tout) {
     if (p.chemin.length > 1 && !tout.some((x) => x.langue === p.langue && x.chemin.join('/') === p.chemin.slice(0, -1).join('/'))) {

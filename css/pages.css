@@ -76,6 +76,7 @@
   max-width: 56rem; padding: 2rem 2.5rem 2rem 2rem;
   background: var(--surface); border: 1px solid var(--ligne); border-radius: 1rem;
 }
+.rapport + .rapport { margin-top: 2rem; }   /* plusieurs documents à la suite */
 .rapport-couverture { width: 100%; height: auto; border-radius: .25rem; box-shadow: 0 .75rem 1.75rem rgba(20, 23, 27, .18); }
 .rapport p { margin: 0; }
 .rapport .sur-titre { font-size: .875rem; line-height: 1.0313rem; color: var(--noir); }
@@ -482,6 +483,9 @@
 .points-forts .icone { width: 1.25rem; height: 1.25rem; margin-top: .125rem; color: var(--rouge-logo); }
 .detail-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 1rem; }
 .detail-texte .lien-fleche { margin-top: 2rem; }   /* renvoi vers la fiche de la filiale (Distribution, Services pétroliers) */
+/* Plusieurs renvois côte à côte (Distribution : réseau de stations Gab'Oil, fiche de Gab'Oil) */
+.detail-liens { display: flex; flex-wrap: wrap; gap: .75rem 2rem; margin-top: 2rem; }
+.detail-texte .detail-liens .lien-fleche { margin-top: 0; }
 /* Chiffres clés d'une page intérieure (Distribution) : le composant de l'accueil, sans la photo à côté du titre */
 .chiffres-intro.sans-photo { grid-template-columns: 1fr; }
 

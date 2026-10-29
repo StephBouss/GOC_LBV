@@ -138,11 +138,11 @@ function pageArticle(a, d) {
     },
     contenu: `
   <!-- Navigation de la rubrique -->
-  <nav class="sous-nav" aria-label="${t['rubrique-information']}">
+  <nav class="sous-nav" aria-label="${t['rubrique-information'].replace(/&/g, '&amp;')}">
     <ul>
       <li><a href="actualites/index.html" aria-current="true">${t.actualites}</a></li>
+      <li><a href="rapports-publications/index.html">${t['rapports-publications'].replace(/&/g, '&amp;')}</a></li>
       <li><a href="mediatheque/index.html">${t.mediatheque}</a></li>
-      <li><a href="rapports-publications/index.html">${t['rapports-publications']}</a></li>
     </ul>
   </nav>
 

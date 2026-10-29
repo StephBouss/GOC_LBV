@@ -344,7 +344,7 @@
     if (piedLarge.matches) e.preventDefault();
   }));
 
-  /* ─── Formulaire de souscription (rubrique Carrières) : pièces jointes. La zone de dépôt affiche le nom des fichiers
+  /* ─── Formulaire de candidature (Carrières > Candidatures) : pièces jointes. La zone de dépôt affiche le nom des fichiers
          choisis, ou la règle non respectée (format, nombre, taille), qui bloque aussi l'envoi. Le serveur d'envoi doit
          refaire ces contrôles. ─── */
   const fichiers = document.querySelector('.depot input');

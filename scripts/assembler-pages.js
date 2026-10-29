@@ -6,8 +6,8 @@
  *  sources/gabarit.html            squelette commun, avec des repères {{…}} ; ses textes ({{t:…}}) viennent de libelles.json
  *  sources/libelles.json           textes de l'interface dans chaque langue (gabarit et modèles générés)
  *  sources/navigation.json         menus dans chaque langue : menu principal, menu mobile, plan du pied de page, liens légaux
- *  sources/pages/<nom>.html        pages françaises : un commentaire JSON en tête (titre, description, onglet, precharger,
- *                                  css, partage), puis le contenu du <main>. Un repère <!-- apres --> facultatif sépare ce
+ *  sources/pages/<nom>.html        pages françaises : un commentaire JSON en tête (titre, description, onglet, parent,
+ *                                  precharger, css, partage), puis le contenu du <main>. Un repère <!-- apres --> facultatif sépare ce
  *                                  qui se place après le pied de page (fenêtres modales).
  *  sources/en/pages/<nom>.html     pages anglaises, rangées sous leur adresse anglaise (group/about.html…). La clé « fr » de
  *                                  leur en-tête donne la page française qu'elles traduisent, comme une traduction liée dans
@@ -145,17 +145,19 @@ const PICTOGRAMMES = {
 
 /* Menus : les liens sont écrits avec l'adresse française de la page (son identité) ; celui de la page courante est signalé.
    Dans une page traduite, traduireLiens() les fait ensuite mener aux traductions. */
+// Libellés des menus : « & » écrit &amp; (« Actualités & Médias »), comme le fait WordPress
+const html = (texte) => texte.replace(/&/g, '&amp;');
 // « accent » : lien de sous-menu en rouge (« mise_en_avant », comme GO’TALK dans Carrières ; dans WordPress, une classe CSS)
-const lien = (identite, texte, href, accent) => `<li><a ${accent ? 'class="nav-accent" ' : ''}href="${href}"${href === identite ? ' aria-current="page"' : ''}>${texte}</a></li>`;
-// Onglets sans sous-menu (« directs » de navigation.json, comme Contact) : un simple lien, souligné sur sa page,
+const lien = (identite, texte, href, accent) => `<li><a ${accent ? 'class="nav-accent" ' : ''}href="${href}"${href === identite ? ' aria-current="page"' : ''}>${html(texte)}</a></li>`;
+// Onglets sans sous-menu (« directs » de navigation.json ; aucun aujourd'hui) : un simple lien, souligné sur sa page,
 // en rouge s'il est « mise_en_avant »
-const directs = ({ identite, langue, navigation }, gabarit) => navigation.directs.map((l) => gabarit(`href="${l.lien}"${l.lien === identite ? ' aria-current="page"' : ''}`, l[langue], l.mise_en_avant ? ' nav-accent' : '')).join('');
+const directs = ({ identite, langue, navigation }, gabarit) => navigation.directs.map((l) => gabarit(`href="${l.lien}"${l.lien === identite ? ' aria-current="page"' : ''}`, html(l[langue]), l.mise_en_avant ? ' nav-accent' : '')).join('');
 
 const navPrincipale = (contexte, onglet) => contexte.navigation.groupes.map((n) => navGroupe(contexte, n, onglet)).join('')
   + directs(contexte, (attributs, texte, accent) => `        <li class="nav-direct"><a class="nav-onglet${accent}" ${attributs}>${texte}</a></li>\n`);
 
 const navGroupe = ({ identite, langue }, n, onglet) => `        <li class="nav-item">
-          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-${n.id}"${n.id === onglet ? ' aria-current="true"' : ''}>${n.libelle[langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-${n.id}"${n.id === onglet ? ' aria-current="true"' : ''}>${html(n.libelle[langue])} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
           <div class="sous-menu" id="sous-menu-${n.id}">
             <ul class="sous-menu-liens">
 ${n.liens.map((l) => `              ${lien(identite, l[langue], l.lien, l.mise_en_avant)}`).join('\n')}
@@ -165,16 +167,16 @@ ${n.liens.map((l) => `              ${lien(identite, l[langue], l.lien, l.mise_e
 `;
 
 const navMobile = (contexte) => contexte.navigation.groupes.map(({ libelle, liens }) => `    <details class="accordeon" name="menu-mobile">
-      <summary>${libelle[contexte.langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <summary>${html(libelle[contexte.langue])} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
 ${liens.map((l) => `        ${lien(contexte.identite, l[contexte.langue], l.lien, l.mise_en_avant)}`).join('\n')}
       </ul>
     </details>
 `).join('') + directs(contexte, (attributs, texte, accent) => `    <a class="menu-mobile-direct${accent}" ${attributs}>${texte}</a>\n`);
 
-// Les onglets directs (Contact) ferment la colonne du groupe marqué « directs_au_pied » (Informations)
+// Les onglets directs ferment la colonne du groupe marqué « directs_au_pied »
 const piedColonnes = ({ identite, langue, navigation }) => navigation.groupes.map((n) => `        <details class="pied-colonne" open>
-          <summary>${n.pied[langue]} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <summary>${html(n.pied[langue])} <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
 ${[...n.liens, ...(n.directs_au_pied ? navigation.directs : [])].map((l) => `            ${lien(identite, l[langue], l.lien)}`).join('\n')}
           </ul>
@@ -186,21 +188,25 @@ const piedLegal = ({ identite, langue, navigation }) => navigation.legal.map((l)
 /* Bande de navigation de la rubrique, sous l'en-tête (repère <!-- sous-nav --> dans la source de la page) : les liens du
    sous-menu de l'onglet de la page, avec les mêmes textes et dans le même ordre que le menu principal, la page courante
    signalée. Un lien vers une partie de la page elle-même devient une simple ancre (défilement sans rechargement), et la
-   première de ces parties est signalée comme l'endroit où l'on se trouve.
+   première de ces parties est signalée comme l'endroit où l'on se trouve. Une sous-page sans entrée de menu (« parent »
+   de son en-tête : Stations Gab'Oil, sous Distribution et Lubrifiants) signale le lien de sa page parente.
    Dans WordPress : le même menu, affiché par le gabarit des pages de la rubrique. */
-function sousNav({ identite, langue, navigation }, onglet) {
+function sousNav({ identite, langue, navigation }, onglet, parent) {
   const n = navigation.groupes.find((g) => g.id === onglet);
   if (!n) throw new Error(`<!-- sous-nav --> : la page n'a pas d'onglet à sous-menu (« ${onglet} »)`);
+  if (parent && !n.liens.some((l) => l.lien === parent)) throw new Error(`page parente absente du sous-menu « ${onglet} » : ${parent}`);
   let signalee = false;
   const element = (l) => {
     const [chemin, ancre] = l.lien.split('#');
-    if (chemin !== identite) return `<li><a href="${l.lien}">${l[langue]}</a></li>`;
-    if (!ancre) return `<li><a href="${l.lien}" aria-current="page">${l[langue]}</a></li>`;
+    const texte = html(l[langue]);
+    if (l.lien === parent) return `<li><a href="${l.lien}" aria-current="true">${texte}</a></li>`;
+    if (chemin !== identite) return `<li><a href="${l.lien}">${texte}</a></li>`;
+    if (!ancre) return `<li><a href="${l.lien}" aria-current="page">${texte}</a></li>`;
     const courant = signalee ? '' : ' aria-current="location"';
     signalee = true;
-    return `<li><a href="#${ancre}"${courant}>${l[langue]}</a></li>`;
+    return `<li><a href="#${ancre}"${courant}>${texte}</a></li>`;
   };
-  return `  <nav class="sous-nav" aria-label="${n.libelle[langue]}">
+  return `  <nav class="sous-nav" aria-label="${html(n.libelle[langue])}">
     <ul>
 ${n.liens.map((l) => `      ${element(l)}`).join('\n')}
     </ul>
@@ -297,7 +303,7 @@ const imagePartage = (meta, contenu) => {
    textes de l'interface (t), menus, et toutes les versions du site (pour traduire les liens) */
 function construire(gabarit, fichier, meta, source, apres, contexte) {
   const { langue, t } = contexte;
-  const contenu = source.replace(/^[ \t]*<!-- sous-nav -->/m, () => sousNav(contexte, meta.onglet));
+  const contenu = source.replace(/^[ \t]*<!-- sous-nav -->/m, () => sousNav(contexte, meta.onglet, meta.parent));
   const corps = contenu + apres;
   const symboles = (dessins, vue) => Object.keys(dessins).filter((id) => corps.includes(`#${id}"`))
     .map((id) => `  <symbol id="${id}" viewBox="${vue}">${dessins[id]}</symbol>\n`).join('');

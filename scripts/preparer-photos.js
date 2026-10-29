@@ -38,7 +38,6 @@ const PHOTOS = [
   { nom: 'presentation-adg', source: 'CA/01.10.26AL(headshots)-0014.jpg', format: 'portrait' },                                      // portrait de l'ADG (Mot de l'ADG)
   { nom: 'historique-hero', source: `${OPERATIONS}/Mboumba/Mboumba - Portrait opérateur & drapeau/DSC09258.jpg` },
   { nom: 'filiales-hero', source: 'Station/Inauguration de la station GabOil 1.png' },
-  { nom: 'activites-hero', source: `${OPERATIONS}/Tsiengui/Tsiengui - Opérateurs dans les installations/Tsiengui - Opérateur et tanks/DSC01337.jpg` },
   { nom: 'exploration-hero', source: `${OPERATIONS}/Sardine/Sardine - Opérateur manipulant les têtes de puits/DSC03702.jpg` },
   { nom: 'exploration-salle-controle', source: `${OPERATIONS}/Tsiengui/Tsiengui - Salle de controle/DSC01588.jpg` },
   { nom: 'contact-hero', source: `${OPERATIONS}/Port-Gentil/POG - Travail d_équipe/DSC04107.jpg` },
@@ -50,6 +49,8 @@ const PHOTOS = [
   { nom: 'rse-hero', source: `${OPERATIONS}/Mandji/Mandji - Vues aériennes/DJI_0353.jpg` },                                             // communautés riveraines
   { nom: 'rse-approche', source: `${OPERATIONS}/Mandji/Mandji - Equipe & nature/DSC02843.jpg` },
   { nom: 'hsei-hero', source: `${OPERATIONS}/Tsiengui/Tsiengui - Prélèvement/DSC01488.jpg` },                                             // opérateur sous masque respiratoire
+  { nom: 'gaz-hero', source: `${OPERATIONS}/Mboumba/Mboumba - Installations/DSC09231.jpg` },                                          // Gaz et valorisation : ballon et tuyauteries jaunes (couleur du gaz)
+  { nom: 'gaz-installations', source: `${OPERATIONS}/Tsiengui/Tsiengui - Installations/DSC01527.jpg` },                                // séparateur des installations de production
   { nom: 'projets-hero', source: `${OPERATIONS}/Tsiengui/Tsiengui - Vues aériennes/DJI_0301.jpg` },                                     // champ et réservoirs en forêt
   { nom: 'projets-equipe', source: `${OPERATIONS}/Sardine/Sardine - Opérateurs en discussion/DSC03483.jpg` },                            // plateforme Sardine
   { nom: 'hsei-approche', source: `${OPERATIONS}/Mboumba/Mboumba - Réunion HSSE/DSC09324.jpg` },                                        // tableau HSSE et 10 Règles d'or
@@ -60,7 +61,7 @@ const PHOTOS = [
   { nom: 'carrieres-hero', source: 'Photo Autre/carrieres-collaborateurs-dossier.jpg' },                                            // trois collaborateurs en tenue SNHG autour d'un dossier (DSC04352, photo fournie le 29/10/2026)
   { nom: 'carrieres-fierte', source: 'Photo Autre/carrieres-operateurs-souriants.jpg' },                                             // deux opérateurs souriants, bras croisés (« Rejoindre la SNHG », photo fournie le 26/10/2026)
   { nom: 'carrieres-equipe', source: `${OPERATIONS}/Obangué/Obangué - Réunion d_équipe/DSC02637.jpg` },                                // réunion d'équipe (bande de candidature)
-  { nom: 'candidature-hero', source: `${OPERATIONS}/Libreville/Libreville - Travail d_équipe/DSC04764.jpg` },                       // présentation au tableau, équipe administrative (Formulaire de souscription)
+  { nom: 'candidature-hero', source: `${OPERATIONS}/Libreville/Libreville - Travail d_équipe/DSC04764.jpg` },                       // présentation au tableau, équipe administrative (Candidatures)
   { nom: 'services-intervention', source: 'SMP/SMP.webp' },                                                                          // technicien SMP sur un appareil de forage, main levée (photo fournie le 24/10/2026)
   // Gabon Oil Participations (filiales/gabon-oil-participations.html) : métier de bureau (participations non opérées), photos du siège
   { nom: 'gop-hero', source: `${OPERATIONS}/Libreville/Libreville - Travail d_équipe/DSC04754.jpg` },                                // réunion autour de la table

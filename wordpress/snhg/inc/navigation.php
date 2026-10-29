@@ -2,10 +2,10 @@
 /**
  * Menus de la maquette, tirés des menus WordPress (Apparence > Menus, un menu par langue avec Polylang) :
  *
- *  Menu principal   éléments de premier niveau = onglets. Un onglet à sous-menu (« Présentation du groupe »…) a des
+ *  Menu principal   éléments de premier niveau = onglets. Un onglet à sous-menu (« Le Groupe »…) a des
  *                   éléments enfants ; sa classe CSS onglet-<rubrique> le relie aux pages de la rubrique (champ
  *                   « Rubrique du menu » des pages), sa description donne le titre de sa colonne dans le pied de page,
- *                   et la classe pied-directs y ajoute les onglets directs (Contact). Un onglet sans enfant est un
+ *                   et la classe pied-directs y ajoute les onglets directs (aucun aujourd'hui). Un onglet sans enfant est un
  *                   lien direct. La classe nav-accent met un lien en rouge (GO’TALK).
  *  Liens légaux     bas du pied de page.
  *
@@ -39,7 +39,7 @@ function snhg_rubrique($e): string {
 	return '';
 }
 
-/* Rubrique de la page en cours : champ « Rubrique du menu » des pages ; les articles sont dans « Informations » */
+/* Rubrique de la page en cours : champ « Rubrique du menu » des pages ; les articles sont dans « Actualités & Médias » */
 function snhg_onglet(): string {
 	if (is_singular('post')) return 'information';
 	return is_page() ? (string) get_post_meta(get_queried_object_id(), 'snhg_onglet', true) : '';
@@ -130,14 +130,19 @@ function snhg_pied_legal(): string {
 }
 
 /* Bande de navigation de la rubrique : les liens du sous-menu de l'onglet de la page. Un lien vers une partie de la
-   page elle-même devient une simple ancre, et la première de ces parties est signalée comme l'endroit où l'on est. */
+   page elle-même devient une simple ancre, et la première de ces parties est signalée comme l'endroit où l'on est.
+   Une sous-page sans entrée de menu (Stations Gab'Oil) signale le lien de sa page parente (_snhg_parent : sa clé d'import). */
 function snhg_sous_nav(): string {
 	$onglet = snhg_onglet();
 	$groupe = current(array_filter(snhg_groupes(), fn($g) => snhg_rubrique($g) === $onglet));
 	if (!$groupe) return '';
+	$parent = is_page() ? (string) get_post_meta(get_queried_object_id(), '_snhg_parent', true) : '';
 	$signalee = false;
-	$liens = array_map(function ($e) use (&$signalee) {
+	$liens = array_map(function ($e) use (&$signalee, $parent) {
 		$texte = esc_html($e->title);
+		if ($parent !== '' && $e->type === 'post_type' && get_post_meta((int) $e->object_id, '_snhg_cle', true) === $parent) {
+			return '<li><a href="' . esc_url($e->url) . '" aria-current="true">' . $texte . '</a></li>';
+		}
 		if (!snhg_vers_page_courante($e)) return '<li><a href="' . esc_url($e->url) . '">' . $texte . '</a></li>';
 		$ancre = strpos($e->url, '#') === false ? '' : substr($e->url, strpos($e->url, '#') + 1);
 		if ($ancre === '') return '<li><a href="' . esc_url($e->url) . '" aria-current="page">' . $texte . '</a></li>';

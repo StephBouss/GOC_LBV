@@ -158,7 +158,7 @@ add_action('acf/init', function () {
 			['key' => 'field_snhg_page_description', 'name' => 'snhg_description', 'label' => 'Description', 'type' => 'textarea', 'rows' => 4, 'new_lines' => '',
 				'instructions' => 'Résumé de la page pour les moteurs de recherche et les aperçus de partage (160 caractères environ).'],
 			['key' => 'field_snhg_page_onglet', 'name' => 'snhg_onglet', 'label' => 'Rubrique du menu', 'type' => 'select', 'allow_null' => 1,
-				'choices' => ['groupe' => 'Présentation du groupe', 'activites' => 'Activités et engagements', 'information' => 'Informations', 'carrieres' => 'Carrières', 'contact' => 'Contact'],
+				'choices' => ['groupe' => 'Le Groupe', 'activites' => 'Nos activités', 'engagements' => 'Nos engagements', 'carrieres' => 'Carrières', 'information' => 'Actualités & Médias', 'contact' => 'Contact'],
 				'instructions' => "Onglet du menu signalé sur cette page ; sa liste de liens forme la bande de navigation de la page."],
 		],
 	]);

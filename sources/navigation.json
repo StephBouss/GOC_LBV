@@ -1,6 +1,6 @@
 {
   "_lisezmoi": [
-    "Menus du site, dans chaque langue : menu principal et menu mobile (« groupes » à sous-menu, puis « directs », onglets sans sous-menu, repris à la fin de la colonne du pied de page du groupe marqué « directs_au_pied » ; « mise_en_avant » affiche un onglet ou un lien de sous-menu en rouge), plan du pied de page (titre « pied » de chaque groupe), liens légaux du bas de page.",
+    "Menus du site, dans chaque langue : menu principal et menu mobile (« groupes » à sous-menu, puis « directs », onglets sans sous-menu (aucun depuis que Contact a son sous-menu), repris à la fin de la colonne du pied de page du groupe marqué « directs_au_pied » ; « mise_en_avant » affiche un onglet ou un lien de sous-menu en rouge), plan du pied de page (titre « pied » de chaque groupe), liens légaux du bas de page.",
     "Les liens s'écrivent avec l'adresse de la page française, depuis la racine du site : la version anglaise mène automatiquement à la traduction de cette page (sources/en/pages/, clé « fr » de l'en-tête).",
     "Dans WordPress : un menu par langue (Polylang, « Apparence > Menus », un emplacement par langue).",
     "Les pages encore à créer sont listées dans INVENTAIRE.md."
@@ -8,41 +8,36 @@
   "groupes": [
     {
       "id": "groupe",
-      "libelle": { "fr": "Présentation du groupe", "en": "About the Group" },
-      "pied": { "fr": "Le groupe", "en": "The Group" },
+      "libelle": { "fr": "Le Groupe", "en": "The Group" },
+      "pied": { "fr": "Le Groupe", "en": "The Group" },
       "liens": [
         { "fr": "À propos", "en": "About us", "lien": "groupe/presentation.html#a-propos" },
         { "fr": "Missions", "en": "Missions", "lien": "groupe/presentation.html#missions" },
         { "fr": "Vision et valeurs", "en": "Vision and values", "lien": "groupe/presentation.html#vision-valeurs" },
         { "fr": "Historique", "en": "History", "lien": "groupe/historique-gouvernance.html#historique" },
         { "fr": "Gouvernance", "en": "Governance", "lien": "groupe/historique-gouvernance.html#gouvernance" },
-        { "fr": "Filiales", "en": "Subsidiaries", "lien": "filiales/index.html" },
-        { "fr": "Activités industrielles", "en": "Industrial activities", "lien": "activites/index.html" }
+        { "fr": "Filiales", "en": "Subsidiaries", "lien": "filiales/index.html" }
       ]
     },
     {
       "id": "activites",
-      "libelle": { "fr": "Activités et engagements", "en": "Activities and commitments" },
-      "pied": { "fr": "Activités", "en": "Activities" },
+      "libelle": { "fr": "Nos activités", "en": "Our activities" },
+      "pied": { "fr": "Nos activités", "en": "Our activities" },
       "liens": [
         { "fr": "Exploration et production", "en": "Exploration and production", "lien": "activites/exploration-production.html" },
-        { "fr": "Distribution et transformation", "en": "Distribution and processing", "lien": "activites/distribution-transformation.html" },
-        { "fr": "Stations Gab'Oil", "en": "Gab'Oil stations", "lien": "activites/stations-gaboil.html" },
+        { "fr": "Gaz et valorisation", "en": "Gas and value creation", "lien": "activites/gaz-valorisation.html" },
+        { "fr": "Distribution et Lubrifiants", "en": "Distribution and Lubricants", "lien": "activites/distribution-lubrifiants.html" },
         { "fr": "Services pétroliers", "en": "Oil services", "lien": "activites/services-petroliers.html" },
-        { "fr": "Projets stratégiques", "en": "Strategic projects", "lien": "activites/projets-strategiques.html" },
-        { "fr": "Engagements HSEI", "en": "HSEI commitments", "lien": "engagements/hsei.html" },
-        { "fr": "Engagements RSE", "en": "CSR commitments", "lien": "engagements/rse.html" }
+        { "fr": "Projets stratégiques", "en": "Strategic projects", "lien": "activites/projets-strategiques.html" }
       ]
     },
     {
-      "id": "information",
-      "libelle": { "fr": "Informations", "en": "Information" },
-      "pied": { "fr": "Informations", "en": "Information" },
-      "directs_au_pied": true,
+      "id": "engagements",
+      "libelle": { "fr": "Nos engagements", "en": "Our commitments" },
+      "pied": { "fr": "Nos engagements", "en": "Our commitments" },
       "liens": [
-        { "fr": "Actualités", "en": "News", "lien": "actualites/index.html" },
-        { "fr": "Médiathèque", "en": "Media library", "lien": "mediatheque/index.html" },
-        { "fr": "Rapports et publications", "en": "Reports and publications", "lien": "rapports-publications/index.html" }
+        { "fr": "Engagements HSEI", "en": "HSEI commitments", "lien": "engagements/hsei.html" },
+        { "fr": "Engagements RSE", "en": "CSR commitments", "lien": "engagements/rse.html" }
       ]
     },
     {
@@ -50,15 +45,33 @@
       "libelle": { "fr": "Carrières", "en": "Careers" },
       "pied": { "fr": "Carrières", "en": "Careers" },
       "liens": [
+        { "fr": "Pourquoi rejoindre la SNHG ?", "en": "Why join GOC?", "lien": "carrieres/index.html" },
         { "fr": "GO’TALK", "en": "GO’TALK", "lien": "gotalk/index.html", "mise_en_avant": true },
-        { "fr": "Pourquoi rejoindre la SNHG", "en": "Why join GOC", "lien": "carrieres/index.html" },
-        { "fr": "Formulaire de souscription", "en": "Application form", "lien": "carrieres/candidature.html" }
+        { "fr": "Candidatures", "en": "Applications", "lien": "carrieres/candidature.html" }
+      ]
+    },
+    {
+      "id": "information",
+      "libelle": { "fr": "Actualités & Médias", "en": "News & Media" },
+      "pied": { "fr": "Actualités & Médias", "en": "News & Media" },
+      "liens": [
+        { "fr": "Actualités", "en": "News", "lien": "actualites/index.html" },
+        { "fr": "Rapports & Publications", "en": "Reports & Publications", "lien": "rapports-publications/index.html" },
+        { "fr": "Médiathèque", "en": "Media library", "lien": "mediatheque/index.html" }
+      ]
+    },
+    {
+      "id": "contact",
+      "libelle": { "fr": "Contact", "en": "Contact" },
+      "pied": { "fr": "Contact", "en": "Contact" },
+      "liens": [
+        { "fr": "Coordonnées", "en": "Contact details", "lien": "contact/index.html#coordonnees" },
+        { "fr": "Formulaire de contact", "en": "Contact form", "lien": "contact/index.html#formulaire" },
+        { "fr": "Implantations", "en": "Locations", "lien": "contact/index.html#implantations" }
       ]
     }
   ],
-  "directs": [
-    { "fr": "Contact", "en": "Contact", "lien": "contact/index.html" }
-  ],
+  "directs": [],
   "legal": [
     { "fr": "Mentions légales", "en": "Legal notice", "lien": "informations-legales/mentions-legales.html" },
     { "fr": "Politique de confidentialité", "en": "Privacy policy", "lien": "informations-legales/confidentialite.html" },

@@ -24,8 +24,8 @@
   <link rel="icon" href="../img/favicon.png?ver=ec0afc973b" type="image/png">
   <link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="../img/photos/presentation-hero.jpg?ver=39091dca91" imagesrcset="../img/photos/presentation-hero-768.jpg?ver=32b970dc21 768w, ../img/photos/presentation-hero.jpg?ver=39091dca91 1536w" imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="../css/styles.css?ver=6e10e7ef95">
-  <link rel="stylesheet" href="../css/pages.css?ver=369c113465">
+  <link rel="stylesheet" href="../css/styles.css?ver=6677d280ad">
+  <link rel="stylesheet" href="../css/pages.css?ver=1833891205">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -48,6 +48,11 @@
   <symbol id="i-tendance" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
   <symbol id="i-feuille" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
   <symbol id="i-flamme" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+  <symbol id="i-eclair" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-foreuse" viewBox="0 0 24 24"><path d="M14 9c0 .6-.4 1-1 1H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8c.6 0 1 .4 1 1Z"/><path d="M18 6h4"/><path d="M14 4h3a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-3"/><path d="m5 10-2 8"/><path d="M12 10v3c0 .6-.4 1-1 1H8"/><path d="m7 18 2-8"/><path d="M5 22c-1.7 0-3-1.3-3-3 0-.6.4-1 1-1h7c.6 0 1 .4 1 1v2c0 .6-.4 1-1 1Z"/></symbol>
+  <symbol id="i-usine" viewBox="0 0 24 24"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></symbol>
+  <symbol id="i-cle" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+  <symbol id="i-coche-cercle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
 </svg>
 
 <a class="evitement" href="#contenu">Aller au contenu</a>
@@ -63,7 +68,7 @@
     <nav class="nav-principale" aria-label="Navigation principale">
       <ul class="nav-onglets">
         <li class="nav-item">
-          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-groupe" aria-current="true">Présentation du groupe <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-groupe" aria-current="true">Le Groupe <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
           <div class="sous-menu" id="sous-menu-groupe">
             <ul class="sous-menu-liens">
               <li><a href="../groupe/presentation.html#a-propos">À propos</a></li>
@@ -72,31 +77,27 @@
               <li><a href="../groupe/historique-gouvernance.html#historique">Historique</a></li>
               <li><a href="../groupe/historique-gouvernance.html#gouvernance">Gouvernance</a></li>
               <li><a href="../filiales/index.html">Filiales</a></li>
-              <li><a href="../activites/index.html">Activités industrielles</a></li>
             </ul>
           </div>
         </li>
         <li class="nav-item">
-          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-activites">Activités et engagements <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-activites">Nos activités <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
           <div class="sous-menu" id="sous-menu-activites">
             <ul class="sous-menu-liens">
               <li><a href="../activites/exploration-production.html">Exploration et production</a></li>
-              <li><a href="../activites/distribution-transformation.html">Distribution et transformation</a></li>
-              <li><a href="../activites/stations-gaboil.html">Stations Gab'Oil</a></li>
+              <li><a href="../activites/gaz-valorisation.html">Gaz et valorisation</a></li>
+              <li><a href="../activites/distribution-lubrifiants.html">Distribution et Lubrifiants</a></li>
               <li><a href="../activites/services-petroliers.html">Services pétroliers</a></li>
               <li><a href="../activites/projets-strategiques.html">Projets stratégiques</a></li>
-              <li><a href="../engagements/hsei.html">Engagements HSEI</a></li>
-              <li><a href="../engagements/rse.html">Engagements RSE</a></li>
             </ul>
           </div>
         </li>
         <li class="nav-item">
-          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-information">Informations <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
-          <div class="sous-menu" id="sous-menu-information">
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-engagements">Nos engagements <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="sous-menu" id="sous-menu-engagements">
             <ul class="sous-menu-liens">
-              <li><a href="../actualites/index.html">Actualités</a></li>
-              <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-              <li><a href="../rapports-publications/index.html">Rapports et publications</a></li>
+              <li><a href="../engagements/hsei.html">Engagements HSEI</a></li>
+              <li><a href="../engagements/rse.html">Engagements RSE</a></li>
             </ul>
           </div>
         </li>
@@ -104,13 +105,32 @@
           <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-carrieres">Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
           <div class="sous-menu" id="sous-menu-carrieres">
             <ul class="sous-menu-liens">
+              <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG ?</a></li>
               <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
-              <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
-              <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+              <li><a href="../carrieres/candidature.html">Candidatures</a></li>
             </ul>
           </div>
         </li>
-        <li class="nav-direct"><a class="nav-onglet" href="../contact/index.html">Contact</a></li>
+        <li class="nav-item">
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-information">Actualités &amp; Médias <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="sous-menu" id="sous-menu-information">
+            <ul class="sous-menu-liens">
+              <li><a href="../actualites/index.html">Actualités</a></li>
+              <li><a href="../rapports-publications/index.html">Rapports &amp; Publications</a></li>
+              <li><a href="../mediatheque/index.html">Médiathèque</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-contact">Contact <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="sous-menu" id="sous-menu-contact">
+            <ul class="sous-menu-liens">
+              <li><a href="../contact/index.html#coordonnees">Coordonnées</a></li>
+              <li><a href="../contact/index.html#formulaire">Formulaire de contact</a></li>
+              <li><a href="../contact/index.html#implantations">Implantations</a></li>
+            </ul>
+          </div>
+        </li>
       </ul>
     </nav>
 
@@ -131,7 +151,7 @@
   </div>
   <nav class="menu-mobile-nav" aria-label="Navigation mobile">
     <details class="accordeon" name="menu-mobile">
-      <summary>Présentation du groupe <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <summary>Le Groupe <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
         <li><a href="../groupe/presentation.html#a-propos">À propos</a></li>
         <li><a href="../groupe/presentation.html#missions">Missions</a></li>
@@ -139,38 +159,49 @@
         <li><a href="../groupe/historique-gouvernance.html#historique">Historique</a></li>
         <li><a href="../groupe/historique-gouvernance.html#gouvernance">Gouvernance</a></li>
         <li><a href="../filiales/index.html">Filiales</a></li>
-        <li><a href="../activites/index.html">Activités industrielles</a></li>
       </ul>
     </details>
     <details class="accordeon" name="menu-mobile">
-      <summary>Activités et engagements <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <summary>Nos activités <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
         <li><a href="../activites/exploration-production.html">Exploration et production</a></li>
-        <li><a href="../activites/distribution-transformation.html">Distribution et transformation</a></li>
-        <li><a href="../activites/stations-gaboil.html">Stations Gab'Oil</a></li>
+        <li><a href="../activites/gaz-valorisation.html">Gaz et valorisation</a></li>
+        <li><a href="../activites/distribution-lubrifiants.html">Distribution et Lubrifiants</a></li>
         <li><a href="../activites/services-petroliers.html">Services pétroliers</a></li>
         <li><a href="../activites/projets-strategiques.html">Projets stratégiques</a></li>
+      </ul>
+    </details>
+    <details class="accordeon" name="menu-mobile">
+      <summary>Nos engagements <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <ul>
         <li><a href="../engagements/hsei.html">Engagements HSEI</a></li>
         <li><a href="../engagements/rse.html">Engagements RSE</a></li>
       </ul>
     </details>
     <details class="accordeon" name="menu-mobile">
-      <summary>Informations <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <summary>Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
-        <li><a href="../actualites/index.html">Actualités</a></li>
-        <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-        <li><a href="../rapports-publications/index.html">Rapports et publications</a></li>
+        <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG ?</a></li>
+        <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
+        <li><a href="../carrieres/candidature.html">Candidatures</a></li>
       </ul>
     </details>
     <details class="accordeon" name="menu-mobile">
-      <summary>Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <summary>Actualités &amp; Médias <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
-        <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
-        <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
-        <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+        <li><a href="../actualites/index.html">Actualités</a></li>
+        <li><a href="../rapports-publications/index.html">Rapports &amp; Publications</a></li>
+        <li><a href="../mediatheque/index.html">Médiathèque</a></li>
       </ul>
     </details>
-    <a class="menu-mobile-direct" href="../contact/index.html">Contact</a>
+    <details class="accordeon" name="menu-mobile">
+      <summary>Contact <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <ul>
+        <li><a href="../contact/index.html#coordonnees">Coordonnées</a></li>
+        <li><a href="../contact/index.html#formulaire">Formulaire de contact</a></li>
+        <li><a href="../contact/index.html#implantations">Implantations</a></li>
+      </ul>
+    </details>
   </nav>
   <div class="menu-mobile-pied">
     <p class="langues"><a href="../groupe/presentation.html" hreflang="fr" lang="fr" aria-current="true">FR<span class="visuellement-masque"> (français)</span></a> <span aria-hidden="true">|</span> <a href="../en/group/about.html" hreflang="en" lang="en">EN<span class="visuellement-masque"> (English)</span></a></p>
@@ -180,7 +211,7 @@
 <main id="contenu">
 
   <!-- Navigation de la rubrique -->
-  <nav class="sous-nav" aria-label="Présentation du groupe">
+  <nav class="sous-nav" aria-label="Le Groupe">
     <ul>
       <li><a href="#a-propos" aria-current="location">À propos</a></li>
       <li><a href="#missions">Missions</a></li>
@@ -188,7 +219,6 @@
       <li><a href="../groupe/historique-gouvernance.html#historique">Historique</a></li>
       <li><a href="../groupe/historique-gouvernance.html#gouvernance">Gouvernance</a></li>
       <li><a href="../filiales/index.html">Filiales</a></li>
-      <li><a href="../activites/index.html">Activités industrielles</a></li>
     </ul>
   </nav>
 
@@ -198,7 +228,7 @@
     <div class="voile" aria-hidden="true"></div>
     <div class="conteneur page-hero-contenu">
       <div class="page-hero-bloc">
-        <p class="sur-titre clair">Présentation du groupe</p>
+        <p class="sur-titre clair">Le Groupe</p>
         <h1 class="page-hero-titre" id="page-titre">À propos de nous</h1>
         <p class="page-hero-chapo">Leader du secteur pétrolier au Gabon, la SNHG œuvre pour la souveraineté énergétique nationale.</p>
       </div>
@@ -291,6 +321,101 @@
       </div>
     </div>
   </section>
+
+  <!-- ═══════════ 5 · Activités : vue d'ensemble (reprise de l'ancienne page Activités industrielles) ═══════════ -->
+  <section class="section" id="activites" aria-labelledby="activites-titre">
+    <div class="conteneur">
+      <div data-apparition>
+        <p class="sur-titre">Activités</p>
+        <h2 class="titre-section marge-60" id="activites-titre">SNHG : construire un champion énergétique national</h2>
+      </div>
+      <div class="secteurs" data-cascade>
+        <article class="secteur">
+          <div class="secteur-tete">
+            <span class="icone-boite" aria-hidden="true"><svg class="icone"><use href="#i-foreuse"/></svg></span>
+            <h3>Amont pétrolier : explorer, produire et accroître les réserves nationales</h3>
+          </div>
+          <p>L'amont pétrolier constitue le fondement de la croissance du Groupe. En quelques années, la SNHG est devenue un acteur majeur de la production nationale. Sa production propre, issue de ses actifs opérés et non opérés, avoisine aujourd'hui 27 000 barils par jour.</p>
+          <a class="lien-fleche" href="../activites/exploration-production.html">Découvrir l'exploration et la production <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        </article>
+        <article class="secteur bleu" id="aval">
+          <div class="secteur-tete">
+            <span class="icone-boite" aria-hidden="true"><svg class="icone"><use href="#i-usine"/></svg></span>
+            <h3>Aval : distribution et lubrifiants</h3>
+          </div>
+          <p>À travers Gab'Oil, la SNHG met en œuvre un ambitieux programme de développement de son réseau de distribution, qui comptait 7 stations-service en 2023 et vise 25 stations. Avec Pizolub, le Groupe dispose d'un outil industriel spécialisé dans la fabrication de lubrifiants.</p>
+          <a class="lien-fleche" href="../activites/distribution-lubrifiants.html">Découvrir la distribution et les lubrifiants <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        </article>
+        <article class="secteur vert" id="services-petroliers">
+          <div class="secteur-tete">
+            <span class="icone-boite" aria-hidden="true"><svg class="icone"><use href="#i-cle"/></svg></span>
+            <h3>Services pétroliers : SMP et expertise nationale</h3>
+          </div>
+          <p>Grâce à l'intégration de SMP – Société de Maintenance Pétrolière, la SNHG renforce sa maîtrise des activités de forage, de maintenance et d'assistance technique. Cette activité permet de réduire la dépendance aux prestataires extérieurs et de renforcer le contenu local.</p>
+          <a class="lien-fleche" href="../activites/services-petroliers.html">Découvrir les services pétroliers <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        </article>
+        <article class="secteur orange">
+          <div class="secteur-tete">
+            <span class="icone-boite" aria-hidden="true"><svg class="icone"><use href="#i-eclair"/></svg></span>
+            <h3>Gestion des participations et création de valeur</h3>
+          </div>
+          <p>À travers Gabon Oil Participations, la SNHG assure une gestion rigoureuse de ses intérêts dans plusieurs permis opérés par des partenaires internationaux, pour accroître la part de la richesse pétrolière captée au bénéfice du pays.</p>
+          <a class="lien-fleche" href="../filiales/index.html#gabon-oil-participations">Découvrir Gabon Oil Participations <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 6 · Engagements : vue d'ensemble, renvois vers les pages HSEI et RSE ═══════════ -->
+  <section class="section fond-surface" id="engagements" aria-labelledby="engagements-titre">
+    <div class="conteneur">
+      <div data-apparition>
+        <p class="sur-titre">Engagements</p>
+        <h2 class="titre-section marge-16" id="engagements-titre">Bâtir un avenir énergétique responsable</h2>
+        <p class="intro-section large">Pour la SNHG, la performance industrielle est indissociable de notre engagement envers l'humain et la nature. Notre démarche s'articule autour de piliers stratégiques : HSEI, RSE, environnement, sécurité et communautés.</p>
+      </div>
+      <div class="engagements-grille" data-cascade>
+        <div class="engagement vert" id="environnement">
+          <div class="engagement-tete"><h3>Environnement</h3></div>
+          <ul>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Préserver le patrimoine naturel et la biodiversité du Gabon.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Faire de la transition vers des énergies plus propres et de la réduction du torchage des gaz des priorités majeures.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Déployer des technologies à faible empreinte carbone à l'horizon 2030.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Déployer des solutions éco-responsables pour garantir l'indépendance énergétique du Gabon.</li>
+          </ul>
+        </div>
+        <div class="engagement rouge" id="rse">
+          <div class="engagement-tete"><h3>RSE et communautés</h3></div>
+          <ul>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Contribuer au bien-être des communautés gabonaises et promouvoir un développement durable dans toutes nos zones d'activité.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Agir comme un partenaire de confiance et un catalyseur du développement local.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Investir continuellement dans la formation et la montée en compétences des cadres gabonais.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Développer le contenu local et la formation d'une élite technique nationale.</li>
+          </ul>
+          <a class="lien-fleche" href="../engagements/rse.html">Nos engagements RSE <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        </div>
+        <div class="engagement bleu" id="gouvernance-transparence">
+          <div class="engagement-tete"><h3>Gouvernance et transparence</h3></div>
+          <ul>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Une gouvernance fondée sur la transparence, la responsabilité et l'excellence opérationnelle.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Transparence (ITIE) : rapports de bonne gouvernance et transparence des ressources.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Un Comité Audit &amp; Contrôle interne qui renforce la transparence et s'assure de la maîtrise des risques et de la conformité des opérations.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Un Comité Contrats &amp; Achats garant d'une gestion responsable et performante des achats.</li>
+          </ul>
+        </div>
+        <div class="engagement orange" id="hsei">
+          <div class="engagement-tete"><h3>HSEI : santé et sécurité</h3></div>
+          <ul>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Garantir l'intégrité totale des hommes et des installations industrielles.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Faire de la santé et de la sécurité de nos collaborateurs et de nos partenaires les piliers fondamentaux de nos opérations.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Appliquer des protocoles HSEI rigoureux sur chaque site pour préserver la sécurité de tous.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Un Comité QHSEI qui veille au respect des normes et à la protection des personnes, des installations et de l'environnement.</li>
+          </ul>
+          <a class="lien-fleche" href="../engagements/hsei.html">Nos engagements HSEI <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- ═══════════ Pied de page (GOCFooter) ═══════════ -->
@@ -314,7 +439,7 @@
       </div>
       <nav class="pied-liens" aria-label="Plan du site">
         <details class="pied-colonne" open>
-          <summary>Le groupe <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <summary>Le Groupe <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
             <li><a href="../groupe/presentation.html#a-propos">À propos</a></li>
             <li><a href="../groupe/presentation.html#missions">Missions</a></li>
@@ -322,36 +447,47 @@
             <li><a href="../groupe/historique-gouvernance.html#historique">Historique</a></li>
             <li><a href="../groupe/historique-gouvernance.html#gouvernance">Gouvernance</a></li>
             <li><a href="../filiales/index.html">Filiales</a></li>
-            <li><a href="../activites/index.html">Activités industrielles</a></li>
           </ul>
         </details>
         <details class="pied-colonne" open>
-          <summary>Activités <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <summary>Nos activités <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
             <li><a href="../activites/exploration-production.html">Exploration et production</a></li>
-            <li><a href="../activites/distribution-transformation.html">Distribution et transformation</a></li>
-            <li><a href="../activites/stations-gaboil.html">Stations Gab'Oil</a></li>
+            <li><a href="../activites/gaz-valorisation.html">Gaz et valorisation</a></li>
+            <li><a href="../activites/distribution-lubrifiants.html">Distribution et Lubrifiants</a></li>
             <li><a href="../activites/services-petroliers.html">Services pétroliers</a></li>
             <li><a href="../activites/projets-strategiques.html">Projets stratégiques</a></li>
+          </ul>
+        </details>
+        <details class="pied-colonne" open>
+          <summary>Nos engagements <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <ul>
             <li><a href="../engagements/hsei.html">Engagements HSEI</a></li>
             <li><a href="../engagements/rse.html">Engagements RSE</a></li>
           </ul>
         </details>
         <details class="pied-colonne" open>
-          <summary>Informations <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <summary>Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
-            <li><a href="../actualites/index.html">Actualités</a></li>
-            <li><a href="../mediatheque/index.html">Médiathèque</a></li>
-            <li><a href="../rapports-publications/index.html">Rapports et publications</a></li>
-            <li><a href="../contact/index.html">Contact</a></li>
+            <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG ?</a></li>
+            <li><a href="../gotalk/index.html">GO’TALK</a></li>
+            <li><a href="../carrieres/candidature.html">Candidatures</a></li>
           </ul>
         </details>
         <details class="pied-colonne" open>
-          <summary>Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <summary>Actualités &amp; Médias <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
-            <li><a href="../gotalk/index.html">GO’TALK</a></li>
-            <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
-            <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
+            <li><a href="../actualites/index.html">Actualités</a></li>
+            <li><a href="../rapports-publications/index.html">Rapports &amp; Publications</a></li>
+            <li><a href="../mediatheque/index.html">Médiathèque</a></li>
+          </ul>
+        </details>
+        <details class="pied-colonne" open>
+          <summary>Contact <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <ul>
+            <li><a href="../contact/index.html#coordonnees">Coordonnées</a></li>
+            <li><a href="../contact/index.html#formulaire">Formulaire de contact</a></li>
+            <li><a href="../contact/index.html#implantations">Implantations</a></li>
           </ul>
         </details>
       </nav>
@@ -370,6 +506,6 @@
 
 <button class="haut-de-page" type="button" aria-label="Revenir en haut de la page"><svg class="icone" aria-hidden="true"><use href="#i-haut"/></svg></button>
 
-<script src="../js/app.js?ver=5131051e7f" defer></script>
+<script src="../js/app.js?ver=85934fe8fb" defer></script>
 </body>
 </html>

@@ -43,7 +43,37 @@
     },
     {
       "source": "/activites-engagements.html",
-      "destination": "/activites/",
+      "destination": "/groupe/presentation.html",
+      "permanent": true
+    },
+    {
+      "source": "/activites/",
+      "destination": "/groupe/presentation.html",
+      "permanent": true
+    },
+    {
+      "source": "/activites/index.html",
+      "destination": "/groupe/presentation.html",
+      "permanent": true
+    },
+    {
+      "source": "/en/activities/",
+      "destination": "/en/group/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/en/activities/index.html",
+      "destination": "/en/group/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/activites/distribution-transformation.html",
+      "destination": "/activites/distribution-lubrifiants.html",
+      "permanent": true
+    },
+    {
+      "source": "/en/activities/distribution-processing.html",
+      "destination": "/en/activities/distribution-lubricants.html",
       "permanent": true
     },
     {

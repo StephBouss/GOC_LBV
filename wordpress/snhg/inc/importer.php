@@ -140,9 +140,12 @@ function snhg_regler_page(int $id, array $p): void {
 	}
 	if (!empty($p['redirection'])) update_post_meta($id, '_snhg_redirection', $p['redirection']);
 	else delete_post_meta($id, '_snhg_redirection');
+	// Sous-page sans entrée de menu : clé d'import de sa page parente, signalée dans la bande de navigation de la rubrique
+	if (!empty($p['meta']['parent'])) update_post_meta($id, '_snhg_parent', "{$p['langue']}:{$p['meta']['parent']}");
+	else delete_post_meta($id, '_snhg_parent');
 }
 
-/* Contenu et réglages de quelques pages seulement (clés « fr:activites/index.html »…), sans toucher au reste du site : pour
+/* Contenu et réglages de quelques pages seulement (clés « fr:groupe/presentation.html »…), sans toucher au reste du site : pour
    reporter une modification des sources sans réimporter ce qui a pu être modifié dans l'administration. Une page nouvelle
    des sources est créée, rattachée à sa traduction déjà présente */
 function snhg_importer_pages(array $c, array $cles): array {

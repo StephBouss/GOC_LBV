@@ -24,8 +24,8 @@
   <link rel="icon" href="../../img/favicon.png?ver=ec0afc973b" type="image/png">
   <link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="../../img/photos/presentation-hero.jpg?ver=39091dca91" imagesrcset="../../img/photos/presentation-hero-768.jpg?ver=32b970dc21 768w, ../../img/photos/presentation-hero.jpg?ver=39091dca91 1536w" imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="../../css/styles.css?ver=6e10e7ef95">
-  <link rel="stylesheet" href="../../css/pages.css?ver=369c113465">
+  <link rel="stylesheet" href="../../css/styles.css?ver=6677d280ad">
+  <link rel="stylesheet" href="../../css/pages.css?ver=1833891205">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -48,6 +48,11 @@
   <symbol id="i-tendance" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
   <symbol id="i-feuille" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
   <symbol id="i-flamme" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+  <symbol id="i-eclair" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-foreuse" viewBox="0 0 24 24"><path d="M14 9c0 .6-.4 1-1 1H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8c.6 0 1 .4 1 1Z"/><path d="M18 6h4"/><path d="M14 4h3a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-3"/><path d="m5 10-2 8"/><path d="M12 10v3c0 .6-.4 1-1 1H8"/><path d="m7 18 2-8"/><path d="M5 22c-1.7 0-3-1.3-3-3 0-.6.4-1 1-1h7c.6 0 1 .4 1 1v2c0 .6-.4 1-1 1Z"/></symbol>
+  <symbol id="i-usine" viewBox="0 0 24 24"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></symbol>
+  <symbol id="i-cle" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+  <symbol id="i-coche-cercle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
 </svg>
 
 <a class="evitement" href="#contenu">Skip to content</a>
@@ -63,7 +68,7 @@
     <nav class="nav-principale" aria-label="Main navigation">
       <ul class="nav-onglets">
         <li class="nav-item">
-          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-groupe" aria-current="true">About the Group <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-groupe" aria-current="true">The Group <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
           <div class="sous-menu" id="sous-menu-groupe">
             <ul class="sous-menu-liens">
               <li><a href="../../en/group/about.html#a-propos">About us</a></li>
@@ -72,31 +77,27 @@
               <li><a href="../../en/group/history-governance.html#historique">History</a></li>
               <li><a href="../../en/group/history-governance.html#gouvernance">Governance</a></li>
               <li><a href="../../en/subsidiaries/index.html">Subsidiaries</a></li>
-              <li><a href="../../en/activities/index.html">Industrial activities</a></li>
             </ul>
           </div>
         </li>
         <li class="nav-item">
-          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-activites">Activities and commitments <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-activites">Our activities <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
           <div class="sous-menu" id="sous-menu-activites">
             <ul class="sous-menu-liens">
               <li><a href="../../en/activities/exploration-production.html">Exploration and production</a></li>
-              <li><a href="../../en/activities/distribution-processing.html">Distribution and processing</a></li>
-              <li><a href="../../en/activities/gaboil-stations.html">Gab'Oil stations</a></li>
+              <li><a href="../../en/activities/gas-value-creation.html">Gas and value creation</a></li>
+              <li><a href="../../en/activities/distribution-lubricants.html">Distribution and Lubricants</a></li>
               <li><a href="../../en/activities/oil-services.html">Oil services</a></li>
               <li><a href="../../en/activities/strategic-projects.html">Strategic projects</a></li>
-              <li><a href="../../en/commitments/hsei.html">HSEI commitments</a></li>
-              <li><a href="../../en/commitments/csr.html">CSR commitments</a></li>
             </ul>
           </div>
         </li>
         <li class="nav-item">
-          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-information">Information <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
-          <div class="sous-menu" id="sous-menu-information">
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-engagements">Our commitments <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="sous-menu" id="sous-menu-engagements">
             <ul class="sous-menu-liens">
-              <li><a href="../../en/news/index.html">News</a></li>
-              <li><a href="../../en/media-library/index.html">Media library</a></li>
-              <li><a href="../../en/reports-publications/index.html">Reports and publications</a></li>
+              <li><a href="../../en/commitments/hsei.html">HSEI commitments</a></li>
+              <li><a href="../../en/commitments/csr.html">CSR commitments</a></li>
             </ul>
           </div>
         </li>
@@ -104,13 +105,32 @@
           <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-carrieres">Careers <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
           <div class="sous-menu" id="sous-menu-carrieres">
             <ul class="sous-menu-liens">
+              <li><a href="../../en/careers/index.html">Why join GOC?</a></li>
               <li><a class="nav-accent" href="../../en/gotalk/index.html">GO’TALK</a></li>
-              <li><a href="../../en/careers/index.html">Why join GOC</a></li>
-              <li><a href="../../en/careers/application.html">Application form</a></li>
+              <li><a href="../../en/careers/application.html">Applications</a></li>
             </ul>
           </div>
         </li>
-        <li class="nav-direct"><a class="nav-onglet" href="../../en/contact/index.html">Contact</a></li>
+        <li class="nav-item">
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-information">News &amp; Media <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="sous-menu" id="sous-menu-information">
+            <ul class="sous-menu-liens">
+              <li><a href="../../en/news/index.html">News</a></li>
+              <li><a href="../../en/reports-publications/index.html">Reports &amp; Publications</a></li>
+              <li><a href="../../en/media-library/index.html">Media library</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-contact">Contact <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="sous-menu" id="sous-menu-contact">
+            <ul class="sous-menu-liens">
+              <li><a href="../../en/contact/index.html#coordonnees">Contact details</a></li>
+              <li><a href="../../en/contact/index.html#formulaire">Contact form</a></li>
+              <li><a href="../../en/contact/index.html#implantations">Locations</a></li>
+            </ul>
+          </div>
+        </li>
       </ul>
     </nav>
 
@@ -131,7 +151,7 @@
   </div>
   <nav class="menu-mobile-nav" aria-label="Mobile navigation">
     <details class="accordeon" name="menu-mobile">
-      <summary>About the Group <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <summary>The Group <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
         <li><a href="../../en/group/about.html#a-propos">About us</a></li>
         <li><a href="../../en/group/about.html#missions">Missions</a></li>
@@ -139,38 +159,49 @@
         <li><a href="../../en/group/history-governance.html#historique">History</a></li>
         <li><a href="../../en/group/history-governance.html#gouvernance">Governance</a></li>
         <li><a href="../../en/subsidiaries/index.html">Subsidiaries</a></li>
-        <li><a href="../../en/activities/index.html">Industrial activities</a></li>
       </ul>
     </details>
     <details class="accordeon" name="menu-mobile">
-      <summary>Activities and commitments <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <summary>Our activities <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
         <li><a href="../../en/activities/exploration-production.html">Exploration and production</a></li>
-        <li><a href="../../en/activities/distribution-processing.html">Distribution and processing</a></li>
-        <li><a href="../../en/activities/gaboil-stations.html">Gab'Oil stations</a></li>
+        <li><a href="../../en/activities/gas-value-creation.html">Gas and value creation</a></li>
+        <li><a href="../../en/activities/distribution-lubricants.html">Distribution and Lubricants</a></li>
         <li><a href="../../en/activities/oil-services.html">Oil services</a></li>
         <li><a href="../../en/activities/strategic-projects.html">Strategic projects</a></li>
+      </ul>
+    </details>
+    <details class="accordeon" name="menu-mobile">
+      <summary>Our commitments <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <ul>
         <li><a href="../../en/commitments/hsei.html">HSEI commitments</a></li>
         <li><a href="../../en/commitments/csr.html">CSR commitments</a></li>
       </ul>
     </details>
     <details class="accordeon" name="menu-mobile">
-      <summary>Information <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <summary>Careers <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
-        <li><a href="../../en/news/index.html">News</a></li>
-        <li><a href="../../en/media-library/index.html">Media library</a></li>
-        <li><a href="../../en/reports-publications/index.html">Reports and publications</a></li>
+        <li><a href="../../en/careers/index.html">Why join GOC?</a></li>
+        <li><a class="nav-accent" href="../../en/gotalk/index.html">GO’TALK</a></li>
+        <li><a href="../../en/careers/application.html">Applications</a></li>
       </ul>
     </details>
     <details class="accordeon" name="menu-mobile">
-      <summary>Careers <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <summary>News &amp; Media <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
-        <li><a class="nav-accent" href="../../en/gotalk/index.html">GO’TALK</a></li>
-        <li><a href="../../en/careers/index.html">Why join GOC</a></li>
-        <li><a href="../../en/careers/application.html">Application form</a></li>
+        <li><a href="../../en/news/index.html">News</a></li>
+        <li><a href="../../en/reports-publications/index.html">Reports &amp; Publications</a></li>
+        <li><a href="../../en/media-library/index.html">Media library</a></li>
       </ul>
     </details>
-    <a class="menu-mobile-direct" href="../../en/contact/index.html">Contact</a>
+    <details class="accordeon" name="menu-mobile">
+      <summary>Contact <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <ul>
+        <li><a href="../../en/contact/index.html#coordonnees">Contact details</a></li>
+        <li><a href="../../en/contact/index.html#formulaire">Contact form</a></li>
+        <li><a href="../../en/contact/index.html#implantations">Locations</a></li>
+      </ul>
+    </details>
   </nav>
   <div class="menu-mobile-pied">
     <p class="langues"><a href="../../groupe/presentation.html" hreflang="fr" lang="fr">FR<span class="visuellement-masque"> (français)</span></a> <span aria-hidden="true">|</span> <a href="../../en/group/about.html" hreflang="en" lang="en" aria-current="true">EN<span class="visuellement-masque"> (English)</span></a></p>
@@ -180,7 +211,7 @@
 <main id="contenu">
 
   <!-- Navigation de la rubrique -->
-  <nav class="sous-nav" aria-label="About the Group">
+  <nav class="sous-nav" aria-label="The Group">
     <ul>
       <li><a href="#a-propos" aria-current="location">About us</a></li>
       <li><a href="#missions">Missions</a></li>
@@ -188,7 +219,6 @@
       <li><a href="../../en/group/history-governance.html#historique">History</a></li>
       <li><a href="../../en/group/history-governance.html#gouvernance">Governance</a></li>
       <li><a href="../../en/subsidiaries/index.html">Subsidiaries</a></li>
-      <li><a href="../../en/activities/index.html">Industrial activities</a></li>
     </ul>
   </nav>
 
@@ -198,7 +228,7 @@
     <div class="voile" aria-hidden="true"></div>
     <div class="conteneur page-hero-contenu">
       <div class="page-hero-bloc">
-        <p class="sur-titre clair">About the Group</p>
+        <p class="sur-titre clair">The Group</p>
         <h1 class="page-hero-titre" id="page-titre">About us</h1>
         <p class="page-hero-chapo">The leading player in Gabon's oil sector, GOC works for national energy sovereignty.</p>
       </div>
@@ -291,6 +321,101 @@
       </div>
     </div>
   </section>
+
+  <!-- ═══════════ 5 · Activités : vue d'ensemble (reprise de l'ancienne page Activités industrielles) ═══════════ -->
+  <section class="section" id="activites" aria-labelledby="activites-titre">
+    <div class="conteneur">
+      <div data-apparition>
+        <p class="sur-titre">Activities</p>
+        <h2 class="titre-section marge-60" id="activites-titre">GOC: building a national energy champion</h2>
+      </div>
+      <div class="secteurs" data-cascade>
+        <article class="secteur">
+          <div class="secteur-tete">
+            <span class="icone-boite" aria-hidden="true"><svg class="icone"><use href="#i-foreuse"/></svg></span>
+            <h3>Upstream oil: exploring, producing and growing national reserves</h3>
+          </div>
+          <p>Upstream oil is the foundation of the Group's growth. In just a few years, GOC has become a major player in national production. Its own production, from its operated and non-operated assets, now stands at around 27,000 barrels per day.</p>
+          <a class="lien-fleche" href="../../en/activities/exploration-production.html">Discover exploration and production <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        </article>
+        <article class="secteur bleu" id="aval">
+          <div class="secteur-tete">
+            <span class="icone-boite" aria-hidden="true"><svg class="icone"><use href="#i-usine"/></svg></span>
+            <h3>Downstream: distribution and lubricants</h3>
+          </div>
+          <p>Through Gab'Oil, GOC is carrying out an ambitious programme to develop its distribution network, which had 7 service stations in 2023 and aims for 25. With Pizolub, the Group has an industrial facility specialising in the manufacture of lubricants.</p>
+          <a class="lien-fleche" href="../../en/activities/distribution-lubricants.html">Discover distribution and lubricants <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        </article>
+        <article class="secteur vert" id="services-petroliers">
+          <div class="secteur-tete">
+            <span class="icone-boite" aria-hidden="true"><svg class="icone"><use href="#i-cle"/></svg></span>
+            <h3>Oil services: SMP and national expertise</h3>
+          </div>
+          <p>With the integration of SMP – <span lang="fr">Société de Maintenance Pétrolière</span>, GOC strengthens its command of drilling, maintenance and technical support activities. This business reduces dependence on outside contractors and strengthens local content.</p>
+          <a class="lien-fleche" href="../../en/activities/oil-services.html">Discover oil services <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        </article>
+        <article class="secteur orange">
+          <div class="secteur-tete">
+            <span class="icone-boite" aria-hidden="true"><svg class="icone"><use href="#i-eclair"/></svg></span>
+            <h3>Managing interests and creating value</h3>
+          </div>
+          <p>Through Gabon Oil Participations, GOC rigorously manages its interests in several permits operated by international partners, to increase the share of oil wealth captured for the benefit of the country.</p>
+          <a class="lien-fleche" href="../../en/subsidiaries/index.html#gabon-oil-participations">Discover Gabon Oil Participations <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 6 · Engagements : vue d'ensemble, renvois vers les pages HSEI et RSE ═══════════ -->
+  <section class="section fond-surface" id="engagements" aria-labelledby="engagements-titre">
+    <div class="conteneur">
+      <div data-apparition>
+        <p class="sur-titre">Commitments</p>
+        <h2 class="titre-section marge-16" id="engagements-titre">Building a responsible energy future</h2>
+        <p class="intro-section large">At GOC, industrial performance goes hand in hand with our commitment to people and nature. Our approach is built on strategic pillars: HSEI, CSR, the environment, safety and communities.</p>
+      </div>
+      <div class="engagements-grille" data-cascade>
+        <div class="engagement vert" id="environnement">
+          <div class="engagement-tete"><h3>Environment</h3></div>
+          <ul>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Preserving Gabon's natural heritage and biodiversity.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Making the transition to cleaner energy and the reduction of gas flaring major priorities.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Deploying low-carbon technologies by 2030.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Rolling out environmentally responsible solutions to guarantee Gabon's energy independence.</li>
+          </ul>
+        </div>
+        <div class="engagement rouge" id="rse">
+          <div class="engagement-tete"><h3>CSR and communities</h3></div>
+          <ul>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Contributing to the well-being of Gabonese communities and promoting sustainable development in all our areas of operation.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Acting as a trusted partner and a catalyst for local development.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Investing continuously in the training and upskilling of Gabonese managers.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Developing local content and training a national technical elite.</li>
+          </ul>
+          <a class="lien-fleche" href="../../en/commitments/csr.html">Our CSR commitments <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        </div>
+        <div class="engagement bleu" id="gouvernance-transparence">
+          <div class="engagement-tete"><h3>Governance and transparency</h3></div>
+          <ul>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Governance founded on transparency, accountability and operational excellence.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Transparency (EITI): good governance reports and transparency of resources.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>An Audit &amp; Internal Control Committee that strengthens transparency and ensures risk control and the compliance of operations.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>A Contracts &amp; Procurement Committee that guarantees responsible and efficient purchasing.</li>
+          </ul>
+        </div>
+        <div class="engagement orange" id="hsei">
+          <div class="engagement-tete"><h3>HSEI: health and safety</h3></div>
+          <ul>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Guaranteeing the complete integrity of people and industrial facilities.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Making the health and safety of our employees and partners the fundamental pillars of our operations.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>Applying rigorous HSEI protocols at every site to keep everyone safe.</li>
+            <li><svg class="icone" aria-hidden="true"><use href="#i-coche-cercle"/></svg>A QHSEI Committee that ensures compliance with standards and the protection of people, facilities and the environment.</li>
+          </ul>
+          <a class="lien-fleche" href="../../en/commitments/hsei.html">Our HSEI commitments <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- ═══════════ Pied de page (GOCFooter) ═══════════ -->
@@ -322,36 +447,47 @@
             <li><a href="../../en/group/history-governance.html#historique">History</a></li>
             <li><a href="../../en/group/history-governance.html#gouvernance">Governance</a></li>
             <li><a href="../../en/subsidiaries/index.html">Subsidiaries</a></li>
-            <li><a href="../../en/activities/index.html">Industrial activities</a></li>
           </ul>
         </details>
         <details class="pied-colonne" open>
-          <summary>Activities <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <summary>Our activities <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
             <li><a href="../../en/activities/exploration-production.html">Exploration and production</a></li>
-            <li><a href="../../en/activities/distribution-processing.html">Distribution and processing</a></li>
-            <li><a href="../../en/activities/gaboil-stations.html">Gab'Oil stations</a></li>
+            <li><a href="../../en/activities/gas-value-creation.html">Gas and value creation</a></li>
+            <li><a href="../../en/activities/distribution-lubricants.html">Distribution and Lubricants</a></li>
             <li><a href="../../en/activities/oil-services.html">Oil services</a></li>
             <li><a href="../../en/activities/strategic-projects.html">Strategic projects</a></li>
+          </ul>
+        </details>
+        <details class="pied-colonne" open>
+          <summary>Our commitments <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <ul>
             <li><a href="../../en/commitments/hsei.html">HSEI commitments</a></li>
             <li><a href="../../en/commitments/csr.html">CSR commitments</a></li>
           </ul>
         </details>
         <details class="pied-colonne" open>
-          <summary>Information <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <summary>Careers <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
-            <li><a href="../../en/news/index.html">News</a></li>
-            <li><a href="../../en/media-library/index.html">Media library</a></li>
-            <li><a href="../../en/reports-publications/index.html">Reports and publications</a></li>
-            <li><a href="../../en/contact/index.html">Contact</a></li>
+            <li><a href="../../en/careers/index.html">Why join GOC?</a></li>
+            <li><a href="../../en/gotalk/index.html">GO’TALK</a></li>
+            <li><a href="../../en/careers/application.html">Applications</a></li>
           </ul>
         </details>
         <details class="pied-colonne" open>
-          <summary>Careers <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <summary>News &amp; Media <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
-            <li><a href="../../en/gotalk/index.html">GO’TALK</a></li>
-            <li><a href="../../en/careers/index.html">Why join GOC</a></li>
-            <li><a href="../../en/careers/application.html">Application form</a></li>
+            <li><a href="../../en/news/index.html">News</a></li>
+            <li><a href="../../en/reports-publications/index.html">Reports &amp; Publications</a></li>
+            <li><a href="../../en/media-library/index.html">Media library</a></li>
+          </ul>
+        </details>
+        <details class="pied-colonne" open>
+          <summary>Contact <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <ul>
+            <li><a href="../../en/contact/index.html#coordonnees">Contact details</a></li>
+            <li><a href="../../en/contact/index.html#formulaire">Contact form</a></li>
+            <li><a href="../../en/contact/index.html#implantations">Locations</a></li>
           </ul>
         </details>
       </nav>
@@ -370,6 +506,6 @@
 
 <button class="haut-de-page" type="button" aria-label="Back to the top of the page"><svg class="icone" aria-hidden="true"><use href="#i-haut"/></svg></button>
 
-<script src="../../js/app.js?ver=5131051e7f" defer></script>
+<script src="../../js/app.js?ver=85934fe8fb" defer></script>
 </body>
 </html>
