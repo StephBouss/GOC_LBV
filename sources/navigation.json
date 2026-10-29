@@ -41,7 +41,8 @@
       "directs_au_pied": true,
       "liens": [
         { "fr": "Actualités", "en": "News", "lien": "actualites/index.html" },
-        { "fr": "Médiathèque", "en": "Media library", "lien": "mediatheque/index.html" }
+        { "fr": "Médiathèque", "en": "Media library", "lien": "mediatheque/index.html" },
+        { "fr": "Rapports et publications", "en": "Reports and publications", "lien": "rapports-publications/index.html" }
       ]
     },
     {
@@ -49,9 +50,9 @@
       "libelle": { "fr": "Carrières", "en": "Careers" },
       "pied": { "fr": "Carrières", "en": "Careers" },
       "liens": [
+        { "fr": "GO’TALK", "en": "GO’TALK", "lien": "gotalk/index.html", "mise_en_avant": true },
         { "fr": "Pourquoi rejoindre la SNHG", "en": "Why join GOC", "lien": "carrieres/index.html" },
-        { "fr": "Formulaire de souscription", "en": "Application form", "lien": "carrieres/candidature.html" },
-        { "fr": "GO’TALK", "en": "GO’TALK", "lien": "gotalk/index.html", "mise_en_avant": true }
+        { "fr": "Formulaire de souscription", "en": "Application form", "lien": "carrieres/candidature.html" }
       ]
     }
   ],

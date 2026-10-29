@@ -25,7 +25,7 @@
   <link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="../img/photos/activites-hero.jpg?ver=2e732650e7" imagesrcset="../img/photos/activites-hero-768.jpg?ver=ee3931459b 768w, ../img/photos/activites-hero.jpg?ver=2e732650e7 1536w" imagesizes="100vw" fetchpriority="high">
   <link rel="stylesheet" href="../css/styles.css?ver=6e10e7ef95">
-  <link rel="stylesheet" href="../css/pages.css?ver=8156a5db1f">
+  <link rel="stylesheet" href="../css/pages.css?ver=369c113465">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -49,8 +49,6 @@
   <symbol id="i-usine" viewBox="0 0 24 24"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></symbol>
   <symbol id="i-cle" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
   <symbol id="i-coche-cercle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
-  <symbol id="i-telecharger" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
-  <symbol id="i-livre" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></symbol>
 </svg>
 
 <a class="evitement" href="#contenu">Aller au contenu</a>
@@ -99,6 +97,7 @@
             <ul class="sous-menu-liens">
               <li><a href="../actualites/index.html">Actualités</a></li>
               <li><a href="../mediatheque/index.html">Médiathèque</a></li>
+              <li><a href="../rapports-publications/index.html">Rapports et publications</a></li>
             </ul>
           </div>
         </li>
@@ -106,9 +105,9 @@
           <button class="nav-onglet" type="button" aria-expanded="false" aria-controls="sous-menu-carrieres">Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
           <div class="sous-menu" id="sous-menu-carrieres">
             <ul class="sous-menu-liens">
+              <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
               <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
               <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
-              <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
             </ul>
           </div>
         </li>
@@ -161,14 +160,15 @@
       <ul>
         <li><a href="../actualites/index.html">Actualités</a></li>
         <li><a href="../mediatheque/index.html">Médiathèque</a></li>
+        <li><a href="../rapports-publications/index.html">Rapports et publications</a></li>
       </ul>
     </details>
     <details class="accordeon" name="menu-mobile">
       <summary>Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
       <ul>
+        <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
         <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
         <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
-        <li><a class="nav-accent" href="../gotalk/index.html">GO’TALK</a></li>
       </ul>
     </details>
     <a class="menu-mobile-direct" href="../contact/index.html">Contact</a>
@@ -227,7 +227,7 @@
             <span class="icone-boite" aria-hidden="true"><svg class="icone"><use href="#i-usine"/></svg></span>
             <h3>Aval : de la distribution à la transformation</h3>
           </div>
-          <p>À travers Gab'Oil, la SNHG met en œuvre un ambitieux programme de développement de son réseau de distribution, qui comptait 7 stations-service en 2023 et vise 27 stations. Avec Pizolub, le Groupe dispose d'un outil industriel spécialisé dans la fabrication de lubrifiants.</p>
+          <p>À travers Gab'Oil, la SNHG met en œuvre un ambitieux programme de développement de son réseau de distribution, qui comptait 7 stations-service en 2023 et vise 25 stations. Avec Pizolub, le Groupe dispose d'un outil industriel spécialisé dans la fabrication de lubrifiants.</p>
           <a class="lien-fleche" href="../activites/distribution-transformation.html">Découvrir la distribution et la transformation <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
         </article>
         <article class="secteur vert" id="services-petroliers">
@@ -310,24 +310,6 @@
         <a class="bouton" href="../contact/index.html">Nous contacter</a>
       </div>
     </div>
-
-    <!-- Rapport : PDF de la médiathèque, lu sur place (liseuse PDF.js) ou téléchargé.
-         WordPress : bloc Fichier (PDF + bouton de téléchargement), la liseuse est ajoutée par le script du thème. -->
-    <div class="conteneur">
-      <article class="rapport" id="rapports" aria-labelledby="rapport-titre" data-apparition>
-        <img class="rapport-couverture" src="../img/documents/dossier-gabon-2026-couverture.jpg?ver=193bcab40a" alt="Première page du dossier : « SNHG : le Gabon définit son destin énergétique »" width="480" height="664" loading="lazy">
-        <div class="rapport-corps">
-          <p class="sur-titre">Rapports et publications</p>
-          <h3 class="rapport-titre" id="rapport-titre">SNHG : le Gabon définit son destin énergétique</h3>
-          <p class="rapport-texte">Dossier spécial consacré à la SNHG : quinze ans après sa création, l'entreprise nationale a changé d'échelle, avec des actifs consolidés, une chaîne de valeur intégrée et une vision industrielle assumée. Avec les entretiens de Marcellin SIMBA NGABI, Edgar MBA OGNANE NGUEMA et Gilles MANGANNEAU.</p>
-          <p class="rapport-meta">Économies Africaines, édition Gabon 2026 · 8 pages · PDF, 3,9 Mo</p>
-          <div class="rapport-actions">
-            <a class="bouton" href="../documents/dossier-gabon-2026-snhg.pdf?ver=e1ca408e27" target="_blank" data-liseuse="liseuse" aria-haspopup="dialog"><svg class="icone" aria-hidden="true"><use href="#i-livre"/></svg> Lire en ligne</a>
-            <a class="bouton bouton-contour-rouge" href="../documents/dossier-gabon-2026-snhg.pdf?ver=e1ca408e27" download="SNHG-Dossier-Gabon-2026.pdf"><svg class="icone" aria-hidden="true"><use href="#i-telecharger"/></svg> Télécharger le PDF</a>
-          </div>
-        </div>
-      </article>
-    </div>
   </section>
 </main>
 
@@ -345,10 +327,9 @@
           <a href="mailto:contact@gabonoil.com"><svg class="icone" aria-hidden="true"><use href="#i-mail"/></svg>contact@gabonoil.com</a>
         </address>
         <ul class="reseaux" aria-label="Réseaux sociaux">
-          <li><a href="https://www.facebook.com/GabOilSA" target="_blank" rel="noopener noreferrer" aria-label="Facebook (nouvel onglet)"><svg class="icone" aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
-          <li><a href="https://www.linkedin.com/company/gabon-oil" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (nouvel onglet)"><svg class="icone" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
-          <!-- X : lien d'attente (#) à la demande du client, l'adresse du compte est à fournir ; la remettre avec target="_blank" et rel="noopener noreferrer" -->
-          <li><a href="#" aria-label="X"><svg class="icone" aria-hidden="true"><use href="#i-x"/></svg></a></li>
+          <li><a href="https://www.facebook.com/GabOilSA/" target="_blank" rel="noopener noreferrer" aria-label="Facebook (nouvel onglet)"><svg class="icone" aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
+          <li><a href="https://www.linkedin.com/company/gabon-oil/posts/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (nouvel onglet)"><svg class="icone" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
+          <li><a href="https://x.com/groupegabonoil" target="_blank" rel="noopener noreferrer" aria-label="X (nouvel onglet)"><svg class="icone" aria-hidden="true"><use href="#i-x"/></svg></a></li>
         </ul>
       </div>
       <nav class="pied-liens" aria-label="Plan du site">
@@ -381,15 +362,16 @@
           <ul>
             <li><a href="../actualites/index.html">Actualités</a></li>
             <li><a href="../mediatheque/index.html">Médiathèque</a></li>
+            <li><a href="../rapports-publications/index.html">Rapports et publications</a></li>
             <li><a href="../contact/index.html">Contact</a></li>
           </ul>
         </details>
         <details class="pied-colonne" open>
           <summary>Carrières <svg class="chevron" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
           <ul>
+            <li><a href="../gotalk/index.html">GO’TALK</a></li>
             <li><a href="../carrieres/index.html">Pourquoi rejoindre la SNHG</a></li>
             <li><a href="../carrieres/candidature.html">Formulaire de souscription</a></li>
-            <li><a href="../gotalk/index.html">GO’TALK</a></li>
           </ul>
         </details>
       </nav>
@@ -405,23 +387,6 @@
     </div>
   </div>
 </footer>
-
-<!-- ═══════════ Liseuse du rapport : <dialog> modal, pages dessinées par PDF.js (tous appareils, y compris Android) ═══════════ -->
-<dialog class="liseuse" id="liseuse" closedby="any" aria-labelledby="liseuse-titre" data-pdf="../documents/dossier-gabon-2026-snhg.pdf?ver=e1ca408e27">
-  <div class="liseuse-tete">
-    <div class="liseuse-titres">
-      <h2 class="liseuse-titre" id="liseuse-titre">SNHG : le Gabon définit son destin énergétique</h2>
-      <p class="liseuse-meta">Économies Africaines, édition Gabon 2026 · 8 pages</p>
-    </div>
-    <div class="liseuse-outils">
-      <a class="bouton liseuse-telecharger" href="../documents/dossier-gabon-2026-snhg.pdf?ver=e1ca408e27" download="SNHG-Dossier-Gabon-2026.pdf"><svg class="icone" aria-hidden="true"><use href="#i-telecharger"/></svg> <span>Télécharger</span></a>
-      <button class="liseuse-fermer" type="button" data-ferme aria-label="Fermer la liseuse"><svg class="icone" aria-hidden="true"><use href="#i-fermer"/></svg></button>
-    </div>
-  </div>
-  <div class="liseuse-pages" role="region" tabindex="0" aria-label="Pages du dossier" autofocus>
-    <p class="liseuse-statut" role="status">Chargement du dossier…</p>
-  </div>
-</dialog>
 
 <button class="haut-de-page" type="button" aria-label="Revenir en haut de la page"><svg class="icone" aria-hidden="true"><use href="#i-haut"/></svg></button>
 

@@ -70,18 +70,18 @@
 .appel-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
 .appel-actions .bouton { font-weight: 700; }
 
-/* ─── Rapport (page Activités) : couverture, présentation, lecture en ligne ou téléchargement ─── */
+/* ─── Rapport (page Rapports et publications) : couverture, présentation, lecture en ligne ou téléchargement ─── */
 .rapport {
   display: grid; grid-template-columns: 10.5rem 1fr; gap: 2.5rem; align-items: center;
-  max-width: 56rem; margin: 4.5rem auto 0; padding: 2rem 2.5rem 2rem 2rem;
-  text-align: left; background: var(--surface); border: 1px solid var(--ligne); border-radius: 1rem;
+  max-width: 56rem; padding: 2rem 2.5rem 2rem 2rem;
+  background: var(--surface); border: 1px solid var(--ligne); border-radius: 1rem;
 }
 .rapport-couverture { width: 100%; height: auto; border-radius: .25rem; box-shadow: 0 .75rem 1.75rem rgba(20, 23, 27, .18); }
-.appel .rapport p { max-width: none; margin: 0; }
-.appel .rapport .sur-titre { font-size: .875rem; line-height: 1.0313rem; color: var(--noir); }
+.rapport p { margin: 0; }
+.rapport .sur-titre { font-size: .875rem; line-height: 1.0313rem; color: var(--noir); }
 .rapport-titre { margin: .875rem 0 .75rem; font-size: 1.5rem; font-weight: 700; line-height: 1.875rem; color: var(--noir); text-wrap: balance; }
-.appel .rapport .rapport-texte { margin-bottom: .75rem; font-size: .9375rem; line-height: 1.5rem; text-wrap: pretty; }
-.appel .rapport .rapport-meta { margin-bottom: 1.5rem; font-size: .8125rem; line-height: 1.25rem; color: var(--acier); }
+.rapport .rapport-texte { margin-bottom: .75rem; font-size: .9375rem; line-height: 1.5rem; color: var(--encre-douce); text-wrap: pretty; }
+.rapport .rapport-meta { margin-bottom: 1.5rem; font-size: .8125rem; line-height: 1.25rem; color: var(--acier); }
 .rapport-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
 .rapport-actions .bouton { gap: .5rem; font-weight: 700; }
 .rapport-actions .icone { width: 1.125rem; height: 1.125rem; }
@@ -124,7 +124,7 @@
   .liseuse::backdrop { animation: fondu .35s var(--doux); }
 }
 @media (max-width: 767px) {
-  .rapport { grid-template-columns: 1fr; gap: 1.75rem; margin-top: 3.5rem; padding: 1.5rem 1.25rem; }
+  .rapport { grid-template-columns: 1fr; gap: 1.75rem; padding: 1.5rem 1.25rem; }
   .rapport-couverture { width: 9rem; margin-inline: auto; }
   .rapport-titre { font-size: 1.3125rem; line-height: 1.625rem; }
   .rapport-actions .bouton { flex: 1 1 100%; }
@@ -292,9 +292,11 @@
 .org-branche > .membre { flex: 1; }   /* cases d'une même rangée à la même hauteur : les traits restent alignés */
 .trait-v { display: block; width: 2px; height: 2rem; margin-inline: auto; background: var(--rouge-logo); }
 .trait-h { display: block; height: 2px; margin-inline: auto; background: var(--rouge-logo); }
-.trait-h.l-232 { width: 14.5rem; }
-.trait-h.l-1008 { width: 63rem; }    /* 6 administrateurs au pas de 168 px */
-.trait-h.l-1120 { width: 70rem; }
+/* Un trait horizontal va du bord extérieur de la première descente au bord extérieur de la dernière (+ 2 px, l'épaisseur
+   d'un trait) : angles nets, rien ne dépasse */
+.trait-h.l-234 { width: calc(14.5rem + 2px); }   /* 2 tutelles : 200 px + 32 px d'écart entre leurs axes */
+.trait-h.l-842 { width: calc(52.5rem + 2px); }   /* 6 administrateurs au pas de 168 px : 5 pas */
+.trait-h.l-962 { width: calc(60rem + 2px); }     /* 7 directeurs au pas de 160 px : 6 pas */
 .org-attaches { display: flex; justify-content: center; }
 .org-attaches span { display: flex; justify-content: center; }
 .org-attaches span::before { content: ""; width: 2px; height: 2rem; background: var(--rouge-logo); }
@@ -405,7 +407,7 @@
   .org-filiales { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--rangee) var(--colonne); }
   .org-filiales > li::before { top: calc(-1 * var(--rangee)); bottom: 0; right: calc(var(--colonne) / -2 - 1px); width: 2px; }   /* tronc central */
   .org-filiales > li:nth-child(even)::before { right: auto; left: calc(var(--colonne) / -2 - 1px); }
-  .org-filiales > li:last-child::before, .org-filiales > li:nth-last-child(2):nth-child(odd)::before { bottom: auto; height: calc(var(--rangee) + var(--accroche) + 1px); }   /* il s'arrête à la dernière rangée */
+  .org-filiales > li:last-child::before, .org-filiales > li:nth-last-child(2):nth-child(odd)::before { bottom: auto; height: calc(var(--rangee) + var(--accroche) + 2px); }   /* il s'arrête sous la branche de la dernière rangée (angle plein) */
   .org-filiales > li::after { top: var(--accroche); right: calc(var(--colonne) / -2); width: calc(var(--colonne) / 2); height: 2px; }   /* branche vers la carte */
   .org-filiales > li:nth-child(even)::after { right: auto; left: calc(var(--colonne) / -2); }
 }
@@ -414,7 +416,7 @@
   .org-filiales { gap: var(--rangee); padding-left: var(--retrait); }
   .org-filiales::before { left: calc(var(--retrait) / 2 - 1px); }
   .org-filiales > li::before { top: calc(-1 * var(--rangee)); bottom: 0; left: calc(var(--retrait) / -2 - 1px); width: 2px; }
-  .org-filiales > li:last-child::before { bottom: auto; height: calc(var(--rangee) + var(--accroche) + 1px); }
+  .org-filiales > li:last-child::before { bottom: auto; height: calc(var(--rangee) + var(--accroche) + 2px); }
   .org-filiales > li::after { top: var(--accroche); left: calc(var(--retrait) / -2); width: calc(var(--retrait) / 2); height: 2px; }
 }
 .carte-entite {
@@ -1039,7 +1041,7 @@ button.station[aria-pressed="true"] { background: var(--rouge-pale); box-shadow:
 
 /* Cartes : la photo, le nom et la fonction ; « Lire le portrait » apparaît au survol (toujours visible au doigt) */
 .talents-tete { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 1rem 4rem; margin-bottom: 3rem; }
-.talents { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); gap: 2rem; list-style: none; }
+.talents { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; list-style: none; }   /* 3 par rangée (9 portraits : 3 × 3) */
 .talent-carte {
   position: relative; isolation: isolate; display: block; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; padding: 0; border: 0; border-radius: 1.25rem;
   text-align: left; color: var(--blanc); background: var(--noir); cursor: pointer;
@@ -1171,11 +1173,11 @@ html:has(dialog.talent[open]) { overflow: hidden; scrollbar-gutter: stable; }
    et ses traits horizontaux disparaissent (requêtes sur la largeur du cadre, pas de l'écran). */
 .org { container: org / inline-size; }
 @container org (width < 63.5rem) {
-  .trait-h.l-1008, .org-attaches.pas-168 { display: none; }
+  .trait-h.l-842, .org-attaches.pas-168 { display: none; }
   .org-rangee.administrateurs { flex-wrap: wrap; max-width: 30.5rem; margin-inline: auto; }   /* 3 + 3 plutôt que 5 + 1 */
 }
 @container org (width < 70.5rem) {
-  .trait-h.l-1120, .org-attaches.pas-160 { display: none; }
+  .trait-h.l-962, .org-attaches.pas-160 { display: none; }
   .org-rangee.directeurs { flex-wrap: wrap; }
 }
 
@@ -1212,6 +1214,7 @@ html:has(dialog.talent[open]) { overflow: hidden; scrollbar-gutter: stable; }
 
   .gotalk-ouverture { padding: 5rem 0 4.5rem; }
   .gotalk-ouverture-grille, .talents-tete { grid-template-columns: minmax(0, 1fr); }
+  .talents { grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); }
   .gotalk-intro { max-width: 40rem; margin-top: .75rem; transform-origin: 2.75rem 0; }
   /* Une colonne : la bulle est sous la marque, sa pointe monte vers elle */
   .gotalk-intro::before { top: 0; bottom: auto; left: 2.75rem; border-top: inherit; border-bottom: 0; translate: 0 -50%; }

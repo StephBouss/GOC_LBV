@@ -1,0 +1,10 @@
+/*
+Theme Name: SNHG – Gabon Oil Company
+Description: Thème du site de la Société Nationale des Hydrocarbures du Gabon (SNHG), dite Gabon Oil Company (GOC). Il reprend la maquette du site (css/, js/) ; les diapositives de l'accueil, les actualités, les stations Gab'Oil et les menus se gèrent depuis l'administration.
+Version: 1.0.0
+Requires at least: 6.9
+Requires PHP: 8.1
+Text Domain: snhg
+*/
+
+/* Les styles du site sont dans css/styles.css et css/pages.css, chargés par inc/document.php */

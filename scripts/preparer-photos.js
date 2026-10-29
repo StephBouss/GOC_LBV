@@ -57,16 +57,26 @@ const PHOTOS = [
   { nom: 'stations-hero', source: 'Station/Inauguration de la station GABOIL.png', zone: [0, 0, 1, 0.84] },                         // page des stations : station de Makokou, sans le titre incrusté
   { nom: 'station-adl', source: 'Station/station-adl.jpeg', format: 'actualite' },                                                  // vignette de la station ADL dans la bulle de la carte, 16:9 (image fournie le 28/10/2026)
   { nom: 'services-hero', source: `${OPERATIONS}/Sardine/Sardine - Local électrique/DSC03872.jpg` },                                    // technicien devant une armoire électrique
-  { nom: 'carrieres-hero', source: `${OPERATIONS}/Port-Gentil/POG - Travail d_équipe/DSC04221.jpg` },                              // collaboratrice et collègue au poste de travail, à droite (le texte de l'ouverture reste à gauche)
+  { nom: 'carrieres-hero', source: 'Photo Autre/carrieres-collaborateurs-dossier.jpg' },                                            // trois collaborateurs en tenue SNHG autour d'un dossier (DSC04352, photo fournie le 29/10/2026)
   { nom: 'carrieres-fierte', source: 'Photo Autre/carrieres-operateurs-souriants.jpg' },                                             // deux opérateurs souriants, bras croisés (« Rejoindre la SNHG », photo fournie le 26/10/2026)
   { nom: 'carrieres-equipe', source: `${OPERATIONS}/Obangué/Obangué - Réunion d_équipe/DSC02637.jpg` },                                // réunion d'équipe (bande de candidature)
   { nom: 'candidature-hero', source: `${OPERATIONS}/Libreville/Libreville - Travail d_équipe/DSC04764.jpg` },                       // présentation au tableau, équipe administrative (Formulaire de souscription)
   { nom: 'services-intervention', source: 'SMP/SMP.webp' },                                                                          // technicien SMP sur un appareil de forage, main levée (photo fournie le 24/10/2026)
+  // Gabon Oil Participations (filiales/gabon-oil-participations.html) : métier de bureau (participations non opérées), photos du siège
+  { nom: 'gop-hero', source: `${OPERATIONS}/Libreville/Libreville - Travail d_équipe/DSC04754.jpg` },                                // réunion autour de la table
+  { nom: 'gop-analyse', source: `${OPERATIONS}/Libreville/Libreville - Portrait hommes bureaux/DSC04991.jpg` },                       // cadre analysant des documents
+  { nom: 'gop-transmission', source: `${OPERATIONS}/Libreville/Libreville - Travail d_équipe/DSC04757.jpg` },                        // présentation au tableau devant l'équipe
+  { nom: 'publications-hero', source: `${OPERATIONS}/Libreville/Libreville - Portrait femmes bureaux/DSC04862.jpg` },                // lecture sur ordinateur portable (Rapports et publications)
   // Images à la une et galeries des actualités (sources/actualites.json), au format 16:9 des cartes et des articles
   // GO’TALK : portraits des talents (sources/gotalk.json), recadrés en 4:5
   { nom: 'gotalk-axelle-manguiya-etoughe', source: 'GOTALK/axelle-manguiya-etoughe.png', format: 'talent' },
   { nom: 'gotalk-ingenieur-chimiste-mboumba', source: 'GOTALK/ingenieur-chimiste-mboumba.png', format: 'talent', zone: [0, 0, 1, 0.9] },   // casque gardé en entier
   { nom: 'gotalk-controleur-couts-senior', source: 'GOTALK/controleur-couts-senior.png', format: 'talent', zone: [0.31, 0, 0.51, 1] },   // photo en largeur : cadrée sur la personne
+  // Portraits du document « portrait _GO TALK.pdf » (29/10/2026), photos tirées du PDF telles quelles (JPEG)
+  { nom: 'gotalk-grace-ntossui', source: 'GOTALK/grace-ntossui.jpg', format: 'talent', zone: [0, 0.06, 1, 0.43] },   // photo en pied : du visage à la taille
+  { nom: 'gotalk-david-albert-mamfoumbi-mbina', source: 'GOTALK/david-albert-mamfoumbi-mbina.jpg', format: 'talent', zone: [0, 0, 1, 0.94] },   // recadrage par le bas : la tête garde sa marge
+  { nom: 'gotalk-ursula-onerawango', source: 'GOTALK/ursula-onerawango.jpg', format: 'talent', zone: [0.233, 0, 0.534, 1] },   // photo en largeur : cadrée sur la personne
+  { nom: 'gotalk-edwin-mpouho', source: 'GOTALK/edwin-mpouho.jpg', format: 'talent', zone: [0, 0, 1, 0.94] },   // recadrage par le bas : la tête garde sa marge
   { nom: 'actu-addax-tsiengui', source: `${OPERATIONS}/Tsiengui/Tsiengui - Vues aériennes/DJI_0299.jpg`, format: 'actualite' },
   { nom: 'actu-addax-obangue', source: `${OPERATIONS}/Obangué/Obangué - Installations/DSC01687.jpg`, format: 'actualite' },
   { nom: 'actu-smp', source: `${OPERATIONS}/Obangué/Obangué - Opérateur salle électrique/DSC01793.jpg`, format: 'actualite' },

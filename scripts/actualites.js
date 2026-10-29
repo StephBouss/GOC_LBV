@@ -142,6 +142,7 @@ function pageArticle(a, d) {
     <ul>
       <li><a href="actualites/index.html" aria-current="true">${t.actualites}</a></li>
       <li><a href="mediatheque/index.html">${t.mediatheque}</a></li>
+      <li><a href="rapports-publications/index.html">${t['rapports-publications']}</a></li>
     </ul>
   </nav>
 

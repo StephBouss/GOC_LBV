@@ -85,6 +85,24 @@ Les images, vidéos, documents et polices du site sont déjà préparés dans `i
 - `scripts/preparer-images.sh` et `scripts/preparer-logos-filiales.js` : photos des actualités, vidéos (WebM et MP4 de moins de 1,5 Mo, réencodés depuis le 1080p du client), portraits et logos. Ils lisent les fichiers d'origine du client et du site de référence, qui ne sont pas dans ce dépôt pour ne pas l'alourdir. Il faut `ffmpeg`.
 - `scripts/preparer-mediatheque.js` : photos de la médiathèque (vignettes de 800 px, grandes images de 1 600 px), d'après `sources/mediatheque.json`. Il lit le reportage « Opérations GOC » du client, hors du dépôt (dossier modifiable par la variable `MEDIATHEQUE_SOURCE`). Il faut `ffmpeg`. Après l'ajout d'une photo dans le fichier de données, on le relance, puis on régénère les pages.
 
+## Version WordPress
+
+Le thème WordPress `snhg` reprend la maquette telle quelle : mêmes styles, même script, même balisage. On le construit depuis les mêmes sources que le site statique. Il demande les extensions Secure Custom Fields (champs) et Polylang (français à la racine, anglais sous `/en/`).
+
+- `wordpress/snhg/` : gabarits PHP du thème. Le rôle de chaque fichier est décrit en tête de `functions.php`.
+- `node scripts/wordpress/construire.js [dossier du WordPress]` copie le thème et les fichiers du site dans `wp-content/themes/snhg/`. Il prépare aussi les contenus à importer dans `wp-content/uploads/snhg-import/contenus.json`.
+- `C:/xampp/php/php.exe scripts/wordpress/importer.php [dossier du WordPress] theme` active le thème et crée les langues. C'est à faire une fois.
+- La même commande avec `contenus` au lieu de `theme` importe les contenus :
+  - médias ;
+  - pages (blocs « HTML personnalisé ») ;
+  - articles ;
+  - diapositives de l'accueil, stations Gab'Oil, galeries de la médiathèque et portraits GO’TALK (types de contenus à champs) ;
+  - menus et réglages.
+
+  Un nouvel import met à jour les mêmes contenus. Il remplace donc ce qui a été modifié dans l'administration.
+
+Les repères des modèles deviennent des codes courts rendus par le thème : `[snhg_diaporama]`, `[snhg_actualites]`, `[snhg_stations]`, `[snhg_mediatheque]`, `[snhg_gotalk]` et `[snhg_sous_nav]`.
+
 ## Licences des composants
 
 - PDF.js 4.10.38 (Mozilla) : licence Apache 2.0, voir `js/pdfjs/LICENSE.txt`.

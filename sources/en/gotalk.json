@@ -184,6 +184,239 @@
         { "libelle": "The expressions I refuse to use", "texte": "“It will never work!”, “I can't do it!”, “It's too hard!”" },
         { "libelle": "My cure for stress", "texte": "Sport." }
       ]
+    },
+    "grace-ntossui": {
+      "nom": "Grace Leiticia M. NTOSSUI",
+      "fonction": "HSSE Officer",
+      "service": "Operational bases",
+      "alt": "Grace Leiticia M. NTOSSUI in orange coveralls, leaning against a field vehicle",
+      "titre": "Safety at the heart of operations",
+      "chapo": "An HSSE Officer at GOC, Grace Leiticia M. NTOSSUI focuses on risk prevention, compliance with safety requirements and the monitoring of activities on the operational sites. Drawing on a career spanning several sectors, she combines rigour, closeness to the teams and continuous improvement to help keep everyone safe.",
+      "entretien": [
+        {
+          "question": "What does your job involve?",
+          "reponse": [
+            "As an HSSE Officer, I monitor Hygiene, Health, Safety and Environment (HSSE) matters on the operational bases and follow up on outstanding actions across the different sites.",
+            "My duties include the HSSE supervision of works, checking equipment compliance and monitoring prevention measures. I am also the focal point for the departments and stakeholders we work with, and I handle the document follow-up, reporting and traceability of HSSE actions."
+          ]
+        },
+        {
+          "question": "What is your background?",
+          "reponse": [
+            "My career lies in QHSE, with a specialisation in occupational health and safety. Trained in Gabon, Ghana and France, I hold a two-year technology diploma (DUT), a professional bachelor's and master's degree, a *Professional Diploma in Health and Safety* and IOSH certification. I recently completed a specialised master's degree in quality management.",
+            "I have worked in construction, mining (notably on the Bélinga iron ore project), consulting, health, industrial hygiene, forestry, logistics and now the oil industry. This variety has given me strong adaptability and a cross-cutting view of QHSE issues."
+          ]
+        },
+        {
+          "question": "Why did you join GOC?",
+          "reponse": [
+            "During my internship with the HSSE unit of the Directorate General of Hydrocarbons, at the Ministry of Petroleum and Gas, then an immersion at the Gabonese petroleum products storage company (SGEPP), I discovered the safety challenges specific to oil and gas activities.",
+            "Joining GOC meant putting my skills at the service of a strategic national company, continuing to learn from experienced professionals and helping, at my level, to build a culture of prevention and risk control."
+          ]
+        },
+        {
+          "question": "What do you particularly enjoy about your job?",
+          "reponse": [
+            "Working closely with the operational teams, internal and external, the rotations across the different sites and the collaboration with all stakeholders.",
+            "Every day brings different situations, every difficulty is a challenge to overcome and every exchange is a chance to learn. This variety is what motivates me every day."
+          ]
+        },
+        {
+          "question": "What is your best memory at GOC?",
+          "reponse": [
+            "My first rotation at the Akondo site. Despite my field experience, I was apprehensive about once again being the only woman on an operational site.",
+            "Thanks to my managers' advice and the support of the Akondo team, I quickly found my bearings and my place. The experience strengthened my adaptability, my self-confidence and my team spirit."
+          ]
+        },
+        {
+          "question": "Which GOC value best represents you?",
+          "accroche": "Excellence.",
+          "reponse": [
+            "It reflects my determination to give my best and to carry out my duties with rigour and professionalism. In my job, striving for excellence also means never taking safety for granted."
+          ]
+        }
+      ],
+      "mots": [
+        { "libelle": "My favourite acronym", "texte": "STOP: Stop, Think, Observe, Proceed. More than an acronym, it is a safety reflex that we apply every day at GOC, notably through the TRIC, before activities begin." },
+        { "libelle": "The province closest to my heart", "texte": "Woleu-Ntem, for my roots, my identity and my attachment to my culture." },
+        { "libelle": "My favourite quote", "texte": "“It is much safer to be feared than loved.” (Niccolò Machiavelli). Not as an invitation to inspire fear, but as a reminder to stand by one's principles and remain fair in one's decisions, without seeking to please at all costs." },
+        { "libelle": "The expressions I refuse to use", "texte": "“You're not here because of your skills.”, “We've always done it this way, don't change anything.” and “What will people say?” Everyone deserves to be judged on their work, and an old practice is not necessarily the best one." },
+        { "libelle": "My cure for stress", "texte": "My father: his wisdom, his advice and his way of reassuring me help me find my calm again." }
+      ]
+    },
+    "david-albert-mamfoumbi-mbina": {
+      "nom": "David-Albert MAMFOUMBI MBINA",
+      "fonction": "Head of Personnel Management",
+      "service": "Human resources",
+      "alt": "David-Albert MAMFOUMBI MBINA in a dark suit, hands clasped, against an orange background",
+      "titre": "Human resources at the heart of collective performance",
+      "chapo": "Head of Personnel Management at GOC, David-Albert MAMFOUMBI MBINA supports career paths and ensures the sound administration of human resources. After working in FinTech in Paris, he chose to return to Gabon to take part in a national industrial ambition, convinced that a company's performance rests on the women and men who bring it to life.",
+      "entretien": [
+        {
+          "question": "What does your job involve?",
+          "reponse": [
+            "I supervise and coordinate recruitment and personnel administration: headcount, employment contracts, staff movements, individual situations and disciplinary procedures. I also ensure compliance with legal and regulatory obligations and the continuous improvement of HR processes.",
+            "Beyond administration, my role is to contribute to rigorous, fair and effective personnel management, reconciling the company's requirements with human realities."
+          ]
+        },
+        {
+          "question": "What is your background?",
+          "reponse": [
+            "After a degree in accounting and management (DCG), my internship in an accounting firm showed me that I needed interaction and human relationships. I therefore moved into human resources and now hold a master's degree in human resources management.",
+            "I then built my experience in Paris, mainly in FinTech companies, where innovation and agility play a major role. A career is not necessarily built in a straight line: what matters is having the courage to follow your aspirations."
+          ]
+        },
+        {
+          "question": "Why did you join GOC?",
+          "reponse": [
+            "When I returned to Gabon in 2024, I wanted to take on new challenges and contribute to my country's development. I discovered a young national company with the ambition of acquiring a far larger business, to strengthen Gabon's energy sovereignty.",
+            "I was won over by the boldness of the move: it was exactly the kind of challenge I wanted to be part of."
+          ]
+        },
+        {
+          "question": "What do you particularly enjoy about your job?",
+          "accroche": "Its human dimension.",
+          "reponse": [
+            "Human resources call for listening, discernment, rigour and adaptability: every situation requires a response that is both professional and attentive to people.",
+            "I am also passionate about the oil sector. Knowing that my work supports a company committed to our country's energy sovereignty gives my job an extra dimension."
+          ]
+        },
+        {
+          "question": "What is your best memory at GOC?",
+          "reponse": [
+            "My integration. I was pleasantly surprised to find an environment that meets the standards of major international groups in terms of IT infrastructure, procedures and organisation. I quickly found familiar bearings, which confirmed that I had made the right choice."
+          ]
+        },
+        {
+          "question": "Which GOC value best represents you?",
+          "accroche": "Excellence and resilience.",
+          "reponse": [
+            "Excellence gives a direction; resilience lets you keep going despite obstacles. In my view, GOC's development since 2024 illustrates this combination of ambition and ability to rise to challenges."
+          ]
+        }
+      ],
+      "mots": [
+        { "libelle": "My favourite acronym", "texte": "CAP: {fr|Courage, Adaptation, Persévérance} (courage, adaptability, perseverance). Courage lets you dare, adaptability helps you evolve and perseverance gives you the strength to see your commitments through." },
+        { "libelle": "The province closest to my heart", "texte": "Nyanga, a link with my origins and a part of our identity worth preserving." },
+        { "libelle": "My favourite quote", "texte": "“They did not know it was impossible, so they did it.” Some limits exist first in the way we think." },
+        { "libelle": "The expressions I refuse to use", "texte": "“I'll try.”, “It's not my job.” and “I don't know how.” I prefer to say: “I don't know yet, but I will learn.”" },
+        { "libelle": "My cure for stress", "texte": "Humour and anticipation. You can be demanding in your work without losing your good mood." }
+      ]
+    },
+    "ursula-onerawango": {
+      "nom": "Ursula Gwenaelle ONERAWANGO",
+      "fonction": "Control room operator",
+      "service": "Obangué site",
+      "alt": "Ursula Gwenaelle ONERAWANGO in orange coveralls and a white hard hat, radio on her chest, in front of production facilities",
+      "titre": "In the control room, at the heart of oil production",
+      "chapo": "A control room operator at the Obangué site, Ursula Gwenaelle ONERAWANGO monitors and supervises the production facilities from the control room. With more than twenty years of experience in the oil industry with several operators, she embodies technical expertise, a sense of responsibility and pride in contributing to national production.",
+      "entretien": [
+        {
+          "question": "What does your job involve?",
+          "reponse": [
+            "From the control room, which gives an overview of the facilities, I operate, control and monitor the production equipment and parameters.",
+            "I work closely with the operators in the field to follow operations, detect anomalies and keep production running in good operating and safety conditions. The control room is the central coordination point between the teams and contractors."
+          ]
+        },
+        {
+          "question": "What is your background?",
+          "reponse": [
+            "I started in 2004 at FORAID Gabon, monitoring valves and relief valves, then worked as an instrument technician at Cap Lopez. At Équipements et Contrôle (EMERSON), I took part in installing the DeltaV system for Total Gabon's Grondin and Torpille sites.",
+            "From 2007 to 2011, I handled relief valve monitoring and maintenance orders on Addax Petroleum's sites, before working as an instrument technician at Rabi and Obangué. I was then a PAD operator and control room operator with SINOPEC at Akondo. Since 2024, I have been a control room operator at the Obangué site with GOC."
+          ]
+        },
+        {
+          "question": "Why did you join GOC?",
+          "accroche": "Out of patriotism.",
+          "reponse": [
+            "Joining the {fr|Société Nationale des Hydrocarbures du Gabon} meant putting my experience and skills at the service of my country. After working for several oil operators, I am proud to contribute to a national company that develops Gabon's resources."
+          ]
+        },
+        {
+          "question": "What do you particularly enjoy about your job?",
+          "reponse": [
+            "The daily challenges of keeping production going. My job calls for vigilance, responsiveness and analytical skills: you have to anticipate, understand the information sent by the equipment and work in coordination with the field.",
+            "I also enjoy being at the centre of exchanges between the sites, the production operators and the contractors. Every day is different."
+          ]
+        },
+        {
+          "question": "What is your best memory at GOC?",
+          "reponse": [
+            "The requisition of the Obangué site by GOC, in 2013. I was taking part in operations there: experiencing in the field this step in the takeover of oil activities by a national company remains a memorable experience."
+          ]
+        },
+        {
+          "question": "Which GOC value best represents you?",
+          "accroche": "National sovereignty.",
+          "reponse": [
+            "It is a conviction that gives meaning to my commitment. Energy sovereignty is also built day by day, through the skills, experience and commitment of the Gabonese women and men working on the production sites."
+          ]
+        }
+      ],
+      "mots": [
+        { "libelle": "My favourite acronym", "texte": "SNHG: {fr|Société Nationale des Hydrocarbures du Gabon}. Much more than a company name, a national ambition I am proud to contribute to." },
+        { "libelle": "The province closest to my heart", "texte": "Moyen-Ogooué, especially Lambaréné." },
+        { "libelle": "My favourite quote", "texte": "“Behind every great man there is a woman.” For the importance of support and of the often discreet, but essential, role of women in human achievements." },
+        { "libelle": "The expression I refuse to use", "texte": "“All men are the same.” Every person deserves to be appreciated for their actions, character and values, rather than on the basis of ready-made judgements." },
+        { "libelle": "My cure for stress", "texte": "Music and a game of Scrabble." }
+      ]
+    },
+    "edwin-mpouho": {
+      "nom": "Edwin Stephen MPOUHO",
+      "fonction": "Gas Strategy and Development Engineer",
+      "service": "Gas Department",
+      "alt": "Edwin Stephen MPOUHO in a mauve shirt, arms folded, against an orange background",
+      "titre": "Turning gas into opportunities for Gabon",
+      "chapo": "A Gas Strategy and Development Engineer at GOC, Edwin Stephen MPOUHO identifies new ways of adding value to gas resources, particularly the gas associated with oil production. From reservoir engineering to energy strategy, his career reflects one ambition: making gas a lever for Gabon's industrial, economic and energy development.",
+      "entretien": [
+        {
+          "question": "What does your job involve?",
+          "reponse": [
+            "I design and assess solutions to add value to GOC's gas resources, in particular the gas associated with oil production, part of which may be flared.",
+            "The aim is to turn it into value: power generation (*Gas-to-Power*), liquefied petroleum gas (LPG) for households, or liquefied (LNG) and compressed natural gas (CNG) to supply localities not connected to the networks. I also carry out market studies and techno-economic analyses to inform strategic decisions."
+          ]
+        },
+        {
+          "question": "What is your background?",
+          "reponse": [
+            "I graduated in Petroleum Engineering from the Colorado School of Mines, in the United States. I joined GOC in 2013 as a petroleum engineer, first in reservoir engineering, then in production engineering.",
+            "In 2019, I joined the Gas Department and moved towards gas strategy and development. I also contributed to Gabon's Gas Transformation Acceleration Plan (PAT), notably to a draft Gas Code and the *Gas Master Plan*."
+          ]
+        },
+        {
+          "question": "Why did you join GOC?",
+          "reponse": [
+            "To put my engineering skills at the service of a national company and contribute to the development of Gabon's energy resources. In a national oil company, beyond the technical side, we take part in projects with tangible benefits for the economy and the people."
+          ]
+        },
+        {
+          "question": "What do you particularly enjoy about your job?",
+          "reponse": [
+            "The variety of topics and skills it involves. Gas development lies at the crossroads of engineering, economics, market analysis and strategy.",
+            "I also enjoy working with teams and partners with complementary expertise, on projects that can lead to concrete results."
+          ]
+        },
+        {
+          "question": "What is your best memory at GOC?",
+          "reponse": [
+            "Signing my first contract, to begin with. But the most striking memory remains the acquisition of Assala Energy in 2024: a major step that gave the company's industrial ambitions a new dimension, and one I experienced from the inside."
+          ]
+        },
+        {
+          "question": "Which GOC value best represents you?",
+          "accroche": "Integrity.",
+          "reponse": [
+            "When technical and economic analyses guide important decisions, objectivity, transparency and rigour are essential: presenting results as they are, acknowledging uncertainties and putting the company's interest first."
+          ]
+        }
+      ],
+      "mots": [
+        { "libelle": "My favourite acronym", "texte": "OOIP: *Original Oil in Place*, the initial volume of oil in a reservoir. It reminds me of one of my professors at the Colorado School of Mines and of my years of training." },
+        { "libelle": "The province closest to my heart", "texte": "Haut-Ogooué, which holds an important place in my personal story." },
+        { "libelle": "My favourite quote", "texte": "“Until the lions have their own historians, the history of the hunt will always glorify the hunter.” This African proverb is a reminder of the importance of telling your own story." },
+        { "libelle": "The expression I refuse to use", "texte": "“We've always done it this way.”, when it is used to dismiss a new idea without even examining it." },
+        { "libelle": "My cure for stress", "texte": "Sport and meditation." }
+      ]
     }
   }
 }

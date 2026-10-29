@@ -1,0 +1,67 @@
+<!-- {
+  "titre": "Rapports et publications · SNHG – Gabon Oil Company",
+  "description": "Les rapports et publications consacrés à la SNHG – Gabon Oil Company, à lire en ligne ou à télécharger au format PDF.",
+  "onglet": "information",
+  "precharger": { "src": "img/photos/publications-hero.jpg", "srcset": "img/photos/publications-hero-768.jpg 768w, img/photos/publications-hero.jpg 1536w" },
+  "css": ["css/pages.css"]
+} -->
+
+  <!-- Navigation de la rubrique -->
+  <!-- sous-nav -->
+
+  <!-- ═══════════ 1 · Ouverture ═══════════ -->
+  <section class="page-hero" aria-labelledby="page-titre">
+    <img class="page-hero-image" src="img/photos/publications-hero.jpg" srcset="img/photos/publications-hero-768.jpg 768w, img/photos/publications-hero.jpg 1536w" sizes="100vw" alt="" width="1536" height="1024" fetchpriority="high">
+    <div class="voile" aria-hidden="true"></div>
+    <div class="conteneur page-hero-contenu">
+      <div class="page-hero-bloc">
+        <p class="sur-titre clair">Rapports et publications</p>
+        <h1 class="page-hero-titre" id="page-titre">Nos publications, à lire et à télécharger</h1>
+        <p class="page-hero-chapo">Dossiers et rapports consacrés à la SNHG : consultez-les en ligne, page par page, ou téléchargez-les au format PDF.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 2 · Publications ═══════════ -->
+  <section class="section" id="publications" aria-labelledby="publications-titre">
+    <div class="conteneur">
+      <div data-apparition>
+        <p class="sur-titre">Publications</p>
+        <h2 class="titre-section marge-16" id="publications-titre">Comprendre la SNHG et ses ambitions</h2>
+        <p class="intro-section large">Retrouvez ici les dossiers et rapports consacrés à la SNHG, à son action et à ses perspectives.</p>
+      </div>
+
+      <!-- Rapport : PDF de la médiathèque, lu sur place (liseuse PDF.js) ou téléchargé.
+           WordPress : bloc Fichier (PDF + bouton de téléchargement), la liseuse est ajoutée par le script du thème. -->
+      <article class="rapport" id="rapports" aria-labelledby="rapport-titre" data-apparition>
+        <img class="rapport-couverture" src="img/documents/dossier-gabon-2026-couverture.jpg" alt="Première page du dossier : « SNHG : le Gabon définit son destin énergétique »" width="480" height="664" loading="lazy">
+        <div class="rapport-corps">
+          <p class="sur-titre">Dossier spécial</p>
+          <h3 class="rapport-titre" id="rapport-titre">SNHG : le Gabon définit son destin énergétique</h3>
+          <p class="rapport-texte">Dossier spécial consacré à la SNHG : quinze ans après sa création, l'entreprise nationale a changé d'échelle, avec des actifs consolidés, une chaîne de valeur intégrée et une vision industrielle assumée. Avec les entretiens de Marcellin SIMBA NGABI, Edgar MBA OGNANE NGUEMA et Gilles MANGANNEAU.</p>
+          <p class="rapport-meta">Économies Africaines, édition Gabon 2026 · 8 pages · PDF, 3,9 Mo</p>
+          <div class="rapport-actions">
+            <a class="bouton" href="documents/dossier-gabon-2026-snhg.pdf" target="_blank" data-liseuse="liseuse" aria-haspopup="dialog"><svg class="icone" aria-hidden="true"><use href="#i-livre"/></svg> Lire en ligne</a>
+            <a class="bouton bouton-contour-rouge" href="documents/dossier-gabon-2026-snhg.pdf" download="SNHG-Dossier-Gabon-2026.pdf"><svg class="icone" aria-hidden="true"><use href="#i-telecharger"/></svg> Télécharger le PDF</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+<!-- apres -->
+<!-- ═══════════ Liseuse du rapport : <dialog> modal, pages dessinées par PDF.js (tous appareils, y compris Android) ═══════════ -->
+<dialog class="liseuse" id="liseuse" closedby="any" aria-labelledby="liseuse-titre" data-pdf="documents/dossier-gabon-2026-snhg.pdf">
+  <div class="liseuse-tete">
+    <div class="liseuse-titres">
+      <h2 class="liseuse-titre" id="liseuse-titre">SNHG : le Gabon définit son destin énergétique</h2>
+      <p class="liseuse-meta">Économies Africaines, édition Gabon 2026 · 8 pages</p>
+    </div>
+    <div class="liseuse-outils">
+      <a class="bouton liseuse-telecharger" href="documents/dossier-gabon-2026-snhg.pdf" download="SNHG-Dossier-Gabon-2026.pdf"><svg class="icone" aria-hidden="true"><use href="#i-telecharger"/></svg> <span>Télécharger</span></a>
+      <button class="liseuse-fermer" type="button" data-ferme aria-label="Fermer la liseuse"><svg class="icone" aria-hidden="true"><use href="#i-fermer"/></svg></button>
+    </div>
+  </div>
+  <div class="liseuse-pages" role="region" tabindex="0" aria-label="Pages du dossier" autofocus>
+    <p class="liseuse-statut" role="status">Chargement du dossier…</p>
+  </div>
+</dialog>

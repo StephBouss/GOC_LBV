@@ -2,6 +2,7 @@
 # Les outils de travail restent dans le dépôt mais ne sont pas mis en ligne.
 sources/
 scripts/
+wordpress/
 references/
 README.md
 INVENTAIRE.md

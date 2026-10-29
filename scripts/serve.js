@@ -23,7 +23,7 @@ const RACINE = process.env.RACINE || path.join(__dirname, '..');
 
 // Le site est à la racine du projet, à côté des outils de travail : ceux-ci ne sont ni servis ni surveillés
 // (comme sur Vercel, voir .vercelignore). Les dossiers cachés (.git, .claude…) sont toujours exclus.
-const PRIVES = new Set(['sources', 'scripts', 'references', 'node_modules']);
+const PRIVES = new Set(['sources', 'scripts', 'references', 'wordpress', 'node_modules']);
 const prive = (rel) => {
   const tete = rel.split(/[\\/]/).find(Boolean) || '';
   return tete.startsWith('.') || PRIVES.has(tete) || /\.md$/i.test(rel);

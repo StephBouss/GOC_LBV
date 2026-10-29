@@ -412,6 +412,10 @@ function assembler() {
   return LANGUES.map((l) => `${l} : ${pages.filter((p) => p.langue === l).length} pages et ${donnees[l].actus.articles.length} articles`);
 }
 
+/* Le thème WordPress (scripts/wordpress/construire.js) reprend les icônes, les pictogrammes et la lecture des pages */
+module.exports = { ICONES, PICTOGRAMMES, LANGUES, DEFAUT, prefixe, lirePages };
+
+if (require.main === module) {
 const bilan = assembler();
 console.log(`Pages assemblées (${bilan.join(' ; ')})`);
 
@@ -441,4 +445,5 @@ if (process.argv.includes('--surveiller')) {
     });
   }
   console.log(`Surveillance de ${DOSSIERS.map((d) => `${d}/`).join(', ')} …`);
+}
 }
