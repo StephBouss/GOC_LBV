@@ -51,6 +51,7 @@ const PHOTOS = [
   { nom: 'hsei-hero', source: `${OPERATIONS}/Tsiengui/Tsiengui - Prélèvement/DSC01488.jpg` },                                             // opérateur sous masque respiratoire
   { nom: 'gaz-hero', source: `${OPERATIONS}/Mboumba/Mboumba - Installations/DSC09231.jpg` },                                          // Gaz et valorisation : ballon et tuyauteries jaunes (couleur du gaz)
   { nom: 'gaz-installations', source: `${OPERATIONS}/Tsiengui/Tsiengui - Installations/DSC01527.jpg` },                                // séparateur des installations de production
+  { nom: 'gaz-butane', source: 'Pexels/bouteilles-gaz-16271901.jpg', zone: [0, 0, 1, 0.88] },                                                  // bouteilles de gaz rouges (aboodi vesakaran, Pexels, licence libre : voir Pexels/LISEZMOI.txt)
   { nom: 'projets-hero', source: `${OPERATIONS}/Tsiengui/Tsiengui - Vues aériennes/DJI_0301.jpg` },                                     // champ et réservoirs en forêt
   { nom: 'projets-equipe', source: `${OPERATIONS}/Sardine/Sardine - Opérateurs en discussion/DSC03483.jpg` },                            // plateforme Sardine
   { nom: 'hsei-approche', source: `${OPERATIONS}/Mboumba/Mboumba - Réunion HSSE/DSC09324.jpg` },                                        // tableau HSSE et 10 Règles d'or

@@ -77,6 +77,8 @@
   background: var(--surface); border: 1px solid var(--ligne); border-radius: 1rem;
 }
 .rapport + .rapport { margin-top: 2rem; }   /* plusieurs documents à la suite */
+/* Document de référence sous l'appel à l'action (Engagements HSEI et RSE) : détaché des boutons, centré, texte à gauche */
+.appel .rapport { margin: 4.5rem auto 0; text-align: left; }
 .rapport-couverture { width: 100%; height: auto; border-radius: .25rem; box-shadow: 0 .75rem 1.75rem rgba(20, 23, 27, .18); }
 .rapport p { margin: 0; }
 .rapport .sur-titre { font-size: .875rem; line-height: 1.0313rem; color: var(--noir); }
@@ -126,6 +128,7 @@
 }
 @media (max-width: 767px) {
   .rapport { grid-template-columns: 1fr; gap: 1.75rem; padding: 1.5rem 1.25rem; }
+  .appel .rapport { margin-top: 3.5rem; }
   .rapport-couverture { width: 9rem; margin-inline: auto; }
   .rapport-titre { font-size: 1.3125rem; line-height: 1.625rem; }
   .rapport-actions .bouton { flex: 1 1 100%; }
